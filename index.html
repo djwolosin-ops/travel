@@ -869,21 +869,31 @@
 
   // Markers
   ports.forEach((port, i) => {
+    const num = i + 1;
     const isEnd = i === ports.length - 1;
     const isStart = i === 0;
+    const size = 26;
 
     const icon = L.divIcon({
       className: '',
       html: `<div style="
-        width: ${isStart || isEnd ? 18 : 14}px;
-        height: ${isStart || isEnd ? 18 : 14}px;
+        width: ${size}px;
+        height: ${size}px;
         background: ${port.color};
         border: 2px solid #0a0e1a;
         border-radius: 50%;
-        box-shadow: 0 0 ${isStart || isEnd ? 10 : 6}px ${port.color}88;
-      "></div>`,
-      iconSize: [18, 18],
-      iconAnchor: [9, 9]
+        box-shadow: 0 0 10px ${port.color}99;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: -apple-system, sans-serif;
+        font-size: 0.72rem;
+        font-weight: 800;
+        color: #0a0e1a;
+        line-height: 1;
+      ">${num}</div>`,
+      iconSize: [size, size],
+      iconAnchor: [size/2, size/2]
     });
 
     const dayLabel = isStart ? 'Day 1' : isEnd ? 'Day 8' : `Day ${port.day}`;
@@ -891,12 +901,12 @@
     L.marker(port.coords, { icon })
       .addTo(map)
       .bindPopup(`
-        <div style="font-family:-apple-system,sans-serif; min-width:160px;">
+        <div style="font-family:-apple-system,sans-serif; min-width:170px;">
           <div style="font-size:0.7rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#718096;margin-bottom:4px;">${dayLabel}</div>
-          <div style="font-size:0.95rem;font-weight:700;color:#1a202c;margin-bottom:4px;">${port.name}</div>
+          <div style="font-size:1rem;font-weight:900;color:#1a202c;margin-bottom:4px;">${port.name}</div>
           <div style="font-size:0.78rem;color:#4a5568;">${port.date}</div>
         </div>
-      `, { maxWidth: 220 });
+      `, { maxWidth: 230 });
   });
 
   // Day number labels along the route
