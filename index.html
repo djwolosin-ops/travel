@@ -852,12 +852,12 @@
   }).addTo(map);
 
   const ports = [
-    { name: "Miami, Florida",            date: "May 17 · Embark",              coords: [25.761, -80.192], day: 1,  color: "#38b2ac" },
-    { name: "George Town, Grand Cayman", date: "May 19 · Arrive 7am / Depart 3:30pm", coords: [19.287, -81.367], day: 3,  color: "#68d391" },
-    { name: "Cozumel, Mexico",           date: "May 20 · Arrive 11am / Depart 8:30pm", coords: [20.507, -86.958], day: 4,  color: "#68d391" },
-    { name: "Puerto Costa Maya, Mexico", date: "May 21 · Arrive 7am / Depart 3pm",     coords: [18.733, -87.717], day: 5,  color: "#68d391" },
-    { name: "Nassau, Bahamas",           date: "May 23 · Arrive 11am / Depart 6pm",    coords: [25.044, -77.350], day: 7,  color: "#68d391" },
-    { name: "Miami, Florida",            date: "May 24 · Disembark",           coords: [25.741, -80.212], day: 8,  color: "#fc8181" },
+    { name: "Miami, Florida",            date: "May 17 · Embark",                      coords: [25.761, -80.192], day: 1, color: "#38b2ac", desc: "Home port. Board Celebrity Beyond at PortMiami and set sail at 4pm." },
+    { name: "George Town, Grand Cayman", date: "May 19 · Arrive 7am / Depart 3:30pm", coords: [19.287, -81.367], day: 3, color: "#68d391", desc: "Crystal-clear British territory famous for Stingray City, Seven Mile Beach, and some of the best snorkeling in the Caribbean." },
+    { name: "Cozumel, Mexico",           date: "May 20 · Arrive 11am / Depart 8:30pm",coords: [20.507, -86.958], day: 4, color: "#68d391", desc: "Colorful Mexican island off the Yucatán coast. World-class reef diving, beach clubs, and fresh ceviche. Long port day." },
+    { name: "Puerto Costa Maya, Mexico", date: "May 21 · Arrive 7am / Depart 3pm",     coords: [18.733, -87.717], day: 5, color: "#68d391", desc: "Gateway to the ancient Chacchoben Mayan ruins. Jungle, history, and one of the least touristy stops on the route." },
+    { name: "Nassau, Bahamas",           date: "May 23 · Arrive 11am / Depart 6pm",    coords: [25.044, -77.350], day: 7, color: "#68d391", desc: "Capital of the Bahamas. Vibrant colonial architecture, pink-sand beaches, and the famous Atlantis resort nearby." },
+    { name: "Miami, Florida",            date: "May 24 · Disembark",                   coords: [25.741, -80.212], day: 8, color: "#fc8181", desc: "Back home. Disembark in the morning, flight to San Diego at 1:30pm." },
   ];
 
   const routeCoords = ports.map(p => p.coords);
@@ -901,12 +901,13 @@
     L.marker(port.coords, { icon })
       .addTo(map)
       .bindPopup(`
-        <div style="font-family:-apple-system,sans-serif; min-width:170px;">
-          <div style="font-size:0.7rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#718096;margin-bottom:4px;">${dayLabel}</div>
+        <div style="font-family:-apple-system,sans-serif; min-width:200px; max-width:240px;">
+          <div style="font-size:0.68rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#718096;margin-bottom:4px;">${dayLabel}</div>
           <div style="font-size:1rem;font-weight:900;color:#1a202c;margin-bottom:4px;">${port.name}</div>
-          <div style="font-size:0.78rem;color:#4a5568;">${port.date}</div>
+          <div style="font-size:0.76rem;color:#718096;margin-bottom:8px;">${port.date}</div>
+          <div style="font-size:0.8rem;color:#2d3748;line-height:1.5;border-top:1px solid #e2e8f0;padding-top:8px;">${port.desc}</div>
         </div>
-      `, { maxWidth: 230 });
+      `, { maxWidth: 260 });
   });
 
   // Day number labels along the route
