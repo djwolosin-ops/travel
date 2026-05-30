@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Donna's Canadian Rockies Adventure</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --teal: #0a7e8c;
+    --teal-dark: #065a64;
+    --teal-light: #e0f5f7;
+    --gold: #c9954a;
+    --gold-light: #fdf3e3;
+    --green: #2e7d52;
+    --green-light: #e8f5ee;
+    --red: #c0392b;
+    --gray: #f4f6f8;
+    --text: #1a1a2e;
+    --muted: #6b7280;
+    --card-shadow: 0 2px 12px rgba(0,0,0,0.10);
+  }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: var(--gray);
+    color: var(--text);
+    min-height: 100vh;
+  }
+
+  /* HEADER */
+  .hero {
+    background: linear-gradient(135deg, #0a3d62 0%, #0a7e8c 50%, #1a5276 100%);
+    color: white;
+    padding: 28px 24px 22px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 180'%3E%3Cpolygon points='0,180 0,120 150,60 300,110 450,30 600,90 750,20 900,80 1050,10 1200,70 1200,180' fill='rgba(255,255,255,0.06)'/%3E%3Cpolygon points='0,180 0,140 100,90 250,130 400,70 550,120 700,50 850,100 1000,40 1200,95 1200,180' fill='rgba(255,255,255,0.04)'/%3E%3C/svg%3E") bottom/cover no-repeat;
+    pointer-events: none;
+  }
+  .hero-emoji { font-size: 2.4rem; display: block; margin-bottom: 6px; }
+  .hero h1 { font-size: 1.7rem; font-weight: 700; letter-spacing: -0.5px; }
+  .hero .subtitle { font-size: 0.92rem; opacity: 0.85; margin-top: 4px; }
+  .hero .dates { font-size: 0.88rem; opacity: 0.75; margin-top: 3px; }
+
+  .countdown-bar {
+    background: rgba(0,0,0,0.25);
+    padding: 8px 24px;
+    text-align: center;
+    font-size: 0.85rem;
+    color: white;
+    letter-spacing: 0.5px;
+  }
+  .countdown-bar span { font-weight: 700; color: #7ecfda; }
+  .countdown-bar.active { background: rgba(46,125,82,0.7); }
+  .countdown-bar.active span { color: #a8f0c0; }
+
+  /* TABS */
+  .tab-bar {
+    background: white;
+    display: flex;
+    overflow-x: auto;
+    border-bottom: 2px solid #e5e7eb;
+    position: sticky; top: 0; z-index: 100;
+    scrollbar-width: none;
+  }
+  .tab-bar::-webkit-scrollbar { display: none; }
+  .tab-btn {
+    flex: none;
+    padding: 12px 16px;
+    border: none; background: none;
+    font-size: 0.82rem; font-weight: 600;
+    color: var(--muted);
+    cursor: pointer;
+    white-space: nowrap;
+    border-bottom: 3px solid transparent;
+    margin-bottom: -2px;
+    transition: all 0.15s;
+  }
+  .tab-btn.active { color: var(--teal); border-bottom-color: var(--teal); }
+  .tab-btn:hover { color: var(--teal-dark); }
+
+  /* CONTENT */
+  .tab-content { display: none; padding: 16px; max-width: 860px; margin: 0 auto; }
+  .tab-content.active { display: block; }
+
+  /* CARDS */
+  .card {
+    background: white;
+    border-radius: 12px;
+    padding: 16px 18px;
+    margin-bottom: 14px;
+    box-shadow: var(--card-shadow);
+  }
+  .card-title {
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--muted);
+    margin-bottom: 10px;
+  }
+
+  /* TODAY CARD */
+  .today-date {
+    font-size: 1.1rem; font-weight: 700; color: var(--teal-dark);
+    margin-bottom: 2px;
+  }
+  .today-night {
+    font-size: 0.82rem; color: var(--muted); margin-bottom: 12px;
+  }
+  .today-plan {
+    font-size: 0.95rem; line-height: 1.6; color: var(--text);
+    border-left: 3px solid var(--teal); padding-left: 12px;
+  }
+  .no-trip {
+    text-align: center; padding: 24px; color: var(--muted); font-size: 0.9rem;
+  }
+
+  /* DAY LIST */
+  .day-item {
+    border-radius: 10px;
+    border: 1.5px solid #e5e7eb;
+    padding: 13px 15px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    transition: all 0.15s;
+    position: relative;
+  }
+  .day-item:hover { border-color: var(--teal); box-shadow: 0 2px 8px rgba(10,126,140,0.12); }
+  .day-item.today-item { border-color: var(--teal); background: var(--teal-light); }
+  .day-item.past-item { opacity: 0.55; }
+  .day-badge {
+    position: absolute; top: 10px; right: 12px;
+    font-size: 0.7rem; font-weight: 700; padding: 2px 8px;
+    border-radius: 20px; background: var(--teal); color: white;
+  }
+  .day-label { font-size: 0.78rem; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; }
+  .day-title { font-size: 1rem; font-weight: 700; margin: 2px 0 4px; color: var(--text); }
+  .day-hotel { font-size: 0.8rem; color: var(--teal); }
+  .day-plan { font-size: 0.82rem; color: var(--muted); margin-top: 4px; line-height: 1.5; }
+  .day-activities { margin-top: 8px; display: flex; flex-wrap: wrap; gap: 5px; }
+  .activity-tag {
+    font-size: 0.72rem; padding: 3px 9px; border-radius: 20px;
+    background: var(--gold-light); color: #8a6520; font-weight: 600;
+  }
+
+  /* HOTELS */
+  .hotel-card {
+    border-left: 4px solid var(--teal);
+    padding-left: 14px;
+    margin-bottom: 16px;
+  }
+  .hotel-name { font-size: 1rem; font-weight: 700; }
+  .hotel-dates { font-size: 0.78rem; color: var(--muted); margin: 2px 0 6px; }
+  .hotel-detail { font-size: 0.82rem; color: var(--text); margin: 2px 0; }
+  .hotel-detail strong { color: var(--teal-dark); }
+  .hotel-confirm {
+    display: inline-block; margin-top: 6px;
+    font-size: 0.75rem; font-weight: 700;
+    background: var(--green-light); color: var(--green);
+    padding: 3px 10px; border-radius: 20px;
+  }
+  .map-btn {
+    display: inline-block; margin-top: 6px; margin-left: 6px;
+    font-size: 0.75rem; font-weight: 700;
+    background: var(--teal-light); color: var(--teal-dark);
+    padding: 3px 10px; border-radius: 20px;
+    text-decoration: none;
+  }
+
+  /* FLIGHTS */
+  .flight-row {
+    display: flex; align-items: center; gap: 10px;
+    padding: 14px 0; border-bottom: 1px solid #f0f0f0;
+  }
+  .flight-row:last-child { border-bottom: none; }
+  .flight-airline { font-size: 0.78rem; color: var(--muted); margin-bottom: 2px; }
+  .flight-num { font-size: 0.85rem; font-weight: 700; color: var(--teal-dark); }
+  .flight-city { font-size: 0.82rem; font-weight: 600; }
+  .flight-time { font-size: 1rem; font-weight: 700; }
+  .flight-arrow { font-size: 1.2rem; color: var(--gold); flex: 1; text-align: center; }
+  .flight-date { font-size: 0.75rem; color: var(--muted); }
+
+  /* ACTIVITIES */
+  .activity-item {
+    padding: 13px 0;
+    border-bottom: 1px solid #f0f0f0;
+  }
+  .activity-item:last-child { border-bottom: none; }
+  .act-date { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; color: var(--gold); letter-spacing: 0.5px; }
+  .act-name { font-size: 0.98rem; font-weight: 700; margin: 2px 0; }
+  .act-time { font-size: 0.82rem; color: var(--teal); font-weight: 600; }
+  .act-addr { font-size: 0.78rem; color: var(--muted); margin-top: 2px; }
+  .act-confirm { font-size: 0.75rem; color: var(--green); font-weight: 700; margin-top: 4px; }
+
+  /* CAR */
+  .car-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .car-cell { background: var(--gray); border-radius: 8px; padding: 9px 11px; }
+  .car-label { font-size: 0.7rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; }
+  .car-value { font-size: 0.88rem; font-weight: 700; color: var(--text); margin-top: 2px; }
+
+  /* CONTACTS */
+  .contact-item {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 11px 0; border-bottom: 1px solid #f0f0f0;
+  }
+  .contact-item:last-child { border-bottom: none; }
+  .contact-name { font-size: 0.88rem; font-weight: 600; }
+  .call-btn {
+    font-size: 0.8rem; font-weight: 700;
+    background: var(--teal); color: white;
+    padding: 5px 13px; border-radius: 20px;
+    text-decoration: none;
+  }
+  .contact-email {
+    font-size: 0.78rem; color: var(--muted); margin-top: 2px;
+  }
+
+  /* PACKING */
+  .pack-section { margin-bottom: 14px; }
+  .pack-section h4 { font-size: 0.78rem; font-weight: 700; text-transform: uppercase; color: var(--teal-dark); letter-spacing: 0.5px; margin-bottom: 8px; }
+  .pack-item {
+    display: flex; align-items: center; gap: 10px;
+    padding: 7px 0; border-bottom: 1px solid #f5f5f5; font-size: 0.88rem;
+    cursor: pointer;
+  }
+  .pack-item input[type=checkbox] { width: 17px; height: 17px; accent-color: var(--teal); flex-shrink: 0; }
+  .pack-item.checked label { text-decoration: line-through; color: var(--muted); }
+  .pack-item label { cursor: pointer; }
+
+  /* ICEFIELDS */
+  .stop-card {
+    background: var(--gray); border-radius: 8px; padding: 10px 12px; margin-bottom: 8px;
+    border-left: 3px solid var(--gold);
+  }
+  .stop-name { font-size: 0.9rem; font-weight: 700; }
+  .stop-note { font-size: 0.78rem; color: var(--muted); margin-top: 2px; }
+
+  /* ROUTE */
+  .route-step {
+    display: flex; gap: 12px; align-items: flex-start;
+    padding: 10px 0; border-bottom: 1px solid #f0f0f0;
+  }
+  .route-dot {
+    width: 32px; height: 32px; border-radius: 50%;
+    background: var(--teal); color: white;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.75rem; font-weight: 700; flex-shrink: 0; margin-top: 2px;
+  }
+  .route-city { font-size: 0.92rem; font-weight: 700; }
+  .route-info { font-size: 0.78rem; color: var(--muted); margin-top: 2px; }
+
+  /* ALERTS */
+  .alert {
+    border-radius: 8px; padding: 10px 14px; margin-bottom: 12px;
+    font-size: 0.82rem; line-height: 1.5;
+  }
+  .alert-warn { background: #fff8e1; border-left: 4px solid #f59e0b; color: #7a5a00; }
+  .alert-info { background: var(--teal-light); border-left: 4px solid var(--teal); color: var(--teal-dark); }
+  .alert strong { display: block; margin-bottom: 2px; }
+
+  @media (max-width: 480px) {
+    .hero h1 { font-size: 1.35rem; }
+    .car-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <span class="hero-emoji">🏔️</span>
+  <h1>Canadian Rockies Adventure</h1>
+  <div class="subtitle">Donna Wolosin &amp; Guest</div>
+  <div class="dates">July 9 – 20, 2026 &nbsp;·&nbsp; Calgary → Banff → Lake Louise → Jasper → Canmore → Calgary</div>
+</div>
+<div class="countdown-bar" id="countdown-bar">
+  <span id="countdown-text">Loading...</span>
+</div>
+
+<div class="tab-bar">
+  <button class="tab-btn active" onclick="showTab('today')">📍 Today</button>
+  <button class="tab-btn" onclick="showTab('itinerary')">🗓 Itinerary</button>
+  <button class="tab-btn" onclick="showTab('hotels')">🏨 Hotels</button>
+  <button class="tab-btn" onclick="showTab('flights')">✈️ Flights</button>
+  <button class="tab-btn" onclick="showTab('activities')">🎯 Activities</button>
+  <button class="tab-btn" onclick="showTab('car')">🚗 Car</button>
+  <button class="tab-btn" onclick="showTab('icefields')">🧊 Icefields</button>
+  <button class="tab-btn" onclick="showTab('contacts')">📞 Contacts</button>
+  <button class="tab-btn" onclick="showTab('packing')">🎒 Packing</button>
+</div>
+
+<!-- TODAY -->
+<div id="tab-today" class="tab-content active">
+  <div id="today-container"></div>
+</div>
+
+<!-- ITINERARY -->
+<div id="tab-itinerary" class="tab-content">
+  <div class="card">
+    <div class="card-title">Full Trip — Day by Day</div>
+    <div id="itinerary-list"></div>
+  </div>
+</div>
+
+<!-- HOTELS -->
+<div id="tab-hotels" class="tab-content">
+  <div class="card">
+    <div class="card-title">Hotel Directory</div>
+    <div id="hotel-list"></div>
+  </div>
+</div>
+
+<!-- FLIGHTS -->
+<div id="tab-flights" class="tab-content">
+  <div class="card">
+    <div class="card-title">Outbound — Thu Jul 9</div>
+    <div class="flight-row">
+      <div>
+        <div class="flight-airline">WestJet</div>
+        <div class="flight-num">WS 1485</div>
+      </div>
+      <div>
+        <div class="flight-city">San Diego (SAN)</div>
+        <div class="flight-time">3:30 PM</div>
+      </div>
+      <div class="flight-arrow">✈</div>
+      <div style="text-align:right">
+        <div class="flight-city">Calgary (YYC)</div>
+        <div class="flight-time">7:55 PM</div>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-title">Return — Mon Jul 20</div>
+    <div class="flight-row">
+      <div>
+        <div class="flight-airline">WestJet</div>
+        <div class="flight-num">WS 1550</div>
+      </div>
+      <div>
+        <div class="flight-city">Calgary (YYC)</div>
+        <div class="flight-time">8:45 AM</div>
+      </div>
+      <div class="flight-arrow">✈</div>
+      <div style="text-align:right">
+        <div class="flight-city">Seattle (SEA)</div>
+        <div class="flight-time">9:40 AM</div>
+      </div>
+    </div>
+    <div class="flight-row">
+      <div>
+        <div class="flight-airline">Delta</div>
+        <div class="flight-num">DL 2572</div>
+      </div>
+      <div>
+        <div class="flight-city">Seattle (SEA)</div>
+        <div class="flight-time">12:14 PM</div>
+      </div>
+      <div class="flight-arrow">✈</div>
+      <div style="text-align:right">
+        <div class="flight-city">San Diego (SAN)</div>
+        <div class="flight-time">3:16 PM</div>
+      </div>
+    </div>
+  </div>
+  <div class="alert alert-warn">
+    <strong>Return day tip</strong>
+    Flight departs 8:45 AM — plan for an early taxi/Uber from Fairmont Palliser to YYC.
+  </div>
+</div>
+
+<!-- ACTIVITIES -->
+<div id="tab-activities" class="tab-content">
+  <div class="card">
+    <div class="card-title">Reservations &amp; Bookings</div>
+    <div class="activity-item">
+      <div class="act-date">Sat, Jul 11</div>
+      <div class="act-name">🚡 Banff Gondola</div>
+      <div class="act-time">4:10 PM boarding</div>
+      <div class="act-addr">100 Mountain Ave, Banff, AB · +1 403-762-7486</div>
+      <div class="act-confirm">Reservation #3966542 · Order ID 28766714</div>
+    </div>
+    <div class="activity-item">
+      <div class="act-date">Sat, Jul 11</div>
+      <div class="act-name">🍽 Sky Bistro — Mountain Top Dining</div>
+      <div class="act-time">5:15 PM</div>
+      <div class="act-addr">1 Mountain Ave, Banff, AB · +1 403-762-7486</div>
+      <div class="act-confirm">OpenTable #284239</div>
+    </div>
+    <div class="activity-item">
+      <div class="act-date">Mon, Jul 13</div>
+      <div class="act-name">🥩 1888 Chop House — Fairmont Banff Springs</div>
+      <div class="act-time">6:30 PM</div>
+      <div class="act-addr">405 Spray Ave, Banff, AB · +1 403-762-6860</div>
+      <div class="act-confirm">OpenTable #2109850181</div>
+    </div>
+    <div class="activity-item">
+      <div class="act-date">Wed, Jul 15</div>
+      <div class="act-name">⛰ Moraine Lake Bus — Outbound (with 1-hr Lake Louise stop)</div>
+      <div class="act-time">8:55 AM departure</div>
+      <div class="act-addr">Lake Louise area · info@morainelakebus.com</div>
+      <div class="act-confirm">Confirmation: B-7XGMGYM</div>
+    </div>
+    <div class="activity-item">
+      <div class="act-date">Wed, Jul 15</div>
+      <div class="act-name">⛰ Moraine Lake Bus — Return</div>
+      <div class="act-time">5:15 PM return from Moraine Lake</div>
+      <div class="act-addr">Moraine Lake · info@morainelakebus.com</div>
+      <div class="act-confirm">Confirmation: B-VN373EP</div>
+    </div>
+  </div>
+</div>
+
+<!-- CAR -->
+<div id="tab-car" class="tab-content">
+  <div class="card">
+    <div class="card-title">Avis Rental Car</div>
+    <div class="car-grid">
+      <div class="car-cell">
+        <div class="car-label">Company</div>
+        <div class="car-value">Avis</div>
+      </div>
+      <div class="car-cell">
+        <div class="car-label">Confirmation</div>
+        <div class="car-value">16306973US4</div>
+      </div>
+      <div class="car-cell">
+        <div class="car-label">Pickup</div>
+        <div class="car-value">Fri Jul 10 @ 10:30 AM</div>
+      </div>
+      <div class="car-cell">
+        <div class="car-label">Drop-off</div>
+        <div class="car-value">Sun Jul 19 @ 5:00 PM</div>
+      </div>
+      <div class="car-cell" style="grid-column:1/-1">
+        <div class="car-label">Location</div>
+        <div class="car-value">Avis Calgary Airport<br><span style="font-weight:400;font-size:0.8rem">2000 Airport Rd, Calgary, AB T2E 6W5</span></div>
+      </div>
+      <div class="car-cell">
+        <div class="car-label">Vehicle</div>
+        <div class="car-value">Toyota Corolla (Midsize)</div>
+      </div>
+      <div class="car-cell">
+        <div class="car-label">Total</div>
+        <div class="car-value" style="color:var(--teal-dark)">$1,077.42</div>
+      </div>
+    </div>
+    <div style="margin-top:12px">
+      <a href="tel:+14032211700" class="call-btn" style="text-decoration:none">📞 Call Avis</a>
+      <a href="https://maps.google.com/?q=Avis,2000+Airport+Rd,Calgary,AB" target="_blank" class="map-btn">🗺 Directions</a>
+    </div>
+  </div>
+  <div class="alert alert-warn">
+    <strong>Pay at pickup</strong>
+    Total due ($1,077.42 CAD) is collected at the counter — not pre-paid. Bring the credit card used to book.
+  </div>
+</div>
+
+<!-- ICEFIELDS -->
+<div id="tab-icefields" class="tab-content">
+  <div class="card">
+    <div class="card-title">July 16 — Icefields Parkway Driving Day</div>
+    <div class="alert alert-warn">
+      <strong>Fuel up before you leave Baker Creek!</strong>
+      Food and fuel are very limited on the Parkway. Start with a full tank, water, snacks, and layers.
+    </div>
+    <div class="stop-card">
+      <div class="stop-name">🏔 Bow Lake</div>
+      <div class="stop-note">Stunning glacial lake — great early stop</div>
+    </div>
+    <div class="stop-card">
+      <div class="stop-name">🏔 Peyto Lake Viewpoint</div>
+      <div class="stop-note">Famous turquoise wolf-shaped lake — short uphill walk to viewpoint</div>
+    </div>
+    <div class="stop-card">
+      <div class="stop-name">🏔 Waterfowl Lakes</div>
+      <div class="stop-note">Beautiful valley views, great photo stop</div>
+    </div>
+    <div class="stop-card">
+      <div class="stop-name">🗻 Mistaya Canyon</div>
+      <div class="stop-note">Short walk to dramatic slot canyon</div>
+    </div>
+    <div class="stop-card">
+      <div class="stop-name">🧊 Columbia Icefield / Athabasca Glacier</div>
+      <div class="stop-note">Largest icefield in the Rockies — walk up to the glacier toe</div>
+    </div>
+    <div class="stop-card">
+      <div class="stop-name">💧 Sunwapta Falls</div>
+      <div class="stop-note">Short walk, dramatic double waterfall</div>
+    </div>
+    <div class="stop-card">
+      <div class="stop-name">💧 Athabasca Falls</div>
+      <div class="stop-note">Most powerful waterfall in the Rockies — final stop before Jasper</div>
+    </div>
+    <div class="alert alert-info" style="margin-top:10px">
+      <strong>Plan this as a full day</strong>
+      The Parkway is 232 km — but with all the stops it easily takes 8+ hours. Arrive in Jasper in the evening.
+    </div>
+  </div>
+</div>
+
+<!-- CONTACTS -->
+<div id="tab-contacts" class="tab-content">
+  <div class="card">
+    <div class="card-title">Quick Contacts</div>
+    <div id="contact-list"></div>
+  </div>
+</div>
+
+<!-- PACKING -->
+<div id="tab-packing" class="tab-content">
+  <div class="card">
+    <div class="card-title">Packing Checklist</div>
+    <div id="packing-list"></div>
+  </div>
+  <div class="card">
+    <div class="card-title">Documents to Have Ready</div>
+    <div id="docs-list"></div>
+  </div>
+</div>
+
+<script>
+// ---- DATA ----
+const TRIP_START = new Date('2026-07-09');
+const TRIP_END   = new Date('2026-07-20');
+
+const days = [
+  { date:'2026-07-09', label:'Thu, Jul 9',  city:'Calgary',     hotel:'Acclaim Hotel By CLIQUE', plan:'Arrive YYC 7:55 PM. Overnight near airport. No car yet — short taxi/Uber to hotel.', activities:[] },
+  { date:'2026-07-10', label:'Fri, Jul 10', city:'Banff',       hotel:'The Fox Hotel & Suites',  plan:'Pick up Avis at 10:30 AM. Drive Calgary → Banff (~1.5 hrs). Check in and explore Banff Avenue.', activities:[] },
+  { date:'2026-07-11', label:'Sat, Jul 11', city:'Banff',       hotel:'The Fox Hotel & Suites',  plan:'Banff sightseeing. Banff Gondola at 4:10 PM, Sky Bistro dinner at 5:15 PM.', activities:['🚡 Gondola 4:10 PM','🍽 Sky Bistro 5:15 PM'] },
+  { date:'2026-07-12', label:'Sun, Jul 12', city:'Banff',       hotel:'The Fox Hotel & Suites',  plan:'Free day in Banff. Options: Bow Falls, Lake Minnewanka, Johnston Canyon, or a relaxed town day.', activities:[] },
+  { date:'2026-07-13', label:'Mon, Jul 13', city:'Banff',       hotel:'The Fox Hotel & Suites',  plan:'Final Banff day. 1888 Chop House at Fairmont Banff Springs at 6:30 PM.', activities:['🥩 1888 Chop House 6:30 PM'] },
+  { date:'2026-07-14', label:'Tue, Jul 14', city:'Lake Louise', hotel:'Baker Creek By Basecamp', plan:'Drive Banff → Baker Creek. Explore Bow Valley Parkway and settle in.', activities:[] },
+  { date:'2026-07-15', label:'Wed, Jul 15', city:'Lake Louise', hotel:'Baker Creek By Basecamp', plan:'Moraine Lake Bus day. Outbound 8:55 AM (with 1-hr Lake Louise stop), return 5:15 PM.', activities:['⛰ Bus 8:55 AM','⛰ Return 5:15 PM'] },
+  { date:'2026-07-16', label:'Thu, Jul 16', city:'Jasper',      hotel:"Whistler's Inn",           plan:'Icefields Parkway driving day. Bow Lake → Peyto → Waterfowl → Mistaya → Columbia Icefield → Sunwapta → Athabasca Falls → Jasper.', activities:['🧊 Icefields Parkway'] },
+  { date:'2026-07-17', label:'Fri, Jul 17', city:'Jasper',      hotel:"Whistler's Inn",           plan:'Jasper sightseeing: Maligne Canyon, Maligne Lake, Pyramid Lake, Jasper town.', activities:[] },
+  { date:'2026-07-18', label:'Sat, Jul 18', city:'Canmore',     hotel:'Coast Canmore Hotel',      plan:'Drive Jasper → Canmore. Scenic stops as desired. Overnight Canmore.', activities:[] },
+  { date:'2026-07-19', label:'Sun, Jul 19', city:'Calgary',     hotel:'Fairmont Palliser',        plan:'Drive Canmore → Calgary. Return Avis at 5:00 PM. Final night at the Fairmont Palliser.', activities:[] },
+  { date:'2026-07-20', label:'Mon, Jul 20', city:'Fly Home',    hotel:'',                         plan:'Early taxi/Uber to YYC. WestJet 1550 departs 8:45 AM to Seattle. Connect Delta 2572 → San Diego, arrives 3:16 PM.', activities:['✈ Depart 8:45 AM'] },
+];
+
+const hotels = [
+  { dates:'Jul 9–10',  name:'Acclaim Hotel By CLIQUE',              addr:'123 Freeport Blvd NE, Calgary, AB T3N 0A3',           phone:'+1 403-291-8000', confirm:'Hotels.com 73460004092852',    checkin:'3:00 PM', checkout:'11:00 AM', maps:'Acclaim+Hotel+By+CLIQUE,Calgary,AB' },
+  { dates:'Jul 10–14', name:'The Fox Hotel & Suites',               addr:'461 Banff Ave, Banff, AB T1L 1H8',                   phone:'+1 403-760-8500', confirm:'Hotels.com 73460017195069',    checkin:'4:00 PM', checkout:'11:00 AM', maps:'Fox+Hotel+Suites,461+Banff+Ave,Banff,AB' },
+  { dates:'Jul 14–16', name:'Baker Creek By Basecamp',              addr:'Bow Valley Pkwy, Lake Louise, AB T0L 1E0',            phone:'+1 403-522-3761', confirm:'Hotels.com 73460025337209',    checkin:'4:00 PM', checkout:'11:00 AM', maps:'Baker+Creek+By+Basecamp,Lake+Louise,AB' },
+  { dates:'Jul 16–18', name:"Whistler's Inn",                       addr:'105 Miette Ave, Jasper, AB T0E 1E0',                 phone:'+1 780-852-3361', confirm:'Agoda 73460049075667',          checkin:'After 4:00 PM', checkout:'Before 11:00 AM', maps:"Whistler's+Inn,105+Miette+Ave,Jasper,AB" },
+  { dates:'Jul 18–19', name:'Coast Canmore Hotel & Conference Ctr', addr:'511 Bow Valley Trail, Canmore, AB T1W 1N7',           phone:'+1 403-678-3625', confirm:'Hotels.com 73460044226617',    checkin:'4:00 PM', checkout:'11:00 AM', maps:'Coast+Canmore+Hotel,511+Bow+Valley+Trail,Canmore,AB' },
+  { dates:'Jul 19–20', name:'Fairmont Palliser',                    addr:'133 9th Ave SW, Calgary, AB T2P 2M3',                phone:'+1 403-262-1234', confirm:'Booking ID 1008620710',         checkin:'3:00 PM', checkout:'12:00 PM', maps:'Fairmont+Palliser,133+9th+Ave+SW,Calgary,AB' },
+];
+
+const contacts = [
+  { name:'Avis Calgary Airport',              phone:'+14032211700',  display:'+1 403-221-1700', email:null },
+  { name:'Acclaim Hotel By CLIQUE',           phone:'+14032918000',  display:'+1 403-291-8000', email:null },
+  { name:'Fox Hotel & Suites (Banff)',         phone:'+14037608500',  display:'+1 403-760-8500', email:null },
+  { name:'Baker Creek By Basecamp',           phone:'+14035223761',  display:'+1 403-522-3761', email:null },
+  { name:"Whistler's Inn (Jasper)",           phone:'+17808523361',  display:'+1 780-852-3361', email:null },
+  { name:'Coast Canmore Hotel',               phone:'+14036783625',  display:'+1 403-678-3625', email:null },
+  { name:'Fairmont Palliser (Calgary)',        phone:'+14032621234',  display:'+1 403-262-1234', email:null },
+  { name:'Sky Bistro / Banff Gondola',         phone:'+14037627486',  display:'+1 403-762-7486', email:null },
+  { name:'1888 Chop House',                   phone:'+14037626860',  display:'+1 403-762-6860', email:null },
+  { name:'Moraine Lake Bus',                  phone:null,            display:null,              email:'info@morainelakebus.com' },
+];
+
+const packingItems = {
+  'Clothing & Gear': [
+    'Fleece or light jacket', 'Rain shell / windbreaker', 'Comfortable walking shoes', 'Light hiking shoes',
+    'Warm layers for mountains', 'Sunglasses', 'Hat / sun hat',
+  ],
+  'Essentials': [
+    'Sunscreen (SPF 50+)', 'Medications / prescriptions', 'Phone charger + portable battery',
+    'Camera (or phone charged)', 'Reusable water bottle',
+  ],
+  'Documents': [
+    'Passport / government ID', 'Credit card used for Avis booking', 'Travel insurance info',
+  ],
+};
+
+const docsItems = [
+  'WestJet flights (outbound + return)',
+  'Avis confirmation #16306973US4',
+  'Banff Gondola — Reservation #3966542',
+  'Sky Bistro — OpenTable #284239',
+  '1888 Chop House — OpenTable #2109850181',
+  'Moraine Lake Bus — B-7XGMGYM & B-VN373EP',
+  'All hotel confirmations (Hotels.com / Agoda / Booking.com)',
+];
+
+// ---- RENDER ----
+function parseDate(str) {
+  const [y,m,d] = str.split('-').map(Number);
+  return new Date(y, m-1, d);
+}
+
+function todayStr() {
+  const t = new Date();
+  return `${t.getFullYear()}-${String(t.getMonth()+1).padStart(2,'0')}-${String(t.getDate()).padStart(2,'0')}`;
+}
+
+function renderCountdown() {
+  const now = new Date();
+  const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+  const start = parseDate('2026-07-09');
+  const end   = parseDate('2026-07-20');
+  const bar   = document.getElementById('countdown-bar');
+  const txt   = document.getElementById('countdown-text');
+
+  if (today < start) {
+    const diff = Math.round((start - today) / 86400000);
+    txt.innerHTML = `✈️ Trip starts in <span>${diff} day${diff===1?'':'s'}</span> — July 9, 2026`;
+  } else if (today <= end) {
+    bar.classList.add('active');
+    const tripDay = Math.round((today - start) / 86400000) + 1;
+    txt.innerHTML = `🏔️ You're on the trip! <span>Day ${tripDay} of 12</span>`;
+  } else {
+    txt.innerHTML = `🌄 Trip complete — what a journey!`;
+  }
+}
+
+function renderToday() {
+  const ts = todayStr();
+  const container = document.getElementById('today-container');
+  const day = days.find(d => d.date === ts);
+
+  if (!day) {
+    const now = new Date();
+    const start = parseDate('2026-07-09');
+    const diff = Math.round((start - now) / 86400000);
+    container.innerHTML = `
+      <div class="card" style="text-align:center;padding:28px 18px">
+        <div style="font-size:2.5rem;margin-bottom:8px">🏔️</div>
+        <div style="font-size:1.1rem;font-weight:700;color:var(--teal-dark);margin-bottom:4px">
+          ${diff > 0 ? `${diff} days until the adventure begins!` : 'The journey is complete!'}
+        </div>
+        <div style="font-size:0.85rem;color:var(--muted)">Trip runs July 9–20, 2026 · Tap Itinerary to browse all days</div>
+      </div>`;
+    return;
+  }
+
+  let actsHtml = day.activities.length
+    ? `<div class="day-activities">${day.activities.map(a=>`<span class="activity-tag">${a}</span>`).join('')}</div>`
+    : '';
+
+  container.innerHTML = `
+    <div class="card">
+      <div class="card-title">Today</div>
+      <div class="today-date">${day.label}</div>
+      <div class="today-night">${day.hotel ? '🏨 Tonight: ' + day.hotel : '✈️ Travel home'}</div>
+      <div class="today-plan">${day.plan}</div>
+      ${actsHtml}
+    </div>
+    ${day.activities.length ? buildTodayActCard(day.date) : ''}
+    ${buildTodayHotelCard(day.date)}
+  `;
+}
+
+function buildTodayActCard(dateStr) {
+  const acts = {
+    '2026-07-11': [
+      '<strong>4:10 PM</strong> — Banff Gondola · 100 Mountain Ave · #3966542',
+      '<strong>5:15 PM</strong> — Sky Bistro · OpenTable #284239',
+    ],
+    '2026-07-13': ['<strong>6:30 PM</strong> — 1888 Chop House · Fairmont Banff Springs · OpenTable #2109850181'],
+    '2026-07-15': [
+      '<strong>8:55 AM</strong> — Moraine Lake Bus (outbound) · B-7XGMGYM',
+      '<strong>5:15 PM</strong> — Moraine Lake Bus (return) · B-VN373EP',
+    ],
+  };
+  if (!acts[dateStr]) return '';
+  return `<div class="card"><div class="card-title">Today's Reservations</div>
+    ${acts[dateStr].map(a=>`<div style="padding:7px 0;border-bottom:1px solid #f0f0f0;font-size:0.85rem">${a}</div>`).join('')}
+  </div>`;
+}
+
+function buildTodayHotelCard(dateStr) {
+  const hotel = hotels.find(h => {
+    const [m1,d1] = h.dates.split('–')[0].trim().replace('Jul ','').split('/');
+    return false; // just show next hotel
+  });
+  // Find tonight's hotel
+  const dayObj = days.find(d => d.date === dateStr);
+  if (!dayObj || !dayObj.hotel) return '';
+  const h = hotels.find(h => h.name === dayObj.hotel || dayObj.hotel.includes(h.name.split(' ')[0]));
+  if (!h) return '';
+  return `<div class="card">
+    <div class="card-title">Tonight's Hotel</div>
+    <div class="hotel-name">${h.name}</div>
+    <div class="hotel-detail" style="margin-top:4px">${h.addr}</div>
+    <div class="hotel-detail"><strong>Check-in:</strong> ${h.checkin} &nbsp;·&nbsp; <strong>Check-out:</strong> ${h.checkout}</div>
+    <span class="hotel-confirm">${h.confirm}</span>
+    <a href="https://maps.google.com/?q=${h.maps}" target="_blank" class="map-btn">🗺 Directions</a>
+    <a href="tel:${h.phone.replace(/\s+/g,'')}" class="call-btn" style="text-decoration:none;display:inline-block;margin-top:6px;margin-left:6px">📞 Call</a>
+  </div>`;
+}
+
+function renderItinerary() {
+  const ts = todayStr();
+  const el = document.getElementById('itinerary-list');
+  el.innerHTML = days.map(d => {
+    const isToday = d.date === ts;
+    const isPast  = d.date < ts;
+    let cls = 'day-item' + (isToday ? ' today-item' : '') + (isPast ? ' past-item' : '');
+    let badge = isToday ? '<span class="day-badge">TODAY</span>' : '';
+    let acts = d.activities.length
+      ? `<div class="day-activities">${d.activities.map(a=>`<span class="activity-tag">${a}</span>`).join('')}</div>`
+      : '';
+    return `<div class="${cls}">
+      ${badge}
+      <div class="day-label">${d.label}</div>
+      <div class="day-title">${d.city}</div>
+      ${d.hotel ? `<div class="day-hotel">🏨 ${d.hotel}</div>` : ''}
+      <div class="day-plan">${d.plan}</div>
+      ${acts}
+    </div>`;
+  }).join('');
+}
+
+function renderHotels() {
+  const el = document.getElementById('hotel-list');
+  el.innerHTML = hotels.map(h => `
+    <div class="hotel-card">
+      <div class="hotel-name">${h.name}</div>
+      <div class="hotel-dates">${h.dates}</div>
+      <div class="hotel-detail">${h.addr}</div>
+      <div class="hotel-detail"><strong>Check-in:</strong> ${h.checkin} &nbsp;·&nbsp; <strong>Check-out:</strong> ${h.checkout}</div>
+      <div class="hotel-detail"><strong>Phone:</strong> ${h.phone}</div>
+      <span class="hotel-confirm">${h.confirm}</span>
+      <a href="https://maps.google.com/?q=${h.maps}" target="_blank" class="map-btn">🗺 Map</a>
+    </div>
+  `).join('');
+}
+
+function renderContacts() {
+  const el = document.getElementById('contact-list');
+  el.innerHTML = contacts.map(c => `
+    <div class="contact-item">
+      <div>
+        <div class="contact-name">${c.name}</div>
+        ${c.email ? `<div class="contact-email">${c.email}</div>` : (c.display ? `<div class="contact-email">${c.display}</div>` : '')}
+      </div>
+      ${c.phone
+        ? `<a href="tel:${c.phone}" class="call-btn">📞 Call</a>`
+        : `<a href="mailto:${c.email}" class="call-btn" style="background:var(--gold)">✉️ Email</a>`
+      }
+    </div>
+  `).join('');
+}
+
+function renderPacking() {
+  const el = document.getElementById('packing-list');
+  const saved = JSON.parse(localStorage.getItem('packChecks') || '{}');
+
+  let html = '';
+  Object.entries(packingItems).forEach(([section, items]) => {
+    html += `<div class="pack-section"><h4>${section}</h4>`;
+    items.forEach(item => {
+      const id = 'pack_' + item.replace(/\s+/g,'_');
+      const checked = !!saved[id];
+      html += `<div class="pack-item ${checked?'checked':''}" onclick="togglePack('${id}',this)">
+        <input type="checkbox" id="${id}" ${checked?'checked':''} onclick="event.stopPropagation()">
+        <label for="${id}">${item}</label>
+      </div>`;
+    });
+    html += `</div>`;
+  });
+  el.innerHTML = html;
+
+  const docs = document.getElementById('docs-list');
+  docs.innerHTML = docsItems.map(item => {
+    const id = 'doc_' + item.replace(/\s+/g,'_').replace(/[^a-zA-Z0-9_]/g,'');
+    const checked = !!saved[id];
+    return `<div class="pack-item ${checked?'checked':''}" onclick="togglePack('${id}',this)">
+      <input type="checkbox" id="${id}" ${checked?'checked':''} onclick="event.stopPropagation()">
+      <label for="${id}">${item}</label>
+    </div>`;
+  }).join('');
+}
+
+function togglePack(id, el) {
+  const saved = JSON.parse(localStorage.getItem('packChecks') || '{}');
+  saved[id] = !saved[id];
+  localStorage.setItem('packChecks', JSON.stringify(saved));
+  const cb = document.getElementById(id);
+  if (cb) cb.checked = saved[id];
+  el.classList.toggle('checked', saved[id]);
+}
+
+// ---- TABS ----
+function showTab(name) {
+  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + name).classList.add('active');
+  event.target.classList.add('active');
+}
+
+// ---- INIT ----
+renderCountdown();
+renderToday();
+renderItinerary();
+renderHotels();
+renderContacts();
+renderPacking();
+</script>
+</body>
+</html>
