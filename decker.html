@@ -63,20 +63,28 @@
 
   /* CITY PILLS */
   .city-pill { display: inline-block; font-size: 0.67rem; font-weight: 700; padding: 2px 9px; border-radius: 20px; margin-bottom: 6px; letter-spacing: 0.3px; }
-  .city-london   { background: #e8f4fd; color: #1565c0; }
-  .city-normandy { background: #e8f5ee; color: #2e6b3e; }
-  .city-paris    { background: #fdf0f3; color: #9c2442; }
-  .city-reims    { background: var(--gold-light); color: #7a5200; }
-  .city-belgium  { background: #fff8e1; color: #856404; }
+  .city-london   { background: #dbeafe; color: #1e40af; }
+  .city-normandy { background: #d1fae5; color: #065f46; }
+  .city-paris    { background: #fef3c7; color: #92400e; }
+  .city-reims    { background: #fde68a; color: #78350f; }
+  .city-belgium  { background: #e0e7ff; color: #3730a3; }
   .city-amsterdam{ background: var(--purple-light); color: var(--purple); }
-  .city-us       { background: #fde8e8; color: #8b1a1a; }
-  .city-travel   { background: #f0f0f0; color: #555; }
+  .city-us       { background: #ccfbf1; color: #0f766e; }
+  .city-travel   { background: #e5e7eb; color: #374151; }
 
   /* DAY ITEMS */
-  .day-item { border-radius: 10px; border: 1.5px solid #e5e7eb; padding: 13px 15px; margin-bottom: 10px; position: relative; transition: all 0.15s; }
+  .day-item { border-radius: 10px; border: 1.5px solid #e5e7eb; border-left: 4px solid #e5e7eb; padding: 13px 15px; margin-bottom: 10px; position: relative; transition: all 0.15s; }
   .day-item:hover { border-color: var(--purple-mid); box-shadow: 0 2px 8px rgba(92,61,158,0.12); }
-  .day-item.today-item { border-color: var(--purple-mid); background: var(--purple-light); }
-  .day-item.past-item { opacity: 0.75; }
+  .day-item.today-item { border-color: var(--purple-mid); border-left-color: var(--purple-mid); background: var(--purple-light); }
+  .day-item.past-item { opacity: 0.7; }
+  .day-item[data-type="london"]    { border-left-color: #1e40af; }
+  .day-item[data-type="normandy"]  { border-left-color: #065f46; }
+  .day-item[data-type="paris"]     { border-left-color: #d97706; }
+  .day-item[data-type="reims"]     { border-left-color: #d97706; }
+  .day-item[data-type="belgium"]   { border-left-color: #3730a3; }
+  .day-item[data-type="amsterdam"] { border-left-color: var(--purple-mid); }
+  .day-item[data-type="us"]        { border-left-color: #0f766e; }
+  .day-item[data-type="travel"]    { border-left-color: #9ca3af; }
   .day-badge { position: absolute; top: 10px; right: 12px; font-size: 0.67rem; font-weight: 700; padding: 2px 8px; border-radius: 20px; background: var(--purple-mid); color: white; }
   .day-label { font-size: 0.75rem; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; }
   .day-title { font-size: 0.98rem; font-weight: 700; margin: 3px 0 4px; }
@@ -612,7 +620,7 @@ function renderItinerary() {
           return `<span class="${cls}">${t}</span>`;
         }).join('')}</div>` : '';
     let cls = 'day-item' + (isToday ? ' today-item' : '') + (isPast ? ' past-item' : '');
-    return `<div class="${cls}">
+    return `<div class="${cls}" data-type="${d.type}">
       ${isToday ? '<span class="day-badge">TODAY</span>' : ''}
       <div class="day-label">${d.label}</div>
       ${pill}
