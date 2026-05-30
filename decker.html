@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Decker Europe Trip — May–June 2026</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --deep: #1b1035;
+    --purple: #5c3d9e;
+    --purple-mid: #7b52c4;
+    --purple-light: #f0ebff;
+    --gold: #d4a843;
+    --gold-light: #fdf6e3;
+    --green: #2e7d52;
+    --green-light: #e8f5ee;
+    --rose: #b5294e;
+    --rose-light: #fdf0f4;
+    --gray: #f3f4f8;
+    --text: #1a1a2e;
+    --muted: #6b7280;
+    --card-shadow: 0 2px 14px rgba(0,0,0,0.09);
+  }
+
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--gray); color: var(--text); min-height: 100vh; }
+
+  /* HERO */
+  .hero {
+    background: linear-gradient(135deg, #1b1035 0%, #3d2275 55%, #1b1035 100%);
+    color: white; padding: 28px 24px 20px; text-align: center; position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 160'%3E%3Ccircle cx='200' cy='80' r='60' fill='rgba(255,255,255,0.03)'/%3E%3Ccircle cx='600' cy='40' r='80' fill='rgba(255,255,255,0.03)'/%3E%3Ccircle cx='1000' cy='100' r='50' fill='rgba(255,255,255,0.03)'/%3E%3C/svg%3E") center/cover no-repeat;
+    pointer-events: none;
+  }
+  .hero-flags { font-size: 1.5rem; display: block; margin-bottom: 6px; letter-spacing: 3px; }
+  .hero h1 { font-size: 1.7rem; font-weight: 800; letter-spacing: -0.5px; }
+  .hero .subtitle { font-size: 0.88rem; opacity: 0.8; margin-top: 5px; }
+  .hero .dates { font-size: 0.8rem; opacity: 0.6; margin-top: 3px; letter-spacing: 0.5px; }
+
+  .countdown-bar { background: #2d1f5e; padding: 8px 24px; text-align: center; font-size: 0.85rem; color: #e2d9f3; }
+  .countdown-bar span { font-weight: 800; color: #ffffff; }
+  .countdown-bar.active { background: rgba(46,125,82,0.85); color: white; }
+  .countdown-bar.active span { color: #ffffff; }
+
+  /* TABS */
+  .tab-bar { background: white; display: flex; overflow-x: auto; border-bottom: 2px solid #e5e7eb; position: sticky; top: 0; z-index: 100; scrollbar-width: none; }
+  .tab-bar::-webkit-scrollbar { display: none; }
+  .tab-btn { flex: none; padding: 12px 14px; border: none; background: none; font-size: 0.79rem; font-weight: 600; color: var(--muted); cursor: pointer; white-space: nowrap; border-bottom: 3px solid transparent; margin-bottom: -2px; transition: all 0.15s; }
+  .tab-btn.active { color: var(--purple); border-bottom-color: var(--purple-mid); }
+  .tab-btn:hover { color: var(--deep); }
+
+  .tab-content { display: none; padding: 16px; max-width: 860px; margin: 0 auto; }
+  .tab-content.active { display: block; }
+
+  /* CARDS */
+  .card { background: white; border-radius: 12px; padding: 16px 18px; margin-bottom: 14px; box-shadow: var(--card-shadow); }
+  .card-title { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); margin-bottom: 12px; }
+
+  /* CITY PILLS */
+  .city-pill { display: inline-block; font-size: 0.67rem; font-weight: 700; padding: 2px 9px; border-radius: 20px; margin-bottom: 6px; letter-spacing: 0.3px; }
+  .city-london   { background: #e8f4fd; color: #1565c0; }
+  .city-normandy { background: #e8f5ee; color: #2e6b3e; }
+  .city-paris    { background: #fdf0f3; color: #9c2442; }
+  .city-reims    { background: var(--gold-light); color: #7a5200; }
+  .city-belgium  { background: #fff8e1; color: #856404; }
+  .city-amsterdam{ background: var(--purple-light); color: var(--purple); }
+  .city-us       { background: #fde8e8; color: #8b1a1a; }
+  .city-travel   { background: #f0f0f0; color: #555; }
+
+  /* DAY ITEMS */
+  .day-item { border-radius: 10px; border: 1.5px solid #e5e7eb; padding: 13px 15px; margin-bottom: 10px; position: relative; transition: all 0.15s; }
+  .day-item:hover { border-color: var(--purple-mid); box-shadow: 0 2px 8px rgba(92,61,158,0.12); }
+  .day-item.today-item { border-color: var(--purple-mid); background: var(--purple-light); }
+  .day-item.past-item { opacity: 0.75; }
+  .day-badge { position: absolute; top: 10px; right: 12px; font-size: 0.67rem; font-weight: 700; padding: 2px 8px; border-radius: 20px; background: var(--purple-mid); color: white; }
+  .day-label { font-size: 0.75rem; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; }
+  .day-title { font-size: 0.98rem; font-weight: 700; margin: 3px 0 4px; }
+  .day-plan { font-size: 0.81rem; color: #444; line-height: 1.55; margin-top: 4px; }
+  .day-tags { margin-top: 8px; display: flex; flex-wrap: wrap; gap: 5px; }
+  .tag { font-size: 0.68rem; padding: 3px 8px; border-radius: 20px; font-weight: 600; }
+  .tag-eat  { background: var(--rose-light); color: var(--rose); }
+  .tag-act  { background: var(--purple-light); color: var(--purple); }
+  .tag-move { background: #f0f0f0; color: #555; }
+  .tag-stay { background: var(--gold-light); color: #7a5200; }
+
+  /* STAYS */
+  .stay-block { border-left: 4px solid var(--purple-mid); padding-left: 14px; margin-bottom: 18px; }
+  .stay-name  { font-size: 0.98rem; font-weight: 700; }
+  .stay-dates { font-size: 0.77rem; color: var(--muted); margin: 2px 0 6px; }
+  .stay-addr  { font-size: 0.81rem; color: var(--text); margin: 2px 0; }
+  .stay-detail{ font-size: 0.81rem; margin: 2px 0; }
+  .stay-detail strong { color: var(--deep); }
+  .btn-sm { display: inline-block; font-size: 0.72rem; font-weight: 700; padding: 4px 11px; border-radius: 20px; text-decoration: none; margin-top: 6px; margin-left: 4px; }
+  .btn-map  { background: var(--purple-light); color: var(--purple); }
+  .btn-call { background: var(--deep); color: white; }
+  .confirm-pill { display: inline-block; font-size: 0.71rem; font-weight: 700; background: var(--green-light); color: var(--green); padding: 2px 9px; border-radius: 20px; margin-top: 5px; }
+
+  /* TRANSPORT */
+  .transport-block { padding: 13px 0; border-bottom: 1px solid #f0f0f0; }
+  .transport-block:last-child { border-bottom: none; }
+  .transport-label { font-size: 0.69rem; font-weight: 700; text-transform: uppercase; color: var(--muted); letter-spacing: 0.5px; margin-bottom: 6px; }
+  .transport-row { display: flex; align-items: center; gap: 8px; }
+  .t-city { font-size: 0.84rem; font-weight: 700; }
+  .t-time { font-size: 0.98rem; font-weight: 800; color: var(--deep); }
+  .t-arrow { flex: 1; text-align: center; color: var(--gold); font-size: 1.2rem; }
+  .t-sub { font-size: 0.72rem; color: var(--muted); margin-top: 2px; }
+
+  /* DINING */
+  .dining-item { padding: 12px 0; border-bottom: 1px solid #f0f0f0; }
+  .dining-item:last-child { border-bottom: none; }
+  .din-date { font-size: 0.69rem; font-weight: 700; text-transform: uppercase; color: var(--gold); letter-spacing: 0.5px; }
+  .din-name { font-size: 0.96rem; font-weight: 700; margin: 2px 0; }
+  .din-time { font-size: 0.81rem; color: var(--purple); font-weight: 600; }
+  .din-addr { font-size: 0.77rem; color: var(--muted); margin-top: 2px; }
+
+  /* CARS */
+  .car-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 8px; }
+  .car-cell { background: var(--gray); border-radius: 8px; padding: 9px 11px; }
+  .car-label { font-size: 0.69rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.4px; }
+  .car-value { font-size: 0.87rem; font-weight: 700; margin-top: 2px; }
+
+  /* ALERTS */
+  .alert { border-radius: 8px; padding: 10px 14px; margin-bottom: 12px; font-size: 0.81rem; line-height: 1.55; }
+  .alert-info { background: var(--purple-light); border-left: 4px solid var(--purple-mid); color: var(--deep); }
+  .alert-warn { background: #fff8e1; border-left: 4px solid #f59e0b; color: #7a5200; }
+  .alert strong { display: block; margin-bottom: 2px; font-size: 0.84rem; }
+
+  /* SECTION HEADER */
+  .section-header { font-size: 0.75rem; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; color: var(--purple); margin: 18px 0 10px; padding-bottom: 5px; border-bottom: 2px solid var(--purple-light); }
+
+  @media (max-width: 480px) {
+    .hero h1 { font-size: 1.35rem; }
+    .car-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <span class="hero-flags">🇬🇧 🇫🇷 🇧🇪 🇳🇱 🇺🇸</span>
+  <h1>Decker Europe Adventure</h1>
+  <div class="subtitle">Jeanne &amp; Doug · Meagan · Dan · Hanna</div>
+  <div class="dates">May 24 – June 30, 2026 · 38 Days · London → Normandy → Paris → Reims → Belgium → Amsterdam → Richmond</div>
+</div>
+<div class="countdown-bar" id="countdown-bar">
+  <span id="countdown-text">Loading...</span>
+</div>
+
+<div class="tab-bar">
+  <button class="tab-btn active" onclick="showTab('today')">📍 Today</button>
+  <button class="tab-btn" onclick="showTab('itinerary')">🗓 Itinerary</button>
+  <button class="tab-btn" onclick="showTab('stays')">🏨 Stays</button>
+  <button class="tab-btn" onclick="showTab('transport')">✈️ Flights &amp; Trains</button>
+  <button class="tab-btn" onclick="showTab('cars')">🚗 Cars</button>
+  <button class="tab-btn" onclick="showTab('dining')">🍽 Dining</button>
+</div>
+
+<!-- TODAY -->
+<div id="tab-today" class="tab-content active">
+  <div id="today-container"></div>
+</div>
+
+<!-- ITINERARY -->
+<div id="tab-itinerary" class="tab-content">
+  <div class="card">
+    <div class="card-title">Full Trip — 38 Days</div>
+    <div id="itinerary-list"></div>
+  </div>
+</div>
+
+<!-- STAYS -->
+<div id="tab-stays" class="tab-content">
+
+  <div class="card">
+    <div class="section-header">🇬🇧 London</div>
+    <div class="stay-block">
+      <div class="stay-name">St. Ermin's Hotel, Autograph Collection</div>
+      <div class="stay-dates">Mon May 25 → Sat May 30 (check-out 10 AM)</div>
+      <div class="stay-addr">2 Caxton St, London SW1H 0QW, UK</div>
+      <div class="stay-detail"><strong>Check-in:</strong> 4:00 PM GMT+1</div>
+      <a href="https://maps.google.com/?q=St+Ermin's+Hotel,2+Caxton+St,London" target="_blank" class="btn-sm btn-map">🗺 Map</a>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="section-header">🇫🇷 Normandy</div>
+    <div class="stay-block">
+      <div class="stay-name">Par Hasard ou pas</div>
+      <div class="stay-dates">Sat May 30 → Tue Jun 2 (check-out 10 AM)</div>
+      <div class="stay-addr">703 Rte de Roncheville, 14130 Saint-Martin-aux-Chartrains, France</div>
+      <div class="stay-detail"><strong>Check-in:</strong> 6:30 PM GMT+2</div>
+      <a href="https://maps.google.com/?q=703+Rte+de+Roncheville,14130+Saint-Martin-aux-Chartrains,France" target="_blank" class="btn-sm btn-map">🗺 Map</a>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="section-header">🇫🇷 Near Paris (Abbey)</div>
+    <div class="stay-block">
+      <div class="stay-name">Domaine de L'Abbaye des Vaux de Cernay</div>
+      <div class="stay-dates">Tue Jun 2 → Fri Jun 5 (check-out 11 AM)</div>
+      <div class="stay-addr">Cernay-la-Ville, 78720, France</div>
+      <div class="stay-detail"><strong>Check-in:</strong> 3:00 PM GMT+2</div>
+      <a href="https://maps.google.com/?q=Domaine+Abbaye+Vaux+de+Cernay,Cernay-la-Ville,France" target="_blank" class="btn-sm btn-map">🗺 Map</a>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="section-header">🇫🇷 Paris — Île Saint-Louis</div>
+    <div class="stay-block">
+      <div class="stay-name">Hotel Du Jeu De Paume</div>
+      <div class="stay-dates">Fri Jun 5 → Tue Jun 9 (check-out 11 AM)</div>
+      <div class="stay-addr">54 Rue Saint-Louis en l'Île, 75004 Paris, France</div>
+      <div class="stay-detail"><strong>Check-in:</strong> 3:00 PM GMT+2</div>
+      <a href="https://maps.google.com/?q=Hotel+Du+Jeu+De+Paume,54+Rue+Saint-Louis+en+l'Île,Paris" target="_blank" class="btn-sm btn-map">🗺 Map</a>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="section-header">🇫🇷 Reims — Champagne Country</div>
+    <div class="stay-block">
+      <div class="stay-name">La Caserne Chanzy Hotel &amp; Spa, Autograph Collection</div>
+      <div class="stay-dates">Tue Jun 9 → Sat Jun 13 (check-out 12 PM)</div>
+      <div class="stay-addr">18 Rue Tronsson Ducoudray, 51100 Reims, France</div>
+      <div class="stay-detail"><strong>Check-in:</strong> 3:00 PM GMT+2</div>
+      <a href="https://maps.google.com/?q=La+Caserne+Chanzy+Hotel,18+Rue+Tronsson+Ducoudray,Reims,France" target="_blank" class="btn-sm btn-map">🗺 Map</a>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="section-header">🇧🇪 Belgium — Kasteel van Ooidonk</div>
+    <div class="stay-block">
+      <div class="stay-name">Kasteel van Ooidonk</div>
+      <div class="stay-dates">Sat Jun 13 → Sun Jun 14 (check-out 10 AM)</div>
+      <div class="stay-addr">Ooidonkdreef 9, 9800 Deinze, Belgium</div>
+      <div class="stay-detail"><strong>Check-in:</strong> 5:00 PM GMT+2</div>
+      <div class="stay-detail"><strong>Dinner onsite:</strong> Grand Café Het Koetshuis, 7:00 PM</div>
+      <a href="https://maps.google.com/?q=Kasteel+van+Ooidonk,Ooidonkdreef+9,Deinze,Belgium" target="_blank" class="btn-sm btn-map">🗺 Map</a>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="section-header">🇧🇪 Ghent</div>
+    <div class="stay-block">
+      <div class="stay-name">B&amp;B Hotel Gent Centrum</div>
+      <div class="stay-dates">Sun Jun 14 → Mon Jun 15 (check-out 10 AM)</div>
+      <div class="stay-addr">Voldersstraat 17, 9000 Gent, Belgium</div>
+      <div class="stay-detail"><strong>Check-in:</strong> 3:00 PM GMT+2</div>
+      <a href="https://maps.google.com/?q=B&B+Hotel+Gent+Centrum,Voldersstraat+17,Gent,Belgium" target="_blank" class="btn-sm btn-map">🗺 Map</a>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="section-header">🇧🇪 Antwerp</div>
+    <div class="stay-block">
+      <div class="stay-name">Hotel Rubens - Grote Markt</div>
+      <div class="stay-dates">Tue Jun 16 → Thu Jun 18 (check-out 10 AM)</div>
+      <div class="stay-addr">Oude Beurs 29, 2000 Antwerpen, Belgium</div>
+      <div class="stay-detail"><strong>Check-in:</strong> 3:00 PM GMT+2</div>
+      <a href="https://maps.google.com/?q=Hotel+Rubens,Oude+Beurs+29,Antwerpen,Belgium" target="_blank" class="btn-sm btn-map">🗺 Map</a>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="section-header">🇳🇱 Amsterdam</div>
+    <div class="stay-block">
+      <div class="stay-name">Pulitzer Amsterdam</div>
+      <div class="stay-dates">Thu Jun 18 → Mon Jun 22 (check-out 10 AM)</div>
+      <div class="stay-addr">Prinsengracht 323, 1016 GZ Amsterdam, Netherlands</div>
+      <div class="stay-detail"><strong>Check-in:</strong> 3:00 PM GMT+2</div>
+      <a href="https://maps.google.com/?q=Pulitzer+Amsterdam,Prinsengracht+323,Amsterdam" target="_blank" class="btn-sm btn-map">🗺 Map</a>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="section-header">🇺🇸 Richmond, Virginia</div>
+    <div class="stay-block">
+      <div class="stay-name">Richmond Marriott</div>
+      <div class="stay-dates">Mon Jun 22 → Sat Jun 27 (check-out 9 AM)</div>
+      <div class="stay-addr">500 E Broad St, Richmond, VA 23219, USA</div>
+      <div class="stay-detail"><strong>Check-in:</strong> 8:00 PM EDT</div>
+      <div class="stay-detail">TBEX North America conference Jun 23–26</div>
+      <a href="https://maps.google.com/?q=Richmond+Marriott,500+E+Broad+St,Richmond,VA" target="_blank" class="btn-sm btn-map">🗺 Map</a>
+    </div>
+  </div>
+</div>
+
+<!-- TRANSPORT -->
+<div id="tab-transport" class="tab-content">
+  <div class="card">
+    <div class="card-title">Flights</div>
+    <div class="transport-block">
+      <div class="transport-label">Sun May 24 — Outbound to London</div>
+      <div class="transport-row">
+        <div><div class="t-city">San Diego (SAN)</div><div class="t-time">7:40 PM PDT</div></div>
+        <div class="t-arrow">✈</div>
+        <div style="text-align:right"><div class="t-city">London Heathrow (LHR)</div><div class="t-time">2:20 PM GMT+1</div><div class="t-sub">Arrives Mon May 25</div></div>
+      </div>
+      <div class="t-sub" style="margin-top:6px">British Airways BA 272</div>
+    </div>
+    <div class="transport-block">
+      <div class="transport-label">Mon Jun 22 — Amsterdam → Richmond</div>
+      <div class="transport-row">
+        <div><div class="t-city">Amsterdam (AMS)</div><div class="t-time">1:15 PM GMT+2</div></div>
+        <div class="t-arrow">✈</div>
+        <div style="text-align:right"><div class="t-city">Richmond (IAD)</div><div class="t-time">3:35 PM EDT</div></div>
+      </div>
+      <div class="t-sub" style="margin-top:6px">KLM KL 651 · Confirmation: YVECC9 · Seats 5A, 6A</div>
+    </div>
+    <div class="transport-block">
+      <div class="transport-label">Tue Jun 30 — Fly Home</div>
+      <div class="transport-row">
+        <div><div class="t-city">Dulles (IAD)</div><div class="t-time">7:49 PM EDT</div></div>
+        <div class="t-arrow">✈</div>
+        <div style="text-align:right"><div class="t-city">San Diego (SAN)</div><div class="t-time">10:13 PM PDT</div></div>
+      </div>
+      <div class="t-sub" style="margin-top:6px">Japan Airlines JL 431 · Conf: WHVODG (AA) / MWPWOZ (AS) · Seats 6C, 6D</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Trains</div>
+    <div class="transport-block">
+      <div class="transport-label">Sat May 30 — London → Paris (Eurostar)</div>
+      <div class="transport-row">
+        <div><div class="t-city">London St Pancras</div><div class="t-time">11:30 AM GMT+1</div></div>
+        <div class="t-arrow">🚄</div>
+        <div style="text-align:right"><div class="t-city">Paris Gare du Nord</div><div class="t-time">2:53 PM GMT+2</div></div>
+      </div>
+      <div class="t-sub" style="margin-top:6px">Coach 2, Seats 75 &amp; 76 · Confirmation: XXMQ32</div>
+    </div>
+    <div class="transport-block">
+      <div class="transport-label">Sat Jun 13 — Lille → Ghent (Flanders → Brussels South)</div>
+      <div class="transport-row">
+        <div><div class="t-city">Lille Flandres</div><div class="t-time">2:52 PM GMT+2</div></div>
+        <div class="t-arrow">🚄</div>
+        <div style="text-align:right"><div class="t-city">Gent-Sint-Pieters</div><div class="t-time">4:00 PM GMT+2</div></div>
+      </div>
+    </div>
+    <div class="transport-block">
+      <div class="transport-label">Thu Jun 18 — Antwerp → Amsterdam (Eurostar)</div>
+      <div class="transport-row">
+        <div><div class="t-city">Antwerp Central</div><div class="t-time">1:00 PM GMT+2</div></div>
+        <div class="t-arrow">🚄</div>
+        <div style="text-align:right"><div class="t-city">Amsterdam Centraal</div><div class="t-time">2:20 PM GMT+2</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CARS -->
+<div id="tab-cars" class="tab-content">
+  <div class="card">
+    <div class="card-title">Rental Cars</div>
+    <div class="car-grid">
+      <div class="car-cell" style="grid-column:1/-1">
+        <div class="car-label">Enterprise #1 — France Road Trip</div>
+        <div class="car-value">Pickup: Sat May 30 · Drop-off: Fri Jun 5 3:30 PM</div>
+      </div>
+      <div class="car-cell">
+        <div class="car-label">Pickup location</div>
+        <div class="car-value" style="font-size:0.78rem;font-weight:500">Picked up with Eurostar arrival</div>
+      </div>
+      <div class="car-cell">
+        <div class="car-label">Drop-off</div>
+        <div class="car-value" style="font-size:0.78rem;font-weight:500">3:30 PM PDT listed (confirm local time)</div>
+      </div>
+    </div>
+
+    <div class="car-grid" style="margin-top:14px">
+      <div class="car-cell" style="grid-column:1/-1">
+        <div class="car-label">Alamo — Paris → Reims</div>
+        <div class="car-value">Pickup: Tue Jun 9 11:00 AM · Drop-off: Sat Jun 13 5:00 PM</div>
+      </div>
+      <div class="car-cell" style="grid-column:1/-1">
+        <div class="car-label">Pickup location</div>
+        <div class="car-value" style="font-size:0.78rem;font-weight:500">Paris Gare De Lyon SNCF, 197 Rue de Bercy, 75012 Paris</div>
+      </div>
+      <div class="car-cell" style="grid-column:1/-1">
+        <div class="car-label">Drop-off location</div>
+        <div class="car-value" style="font-size:0.78rem;font-weight:500">Face Casino Barriere Lille France</div>
+      </div>
+    </div>
+
+    <div class="car-grid" style="margin-top:14px">
+      <div class="car-cell" style="grid-column:1/-1">
+        <div class="car-label">Enterprise #2 — Reims (separate pickup)</div>
+        <div class="car-value">Pickup: Tue Jun 9 3:00 PM</div>
+      </div>
+      <div class="car-cell" style="grid-column:1/-1">
+        <div class="car-label">Pickup location</div>
+        <div class="car-value" style="font-size:0.78rem;font-weight:500">28 Bd Joffre, 51100 Reims, France</div>
+      </div>
+    </div>
+
+    <div class="car-grid" style="margin-top:14px">
+      <div class="car-cell" style="grid-column:1/-1">
+        <div class="car-label">Avis — Virginia / FAM Trip</div>
+        <div class="car-value">Pickup: Fri Jun 26 10:00 AM · Drop-off: Tue Jun 30 6:00 PM</div>
+      </div>
+      <div class="car-cell" style="grid-column:1/-1">
+        <div class="car-label">Drop-off location</div>
+        <div class="car-value" style="font-size:0.78rem;font-weight:500">1 Saarinen Cir, Dulles, VA 20166 (IAD Airport)</div>
+      </div>
+    </div>
+  </div>
+  <div class="alert alert-warn">
+    <strong>⚠️ Two cars in Reims on Jun 9</strong>
+    Alamo pickup at Paris Gare de Lyon AND Enterprise pickup in Reims — two separate car pickups for the group on the same day. Coordinate who picks up which.
+  </div>
+</div>
+
+<!-- DINING -->
+<div id="tab-dining" class="tab-content">
+  <div class="card">
+    <div class="card-title">London</div>
+    <div class="dining-item">
+      <div class="din-date">Mon May 25</div>
+      <div class="din-name">🍺 The Grenadier</div>
+      <div class="din-time">7:30 PM GMT+1</div>
+      <div class="din-addr">18 Wilton Row, London SW1X 7NR</div>
+    </div>
+    <div class="dining-item">
+      <div class="din-date">Tue May 26</div>
+      <div class="din-name">🍽 Quilon</div>
+      <div class="din-time">7:30 PM GMT+1</div>
+      <div class="din-addr">41 Buckingham Gate, London SW1E 6AF</div>
+    </div>
+    <div class="dining-item">
+      <div class="din-date">Wed May 27</div>
+      <div class="din-name">🍽 Hoppers Restaurant</div>
+      <div class="din-time">7:30 PM GMT+1</div>
+    </div>
+    <div class="dining-item">
+      <div class="din-date">Thu May 28</div>
+      <div class="din-name">🍽 Bon Gusto</div>
+      <div class="din-time">7:30 PM GMT+1</div>
+      <div class="din-addr">75–77 Buckingham Gate, London SW1E 6PD</div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-title">Paris</div>
+    <div class="dining-item">
+      <div class="din-date">Fri Jun 5</div>
+      <div class="din-name">👥 Marie &amp; Martin Godbout — Meet at Hotel</div>
+      <div class="din-time">6:00 PM GMT+2</div>
+      <div class="din-addr">Hotel Du Jeu De Paume, 54 Rue Saint-Louis en l'Île</div>
+    </div>
+    <div class="dining-item">
+      <div class="din-date">Fri Jun 5</div>
+      <div class="din-name">🍽 Restaurant Vatel Paris</div>
+      <div class="din-time">7:30 PM GMT+2</div>
+      <div class="din-addr">Pavillon, Tour Aurore, 92403 Courbevoie</div>
+    </div>
+    <div class="dining-item">
+      <div class="din-date">Sat Jun 6</div>
+      <div class="din-name">🍽 Le Bon Georges</div>
+      <div class="din-time">7:15 PM GMT+2</div>
+      <div class="din-addr">45 Rue Saint-Georges, 75009 Paris</div>
+    </div>
+    <div class="dining-item">
+      <div class="din-date">Sun Jun 7</div>
+      <div class="din-name">🍽 L'Îlot Vache</div>
+      <div class="din-time">7:30 PM GMT+2</div>
+      <div class="din-addr">35 Rue Saint-Louis en l'Île, 75004 Paris</div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-title">Belgium &amp; Amsterdam</div>
+    <div class="dining-item">
+      <div class="din-date">Sat Jun 13</div>
+      <div class="din-name">🏰 Grand Café Het Koetshuis</div>
+      <div class="din-time">7:00 PM GMT+2</div>
+      <div class="din-addr">Ooidonkdreef 28, 9800 Deinze (Kasteel onsite)</div>
+    </div>
+    <div class="dining-item">
+      <div class="din-date">Thu Jun 18</div>
+      <div class="din-name">👥 Dinner with Judy &amp; Steve</div>
+      <div class="din-time">7:00 PM GMT+2</div>
+      <div class="din-addr">TBD — Amsterdam</div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-title">Richmond, Virginia</div>
+    <div class="dining-item">
+      <div class="din-date">Thu Jun 25</div>
+      <div class="din-name">🎨 Crossroads Art Center Open House</div>
+      <div class="din-time">5:30–8:30 PM EDT</div>
+      <div class="din-addr">2016 Staples Mill Rd, Richmond, VA 23230</div>
+    </div>
+  </div>
+</div>
+
+<script>
+const days = [
+  { date:'2026-05-24', label:'Sun, May 24', city:'Depart San Diego', type:'travel', plan:'BA 272 departs SAN 7:40 PM → London Heathrow. Overnight flight.', tags:['✈ BA272 7:40PM SAN'] },
+  { date:'2026-05-25', label:'Mon, May 25', city:'London — Arrive', type:'london', plan:'Arrive LHR 2:20 PM. Check in St. Ermin\'s Hotel (4 PM). Evening: The Grenadier pub 7:30 PM.', tags:['🛬 Arrive 2:20PM','🍺 Grenadier 7:30PM'] },
+  { date:'2026-05-26', label:'Tue, May 26', city:'London', type:'london', plan:'V&A Schiaparelli Exhibit 10 AM – 5 PM. Dinner Quilon 7:30 PM.', tags:['🎨 V&A 10AM','🍽 Quilon 7:30PM'] },
+  { date:'2026-05-27', label:'Wed, May 27', city:'London', type:'london', plan:'V&A East Museum 11 AM – 4 PM (Stratford Cross). Dinner Hoppers 7:30 PM.', tags:['🎨 V&A East 11AM','🍽 Hoppers 7:30PM'] },
+  { date:'2026-05-28', label:'Thu, May 28', city:'London', type:'london', plan:'Meet Tim Fordham Moss (Wixhill Ltd. PR) at St. Ermin\'s lobby 4:30–5:30 PM. Dinner Bon Gusto 7:30 PM.', tags:['🤝 Tim Fordham 4:30PM','🍽 Bon Gusto 7:30PM'] },
+  { date:'2026-05-29', label:'Fri, May 29', city:'London — Arundel Castle', type:'london', plan:'Day trip to Arundel Castle with Mary & Kevin Lewis. 10 AM – 7 PM.', tags:['🏰 Arundel Castle 10AM'] },
+  { date:'2026-05-30', label:'Sat, May 30', city:'London → Paris → Normandy', type:'travel', plan:'Check out St. Ermin\'s (10 AM). Eurostar St Pancras → Paris Gare du Nord 11:30 AM, arrives 2:53 PM. Drive to Normandy. Check in Par Hasard ou pas (6:30 PM).', tags:['🚄 Eurostar 11:30AM','🚗 Drive to Normandy'] },
+  { date:'2026-05-31', label:'Sun, May 31', city:'Normandy', type:'normandy', plan:'Normandy Tour with HQ Company Tour 9 AM – 5:30 PM. Based in Bayeux.', tags:['🎖 Normandy Tour 9AM'] },
+  { date:'2026-06-01', label:'Mon, Jun 1',  city:'Normandy', type:'normandy', plan:'Free day — explore Normandy. Bayeux Tapestry, beaches, villages.', tags:[] },
+  { date:'2026-06-02', label:'Tue, Jun 2',  city:'Normandy → Abbey', type:'travel', plan:'Check out Par Hasard (10 AM). Drive to Domaine de L\'Abbaye des Vaux de Cernay. Check in 3 PM.', tags:['🚗 Drive to Abbey'] },
+  { date:'2026-06-03', label:'Wed, Jun 3',  city:'Abbaye des Vaux de Cernay', type:'paris', plan:'Stay at the Abbey — stunning grounds near Versailles. Explore the estate.', tags:[] },
+  { date:'2026-06-04', label:'Thu, Jun 4',  city:'Abbaye des Vaux de Cernay', type:'paris', plan:'Abbey day. Day trip options: Chartres, Versailles, or Rambouillet forest.', tags:[] },
+  { date:'2026-06-05', label:'Fri, Jun 5',  city:'Paris — Île Saint-Louis', type:'paris', plan:'Check out Abbey (11 AM). Drop off Enterprise. Check in Hotel Du Jeu De Paume, Paris (3 PM). Meet Marie & Martin Godbout 6 PM. Dinner Restaurant Vatel 7:30 PM.', tags:['🏨 Hotel Du Jeu De Paume','👥 Godbouts 6PM','🍽 Vatel 7:30PM'] },
+  { date:'2026-06-06', label:'Sat, Jun 6',  city:'Paris', type:'paris', plan:'Paris day. Dinner Le Bon Georges 7:15 PM.', tags:['🍽 Le Bon Georges 7:15PM'] },
+  { date:'2026-06-07', label:'Sun, Jun 7',  city:'Paris', type:'paris', plan:'Paris day. Dinner L\'Îlot Vache 7:30 PM (steps from hotel).', tags:['🍽 L\'Îlot Vache 7:30PM'] },
+  { date:'2026-06-08', label:'Mon, Jun 8',  city:'Paris', type:'paris', plan:'Final Paris day — explore at leisure.', tags:[] },
+  { date:'2026-06-09', label:'Tue, Jun 9',  city:'Paris → Reims', type:'travel', plan:'Check out Hotel Du Jeu De Paume (11 AM). Alamo pickup Paris Gare de Lyon 11 AM. Drive to Reims. Check in La Caserne Chanzy 3 PM. Also: Enterprise pickup in Reims 3 PM.', tags:['🚗 Alamo Paris 11AM','🏨 Caserne Chanzy 3PM'] },
+  { date:'2026-06-10', label:'Wed, Jun 10', city:'Reims — Champagne', type:'reims', plan:'Champagne country. Explore Reims Cathedral, champagne houses.', tags:[] },
+  { date:'2026-06-11', label:'Thu, Jun 11', city:'Reims — Champagne Tour', type:'reims', plan:'Billecart-Salmon Champagne house tour 10:30 AM – 12:00 PM. 40 Rue Carnot, Aÿ-Champagne.', tags:['🥂 Billecart-Salmon 10:30AM'] },
+  { date:'2026-06-12', label:'Fri, Jun 12', city:'Reims', type:'reims', plan:'Final Reims day. Explore at leisure.', tags:[] },
+  { date:'2026-06-13', label:'Sat, Jun 13', city:'Reims → Belgium (Kasteel)', type:'travel', plan:'Check out La Caserne Chanzy (12 PM). Drive / train Lille → Ghent. Train: Lille Flandres 2:52 PM → Gent 4:00 PM. Drop Alamo at Casino Lille. Check in Kasteel van Ooidonk (5 PM). Dinner Grand Café Het Koetshuis 7 PM.', tags:['🚄 Lille→Ghent 2:52PM','🏰 Kasteel van Ooidonk','🍽 Koetshuis 7PM'] },
+  { date:'2026-06-14', label:'Sun, Jun 14', city:'Belgium — Ghent', type:'belgium', plan:'Check out Kasteel (10 AM). Check in B&B Hotel Gent Centrum (3 PM). Explore Ghent.', tags:['🏨 Ghent'] },
+  { date:'2026-06-15', label:'Mon, Jun 15', city:'Belgium — Ghent/Antwerp', type:'belgium', plan:'Check out Gent (10 AM). Travel to Antwerp.', tags:[] },
+  { date:'2026-06-16', label:'Tue, Jun 16', city:'Antwerp', type:'belgium', plan:'Check in Hotel Rubens - Grote Markt (3 PM). Explore Antwerp.', tags:['🏨 Hotel Rubens'] },
+  { date:'2026-06-17', label:'Wed, Jun 17', city:'Antwerp', type:'belgium', plan:'Full day in Antwerp — cathedral, diamond district, Rubens House.', tags:[] },
+  { date:'2026-06-18', label:'Thu, Jun 18', city:'Antwerp → Amsterdam', type:'travel', plan:'Check out Hotel Rubens (10 AM). Eurostar Antwerp → Amsterdam 1 PM, arrives 2:20 PM. Check in Pulitzer Amsterdam (3 PM). Dinner with Judy & Steve 7 PM.', tags:['🚄 Eurostar 1PM','🏨 Pulitzer','🍽 Dinner Judy & Steve 7PM'] },
+  { date:'2026-06-19', label:'Fri, Jun 19', city:'Amsterdam', type:'amsterdam', plan:'Anne Frank House 11:15 AM – 12:15 PM. Wedding Rehearsal Party at Het West-Indisch Huis 6–10 PM.', tags:['🏛 Anne Frank 11:15AM','🎉 Rehearsal Party 6PM'] },
+  { date:'2026-06-20', label:'Sat, Jun 20', city:'Amsterdam — Wedding Day!', type:'amsterdam', plan:'Alex & Frank\'s wedding at Posthoornkerk 3:30 PM. Celebrate!', tags:['💍 Wedding 3:30PM Posthoornkerk'] },
+  { date:'2026-06-21', label:'Sun, Jun 21', city:'Amsterdam', type:'amsterdam', plan:'Free day in Amsterdam post-wedding. Canals, Rijksmuseum, Vondelpark.', tags:[] },
+  { date:'2026-06-22', label:'Mon, Jun 22', city:'Amsterdam → Richmond', type:'travel', plan:'Check out Pulitzer (10 AM). KLM KL 651 AMS → IAD 1:15 PM, arrives 3:35 PM EDT. Check in Richmond Marriott ~8 PM.', tags:['✈ KL651 1:15PM AMS','🛬 Arrive Richmond'] },
+  { date:'2026-06-23', label:'Tue, Jun 23', city:'Richmond — TBEX', type:'us', plan:'TBEX North America conference begins. Greater Richmond Convention Center. Pre-Bex Garden Tour 9:30 AM – 4 PM.', tags:['🎤 TBEX begins','🌿 Garden Tour 9:30AM'] },
+  { date:'2026-06-24', label:'Wed, Jun 24', city:'Richmond — TBEX', type:'us', plan:'TBEX — Americana Adventure Pre-Bex 9:45 AM – 4 PM.', tags:['🎤 TBEX','🇺🇸 Americana Tour 9:45AM'] },
+  { date:'2026-06-25', label:'Thu, Jun 25', city:'Richmond — TBEX', type:'us', plan:'TBEX continues. Crossroads Art Center Open House 5:30–8:30 PM.', tags:['🎤 TBEX','🎨 Art Center 5:30PM'] },
+  { date:'2026-06-26', label:'Fri, Jun 26', city:'Richmond — TBEX', type:'us', plan:'TBEX final day. Avis rental pickup 10 AM.', tags:['🎤 TBEX final','🚗 Avis pickup 10AM'] },
+  { date:'2026-06-27', label:'Sat, Jun 27', city:'Northern Virginia — FAM Trip', type:'us', plan:'FAM/Press trip begins — Northern Virginia. Details TBD. Check out Richmond Marriott (9 AM).', tags:['📋 FAM Trip begins (details TBD)'] },
+  { date:'2026-06-28', label:'Sun, Jun 28', city:'Northern Virginia — FAM Trip', type:'us', plan:'FAM/Press trip Day 2 — Northern Virginia. Details TBD.', tags:[] },
+  { date:'2026-06-29', label:'Mon, Jun 29', city:'Northern Virginia — FAM Trip', type:'us', plan:'FAM/Press trip Day 3 — Northern Virginia. Details TBD.', tags:[] },
+  { date:'2026-06-30', label:'Tue, Jun 30', city:'Fly Home', type:'travel', plan:'Drop Avis at Dulles 6 PM. JL 431 IAD → SAN departs 7:49 PM, arrives 10:13 PM PDT. Home!', tags:['🚗 Avis drop Dulles 6PM','✈ JL431 7:49PM IAD'] },
+];
+
+const cityTypeMap = {
+  london: 'city-london', normandy: 'city-normandy', paris: 'city-paris',
+  reims: 'city-reims', belgium: 'city-belgium', amsterdam: 'city-amsterdam',
+  us: 'city-us', travel: 'city-travel'
+};
+
+function parseDate(str) { const [y,m,d] = str.split('-').map(Number); return new Date(y,m-1,d); }
+function todayStr() { const t = new Date(); return `${t.getFullYear()}-${String(t.getMonth()+1).padStart(2,'0')}-${String(t.getDate()).padStart(2,'0')}`; }
+
+function renderCountdown() {
+  const today = new Date(); today.setHours(0,0,0,0);
+  const start = parseDate('2026-05-24');
+  const end   = parseDate('2026-06-30');
+  const bar = document.getElementById('countdown-bar');
+  const txt = document.getElementById('countdown-text');
+  if (today < start) {
+    const diff = Math.round((start - today) / 86400000);
+    txt.innerHTML = `✈️ Trip starts in <span>${diff} day${diff===1?'':'s'}</span> — May 24, 2026`;
+  } else if (today <= end) {
+    bar.classList.add('active');
+    const d = Math.round((today - start) / 86400000) + 1;
+    txt.innerHTML = `🌍 On the road! <span>Day ${d} of 38</span>`;
+  } else {
+    txt.innerHTML = `🎉 What an adventure — welcome home!`;
+  }
+}
+
+function renderToday() {
+  const ts = todayStr();
+  const container = document.getElementById('today-container');
+  const day = days.find(d => d.date === ts);
+  if (!day) {
+    const now = new Date(); now.setHours(0,0,0,0);
+    const start = parseDate('2026-05-24');
+    const diff = Math.round((start - now) / 86400000);
+    container.innerHTML = `
+      <div class="card" style="text-align:center;padding:28px 18px">
+        <div style="font-size:2.5rem;margin-bottom:8px">🌍</div>
+        <div style="font-size:1.1rem;font-weight:700;color:var(--deep);margin-bottom:4px">
+          ${diff > 0 ? `${diff} days until departure!` : 'Safe travels — what a trip!'}
+        </div>
+        <div style="font-size:0.85rem;color:var(--muted)">May 24 – Jun 30, 2026 · 38 days · 5 countries</div>
+      </div>`;
+    return;
+  }
+  const pill = `<span class="city-pill ${cityTypeMap[day.type]||'city-travel'}">${day.city}</span>`;
+  const tagsHtml = day.tags.length
+    ? `<div class="day-tags">${day.tags.map(t => {
+        const cls = t.includes('🍽')||t.includes('🍺')||t.includes('🥂') ? 'tag tag-eat' : t.includes('✈')||t.includes('🚄')||t.includes('🚗') ? 'tag tag-move' : 'tag tag-act';
+        return `<span class="${cls}">${t}</span>`;
+      }).join('')}</div>` : '';
+  container.innerHTML = `
+    <div class="card">
+      <div class="card-title">Today</div>
+      ${pill}
+      <div style="font-size:1.05rem;font-weight:700;color:var(--deep);margin:4px 0 2px">${day.label}</div>
+      <div style="font-size:0.82rem;color:var(--muted);margin-bottom:10px">${day.city}</div>
+      <div style="font-size:0.93rem;line-height:1.6;border-left:3px solid var(--purple-mid);padding-left:12px">${day.plan}</div>
+      ${tagsHtml}
+    </div>`;
+}
+
+function renderItinerary() {
+  const ts = todayStr();
+  const el = document.getElementById('itinerary-list');
+  el.innerHTML = days.map(d => {
+    const isToday = d.date === ts;
+    const isPast  = d.date < ts;
+    const pill = `<span class="city-pill ${cityTypeMap[d.type]||'city-travel'}">${d.city}</span>`;
+    const tagsHtml = d.tags.length
+      ? `<div class="day-tags">${d.tags.map(t => {
+          const cls = t.includes('🍽')||t.includes('🍺')||t.includes('🥂') ? 'tag tag-eat' : t.includes('✈')||t.includes('🚄')||t.includes('🚗') ? 'tag tag-move' : 'tag tag-act';
+          return `<span class="${cls}">${t}</span>`;
+        }).join('')}</div>` : '';
+    let cls = 'day-item' + (isToday ? ' today-item' : '') + (isPast ? ' past-item' : '');
+    return `<div class="${cls}">
+      ${isToday ? '<span class="day-badge">TODAY</span>' : ''}
+      <div class="day-label">${d.label}</div>
+      ${pill}
+      <div class="day-plan">${d.plan}</div>
+      ${tagsHtml}
+    </div>`;
+  }).join('');
+}
+
+function showTab(name) {
+  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + name).classList.add('active');
+  event.target.classList.add('active');
+}
+
+renderCountdown();
+renderToday();
+renderItinerary();
+</script>
+</body>
+</html>
