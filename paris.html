@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Paris & Annecy — June 2026</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy: #1a2744;
+    --navy-mid: #243460;
+    --blue: #2d5be3;
+    --blue-light: #e8eefb;
+    --gold: #c9a84c;
+    --gold-light: #fdf8ed;
+    --rose: #c94c6a;
+    --rose-light: #fdf0f3;
+    --green: #2e7d52;
+    --green-light: #e8f5ee;
+    --gray: #f3f4f8;
+    --text: #1a1a2e;
+    --muted: #6b7280;
+    --card-shadow: 0 2px 12px rgba(0,0,0,0.09);
+  }
+
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--gray); color: var(--text); min-height: 100vh; }
+
+  /* HERO */
+  .hero {
+    background: linear-gradient(135deg, #1a2744 0%, #2d3f7a 55%, #1a2744 100%);
+    color: white; padding: 28px 24px 20px; text-align: center; position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 120'%3E%3Cpath d='M0,80 L60,80 L60,40 L70,20 L80,40 L80,80 L200,80 L200,50 L230,10 L260,50 L260,80 L400,80 L400,55 L420,30 L440,55 L440,80 L600,80 L600,45 L640,5 L680,45 L680,80 L800,80 L800,120 L0,120 Z' fill='rgba(255,255,255,0.05)'/%3E%3C/svg%3E") bottom/cover no-repeat;
+    pointer-events: none;
+  }
+  .hero-flag { font-size: 1.6rem; display: block; margin-bottom: 6px; letter-spacing: 4px; }
+  .hero h1 { font-size: 1.75rem; font-weight: 800; letter-spacing: -0.5px; }
+  .hero .subtitle { font-size: 0.9rem; opacity: 0.8; margin-top: 5px; }
+  .hero .dates { font-size: 0.82rem; opacity: 0.65; margin-top: 3px; letter-spacing: 0.5px; }
+
+  .countdown-bar { background: rgba(0,0,0,0.3); padding: 8px 24px; text-align: center; font-size: 0.85rem; color: white; }
+  .countdown-bar span { font-weight: 800; color: #f0d080; }
+  .countdown-bar.active { background: rgba(46,125,82,0.65); }
+  .countdown-bar.active span { color: #a8f0c0; }
+
+  /* TABS */
+  .tab-bar { background: white; display: flex; overflow-x: auto; border-bottom: 2px solid #e5e7eb; position: sticky; top: 0; z-index: 100; scrollbar-width: none; }
+  .tab-bar::-webkit-scrollbar { display: none; }
+  .tab-btn { flex: none; padding: 12px 15px; border: none; background: none; font-size: 0.8rem; font-weight: 600; color: var(--muted); cursor: pointer; white-space: nowrap; border-bottom: 3px solid transparent; margin-bottom: -2px; transition: all 0.15s; }
+  .tab-btn.active { color: var(--navy); border-bottom-color: var(--gold); }
+  .tab-btn:hover { color: var(--navy-mid); }
+
+  .tab-content { display: none; padding: 16px; max-width: 860px; margin: 0 auto; }
+  .tab-content.active { display: block; }
+
+  /* CARDS */
+  .card { background: white; border-radius: 12px; padding: 16px 18px; margin-bottom: 14px; box-shadow: var(--card-shadow); }
+  .card-title { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); margin-bottom: 12px; }
+
+  /* CITY BADGE */
+  .city-pill {
+    display: inline-block; font-size: 0.68rem; font-weight: 700; padding: 2px 9px; border-radius: 20px; margin-bottom: 8px; letter-spacing: 0.5px;
+  }
+  .city-paris { background: var(--blue-light); color: var(--blue); }
+  .city-annecy { background: var(--rose-light); color: var(--rose); }
+
+  /* TODAY */
+  .today-date { font-size: 1.1rem; font-weight: 700; color: var(--navy); margin-bottom: 2px; }
+  .today-sub { font-size: 0.82rem; color: var(--muted); margin-bottom: 10px; }
+  .today-plan { font-size: 0.93rem; line-height: 1.6; border-left: 3px solid var(--gold); padding-left: 12px; }
+
+  /* DAY ITEMS */
+  .day-item { border-radius: 10px; border: 1.5px solid #e5e7eb; padding: 13px 15px; margin-bottom: 10px; position: relative; transition: all 0.15s; }
+  .day-item:hover { border-color: var(--gold); box-shadow: 0 2px 8px rgba(201,168,76,0.15); }
+  .day-item.today-item { border-color: var(--gold); background: var(--gold-light); }
+  .day-item.past-item { opacity: 0.5; }
+  .day-badge { position: absolute; top: 10px; right: 12px; font-size: 0.68rem; font-weight: 700; padding: 2px 8px; border-radius: 20px; background: var(--gold); color: white; }
+  .day-label { font-size: 0.75rem; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; }
+  .day-title { font-size: 1rem; font-weight: 700; margin: 2px 0 5px; }
+  .day-plan { font-size: 0.82rem; color: #444; line-height: 1.55; margin-top: 4px; }
+  .day-tags { margin-top: 8px; display: flex; flex-wrap: wrap; gap: 5px; }
+  .tag { font-size: 0.7rem; padding: 3px 9px; border-radius: 20px; font-weight: 600; }
+  .tag-eat { background: var(--rose-light); color: var(--rose); }
+  .tag-act { background: var(--blue-light); color: var(--blue); }
+  .tag-move { background: #f0f0f0; color: #555; }
+
+  /* STAYS */
+  .stay-card { border-left: 4px solid var(--gold); padding-left: 14px; margin-bottom: 18px; }
+  .stay-name { font-size: 1rem; font-weight: 700; }
+  .stay-dates { font-size: 0.78rem; color: var(--muted); margin: 2px 0 6px; }
+  .stay-detail { font-size: 0.82rem; margin: 3px 0; }
+  .stay-detail strong { color: var(--navy); }
+  .stay-confirm { display: inline-block; font-size: 0.73rem; font-weight: 700; background: var(--green-light); color: var(--green); padding: 3px 10px; border-radius: 20px; margin-top: 6px; }
+  .btn-sm { display: inline-block; font-size: 0.73rem; font-weight: 700; padding: 4px 11px; border-radius: 20px; text-decoration: none; margin-top: 6px; margin-left: 6px; }
+  .btn-map { background: var(--blue-light); color: var(--navy); }
+  .btn-call { background: var(--navy); color: white; }
+  .btn-email { background: var(--gold-light); color: #7a5a00; }
+
+  /* DINING */
+  .dining-item { padding: 13px 0; border-bottom: 1px solid #f0f0f0; }
+  .dining-item:last-child { border-bottom: none; }
+  .din-date { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; color: var(--gold); }
+  .din-name { font-size: 0.98rem; font-weight: 700; margin: 2px 0; }
+  .din-time { font-size: 0.82rem; color: var(--blue); font-weight: 600; }
+  .din-addr { font-size: 0.78rem; color: var(--muted); margin-top: 2px; }
+  .din-note { font-size: 0.78rem; color: var(--text); margin-top: 4px; line-height: 1.5; }
+  .warn-pill { display: inline-block; font-size: 0.7rem; font-weight: 700; background: #fff3cd; color: #856404; padding: 2px 8px; border-radius: 20px; margin-top: 4px; }
+  .confirm-pill { display: inline-block; font-size: 0.7rem; font-weight: 700; background: var(--green-light); color: var(--green); padding: 2px 8px; border-radius: 20px; margin-top: 4px; }
+
+  /* ACTIVITIES */
+  .act-item { padding: 13px 0; border-bottom: 1px solid #f0f0f0; }
+  .act-item:last-child { border-bottom: none; }
+  .act-date { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; color: var(--blue); letter-spacing: 0.5px; }
+  .act-name { font-size: 0.96rem; font-weight: 700; margin: 3px 0; }
+  .act-time { font-size: 0.82rem; color: var(--gold); font-weight: 600; }
+  .act-detail { font-size: 0.8rem; color: #444; margin-top: 4px; line-height: 1.5; }
+  .act-confirm { font-size: 0.73rem; font-weight: 700; color: var(--green); margin-top: 4px; }
+
+  /* FLIGHTS / TRAINS */
+  .transport-card { padding: 14px 0; border-bottom: 1px solid #f0f0f0; }
+  .transport-card:last-child { border-bottom: none; }
+  .transport-label { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; color: var(--muted); letter-spacing: 0.5px; margin-bottom: 6px; }
+  .transport-row { display: flex; align-items: center; gap: 8px; }
+  .transport-who { font-size: 0.7rem; font-weight: 700; background: var(--blue-light); color: var(--blue); padding: 2px 8px; border-radius: 20px; margin-bottom: 6px; display: inline-block; }
+  .t-city { font-size: 0.85rem; font-weight: 700; }
+  .t-time { font-size: 1rem; font-weight: 800; color: var(--navy); }
+  .t-arrow { flex: 1; text-align: center; color: var(--gold); font-size: 1.2rem; }
+  .t-num { font-size: 0.75rem; color: var(--muted); margin-top: 2px; }
+
+  /* OPTIONAL */
+  .opt-item { padding: 9px 0; border-bottom: 1px solid #f5f5f5; font-size: 0.87rem; line-height: 1.5; display: flex; gap: 8px; align-items: flex-start; }
+  .opt-item:last-child { border-bottom: none; }
+  .opt-icon { flex-shrink: 0; margin-top: 1px; }
+
+  /* ALERTS */
+  .alert { border-radius: 8px; padding: 10px 14px; margin-bottom: 12px; font-size: 0.82rem; line-height: 1.55; }
+  .alert-warn { background: #fff8e1; border-left: 4px solid #f59e0b; color: #7a5a00; }
+  .alert-info { background: var(--blue-light); border-left: 4px solid var(--blue); color: var(--navy); }
+  .alert-rose { background: var(--rose-light); border-left: 4px solid var(--rose); color: #7a1030; }
+  .alert strong { display: block; margin-bottom: 2px; font-size: 0.85rem; }
+
+  /* AIRBNB KEY */
+  .key-box { background: var(--navy); color: white; border-radius: 10px; padding: 14px 16px; margin-top: 10px; }
+  .key-label { font-size: 0.68rem; text-transform: uppercase; letter-spacing: 1px; opacity: 0.6; }
+  .key-code { font-size: 2rem; font-weight: 800; letter-spacing: 6px; color: var(--gold); }
+
+  @media (max-width: 480px) {
+    .hero h1 { font-size: 1.4rem; }
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <span class="hero-flag">🇫🇷 🗼 🏔️</span>
+  <h1>Paris &amp; Annecy</h1>
+  <div class="subtitle">Altschuls &amp; Millars Family Adventure</div>
+  <div class="dates">June 5 – 14, 2026 &nbsp;·&nbsp; Paris → Annecy → Paris → Home</div>
+</div>
+<div class="countdown-bar" id="countdown-bar">
+  <span id="countdown-text">Loading...</span>
+</div>
+
+<div class="tab-bar">
+  <button class="tab-btn active" onclick="showTab('today')">📍 Today</button>
+  <button class="tab-btn" onclick="showTab('itinerary')">🗓 Itinerary</button>
+  <button class="tab-btn" onclick="showTab('stays')">🏨 Stays</button>
+  <button class="tab-btn" onclick="showTab('transport')">✈️ Flights &amp; Trains</button>
+  <button class="tab-btn" onclick="showTab('dining')">🍽 Dining</button>
+  <button class="tab-btn" onclick="showTab('activities')">🎯 Activities</button>
+  <button class="tab-btn" onclick="showTab('optional')">✨ Optional</button>
+</div>
+
+<!-- TODAY -->
+<div id="tab-today" class="tab-content active">
+  <div id="today-container"></div>
+</div>
+
+<!-- ITINERARY -->
+<div id="tab-itinerary" class="tab-content">
+  <div class="card">
+    <div class="card-title">Full Trip — Day by Day</div>
+    <div id="itinerary-list"></div>
+  </div>
+</div>
+
+<!-- STAYS -->
+<div id="tab-stays" class="tab-content">
+  <div class="card">
+    <div class="card-title">Paris — Hotel Madison</div>
+    <div class="stay-card">
+      <div class="stay-name">Hotel Madison</div>
+      <div class="stay-dates">Fri Jun 5 → Wed Jun 10 (5 nights)</div>
+      <div class="stay-detail">143 Boulevard Saint-Germain, 75006 Paris</div>
+      <div class="stay-detail"><strong>Check-in:</strong> Jun 5 &nbsp;·&nbsp; <strong>Check-out:</strong> Jun 10 morning</div>
+      <div class="stay-detail"><strong>Altschuls Confirmation:</strong> 84418</div>
+      <span class="stay-confirm">Saint-Germain-des-Prés</span>
+      <a href="https://maps.google.com/?q=Hotel+Madison,143+Boulevard+Saint-Germain,Paris" target="_blank" class="btn-sm btn-map">🗺 Map</a>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-title">Annecy — AirBnB</div>
+    <div class="stay-card">
+      <div class="stay-name">Annecy AirBnB</div>
+      <div class="stay-dates">Wed Jun 10 → Sat Jun 13 (3 nights)</div>
+      <div class="stay-detail">4 Bis Rue de la Poste, Annecy 74000 France</div>
+      <div class="stay-detail"><strong>Check-in:</strong> 4PM–9PM &nbsp;·&nbsp; <strong>Check-out:</strong> Before 10AM Sat Jun 13</div>
+      <div class="stay-detail">Entrance: between the swiximmo agenda and the Beautiful store</div>
+      <a href="https://maps.google.com/?q=4+Bis+Rue+de+la+Poste,Annecy,France" target="_blank" class="btn-sm btn-map">🗺 Map</a>
+      <div class="key-box">
+        <div class="key-label">Gate key code</div>
+        <div class="key-code">8426</div>
+        <div style="font-size:0.75rem;opacity:0.7;margin-top:4px">Lock box instructions in app 24 hrs before check-in</div>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-title">Paris — Holiday Inn CDG (Last Night)</div>
+    <div class="stay-card">
+      <div class="stay-name">Holiday Inn CDG</div>
+      <div class="stay-dates">Sat Jun 13 → Sun Jun 14 (1 night)</div>
+      <div class="stay-detail"><strong>Two rooms</strong> — connecting requested</div>
+      <div class="stay-detail"><strong>Confirmation 1:</strong> 61926407</div>
+      <div class="stay-detail"><strong>Confirmation 2:</strong> 64306199</div>
+      <div class="stay-detail"><strong>Airport Shuttle:</strong> Reserve via +33 1 84 28 07 00</div>
+      <span class="stay-confirm">Free airport shuttle — book in advance</span>
+      <a href="mailto:reception@hi-cdg.com" class="btn-sm btn-email">✉️ Email Hotel</a>
+    </div>
+  </div>
+</div>
+
+<!-- TRANSPORT -->
+<div id="tab-transport" class="tab-content">
+  <div class="card">
+    <div class="card-title">Flights to Paris</div>
+    <div class="transport-card">
+      <div class="transport-who">Millars</div>
+      <div class="transport-label">Wed Jun 3 → Thu Jun 4</div>
+      <div class="transport-row">
+        <div><div class="t-city">Los Angeles (LAX)</div><div class="t-time">2:00 PM</div><div class="t-num">Wed Jun 3</div></div>
+        <div class="t-arrow">✈</div>
+        <div style="text-align:right"><div class="t-city">Paris CDG</div><div class="t-time">9:50 AM</div><div class="t-num">Thu Jun 4</div></div>
+      </div>
+    </div>
+    <div class="transport-card">
+      <div class="transport-who">Altschuls</div>
+      <div class="transport-label">Thu Jun 4 → Fri Jun 5</div>
+      <div class="transport-row">
+        <div><div class="t-city">Los Angeles (LAX)</div><div class="t-time">3:15 PM</div><div class="t-num">Thu Jun 4</div></div>
+        <div class="t-arrow">✈</div>
+        <div style="text-align:right"><div class="t-city">Paris CDG</div><div class="t-time">11:10 AM</div><div class="t-num">Fri Jun 5</div></div>
+      </div>
+      <div class="alert alert-warn" style="margin-top:10px;margin-bottom:0">
+        <strong>To-do before flying</strong>
+        Enter passport numbers on Air France app
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-title">Paris → Annecy (Wed Jun 10)</div>
+    <div class="transport-card">
+      <div class="transport-who">Altschuls</div>
+      <div class="transport-label">TGV INOUI — Paris Gare de Lyon</div>
+      <div class="transport-row">
+        <div><div class="t-city">Paris Gare de Lyon</div><div class="t-time">12:46 PM</div></div>
+        <div class="t-arrow">🚄</div>
+        <div style="text-align:right"><div class="t-city">Annecy</div><div class="t-time">4:33 PM</div></div>
+      </div>
+      <div style="font-size:0.75rem;color:var(--muted);margin-top:6px">Tickets in Trainline app</div>
+    </div>
+    <div class="transport-card">
+      <div class="transport-who">Millars</div>
+      <div class="transport-label">Eurostar — Paris Gare du Nord</div>
+      <div class="transport-row">
+        <div><div class="t-city">Paris Gare du Nord</div><div class="t-time">12:02 PM</div></div>
+        <div class="t-arrow">🚄</div>
+        <div style="text-align:right"><div class="t-city">London St Pancras</div><div class="t-time">1:30 PM</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-title">Annecy → Paris (Sat Jun 13)</div>
+    <div class="transport-card">
+      <div class="transport-who">Altschuls</div>
+      <div class="transport-label">TGV INOUI</div>
+      <div class="transport-row">
+        <div><div class="t-city">Annecy</div><div class="t-time">3:29 PM</div></div>
+        <div class="t-arrow">🚄</div>
+        <div style="text-align:right"><div class="t-city">Paris</div><div class="t-time">7:14 PM</div></div>
+      </div>
+      <div style="font-size:0.75rem;color:var(--muted);margin-top:6px">Store luggage at The Lake Lockers (near train station) before departure</div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-title">Fly Home (Sun Jun 14)</div>
+    <div class="alert alert-info" style="margin-bottom:0">
+      <strong>Early morning</strong>
+      Reserve Holiday Inn CDG airport shuttle the night before: +33 1 84 28 07 00 or reception@hi-cdg.com
+    </div>
+  </div>
+</div>
+
+<!-- DINING -->
+<div id="tab-dining" class="tab-content">
+  <div class="card">
+    <div class="card-title">Paris Reservations</div>
+
+    <div class="dining-item">
+      <div class="din-date">Fri Jun 5</div>
+      <div class="din-name">🍽 Brasserie Lipp</div>
+      <div class="din-time">6:00 PM</div>
+      <div class="din-addr">3-min walk from Hotel Madison</div>
+      <div class="din-note">Traditional: steak frites, roast chicken, chocolate mousse</div>
+      <span class="warn-pill">⚠️ €120 deposit — no show/cancel after Jun 5 13:45</span>
+    </div>
+
+    <div class="dining-item">
+      <div class="din-date">Sat Jun 6</div>
+      <div class="din-name">🍽 Francette</div>
+      <div class="din-time">12:30 PM (terrace)</div>
+      <div class="din-addr">3-min walk from river cruise dock — go directly from boat</div>
+      <div class="din-note">Views of the Eiffel Tower</div>
+      <span class="warn-pill">⚠️ $25pp charge if no show or &lt;24hr cancel (Laurie's card)</span>
+    </div>
+
+    <div class="dining-item">
+      <div class="din-date">Sat Jun 6</div>
+      <div class="din-name">🍽 Brasserie Des Prés</div>
+      <div class="din-time">7:15 PM</div>
+      <div class="din-addr">6 Cour du Commerce Saint-André — 5 min from hotel</div>
+      <div class="din-note">Tom made reservation (earliest available)</div>
+    </div>
+
+    <div class="dining-item">
+      <div class="din-date">Sun Jun 7</div>
+      <div class="din-name">🗼 Brasserie — Eiffel Tower 1st Floor</div>
+      <div class="din-time">12:00 PM (noon)</div>
+      <div class="din-addr">Eiffel Tower, 1st floor — go up for lunch, walk glass railings after</div>
+      <span class="confirm-pill">Confirmation: MB000238077</span>
+    </div>
+
+    <div class="dining-item">
+      <div class="din-date">Sun Jun 7</div>
+      <div class="din-name">🍽 Delta</div>
+      <div class="din-time">6:30 PM</div>
+      <div class="din-addr">8 Rue Princesse</div>
+      <div class="din-note">Laurie made reservation on their website</div>
+    </div>
+
+    <div class="dining-item">
+      <div class="din-date">Mon Jun 8</div>
+      <div class="din-name">☕ Café Marly</div>
+      <div class="din-time">12:30 PM</div>
+      <div class="din-addr">Louvre area — Laurie made reservation via website</div>
+      <span class="warn-pill">⚠️ €300 hold (€50pp) — charged if cancel after 6:55am Jun 8</span>
+    </div>
+
+    <div class="dining-item">
+      <div class="din-date">Mon Jun 8</div>
+      <div class="din-name">🍽 Le Procope</div>
+      <div class="din-time">7:00 PM</div>
+      <div class="din-addr">Oldest restaurant in Paris — Tom made reservation</div>
+      <span class="warn-pill">⚠️ €60 deposit on credit card hold</span>
+    </div>
+
+    <div class="dining-item">
+      <div class="din-date">Tue Jun 9</div>
+      <div class="din-name">🍽 Maceo Restaurant</div>
+      <div class="din-time">7:00 PM</div>
+      <div class="din-addr">Party of 6</div>
+      <span class="warn-pill">⚠️ €300 hold — cancelable by 3:30 PM Jun 9 (same day)</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Annecy Reservations</div>
+
+    <div class="dining-item">
+      <div class="din-date">Wed Jun 10</div>
+      <div class="din-name">🍽 Jiminy Osteria</div>
+      <div class="din-time">6:30 PM</div>
+      <div class="din-addr">2 Pass. Gruffaz, 74000 Annecy</div>
+    </div>
+
+    <div class="dining-item">
+      <div class="din-date">Thu Jun 11</div>
+      <div class="din-name">🍽 l'Assiette Rouge</div>
+      <div class="din-time">12:30 PM</div>
+      <div class="din-addr">Halfway to the boat along the lake — Océ confirmed</div>
+    </div>
+
+    <div class="dining-item">
+      <div class="din-date">Thu Jun 11</div>
+      <div class="din-name">🍽 Chez Ingalls</div>
+      <div class="din-time">6:30 PM</div>
+      <div class="din-addr">Confirmed via email</div>
+    </div>
+
+    <div class="dining-item">
+      <div class="din-date">Fri Jun 12</div>
+      <div class="din-name">🫕 Le Freti</div>
+      <div class="din-time">6:30 PM</div>
+      <div class="din-addr">12 Rue Sainte-Claire, 74000 Annecy</div>
+      <div class="din-note">50-year-old fondue institution</div>
+    </div>
+
+    <div class="dining-item">
+      <div class="din-date">Sat Jun 13</div>
+      <div class="din-name">🚂 Le Train Bleu</div>
+      <div class="din-time">7:30 PM (after arriving Paris 7:14 PM)</div>
+      <div class="din-addr">Paris Gare de Lyon — confirmed!</div>
+      <div class="din-note">Backup: Aux 2 Saveurs at 8:30 PM if train delayed</div>
+    </div>
+  </div>
+</div>
+
+<!-- ACTIVITIES -->
+<div id="tab-activities" class="tab-content">
+  <div class="card">
+    <div class="card-title">Booked Activities</div>
+
+    <div class="act-item">
+      <span class="city-pill city-paris">Paris</span>
+      <div class="act-date">Sat Jun 6</div>
+      <div class="act-name">⛵ Vedettes de Paris Family River Cruise</div>
+      <div class="act-time">Arrive by 11:10 AM — departs 11:30 AM (1 hr)</div>
+      <div class="act-detail">Port de Suffren, 75007 Paris · Crepes on board · Tickets purchased by Tom</div>
+      <div class="act-detail">Optional before: Champ de Mars park/playground (2 min from dock, Eiffel Tower view)</div>
+    </div>
+
+    <div class="act-item">
+      <span class="city-pill city-paris">Paris</span>
+      <div class="act-date">Sun Jun 7</div>
+      <div class="act-name">🥐 Macaron Making Class (Laurie, Charlotte, Juliette)</div>
+      <div class="act-time">Arrive by 8:55 AM</div>
+      <div class="act-detail">31 Rue Buffon, 75005 · "Baked in Paris" — left of large blue door, frosted glass, ask for Pastry chef</div>
+      <div class="act-confirm">Confirmation: GYG32MAK8GH9 — tickets in Get Your Guide App</div>
+    </div>
+
+    <div class="act-item">
+      <span class="city-pill city-paris">Paris</span>
+      <div class="act-date">Sun Jun 7</div>
+      <div class="act-name">🗼 Eiffel Tower Drawing Workshop</div>
+      <div class="act-time">2:55 PM — Entrance 2 of Eiffel Tower</div>
+      <div class="act-detail">Meet instructor wearing big red cap, holding "Eiffel Tower Drawing Workshop" sign</div>
+      <div class="act-detail">After: Trocadéro playground (7 min walk) — great photo spot with Tower background</div>
+      <div class="act-confirm">Voucher in Get Your Guide App</div>
+    </div>
+
+    <div class="act-item">
+      <span class="city-pill city-paris">Paris</span>
+      <div class="act-date">Mon Jun 8</div>
+      <div class="act-name">📸 Flytographer Photo Session — Louvre Pyramids</div>
+      <div class="act-time">8:45 AM</div>
+      <div class="act-detail">Meet in front of the Pyramid, under Louis XIV statue (horse with two legs up)</div>
+      <div class="act-detail">Photographer: Flora (booked via Flytographer app)</div>
+    </div>
+
+    <div class="act-item">
+      <span class="city-pill city-paris">Paris</span>
+      <div class="act-date">Mon Jun 8</div>
+      <div class="act-name">⛪ Sainte-Chapelle</div>
+      <div class="act-time">10:00 AM entry</div>
+      <div class="act-detail">Tom purchased tickets — 4 adults + 2 children. Opens 9AM.</div>
+      <div class="act-detail">After: Amorino gelato near Notre Dame (opens 10AM), then view Notre Dame exterior</div>
+      <div class="act-detail">💡 Secret Louvre entrance: back door near the Seine by lion sculptures — no line, walk through African Art section straight to Mona Lisa</div>
+      <div class="act-confirm">Louvre tickets (Laurie + 2 kids, 2:30 PM) in Notes app — Jon and Millars skip</div>
+    </div>
+
+    <div class="act-item">
+      <span class="city-pill city-paris">Paris</span>
+      <div class="act-date">Tue Jun 9</div>
+      <div class="act-name">🎨 Musée d'Orsay</div>
+      <div class="act-time">10:00 AM entry</div>
+      <div class="act-detail">Tom made reservations — tickets printed and downloaded. Lunch at museum café (no reservation needed).</div>
+    </div>
+
+    <div class="act-item">
+      <span class="city-pill city-annecy">Annecy</span>
+      <div class="act-date">Thu Jun 11</div>
+      <div class="act-name">⛵ Boat — Eden 22</div>
+      <div class="act-time">Arrive 2:15 PM — 2-hour reservation 2:30–4:30 PM</div>
+      <div class="act-detail">Port Annecy-le-Vieux · Confirmed 14:30–16:30 via email</div>
+    </div>
+
+    <div class="act-item">
+      <span class="city-pill city-annecy">Annecy</span>
+      <div class="act-date">Fri Jun 12</div>
+      <div class="act-name">🏰 Château de Menthon St. Bernard</div>
+      <div class="act-time">Opens 1:00 PM — take taxi</div>
+      <div class="act-detail">Inspiration for Sleeping Beauty's castle · Café onsite · Ticket office will call taxi after visit</div>
+    </div>
+  </div>
+</div>
+
+<!-- OPTIONAL -->
+<div id="tab-optional" class="tab-content">
+  <div class="card">
+    <div class="card-title">Paris — Optional Activities</div>
+    <div class="opt-item"><span class="opt-icon">🍦</span><span><strong>Berthillon ice cream</strong> — closed Mon &amp; Tue, go for dessert one night</span></div>
+    <div class="opt-item"><span class="opt-icon">☕</span><span><strong>Hot chocolate at Les Deux Magots</strong></span></div>
+    <div class="opt-item"><span class="opt-icon">🛍</span><span><strong>Le Marais shopping</strong> — Rue des Francs-Bourgeois, vintage &amp; small boutiques</span></div>
+    <div class="opt-item"><span class="opt-icon">🛍</span><span><strong>Rue de Rennes shopping</strong> — very close to hotel, trendy + designer. <em>Agatha jewelry store</em> is there.</span></div>
+    <div class="opt-item"><span class="opt-icon">🏬</span><span><strong>Le Bon Marché</strong> — world's first department store, food hall, near hotel. A few doors down: <em>Du Pareil Au Même</em> (inexpensive kids' clothing)</span></div>
+    <div class="opt-item"><span class="opt-icon">📖</span><span><strong>Le Petit Prince store &amp; Buci News</strong> — 5-min walk from hotel, colorful paper goods the girls will love</span></div>
+    <div class="opt-item"><span class="opt-icon">📚</span><span><strong>Librairie Galignani</strong> — English language bookstore near Louvre</span></div>
+    <div class="opt-item"><span class="opt-icon">🏛</span><span><strong>Arc de Triomphe</strong></span></div>
+    <div class="opt-item"><span class="opt-icon">👕</span><span><strong>Uniqlo</strong> — very near the hotel if anyone forgets clothes</span></div>
+    <div class="opt-item"><span class="opt-icon">🍫</span><span><strong>Patrick Roger</strong> — considered the best chocolatier in Paris</span></div>
+    <div class="opt-item"><span class="opt-icon">🌸</span><span><strong>Luxembourg Gardens</strong> — fountain, little sail boats, playground, pony rides, carousel, ping pong</span></div>
+    <div class="opt-item"><span class="opt-icon">🎁</span><span><strong>Marin Monagut</strong> — boutique gift/souvenir/paperie store near hotel</span></div>
+    <div class="opt-item"><span class="opt-icon">📖</span><span><strong>The Red Wheelbarrow / Red Balloon</strong> — English language bookstore</span></div>
+    <div class="opt-item"><span class="opt-icon">🏛</span><span><strong>Montmartre</strong> (Millars skip) — street artist caricatures of the girls, crepes</span></div>
+  </div>
+  <div class="card">
+    <div class="card-title">Annecy — Optional Activities</div>
+    <div class="opt-item"><span class="opt-icon">🚲</span><span><strong>Rent bikes</strong> — ride around the lake, stop at playgrounds &amp; ice cream. <em>Plage D'Albigny</em> = great kids beach (short ride from Old Town)</span></div>
+    <div class="opt-item"><span class="opt-icon">🏄</span><span><strong>Paddleboards or pedal boat with slide</strong></span></div>
+    <div class="opt-item"><span class="opt-icon">⛳</span><span><strong>Mini-Golf et Station Roller de l'Impérial</strong></span></div>
+    <div class="opt-item"><span class="opt-icon">🍦</span><span><strong>Glacier des Alpes</strong> — ice cream on the lake walk</span></div>
+    <div class="opt-item"><span class="opt-icon">🍦</span><span><strong>Maison Perriere</strong> — another special ice cream shop</span></div>
+    <div class="opt-item"><span class="opt-icon">🧺</span><span><strong>Laundryheap App</strong> — book Mon Jun 8 pickup. 24-hr wash &amp; fold. Code <strong>WELCOME15</strong> for 15% off. Leave with front desk.</span></div>
+  </div>
+  <div class="card">
+    <div class="card-title">Best Hot Chocolate Tips 🍫</div>
+    <div class="opt-item"><span class="opt-icon">☕</span><span><strong>Les Deux Magots</strong> — Paris classic</span></div>
+    <div class="opt-item"><span class="opt-icon">☕</span><span><strong>Carette at Trocadéro</strong> — considered the best in Paris (also croissants)</span></div>
+  </div>
+</div>
+
+<script>
+const days = [
+  { date:'2026-06-03', label:'Wed, Jun 3',  city:'Millars Depart LAX',    cityType:'move', plan:'Millars fly LAX → CDG. Departs 2:00 PM.', tags:['✈ Millars depart'] },
+  { date:'2026-06-04', label:'Thu, Jun 4',  city:'Millars Arrive Paris',  cityType:'paris', plan:'Millars arrive CDG 9:50 AM. Altschuls depart LAX at 3:15 PM.', tags:['✈ Millars arrive CDG','✈ Altschuls depart LAX'] },
+  { date:'2026-06-05', label:'Fri, Jun 5',  city:'Paris — Arrival Day',   cityType:'paris', plan:'Altschuls arrive CDG 11:10 AM. Check into Hotel Madison. Crepes for late lunch (L\'Atelier or Crêperie des Canettes). St Sulpice fountain, Luxembourg Gardens taste. Dinner Brasserie Lipp 6:00 PM.', tags:['🛬 Arrive CDG 11:10','🥞 Crepes lunch','🍽 Brasserie Lipp 6PM'] },
+  { date:'2026-06-06', label:'Sat, Jun 6',  city:'Paris — River Cruise',  cityType:'paris', plan:'Vedettes de Paris River Cruise — arrive by 11:10 AM, departs 11:30 AM. Lunch at Francette 12:30 PM (go straight from boat!). Afternoon: Luxembourg Gardens + chocolate + souvenirs. Dinner Brasserie Des Prés 7:15 PM.', tags:['⛵ Cruise 11:30AM','🍽 Francette 12:30','🍽 Brasserie Des Prés 7:15'] },
+  { date:'2026-06-07', label:'Sun, Jun 7',  city:'Paris — Eiffel Tower Day', cityType:'paris', plan:'Macaron class 8:55 AM (Laurie, Charlotte, Juliette). Lunch at Eiffel Tower 1st floor noon. Drawing workshop 2:55 PM. Trocadéro playground after. Dinner Delta 6:30 PM.', tags:['🥐 Macaron class 8:55AM','🗼 Eiffel lunch noon','🎨 Drawing 2:55PM','🍽 Delta 6:30PM'] },
+  { date:'2026-06-08', label:'Mon, Jun 8',  city:'Paris — Louvre & Île de la Cité', cityType:'paris', plan:'Photo session Louvre 8:45 AM (Flora). Sainte-Chapelle 10 AM. Notre Dame walk + Amorino gelato. Lunch Café Marly 12:30 PM. Optional Louvre 2:30 PM (Laurie + girls). Dinner Le Procope 7 PM.', tags:['📸 Photos 8:45AM','⛪ Sainte-Chapelle 10AM','☕ Café Marly 12:30','🍽 Le Procope 7PM'] },
+  { date:'2026-06-09', label:'Tue, Jun 9',  city:'Paris — Musée d\'Orsay', cityType:'paris', plan:'Musée d\'Orsay 10 AM. Lunch at museum. Optional Montmartre afternoon (Millars skip). Dinner Maceo 7 PM.', tags:['🎨 d\'Orsay 10AM','🍽 Maceo 7PM'] },
+  { date:'2026-06-10', label:'Wed, Jun 10', city:'Paris → Annecy',        cityType:'move', plan:'Grab crepes/takeout near hotel for train. Millars Eurostar to London 12:02 PM. Altschuls TGV to Annecy 12:46 PM, arrives 4:33 PM. Check in AirBnB (code 8426). Dinner Jiminy Osteria 6:30 PM.', tags:['🚄 Altschuls → Annecy 12:46','🚄 Millars → London 12:02','🍽 Jiminy Osteria 6:30'] },
+  { date:'2026-06-11', label:'Thu, Jun 11', city:'Annecy Day 1',          cityType:'annecy', plan:'Palais de l\'Île + Old Town. Meet Océ & family at 10:30. Lunch l\'Assiette Rouge 12:30. Boat Eden 22 at 2:30–4:30 PM. Dinner Chez Ingalls 6:30 PM.', tags:['👨‍👩‍👧 Meet Océ 10:30','🍽 Assiette Rouge 12:30','⛵ Boat 2:30-4:30','🍽 Chez Ingalls 6:30'] },
+  { date:'2026-06-12', label:'Fri, Jun 12', city:'Annecy Day 2',          cityType:'annecy', plan:'Old Town Market 8AM–12PM (Rue Sainte-Clair). Bikes + mini golf + beach (Plage D\'Albigny). Château de Menthon (opens 1 PM, taxi there). Dinner Le Freti fondue 6:30 PM.', tags:['🛒 Market 8-12','🚲 Bikes + beach','🏰 Château 1PM','🫕 Le Freti 6:30'] },
+  { date:'2026-06-13', label:'Sat, Jun 13', city:'Annecy → Paris',        cityType:'move', plan:'Check out before 10 AM. Store luggage at The Lake Lockers. Annecy Castle-Museum (10AM–noon, 2–5PM). TGV back to Paris 3:29 PM, arrives 7:14 PM. Dinner Le Train Bleu 7:30 PM.', tags:['🏰 Castle Museum','🚄 TGV 3:29PM','🍽 Le Train Bleu 7:30'] },
+  { date:'2026-06-14', label:'Sun, Jun 14', city:'Fly Home',               cityType:'move', plan:'Book Holiday Inn airport shuttle the night before. Fly home from CDG.', tags:['✈ Fly home'] },
+];
+
+function parseDate(str) { const [y,m,d] = str.split('-').map(Number); return new Date(y,m-1,d); }
+function todayStr() { const t = new Date(); return `${t.getFullYear()}-${String(t.getMonth()+1).padStart(2,'0')}-${String(t.getDate()).padStart(2,'0')}`; }
+
+function renderCountdown() {
+  const today = new Date(); today.setHours(0,0,0,0);
+  const start = parseDate('2026-06-05');
+  const end   = parseDate('2026-06-14');
+  const bar = document.getElementById('countdown-bar');
+  const txt = document.getElementById('countdown-text');
+  if (today < start) {
+    const diff = Math.round((start - today) / 86400000);
+    txt.innerHTML = `✈️ Trip starts in <span>${diff} day${diff===1?'':'s'}</span> — June 5, 2026`;
+  } else if (today <= end) {
+    bar.classList.add('active');
+    const tripDay = Math.round((today - start) / 86400000) + 1;
+    txt.innerHTML = `🗼 You're in France! <span>Day ${tripDay} of 10</span>`;
+  } else {
+    txt.innerHTML = `🥐 Trip complete — magnifique!`;
+  }
+}
+
+function renderToday() {
+  const ts = todayStr();
+  const container = document.getElementById('today-container');
+  const day = days.find(d => d.date === ts);
+  if (!day) {
+    const now = new Date(); now.setHours(0,0,0,0);
+    const start = parseDate('2026-06-05');
+    const diff = Math.round((start - now) / 86400000);
+    container.innerHTML = `
+      <div class="card" style="text-align:center;padding:28px 18px">
+        <div style="font-size:2.5rem;margin-bottom:8px">🗼</div>
+        <div style="font-size:1.1rem;font-weight:700;color:var(--navy);margin-bottom:4px">
+          ${diff > 0 ? `${diff} days until Paris!` : 'What a trip!'}
+        </div>
+        <div style="font-size:0.85rem;color:var(--muted)">Trip: June 5–14, 2026 · Tap Itinerary to browse all days</div>
+      </div>`;
+    return;
+  }
+  const cityPill = day.cityType === 'annecy'
+    ? '<span class="city-pill city-annecy">Annecy</span>'
+    : day.cityType === 'paris' ? '<span class="city-pill city-paris">Paris</span>' : '';
+  const tagsHtml = day.tags.length
+    ? `<div class="day-tags">${day.tags.map(t => {
+        const cls = t.includes('🍽') || t.includes('🥐') || t.includes('🫕') ? 'tag tag-eat' : t.includes('✈') || t.includes('🚄') ? 'tag tag-move' : 'tag tag-act';
+        return `<span class="${cls}">${t}</span>`;
+      }).join('')}</div>` : '';
+  container.innerHTML = `
+    <div class="card">
+      <div class="card-title">Today</div>
+      ${cityPill}
+      <div class="today-date">${day.label}</div>
+      <div class="today-sub">${day.city}</div>
+      <div class="today-plan">${day.plan}</div>
+      ${tagsHtml}
+    </div>`;
+}
+
+function renderItinerary() {
+  const ts = todayStr();
+  const el = document.getElementById('itinerary-list');
+  el.innerHTML = days.map(d => {
+    const isToday = d.date === ts;
+    const isPast  = d.date < ts;
+    const cityPill = d.cityType === 'annecy'
+      ? '<span class="city-pill city-annecy">Annecy</span>'
+      : d.cityType === 'paris' ? '<span class="city-pill city-paris">Paris</span>' : '';
+    const tagsHtml = d.tags.length
+      ? `<div class="day-tags">${d.tags.map(t => {
+          const cls = t.includes('🍽')||t.includes('🥐')||t.includes('🫕') ? 'tag tag-eat' : t.includes('✈')||t.includes('🚄') ? 'tag tag-move' : 'tag tag-act';
+          return `<span class="${cls}">${t}</span>`;
+        }).join('')}</div>` : '';
+    let cls = 'day-item' + (isToday ? ' today-item' : '') + (isPast ? ' past-item' : '');
+    return `<div class="${cls}">
+      ${isToday ? '<span class="day-badge">TODAY</span>' : ''}
+      <div class="day-label">${d.label}</div>
+      ${cityPill}
+      <div class="day-title">${d.city}</div>
+      <div class="day-plan">${d.plan}</div>
+      ${tagsHtml}
+    </div>`;
+  }).join('');
+}
+
+function showTab(name) {
+  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + name).classList.add('active');
+  event.target.classList.add('active');
+}
+
+renderCountdown();
+renderToday();
+renderItinerary();
+</script>
+</body>
+</html>
