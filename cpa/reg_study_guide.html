@@ -383,9 +383,51 @@
       margin: 32px 0;
     }
 
+    /* HAMBURGER BUTTON — mobile only */
+    .hamburger {
+      display: none;
+      position: fixed;
+      top: 14px; left: 14px;
+      z-index: 300;
+      background: #1a2535;
+      border: 1.5px solid #2d4a6e;
+      border-radius: 8px;
+      padding: 8px 11px;
+      cursor: pointer;
+      flex-direction: column;
+      gap: 5px;
+    }
+    .hamburger span {
+      display: block;
+      width: 22px; height: 2px;
+      background: #e2e8f0;
+      border-radius: 2px;
+      transition: all 0.2s;
+    }
+    .sidebar-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.5);
+      z-index: 150;
+    }
+
     @media (max-width: 768px) {
-      .sidebar { display: none; }
-      .main { margin-left: 0; padding: 24px 16px 60px; }
+      .hamburger { display: flex; }
+      .sidebar {
+        display: block;
+        position: fixed;
+        top: 0; left: -320px;
+        height: 100vh;
+        width: 280px;
+        z-index: 200;
+        transition: left 0.25s ease;
+        overflow-y: auto;
+        box-shadow: 4px 0 20px rgba(0,0,0,0.4);
+      }
+      .sidebar.open { left: 0; }
+      .sidebar-overlay.open { display: block; }
+      .main { margin-left: 0; padding: 60px 16px 60px; }
       .two-col { grid-template-columns: 1fr; }
       .m-item { width: 100%; }
     }
@@ -393,8 +435,16 @@
 </head>
 <body>
 
+<!-- HAMBURGER BUTTON -->
+<button class="hamburger" id="hamburger" onclick="toggleSidebar()" aria-label="Open menu">
+  <span></span><span></span><span></span>
+</button>
+
+<!-- OVERLAY (tap to close) -->
+<div class="sidebar-overlay" id="overlay" onclick="toggleSidebar()"></div>
+
 <!-- SIDEBAR -->
-<nav class="sidebar">
+<nav class="sidebar" id="sidebar">
   <div class="sidebar-title">REG Study Guide</div>
 
   <div class="sidebar-section">Individual Tax</div>
@@ -5067,6 +5117,20 @@
 </div>
 
 <script>
+  function toggleSidebar() {
+    document.getElementById('sidebar').classList.toggle('open');
+    document.getElementById('overlay').classList.toggle('open');
+  }
+  // Close sidebar when a nav link is tapped on mobile
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.sidebar a').forEach(link => {
+      link.addEventListener('click', () => {
+        document.getElementById('sidebar').classList.remove('open');
+        document.getElementById('overlay').classList.remove('open');
+      });
+    });
+  });
+
   const examDate = new Date('2026-07-18');
   const today = new Date();
   today.setHours(0, 0, 0, 0);
