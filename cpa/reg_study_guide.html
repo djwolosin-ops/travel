@@ -495,6 +495,7 @@
   <div class="sidebar-section">Property Taxation</div>
   <a href="#property-basis">Property Basis & Gain/Loss</a>
   <a href="#gifted-property">Gifted Property Basis</a>
+  <a href="#inherited-property">Inherited Property & Step-Up Basis</a>
 
   <div class="sidebar-section">Business Tax</div>
   <a href="#s-corp-passthrough">S Corp Pass-Through Income</a>
@@ -5265,6 +5266,139 @@
       <p><strong style="color:#fc8181;">Who pays gift tax?</strong> Always the donor — never the recipient. Becker asks this directly.<br><br>
       <strong style="color:#fc8181;">Carryover basis ≠ FMV</strong> — even if the gifted stock is worth $500K today, your basis is what the donor paid. All that appreciation eventually gets taxed when you sell.<br><br>
       <strong style="color:#fc8181;">The phantom zone</strong> — if you sell gifted property for a price between donor basis and FMV (when FMV &lt; basis), there is no gain AND no loss. Don't try to force a number — it's literally zero.</p>
+    </div>
+
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ============================================================ -->
+  <!-- TOPIC 47: INHERITED PROPERTY & STEP-UP BASIS -->
+  <!-- ============================================================ -->
+  <div class="topic" id="inherited-property">
+    <div class="topic-header">
+      <div class="topic-num">47</div>
+      <h2>Inherited Property &amp; Step-Up Basis</h2>
+      <span class="topic-tag">Property Taxation</span>
+    </div>
+
+    <div class="two-col">
+      <div class="rule-card">
+        <h4>Normal Inheritance — Step-Up Basis</h4>
+        <p>When you inherit property, your basis = <strong style="color:#f7fafc;">FMV on the date of death.</strong> All pre-death appreciation is wiped out — never taxed.</p>
+        <div style="background:#0a0d14;border-radius:6px;padding:12px 14px;margin-top:10px;font-size:0.82rem;line-height:1.9;">
+          <span style="color:#63b3ed;">Dad bought stock:</span> <span style="color:#a0aec0;">$10,000</span><br>
+          <span style="color:#63b3ed;">FMV at death:</span> <span style="color:#f7fafc;">$100,000</span><br>
+          <span style="color:#f6ad55;font-weight:700;">Your basis = $100,000</span> <span style="color:#718096;font-size:0.78rem;">(NOT $10,000)</span><br>
+          <span style="color:#68d391;font-size:0.78rem;">$90,000 of gain permanently excluded</span>
+        </div>
+        <p style="margin-top:10px;font-size:0.78rem;color:#718096;">Usually a step-UP, but can be a step-DOWN if property lost value before death.</p>
+      </div>
+
+      <div class="rule-card">
+        <h4>Why AVD Exists</h4>
+        <p>Large estates owe estate tax. If the market crashes after death, the estate gets taxed on values that no longer exist.</p>
+        <div style="background:#0a0d14;border-radius:6px;padding:12px 14px;margin-top:10px;font-size:0.82rem;line-height:1.9;">
+          <span style="color:#63b3ed;">Estate at death:</span> <span style="color:#f7fafc;">$15,000,000</span><br>
+          <span style="color:#63b3ed;">6 months later:</span> <span style="color:#fc8181;">$12,000,000</span><br>
+          <span style="color:#a0aec0;font-size:0.78rem;">Executor can elect AVD → pay estate tax on $12M instead of $15M</span>
+        </div>
+        <p style="margin-top:10px;font-size:0.78rem;color:#718096;">AVD election must reduce both the gross estate AND estate tax — can't elect just to lower basis without also lowering the tax.</p>
+      </div>
+    </div>
+
+    <div class="rule-card">
+      <h4>Alternate Valuation Date (AVD) Rule</h4>
+      <p>Instead of date-of-death FMV, use FMV at the <strong style="color:#f7fafc;">earlier of:</strong></p>
+      <div class="two-col" style="margin-top:12px;">
+        <div style="background:#0a0d14;border:1px solid #2d4a6e;border-radius:8px;padding:14px;text-align:center;">
+          <div style="color:#38b2ac;font-size:1.1rem;font-weight:800;margin-bottom:6px;">Date asset distributed</div>
+          <div style="color:#718096;font-size:0.78rem;">to beneficiary</div>
+        </div>
+        <div style="background:#0a0d14;border:1px solid #2d4a6e;border-radius:8px;padding:14px;text-align:center;">
+          <div style="color:#38b2ac;font-size:1.1rem;font-weight:800;margin-bottom:6px;">6 months after death</div>
+          <div style="color:#718096;font-size:0.78rem;">whichever comes first</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="example">
+      <div class="e-label">AVD Examples — Dad Dies January 1</div>
+      <table style="width:100%;border-collapse:collapse;font-size:0.82rem;margin-top:8px;">
+        <thead>
+          <tr style="border-bottom:1px solid #2d4a6e;">
+            <th style="text-align:left;padding:6px 10px;color:#63b3ed;width:30%;">Scenario</th>
+            <th style="text-align:left;padding:6px 10px;color:#63b3ed;width:40%;">Facts</th>
+            <th style="text-align:left;padding:6px 10px;color:#63b3ed;width:30%;">AVD Basis</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="border-bottom:1px solid #1a2535;">
+            <td style="padding:8px 10px;color:#f7fafc;">Held to 6 months</td>
+            <td style="padding:8px 10px;color:#a0aec0;">Jan 1: $100/share<br>Jul 1: $80/share<br>Stock kept until Jul 1</td>
+            <td style="padding:8px 10px;color:#f6ad55;font-weight:700;">$80/share<br><span style="color:#718096;font-size:0.75rem;">(6 months = earlier)</span></td>
+          </tr>
+          <tr style="background:#0f1a2e;">
+            <td style="padding:8px 10px;color:#f7fafc;">Distributed early</td>
+            <td style="padding:8px 10px;color:#a0aec0;">Jan 1: $100/share<br>Mar 1: $90/share<br>Jul 1: $80/share<br>Distributed Mar 1</td>
+            <td style="padding:8px 10px;color:#f6ad55;font-weight:700;">$90/share<br><span style="color:#718096;font-size:0.75rem;">(distribution = earlier)</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="rule-card">
+      <h4>Gift vs. Inheritance — The High-Yield Comparison</h4>
+      <p style="margin-bottom:12px;">Becker loves testing these as opposites — they're almost mirror images.</p>
+      <table style="width:100%;border-collapse:collapse;font-size:0.82rem;">
+        <thead>
+          <tr style="border-bottom:1px solid #2d4a6e;">
+            <th style="text-align:left;padding:6px 10px;color:#63b3ed;width:40%;">Transfer Type</th>
+            <th style="text-align:left;padding:6px 10px;color:#63b3ed;width:60%;">Basis Used</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="border-bottom:1px solid #1a2535;">
+            <td style="padding:6px 10px;color:#a0aec0;">Gift — FMV &gt; donor basis</td>
+            <td style="padding:6px 10px;color:#f6ad55;font-weight:700;">Carryover basis (donor's low basis)</td>
+          </tr>
+          <tr style="border-bottom:1px solid #1a2535;">
+            <td style="padding:6px 10px;color:#a0aec0;">Gift — FMV &lt; donor basis, sold for loss</td>
+            <td style="padding:6px 10px;color:#f6ad55;font-weight:700;">FMV at gift date</td>
+          </tr>
+          <tr style="border-bottom:1px solid #1a2535;">
+            <td style="padding:6px 10px;color:#a0aec0;">Gift — sold between FMV and basis</td>
+            <td style="padding:6px 10px;color:#f6ad55;font-weight:700;">No gain, no loss</td>
+          </tr>
+          <tr style="border-bottom:1px solid #1a2535;">
+            <td style="padding:6px 10px;color:#a0aec0;">Inheritance (normal)</td>
+            <td style="padding:6px 10px;color:#68d391;font-weight:700;">FMV at date of death (step-up)</td>
+          </tr>
+          <tr>
+            <td style="padding:6px 10px;color:#a0aec0;">Inheritance with AVD</td>
+            <td style="padding:6px 10px;color:#68d391;font-weight:700;">FMV at earlier of distribution or 6 months</td>
+          </tr>
+        </tbody>
+      </table>
+      <p style="margin-top:10px;font-size:0.78rem;color:#718096;"><strong style="color:#f6ad55;">The key contrast:</strong> Gift = donor's basis usually carries over (appreciation preserved for IRS). Inheritance = basis resets to FMV at death (pre-death appreciation permanently excluded).</p>
+    </div>
+
+    <div class="mnemonic">
+      <div class="m-label">REG Memory Trick</div>
+      <div style="font-size:0.85rem;color:#a0aec0;line-height:2;">
+        <strong style="color:#f7fafc;">Inheritance = Date of Death value</strong><br>
+        &nbsp;&nbsp;&nbsp;&nbsp;Unless AVD elected →<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;<strong style="color:#f6ad55;">Earlier of: distribution date OR 6 months after death</strong><br><br>
+        <strong style="color:#38b2ac;">Gift vs. Inheritance in one line:</strong><br>
+        Gift → basis carries over. Inheritance → basis resets. They're opposites.
+      </div>
+    </div>
+
+    <div class="trap">
+      <div class="t-label">Exam Traps</div>
+      <p><strong style="color:#fc8181;">AVD is not automatic</strong> — executor must elect it, and it must reduce both the gross estate AND the estate tax. Can't cherry-pick individual assets to use different dates.<br><br>
+      <strong style="color:#fc8181;">Holding period on inherited property</strong> — always treated as long-term regardless of how long you actually held it. Sell the next day after inheriting → still long-term capital gain.<br><br>
+      <strong style="color:#fc8181;">Step-down is possible</strong> — if property lost value before death, basis steps DOWN to the lower FMV. The rule isn't "step-up" — it's always FMV at death, up or down.</p>
     </div>
 
   </div>
