@@ -497,6 +497,7 @@
   <a href="#gifted-property">Gifted Property Basis</a>
   <a href="#inherited-property">Inherited Property & Step-Up Basis</a>
   <a href="#de-minimis">De Minimis Safe Harbor</a>
+  <a href="#personal-to-business">Personal → Business Conversion Basis</a>
 
   <div class="sidebar-section">Business Tax</div>
   <a href="#s-corp-passthrough">S Corp Pass-Through Income</a>
@@ -5478,6 +5479,98 @@
         <strong style="color:#f7fafc;">With AFS → $5,000</strong> &nbsp;|&nbsp; <strong style="color:#f7fafc;">Without AFS → $2,500</strong><br>
         Over the limit → <strong style="color:#fc8181;">capitalize the WHOLE item</strong>, not just the excess<br>
         <strong style="color:#718096;font-size:0.8rem;">Lower priority than basis/gifts/entity tax — but Becker loves a quick MCQ on the thresholds</strong>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ============================================================ -->
+  <!-- TOPIC 49: PERSONAL TO BUSINESS CONVERSION BASIS -->
+  <!-- ============================================================ -->
+  <div class="topic" id="personal-to-business">
+    <div class="topic-header">
+      <div class="topic-num">49</div>
+      <h2>Personal → Business Conversion Basis</h2>
+      <span class="topic-tag">Property Taxation</span>
+    </div>
+
+    <div class="rule-card">
+      <h4>The Core Rule</h4>
+      <p><strong style="color:#f7fafc;">Depreciation basis = Lower of adjusted basis (cost) OR FMV at conversion date.</strong></p>
+      <p style="margin-top:10px;font-size:0.82rem;color:#718096;"><strong style="color:#f6ad55;">Why:</strong> The IRS won't let you deduct personal losses. If your asset lost value while it was personal property, that decline happened in your personal life — not the business. Allowing you to depreciate the original cost would let you write off that personal loss, which they don't allow.</p>
+      <p style="margin-top:8px;font-size:0.82rem;color:#718096;">The IRS also won't let you step up basis when FMV rises. Lower always wins — both gains and losses from personal life are ignored.</p>
+    </div>
+
+    <div class="two-col">
+      <div class="example">
+        <div class="e-label">Example 1 — Value Dropped</div>
+        <div style="font-size:0.82rem;line-height:1.9;margin-top:6px;">
+          <span style="color:#63b3ed;">Cost:</span> <span style="color:#f7fafc;">$2,000</span><br>
+          <span style="color:#63b3ed;">FMV at conversion:</span> <span style="color:#f7fafc;">$1,200</span><br>
+          <span style="color:#a0aec0;font-size:0.78rem;">Lower = FMV</span><br>
+          <span style="color:#f6ad55;font-weight:700;">Depreciation basis = $1,200</span>
+        </div>
+        <p style="margin-top:8px;font-size:0.78rem;color:#718096;">The $800 personal decline is gone — IRS won't let you recover it through depreciation.</p>
+      </div>
+
+      <div class="example">
+        <div class="e-label">Example 2 — Value Increased</div>
+        <div style="font-size:0.82rem;line-height:1.9;margin-top:6px;">
+          <span style="color:#63b3ed;">Cost:</span> <span style="color:#f7fafc;">$1,500</span><br>
+          <span style="color:#63b3ed;">FMV at conversion:</span> <span style="color:#f7fafc;">$1,800</span><br>
+          <span style="color:#a0aec0;font-size:0.78rem;">Lower = Cost</span><br>
+          <span style="color:#f6ad55;font-weight:700;">Depreciation basis = $1,500</span>
+        </div>
+        <p style="margin-top:8px;font-size:0.78rem;color:#718096;">Even though it appreciated, IRS won't step up basis. Still use the lower cost.</p>
+      </div>
+    </div>
+
+    <div class="example">
+      <div class="e-label">Very Testable Example — Desk</div>
+      <div style="font-size:0.82rem;line-height:1.9;margin-top:6px;">
+        <span style="color:#63b3ed;">Bought desk for:</span> <span style="color:#f7fafc;">$10,000</span><br>
+        <span style="color:#63b3ed;">FMV at conversion:</span> <span style="color:#f7fafc;">$7,000</span><br>
+        <span style="color:#f6ad55;font-weight:700;">Depreciation basis = $7,000</span> <span style="color:#718096;font-size:0.78rem;">(not $10,000)</span>
+      </div>
+      <p style="margin-top:8px;font-size:0.78rem;color:#718096;">If Becker asks "what is the basis for depreciation?" on converted property → immediately think: <strong style="color:#f7fafc;">lower of cost or FMV at conversion.</strong></p>
+    </div>
+
+    <div class="rule-card">
+      <h4>Three Bases on Converted Property (Advanced)</h4>
+      <p style="font-size:0.82rem;color:#718096;margin-bottom:12px;">Converted property can actually have different bases depending on the purpose. REG MCQs usually only ask about depreciation, but know this exists:</p>
+      <table style="width:100%;border-collapse:collapse;font-size:0.82rem;">
+        <thead>
+          <tr style="border-bottom:1px solid #2d4a6e;">
+            <th style="text-align:left;padding:6px 10px;color:#63b3ed;width:35%;">Purpose</th>
+            <th style="text-align:left;padding:6px 10px;color:#63b3ed;width:65%;">Basis Used</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="border-bottom:1px solid #1a2535;">
+            <td style="padding:6px 10px;color:#f6ad55;font-weight:700;">Depreciation</td>
+            <td style="padding:6px 10px;color:#a0aec0;">Lower of adjusted basis or FMV at conversion</td>
+          </tr>
+          <tr style="border-bottom:1px solid #1a2535;">
+            <td style="padding:6px 10px;color:#a0aec0;">Gain on sale</td>
+            <td style="padding:6px 10px;color:#a0aec0;">Adjusted basis at conversion (original cost − prior depreciation)</td>
+          </tr>
+          <tr>
+            <td style="padding:6px 10px;color:#a0aec0;">Loss on sale</td>
+            <td style="padding:6px 10px;color:#a0aec0;">Lower of adjusted basis or FMV at conversion</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="mnemonic">
+      <div class="m-label">Memory Trick</div>
+      <div style="font-size:0.85rem;color:#a0aec0;line-height:2;">
+        <strong style="color:#f7fafc;">"IRS ignores personal gains and personal losses."</strong><br>
+        Value dropped before conversion → can't deduct the personal loss → use lower FMV<br>
+        Value rose before conversion → can't step up basis → still use lower cost<br><br>
+        MCQ trigger: <strong style="color:#f6ad55;">"basis for depreciation" + converted property</strong> → Lower of cost or FMV at conversion. Done.
       </div>
     </div>
 
