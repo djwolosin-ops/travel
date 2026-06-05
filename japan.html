@@ -199,6 +199,9 @@
     .tab-content { display: none; }
     .tab-content.active { display: block; }
 
+    /* TWEMOJI */
+    img.emoji { height: 1em; width: 1em; vertical-align: -0.1em; display: inline-block; }
+
     /* LINK */
     a[href^="tel"] { color: var(--cyan); text-decoration: none; }
     a[href^="tel"]:hover { text-shadow: 0 0 10px rgba(0,212,255,0.5); }
@@ -225,7 +228,7 @@
 
 <div class="layout">
   <nav class="sidebar" id="sidebar">
-    <div class="sidebar-title">Japan Cruise</div>
+    <div class="sidebar-title">🇯🇵 Japan Cruise</div>
     <div class="sidebar-section">Navigation</div>
     <a href="#" onclick="showTab('overview')">Overview</a>
     <a href="#" onclick="showTab('itinerary')">Itinerary</a>
@@ -252,7 +255,7 @@
       <div class="hero-top">
         <div>
           <div class=”hero-tag”>// VOYAGE LOG &middot; HOLLAND AMERICA LINE</div>
-          <h1><span>Japan</span> Cruise 2026</h1>
+          <h1>🇯🇵 <span>Japan</span> Cruise 2026</h1>
           <div class=”hero-sub”>Westerdam &middot; 13 Nights &middot; Round Trip Tokyo</div>
           <div class=”hero-line”>
             <span class=”pill pill-cyan”>Oct 11&ndash;24, 2026</span>
@@ -555,8 +558,8 @@
                   : isSea   ? `<div class="day-badge sea">Day ${i+1}</div>`
                   :           `<div class="day-badge">Day ${i+1}</div>`;
 
-      const ctry = d.country === 'jp' ? '<span class="country-pill jp">JP</span>'
-                 : d.country === 'kr' ? '<span class="country-pill kr">KR</span>' : '';
+      const ctry = d.country === 'jp' ? '<span class="country-pill jp">🇯🇵 Japan</span>'
+                 : d.country === 'kr' ? '<span class="country-pill kr">🇰🇷 Korea</span>' : '';
 
       const times = (!d.sea && d.arr !== '--') ? `Arrive ${d.arr} · Depart ${d.dep}` : d.arr === '--' && d.dep !== '--' ? `Depart ${d.dep}` : '';
 
@@ -614,6 +617,8 @@
   buildItinerary();
   renderPacking();
   setInterval(updateCountdown, 60000);
+  twemoji.parse(document.body, { folder: 'svg', ext: '.svg' });
 </script>
+<script src="https://cdn.jsdelivr.net/npm/twemoji@14/dist/twemoji.min.js" crossorigin="anonymous"></script>
 </body>
 </html>
