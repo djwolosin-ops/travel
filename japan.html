@@ -228,7 +228,7 @@
 
 <div class="layout">
   <nav class="sidebar" id="sidebar">
-    <div class="sidebar-title">🇯🇵 Japan Cruise</div>
+    <div class="sidebar-title"><img src="https://cdn.jsdelivr.net/npm/twemoji@14/assets/svg/1f1ef-1f1f5.svg" style="height:1em;width:1em;vertical-align:-0.1em;margin-right:6px;">Japan Cruise</div>
     <div class="sidebar-section">Navigation</div>
     <a href="#" onclick="showTab('overview')">Overview</a>
     <a href="#" onclick="showTab('itinerary')">Itinerary</a>
@@ -255,7 +255,7 @@
       <div class="hero-top">
         <div>
           <div class=”hero-tag”>// VOYAGE LOG &middot; HOLLAND AMERICA LINE</div>
-          <h1>🇯🇵 <span>Japan</span> Cruise 2026</h1>
+          <h1><img src="https://cdn.jsdelivr.net/npm/twemoji@14/assets/svg/1f1ef-1f1f5.svg" style="height:0.9em;width:0.9em;vertical-align:-0.05em;margin-right:10px;"><span>Japan</span> Cruise 2026</h1>
           <div class=”hero-sub”>Westerdam &middot; 13 Nights &middot; Round Trip Tokyo</div>
           <div class=”hero-line”>
             <span class=”pill pill-cyan”>Oct 11&ndash;24, 2026</span>
@@ -558,8 +558,10 @@
                   : isSea   ? `<div class="day-badge sea">Day ${i+1}</div>`
                   :           `<div class="day-badge">Day ${i+1}</div>`;
 
-      const ctry = d.country === 'jp' ? '<span class="country-pill jp">🇯🇵 Japan</span>'
-                 : d.country === 'kr' ? '<span class="country-pill kr">🇰🇷 Korea</span>' : '';
+      const jpFlag = '<img src="https://cdn.jsdelivr.net/npm/twemoji@14/assets/svg/1f1ef-1f1f5.svg" style="height:1em;width:1em;vertical-align:-0.1em;margin-right:4px;">';
+      const krFlag = '<img src="https://cdn.jsdelivr.net/npm/twemoji@14/assets/svg/1f1f0-1f1f7.svg" style="height:1em;width:1em;vertical-align:-0.1em;margin-right:4px;">';
+      const ctry = d.country === 'jp' ? `<span class="country-pill jp">${jpFlag}Japan</span>`
+                 : d.country === 'kr' ? `<span class="country-pill kr">${krFlag}Korea</span>` : '';
 
       const times = (!d.sea && d.arr !== '--') ? `Arrive ${d.arr} · Depart ${d.dep}` : d.arr === '--' && d.dep !== '--' ? `Depart ${d.dep}` : '';
 
