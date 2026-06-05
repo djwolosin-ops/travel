@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Japan Cruise — Oct 2026</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;700&display=swap');
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-size: 18px; }
+    body { font-family: 'Inter', -apple-system, sans-serif; background: #050a14; color: #c8d8f0; min-height: 100vh; }
+
+    :root {
+      --cyan: #00d4ff;
+      --cyan-dim: rgba(0,212,255,0.15);
+      --cyan-glow: rgba(0,212,255,0.08);
+      --blue: #3b82f6;
+      --purple: #818cf8;
+      --green: #34d399;
+      --amber: #fbbf24;
+      --bg: #050a14;
+      --bg2: #080f1e;
+      --card: #0b1425;
+      --card2: #0e1a2e;
+      --border: #1a2d4a;
+      --border-bright: #2a4a6e;
+      --text: #c8d8f0;
+      --muted: #4a6080;
+      --white: #e8f4ff;
+    }
+
+    /* HAMBURGER */
+    .hamburger { display: none; position: fixed; top: 14px; left: 14px; z-index: 300; background: var(--card); border: 1px solid var(--border-bright); border-radius: 8px; padding: 8px 11px; cursor: pointer; flex-direction: column; gap: 5px; }
+    .hamburger span { display: block; width: 22px; height: 2px; background: var(--cyan); border-radius: 2px; }
+    .sidebar-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.7); z-index: 150; }
+
+    /* LAYOUT */
+    .layout { display: flex; min-height: 100vh; }
+
+    /* SIDEBAR */
+    .sidebar {
+      width: 270px; flex-shrink: 0;
+      background: var(--bg2);
+      border-right: 1px solid var(--border);
+      padding: 28px 0;
+      position: fixed; top: 0; height: 100vh; overflow-y: auto; z-index: 100;
+    }
+    .sidebar-title {
+      padding: 0 22px 20px;
+      font-size: 0.72rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.14em;
+      color: var(--cyan);
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 14px;
+      text-shadow: 0 0 20px rgba(0,212,255,0.5);
+    }
+    .sidebar a {
+      display: block; padding: 9px 22px;
+      font-size: 0.9rem; color: var(--muted);
+      text-decoration: none; border-left: 3px solid transparent;
+      transition: all 0.2s; letter-spacing: 0.01em;
+    }
+    .sidebar a:hover { color: var(--white); border-left-color: var(--cyan); background: var(--cyan-glow); }
+    .sidebar a.active { color: var(--cyan); border-left-color: var(--cyan); }
+    .sidebar-section { padding: 18px 22px 7px; font-size: 0.62rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.12em; color: #3a5070; }
+
+    /* MAIN */
+    .main { margin-left: 270px; flex: 1; padding: 0 0 80px; }
+
+    /* HERO */
+    .hero {
+      background: linear-gradient(135deg, #060e1f 0%, #0a1628 50%, #050a14 100%);
+      padding: 44px 36px 36px;
+      border-bottom: 1px solid var(--border);
+      position: relative; overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse at 80% 50%, rgba(0,212,255,0.06) 0%, transparent 60%),
+        radial-gradient(ellipse at 20% 80%, rgba(59,130,246,0.05) 0%, transparent 50%);
+      pointer-events: none;
+    }
+    .hero-grid-bg {
+      position: absolute; inset: 0; pointer-events: none; opacity: 0.03;
+      background-image: linear-gradient(var(--cyan) 1px, transparent 1px), linear-gradient(90deg, var(--cyan) 1px, transparent 1px);
+      background-size: 40px 40px;
+    }
+    .hero-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 24px; flex-wrap: wrap; position: relative; }
+    .hero-tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.7rem; color: var(--cyan); letter-spacing: 0.1em;
+      margin-bottom: 8px; opacity: 0.8;
+    }
+    .hero h1 { font-size: 2.2rem; font-weight: 900; color: var(--white); letter-spacing: -0.03em; line-height: 1.1; }
+    .hero h1 span { color: var(--cyan); text-shadow: 0 0 30px rgba(0,212,255,0.4); }
+    .hero-sub { color: #4a7090; font-size: 0.95rem; margin-top: 6px; letter-spacing: 0.02em; }
+    .hero-line { margin-top: 18px; display: flex; gap: 8px; flex-wrap: wrap; }
+    .pill { display: inline-flex; align-items: center; gap: 4px; font-size: 0.72rem; font-weight: 700; padding: 4px 12px; border-radius: 99px; letter-spacing: 0.04em; }
+    .pill-cyan { background: var(--cyan-dim); color: var(--cyan); border: 1px solid rgba(0,212,255,0.3); }
+    .pill-blue { background: rgba(59,130,246,0.12); color: #93c5fd; border: 1px solid rgba(59,130,246,0.25); }
+    .pill-purple { background: rgba(129,140,248,0.12); color: #a5b4fc; border: 1px solid rgba(129,140,248,0.25); }
+    .pill-gray { background: rgba(255,255,255,0.04); color: #5a7090; border: 1px solid var(--border); }
+
+    /* COUNTDOWN */
+    .countdown-bar { display: flex; gap: 12px; flex-wrap: wrap; }
+    .cd-box {
+      background: var(--card);
+      border: 1px solid var(--border-bright);
+      border-radius: 12px; padding: 14px 20px;
+      text-align: center; min-width: 90px;
+      position: relative; overflow: hidden;
+    }
+    .cd-box::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+      background: linear-gradient(90deg, transparent, var(--cyan), transparent);
+      opacity: 0.6;
+    }
+    .cd-num {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 2rem; font-weight: 700; color: var(--white); line-height: 1;
+    }
+    .cd-num.cyan { color: var(--cyan); text-shadow: 0 0 20px rgba(0,212,255,0.4); }
+    .cd-label { font-size: 0.62rem; color: var(--muted); font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; margin-top: 4px; }
+
+    /* CONTENT */
+    .content { padding: 36px; }
+    .section { margin-bottom: 40px; }
+    .section-title {
+      font-size: 0.62rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.14em;
+      color: var(--cyan); margin-bottom: 16px;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .section-title::after { content: ''; flex: 1; height: 1px; background: linear-gradient(90deg, var(--border-bright), transparent); }
+
+    /* CARDS */
+    .card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 14px; padding: 20px 24px; margin-bottom: 14px;
+      transition: border-color 0.2s;
+    }
+    .card:hover { border-color: var(--border-bright); }
+    .card h3 { font-size: 1rem; font-weight: 700; color: var(--white); margin-bottom: 10px; }
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .three-col { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+
+    /* ITINERARY */
+    .day-item {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 14px; padding: 16px 20px; margin-bottom: 12px;
+      position: relative; border-left: 3px solid transparent;
+      transition: all 0.2s;
+    }
+    .day-item:hover { border-color: var(--border-bright); border-left-color: var(--cyan); box-shadow: 0 0 20px rgba(0,212,255,0.05); }
+    .day-item.today-item { border-left-color: var(--cyan); background: rgba(0,212,255,0.04); box-shadow: 0 0 30px rgba(0,212,255,0.08); }
+    .day-item.past-item { opacity: 0.4; }
+    .day-item.sea-day { border-left-color: var(--purple); }
+    .day-badge { position: absolute; top: 12px; right: 14px; font-size: 0.62rem; font-weight: 700; padding: 3px 9px; border-radius: 99px; background: var(--cyan-dim); color: var(--cyan); border: 1px solid rgba(0,212,255,0.3); font-family: 'JetBrains Mono', monospace; }
+    .day-badge.sea { background: rgba(129,140,248,0.12); color: var(--purple); border-color: rgba(129,140,248,0.3); }
+    .day-date { font-size: 0.72rem; color: var(--muted); margin-bottom: 5px; font-family: 'JetBrains Mono', monospace; letter-spacing: 0.04em; }
+    .day-port { font-size: 1.1rem; font-weight: 800; color: var(--white); letter-spacing: -0.01em; }
+    .day-times { font-size: 0.82rem; color: #4a6080; margin-top: 5px; }
+    .day-desc { font-size: 0.85rem; color: #3a5570; margin-top: 8px; line-height: 1.6; }
+    .country-pill { display: inline-block; font-size: 0.65rem; font-weight: 700; padding: 2px 8px; border-radius: 99px; margin-left: 8px; vertical-align: middle; }
+    .jp { background: rgba(0,212,255,0.1); color: var(--cyan); }
+    .kr { background: rgba(59,130,246,0.12); color: #93c5fd; }
+
+    /* STAT BOXES */
+    .stat-box {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 14px; padding: 20px 16px; text-align: center;
+      position: relative; overflow: hidden;
+    }
+    .stat-box::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, var(--cyan), transparent); opacity: 0.4; }
+    .stat-num { font-family: 'JetBrains Mono', monospace; font-size: 2rem; font-weight: 700; color: var(--cyan); text-shadow: 0 0 20px rgba(0,212,255,0.3); }
+    .stat-label { font-size: 0.68rem; color: var(--muted); margin-top: 6px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; }
+
+    /* TABLE */
+    table { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
+    th { text-align: left; padding: 9px 12px; color: var(--cyan); font-size: 0.62rem; text-transform: uppercase; letter-spacing: 0.1em; border-bottom: 1px solid var(--border); font-family: 'JetBrains Mono', monospace; }
+    td { padding: 9px 12px; color: #4a6080; border-bottom: 1px solid rgba(26,45,74,0.5); }
+    td.val { color: var(--white); font-weight: 600; }
+    tr:last-child td { border-bottom: none; }
+
+    /* PACKING */
+    .pack-section { margin-bottom: 24px; }
+    .pack-section h4 { font-size: 0.65rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.12em; color: var(--cyan); margin-bottom: 10px; }
+    .pack-item { display: flex; align-items: center; gap: 12px; padding: 9px 12px; border-radius: 8px; cursor: pointer; transition: background 0.15s; font-size: 0.9rem; color: #4a6080; }
+    .pack-item:hover { background: var(--card2); }
+    .pack-item.checked { color: var(--green); text-decoration: line-through; opacity: 0.5; }
+    .pack-item input[type=checkbox] { accent-color: var(--cyan); width: 16px; height: 16px; cursor: pointer; flex-shrink: 0; }
+
+    /* TABS */
+    .tab-bar { display: flex; gap: 2px; border-bottom: 1px solid var(--border); margin-bottom: 28px; overflow-x: auto; }
+    .tab-btn { padding: 11px 20px; font-size: 0.88rem; font-weight: 600; color: var(--muted); background: none; border: none; cursor: pointer; border-bottom: 2px solid transparent; white-space: nowrap; transition: all 0.2s; letter-spacing: 0.02em; }
+    .tab-btn:hover { color: var(--text); }
+    .tab-btn.active { color: var(--cyan); border-bottom-color: var(--cyan); text-shadow: 0 0 20px rgba(0,212,255,0.4); }
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+
+    /* LINK */
+    a[href^="tel"] { color: var(--cyan); text-decoration: none; }
+    a[href^="tel"]:hover { text-shadow: 0 0 10px rgba(0,212,255,0.5); }
+
+    @media (max-width: 768px) {
+      html { font-size: 17px; }
+      .hamburger { display: flex; }
+      .sidebar { left: -290px; transition: left 0.25s ease; }
+      .sidebar.open { left: 0; }
+      .sidebar-overlay.open { display: block; }
+      .main { margin-left: 0; }
+      .hero { padding: 60px 20px 28px; }
+      .content { padding: 20px; }
+      .two-col, .three-col { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<button class="hamburger" id="hamburger" onclick="toggleSidebar()">
+  <span></span><span></span><span></span>
+</button>
+<div class="sidebar-overlay" id="overlay" onclick="toggleSidebar()"></div>
+
+<div class="layout">
+  <nav class="sidebar" id="sidebar">
+    <div class="sidebar-title">🇯🇵 Japan Cruise</div>
+    <div class="sidebar-section">Navigation</div>
+    <a href="#" onclick="showTab('overview')">Overview</a>
+    <a href="#" onclick="showTab('itinerary')">Itinerary</a>
+    <a href="#" onclick="showTab('ship')">Ship & Cabin</a>
+    <a href="#" onclick="showTab('booking')">Booking & Payment</a>
+    <a href="#" onclick="showTab('packing')">Packing</a>
+    <div class="sidebar-section">Ports</div>
+    <a href="#" onclick="showTab('itinerary')">Tokyo (Embark)</a>
+    <a href="#" onclick="showTab('itinerary')">Omaezaki</a>
+    <a href="#" onclick="showTab('itinerary')">Kobe</a>
+    <a href="#" onclick="showTab('itinerary')">Kochi</a>
+    <a href="#" onclick="showTab('itinerary')">Hakata / Fukuoka</a>
+    <a href="#" onclick="showTab('itinerary')">Sokcho (Korea)</a>
+    <a href="#" onclick="showTab('itinerary')">Kanazawa</a>
+    <a href="#" onclick="showTab('itinerary')">Sakata</a>
+    <a href="#" onclick="showTab('itinerary')">Hakodate</a>
+    <a href="#" onclick="showTab('itinerary')">Miyako</a>
+    <a href="#" onclick="showTab('itinerary')">Tokyo (Return)</a>
+  </nav>
+
+  <div class="main">
+    <div class="hero">
+      <div class="hero-grid-bg"></div>
+      <div class="hero-top">
+        <div>
+          <div class="hero-tag">// VOYAGE LOG · HOLLAND AMERICA LINE</div>
+          <h1>🇯🇵 <span>Japan</span> Cruise 2026</h1>
+          <div class="hero-sub">Westerdam · 13 Nights · Round Trip Tokyo</div>
+          <div class="hero-line">
+            <span class="pill pill-cyan">Oct 11–24, 2026</span>
+            <span class="pill pill-blue">Round Trip Tokyo</span>
+            <span class="pill pill-purple">10 Ports</span>
+            <span class="pill pill-gray">Diana &amp; David</span>
+          </div>
+        </div>
+        <div class="countdown-bar">
+          <div class="cd-box">
+            <div class="cd-num cyan" id="cd-days">--</div>
+            <div class="cd-label">Days</div>
+          </div>
+          <div class="cd-box">
+            <div class="cd-num" id="cd-hours">--</div>
+            <div class="cd-label">Hours</div>
+          </div>
+          <div class="cd-box">
+            <div class="cd-num" style="font-size:1rem;color:#4a6080;padding-top:6px;">OCT 11</div>
+            <div class="cd-label">Departure</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="content">
+      <div class="tab-bar">
+        <button class="tab-btn active" onclick="showTab('overview')">Overview</button>
+        <button class="tab-btn" onclick="showTab('itinerary')">Itinerary</button>
+        <button class="tab-btn" onclick="showTab('ship')">Ship & Cabin</button>
+        <button class="tab-btn" onclick="showTab('booking')">Booking</button>
+        <button class="tab-btn" onclick="showTab('packing')">Packing</button>
+      </div>
+
+      <!-- OVERVIEW -->
+      <div class="tab-content active" id="tab-overview">
+        <div class="section">
+          <div class="section-title">Trip at a Glance</div>
+          <div class="three-col">
+            <div class="stat-box">
+              <div class="stat-num">13</div>
+              <div class="stat-label">Nights</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-num" style="color:#818cf8;">10</div>
+              <div class="stat-label">Ports</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-num" style="color:#34d399;">2</div>
+              <div class="stat-label">Travelers</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="section-title">Key Dates</div>
+          <div class="card">
+            <table>
+              <tr><td>Departure</td><td class="val">Sun, Oct 11, 2026 — 7:00 PM from Tokyo</td></tr>
+              <tr><td>Return</td><td class="val">Sat, Oct 24, 2026 — Arrive Tokyo 8:00 AM</td></tr>
+              <tr><td>Ship</td><td class="val">Holland America Westerdam</td></tr>
+              <tr><td>Stateroom</td><td class="val">8125 · Deck 8 (Navigation) · Standard Interior</td></tr>
+              <tr><td>Dining</td><td class="val">Early Seating · 5:45 PM · Table for 2</td></tr>
+            </table>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="section-title">Included Perks</div>
+          <div class="two-col">
+            <div class="card">
+              <h3>$280 Costco Shop Card</h3>
+              <p style="font-size:0.82rem;color:#a0aec0;">Digital card included with booking. Valid for both guests.</p>
+            </div>
+            <div class="card">
+              <h3>Pre-Paid Crew Appreciation</h3>
+              <p style="font-size:0.82rem;color:#a0aec0;">Gratuities pre-paid for cruise. Bar, spa, and dining room tips are separate.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="section-title">Contacts</div>
+          <div class="two-col">
+            <div class="card">
+              <h3>Costco Travel — Before Trip</h3>
+              <p style="font-size:0.85rem;color:#a0aec0;margin-top:4px;">📞 <a href="tel:18669217925" style="color:#f87171;">1-866-921-7925</a></p>
+              <p style="font-size:0.75rem;color:#64748b;margin-top:4px;">M–F 5am–7pm PT · Sat/Sun 6am–5pm PT</p>
+            </div>
+            <div class="card">
+              <h3>During &amp; After Trip</h3>
+              <p style="font-size:0.85rem;color:#a0aec0;margin-top:4px;">📞 <a href="tel:18663174711" style="color:#f87171;">1-866-317-4711</a></p>
+              <p style="font-size:0.75rem;color:#64748b;margin-top:4px;">M–F 5am–7pm PT · Sat/Sun 6am–5pm PT</p>
+            </div>
+            <div class="card">
+              <h3>Shore Excursions Group</h3>
+              <p style="font-size:0.85rem;color:#a0aec0;margin-top:4px;">📞 <a href="tel:18663501879" style="color:#f87171;">1-866-350-1879</a></p>
+              <p style="font-size:0.75rem;color:#64748b;margin-top:4px;">Use code <strong style="color:#fbbf24;font-size:0.8rem;">COSTSHRX</strong> for 10% off</p>
+            </div>
+            <div class="card">
+              <h3>HAL Confirmation</h3>
+              <p style="font-size:0.85rem;color:#a0aec0;margin-top:4px;">HAL #: <strong style="color:#fff;">3TXC4T</strong></p>
+              <p style="font-size:0.75rem;color:#64748b;margin-top:4px;">Costco #: C477474169</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ITINERARY -->
+      <div class="tab-content" id="tab-itinerary">
+        <div class="section-title">13-Night Sailing Itinerary</div>
+        <div id="itinerary-list"></div>
+      </div>
+
+      <!-- SHIP -->
+      <div class="tab-content" id="tab-ship">
+        <div class="section">
+          <div class="section-title">Ship Details</div>
+          <div class="card">
+            <table>
+              <tr><td>Ship</td><td class="val">Westerdam</td></tr>
+              <tr><td>Cruise Line</td><td class="val">Holland America Line</td></tr>
+              <tr><td>Voyage</td><td class="val">13 Night Japan Round Trip</td></tr>
+              <tr><td>Embarkation Port</td><td class="val">Tokyo, Japan</td></tr>
+              <tr><td>Disembarkation Port</td><td class="val">Tokyo, Japan</td></tr>
+            </table>
+          </div>
+        </div>
+        <div class="section">
+          <div class="section-title">Cabin</div>
+          <div class="two-col">
+            <div class="card">
+              <h3>Stateroom 8125</h3>
+              <table style="margin-top:10px;">
+                <tr><td>Deck</td><td class="val">8 — Navigation Deck</td></tr>
+                <tr><td>Category</td><td class="val">MM — Standard Interior</td></tr>
+                <tr><td>Guests</td><td class="val">Diana &amp; David Wolosin</td></tr>
+              </table>
+            </div>
+            <div class="card">
+              <h3>Dining</h3>
+              <table style="margin-top:10px;">
+                <tr><td>Seating</td><td class="val">Early — 5:45 PM</td></tr>
+                <tr><td>Level</td><td class="val">Upper Level</td></tr>
+                <tr><td>Table Size</td><td class="val">2 — Confirmed Request</td></tr>
+                <tr><td>Note</td><td class="val" style="color:#fbbf24;font-size:0.75rem;">Confirm onboard with maître d'</td></tr>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- BOOKING -->
+      <div class="tab-content" id="tab-booking">
+        <div class="section">
+          <div class="section-title">Booking Confirmation</div>
+          <div class="card">
+            <table>
+              <tr><td>Costco Confirmation</td><td class="val">C477474169</td></tr>
+              <tr><td>HAL Confirmation</td><td class="val">3TXC4T</td></tr>
+              <tr><td>Booking Date</td><td class="val">November 26, 2025</td></tr>
+              <tr><td>Costco Member</td><td class="val">Diana Wolosin · #111990318408</td></tr>
+            </table>
+          </div>
+        </div>
+        <div class="section">
+          <div class="section-title">Payment Summary</div>
+          <div class="card">
+            <table>
+              <tr><td>Diana — Cruise Package</td><td class="val">$2,064.00</td></tr>
+              <tr><td>Diana — Taxes &amp; Fees</td><td class="val">$15.00</td></tr>
+              <tr><td>David — Cruise Package</td><td class="val">$2,064.00</td></tr>
+              <tr><td>David — Taxes &amp; Fees</td><td class="val">$15.00</td></tr>
+              <tr><td>Total Package Price</td><td class="val">$4,158.00</td></tr>
+              <tr><td>Amount Paid</td><td class="val" style="color:#34d399;">($600.00)</td></tr>
+              <tr><td style="color:#fc8181;font-weight:700;">Balance Remaining</td><td class="val" style="color:#fc8181;font-weight:700;">$3,558.00</td></tr>
+              <tr><td style="color:#f87171;">Final Payment Due</td><td class="val" style="color:#f87171;">05/30/2026 ⚠️ PAST DUE</td></tr>
+            </table>
+          </div>
+        </div>
+        <div class="section">
+          <div class="section-title">Included Extras</div>
+          <div class="card">
+            <table>
+              <tr><td>$280 Digital Costco Shop Card</td><td class="val" style="color:#34d399;">✓ Included</td></tr>
+              <tr><td>Pre-Paid Crew Appreciation</td><td class="val" style="color:#34d399;">✓ Included</td></tr>
+              <tr><td>Cruise Fare Savings</td><td class="val" style="color:#34d399;">✓ Applied</td></tr>
+              <tr><td>Non-Refundable Deposit</td><td class="val" style="color:#fbbf24;font-size:0.8rem;">⚠️ Non-refundable</td></tr>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- PACKING -->
+      <div class="tab-content" id="tab-packing">
+        <div class="section-title">Packing Checklist</div>
+        <div id="packing-list"></div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+  const DEPARTURE = new Date('2026-10-11T19:00:00');
+
+  // Countdown
+  function updateCountdown() {
+    const now  = new Date();
+    const diff = DEPARTURE - now;
+    if (diff <= 0) { document.getElementById('cd-days').textContent = '0'; document.getElementById('cd-hours').textContent = '0'; return; }
+    document.getElementById('cd-days').textContent  = Math.floor(diff / 86400000).toLocaleString();
+    document.getElementById('cd-hours').textContent = Math.floor((diff % 86400000) / 3600000);
+  }
+
+  // Tabs
+  function showTab(id) {
+    document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+    document.getElementById('tab-' + id).classList.add('active');
+    const btns = document.querySelectorAll('.tab-btn');
+    const labels = ['overview','itinerary','ship','booking','packing'];
+    const idx = labels.indexOf(id);
+    if (idx >= 0) btns[idx].classList.add('active');
+    document.getElementById('sidebar').classList.remove('open');
+    document.getElementById('overlay').classList.remove('open');
+  }
+
+  // Sidebar toggle
+  function toggleSidebar() {
+    document.getElementById('sidebar').classList.toggle('open');
+    document.getElementById('overlay').classList.toggle('open');
+  }
+
+  // Itinerary
+  const itinerary = [
+    { date: 'Oct 11', day: 'Sun', port: 'Tokyo', arr: '—', dep: '7:00 PM', country: 'jp', desc: 'Embarkation day. Board the Westerdam and settle in. Ship departs evening.' },
+    { date: 'Oct 12', day: 'Mon', port: 'Omaezaki', arr: '7:00 AM', dep: '4:00 PM', country: 'jp', desc: 'Small fishing port town in Shizuoka Prefecture. Cape Omaezaki lighthouse area.' },
+    { date: 'Oct 13', day: 'Tue', port: 'Kobe', arr: '9:00 AM', dep: '7:00 PM', country: 'jp', desc: 'Major port city. Arima Onsen, Nunobiki Herb Garden, Chinatown (Nankinmachi), Kobe beef.' },
+    { date: 'Oct 14', day: 'Wed', port: 'Kochi', arr: '8:00 AM', dep: '9:00 PM', country: 'jp', desc: 'Shikoku island. Kochi Castle, Hirome Market, Katsurahama Beach. Known for katsuo (bonito) tataki.' },
+    { date: 'Oct 15', day: 'Thu', port: 'Kanmon Strait', arr: '—', dep: '—', country: 'jp', desc: 'Scenic transit through the narrow strait between Honshu and Kyushu. Panoramic views from deck.', sea: true },
+    { date: 'Oct 16', day: 'Fri', port: 'Hakata / Fukuoka', arr: '8:00 AM', dep: '4:00 PM', country: 'jp', desc: 'Fukuoka — Hakata ramen, Canal City, Dazaifu Tenmangu Shrine, Ohori Park. Great food city.' },
+    { date: 'Oct 17', day: 'Sat', port: 'Sokcho', arr: '10:00 AM', dep: '8:00 PM', country: 'kr', desc: 'South Korea. Gateway to Seoraksan National Park — best fall foliage. Abai Village, Sokcho beach.' },
+    { date: 'Oct 18', day: 'Sun', port: 'Sea Day', arr: '—', dep: '—', country: null, desc: 'Full day at sea. Relax, explore the ship, spa, pool, shows.', sea: true },
+    { date: 'Oct 19', day: 'Mon', port: 'Kanazawa', arr: '8:00 AM', dep: '7:00 PM', country: 'jp', desc: 'Kenroku-en Garden (one of Japan\'s top 3), Higashi Chaya geisha district, Omicho Market fresh seafood.' },
+    { date: 'Oct 20', day: 'Tue', port: 'Sakata', arr: '10:00 AM', dep: '6:00 PM', country: 'jp', desc: 'Historic rice trading port in Yamagata. Sankyo Soko rice warehouses, local sake breweries.' },
+    { date: 'Oct 21', day: 'Wed', port: 'Hakodate', arr: '8:00 AM', dep: '5:00 PM', country: 'jp', desc: 'Southern Hokkaido. Goryokaku star fort, Hakodate morning market, Mt. Hakodate night view. Iconic.' },
+    { date: 'Oct 22', day: 'Thu', port: 'Miyako', arr: '8:00 AM', dep: '5:00 PM', country: 'jp', desc: 'Iwate Prefecture. Jodogahama Beach (stunning white rocks/blue water), Ryusendo Cavern nearby.' },
+    { date: 'Oct 23', day: 'Fri', port: 'Sea Day', arr: '—', dep: '—', country: null, desc: 'Final sea day. Pack, attend the Captain\'s farewell dinner, explore last dining options.', sea: true },
+    { date: 'Oct 24', day: 'Sat', port: 'Tokyo (Return)', arr: '8:00 AM', dep: '—', country: 'jp', desc: 'Disembarkation day in Tokyo. Ship arrives 8:00 AM.' },
+  ];
+
+  function buildItinerary() {
+    const now = new Date();
+    document.getElementById('itinerary-list').innerHTML = itinerary.map((d, i) => {
+      const portDate = new Date('2026-' + d.date.replace('Oct ','10-').padStart(6,'0'));
+      const isToday  = portDate.toDateString() === now.toDateString();
+      const isPast   = portDate < now && !isToday;
+      const isSea    = d.sea;
+
+      let cls = 'day-item';
+      if (isToday) cls += ' today-item';
+      if (isPast)  cls += ' past-item';
+      if (isSea)   cls += ' sea-day';
+
+      const badge = isToday ? '<div class="day-badge">TODAY</div>'
+                  : isSea   ? `<div class="day-badge sea">Day ${i+1}</div>`
+                  :           `<div class="day-badge">Day ${i+1}</div>`;
+
+      const ctry = d.country === 'jp' ? '<span class="country-pill jp">🇯🇵 Japan</span>'
+                 : d.country === 'kr' ? '<span class="country-pill kr">🇰🇷 Korea</span>' : '';
+
+      const times = (!d.sea && d.arr !== '—') ? `Arrive ${d.arr} · Depart ${d.dep}` : d.arr === '—' && d.dep !== '—' ? `Depart ${d.dep}` : '';
+
+      return `<div class="${cls}">
+        ${badge}
+        <div class="day-date">${d.date}, 2026 · ${d.day}</div>
+        <div class="day-port">${d.port}${ctry}</div>
+        ${times ? `<div class="day-times">⏰ ${times}</div>` : ''}
+        <div class="day-desc">${d.desc}</div>
+      </div>`;
+    }).join('');
+  }
+
+  // Packing
+  const packingItems = {
+    'Travel Documents': ['Passports (valid 6+ months past Oct 24)', 'HAL confirmation 3TXC4T', 'Costco confirmation C477474169', 'Travel insurance info', 'Credit cards & cash (¥yen)', 'Emergency contacts card'],
+    'Clothing — Ship': ['Formal night outfits (2)', 'Smart casual dinner clothes', 'Daytime casual (7+ days)', 'Loungewear / pyjamas', 'Swimsuit', 'Light jacket for deck'],
+    'Clothing — Shore': ['Walking shoes (comfortable)', 'Rain jacket / umbrella', 'Layers for October weather', 'Slip-on shoes (temples)', 'Socks (lots — you remove shoes)', 'Light sweater (Hokkaido will be cold)'],
+    'Toiletries': ['Sunscreen', 'Motion sickness patches/Dramamine', 'Hand sanitizer', 'Medications', 'First aid basics'],
+    'Electronics': ['Phone + charger', 'Camera', 'Portable charger / power bank', 'Universal adapter (Japan: Type A — same as US)', 'Headphones'],
+    'Japan Essentials': ['IC card or Suica (load on phone)', 'Japan offline maps downloaded', 'Google Translate downloaded + Japanese', 'Small bills ¥ (many places cash only)', 'Tote bag (Japan is eco — bring your own)'],
+  };
+
+  function renderPacking() {
+    const el    = document.getElementById('packing-list');
+    const saved = JSON.parse(localStorage.getItem('japanPackChecks') || '{}');
+    let html = '';
+    Object.entries(packingItems).forEach(([section, items]) => {
+      html += `<div class="pack-section"><h4>${section}</h4>`;
+      items.forEach(item => {
+        const id      = 'pack_' + item.replace(/\s+/g,'_').replace(/[^a-zA-Z0-9_]/g,'');
+        const checked = !!saved[id];
+        html += `<div class="pack-item ${checked?'checked':''}" onclick="togglePack('${id}',this)">
+          <input type="checkbox" id="${id}" ${checked?'checked':''} onclick="event.stopPropagation()">
+          <label for="${id}">${item}</label>
+        </div>`;
+      });
+      html += '</div>';
+    });
+    el.innerHTML = html;
+  }
+
+  function togglePack(id, el) {
+    const saved = JSON.parse(localStorage.getItem('japanPackChecks') || '{}');
+    const cb    = document.getElementById(id);
+    const now   = !saved[id];
+    saved[id]   = now;
+    cb.checked  = now;
+    el.classList.toggle('checked', now);
+    localStorage.setItem('japanPackChecks', JSON.stringify(saved));
+  }
+
+  // Init
+  updateCountdown();
+  buildItinerary();
+  renderPacking();
+  setInterval(updateCountdown, 60000);
+</script>
+</body>
+</html>
