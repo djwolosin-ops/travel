@@ -499,6 +499,7 @@
   <a href="#de-minimis">De Minimis Safe Harbor</a>
   <a href="#personal-to-business">Personal → Business Conversion Basis</a>
   <a href="#capital-loss-carryover">Capital Gains & Loss Carryover</a>
+  <a href="#wash-sale">Wash Sale Rules</a>
 
   <div class="sidebar-section">Business Tax</div>
   <a href="#s-corp-passthrough">S Corp Pass-Through Income</a>
@@ -6080,6 +6081,137 @@
         Loss = $10,000 − $1,500 collected = <strong style="color:#f6ad55;font-weight:700;">$8,500 STCL in current year.</strong><br><br>
         <span style="color:#718096;">A &amp; C — wrong year. Notification of 20% recovery last year = partially worthless → no deduction last year. Deduction only triggers when totally worthless (final settlement). B — nonbusiness bad debt is never ordinary loss, always STCL.</span>
       </div>
+    </div>
+
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ============================================================ -->
+  <!-- TOPIC 51: WASH SALE RULES -->
+  <!-- ============================================================ -->
+  <div class="topic" id="wash-sale">
+    <div class="topic-header">
+      <div class="topic-num">51</div>
+      <h2>Wash Sale Rules</h2>
+      <span class="topic-tag">Property Taxation</span>
+    </div>
+
+    <div class="rule-card">
+      <h4>The Core Rule</h4>
+      <p>If you sell stock at a <strong style="color:#f7fafc;">loss</strong> and buy <strong style="color:#f7fafc;">substantially identical</strong> stock within <strong style="color:#fc8181;">30 days before or after</strong> the sale, the loss is <strong style="color:#fc8181;">disallowed</strong> (partially or fully). The disallowed loss is not gone — it gets <strong style="color:#68d391;">added to the basis</strong> of the reacquired stock.</p>
+      <div style="background:#0a0d14;border:1px solid #2d4a6e;border-radius:8px;padding:12px 16px;margin-top:12px;font-size:0.82rem;color:#a0aec0;line-height:1.9;">
+        <strong style="color:#38b2ac;">Disallowed loss</strong> = Realized loss × (shares reacquired ÷ shares sold)<br>
+        <strong style="color:#38b2ac;">Recognized loss</strong> = Realized loss − Disallowed loss<br>
+        <strong style="color:#38b2ac;">New basis of reacquired stock</strong> = Cost paid + Disallowed loss
+      </div>
+    </div>
+
+    <div class="rule-card">
+      <h4>JP / Micron Co. — Full Worked Example</h4>
+      <p style="font-size:0.82rem;color:#718096;margin-bottom:14px;">Five transactions, three dates tested. Follow the disallowed loss as it flows from sale → into new basis → affects next sale.</p>
+
+      <table style="width:100%;border-collapse:collapse;font-size:0.82rem;margin-bottom:16px;">
+        <thead>
+          <tr style="border-bottom:1px solid #2d4a6e;">
+            <th style="padding:6px 10px;color:#63b3ed;text-align:left;">Date</th>
+            <th style="padding:6px 10px;color:#63b3ed;text-align:left;">Transaction</th>
+            <th style="padding:6px 10px;color:#63b3ed;text-align:right;">Shares</th>
+            <th style="padding:6px 10px;color:#63b3ed;text-align:right;">Price</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="border-bottom:1px solid #1a2535;"><td style="padding:6px 10px;color:#a0aec0;">Jan 1, Yr 1</td><td style="padding:6px 10px;color:#68d391;">Buy</td><td style="padding:6px 10px;text-align:right;color:#f7fafc;">30</td><td style="padding:6px 10px;text-align:right;color:#f7fafc;">$5</td></tr>
+          <tr style="border-bottom:1px solid #1a2535;"><td style="padding:6px 10px;color:#a0aec0;">Jun 30, Yr 2</td><td style="padding:6px 10px;color:#fc8181;">Sell</td><td style="padding:6px 10px;text-align:right;color:#f7fafc;">30</td><td style="padding:6px 10px;text-align:right;color:#f7fafc;">$3</td></tr>
+          <tr style="border-bottom:1px solid #1a2535;"><td style="padding:6px 10px;color:#a0aec0;">Jul 15, Yr 2</td><td style="padding:6px 10px;color:#68d391;">Buy</td><td style="padding:6px 10px;text-align:right;color:#f7fafc;">20</td><td style="padding:6px 10px;text-align:right;color:#f7fafc;">$2</td></tr>
+          <tr style="border-bottom:1px solid #1a2535;"><td style="padding:6px 10px;color:#a0aec0;">Jul 17, Yr 2</td><td style="padding:6px 10px;color:#fc8181;">Sell</td><td style="padding:6px 10px;text-align:right;color:#f7fafc;">20</td><td style="padding:6px 10px;text-align:right;color:#f7fafc;">$2.50</td></tr>
+          <tr><td style="padding:6px 10px;color:#a0aec0;">Aug 22, Yr 2</td><td style="padding:6px 10px;color:#68d391;">Buy</td><td style="padding:6px 10px;text-align:right;color:#f7fafc;">50</td><td style="padding:6px 10px;text-align:right;color:#f7fafc;">$3.75</td></tr>
+        </tbody>
+      </table>
+
+      <!-- DATE 1 -->
+      <div style="background:#0a0d14;border:1px solid #2d4a6e;border-radius:8px;padding:14px 16px;margin-bottom:12px;font-size:0.82rem;color:#a0aec0;line-height:1.9;">
+        <strong style="color:#f6ad55;">June 30, Year 2 — Sell 30 shares @ $3</strong><br>
+        Basis: 30 × $5 = <strong style="color:#f7fafc;">$150</strong><br>
+        Realized loss: $90 − $150 = <strong style="color:#fc8181;">($60)</strong><br>
+        <br>
+        <strong style="color:#38b2ac;">Wash sale triggered:</strong> Bought 20 identical shares Jul 15 (within 30 days)<br>
+        % reacquired: 20 ÷ 30 = <strong style="color:#f7fafc;">66.67%</strong><br>
+        Disallowed loss: $60 × 66.67% = <strong style="color:#fc8181;">$40 disallowed</strong><br>
+        <strong style="color:#68d391;">Recognized loss: $60 − $40 = ($20)</strong><br>
+        <br>
+        <span style="color:#718096;font-size:0.78rem;">The $40 disallowed loss flows into the basis of the July 15 purchase.</span>
+      </div>
+
+      <!-- DATE 2 -->
+      <div style="background:#0a0d14;border:1px solid #2d4a6e;border-radius:8px;padding:14px 16px;margin-bottom:12px;font-size:0.82rem;color:#a0aec0;line-height:1.9;">
+        <strong style="color:#f6ad55;">July 17, Year 2 — Sell 20 shares @ $2.50</strong><br>
+        Basis: (20 × $2) + $40 disallowed loss carried in = <strong style="color:#f7fafc;">$80</strong><br>
+        Realized loss: $50 − $80 = <strong style="color:#fc8181;">($30)</strong><br>
+        <br>
+        <strong style="color:#38b2ac;">No wash sale:</strong> No identical stock purchased within 30 days of Jul 17<br>
+        <strong style="color:#68d391;">Recognized loss: ($30) — full loss allowed</strong>
+      </div>
+
+      <!-- DATE 3 -->
+      <div style="background:#0a0d14;border:1px solid #2d4a6e;border-radius:8px;padding:14px 16px;font-size:0.82rem;color:#a0aec0;line-height:1.9;">
+        <strong style="color:#f6ad55;">August 22, Year 2 — Buy 50 shares @ $3.75</strong><br>
+        Basis: 50 × $3.75 = <strong style="color:#f7fafc;">$188</strong><br>
+        No adjustment — the July 17 sale was not a wash sale, so nothing carries forward.<br>
+        <strong style="color:#68d391;">Clean basis of $188.</strong>
+      </div>
+    </div>
+
+    <div class="example">
+      <div class="e-label">Answer Table</div>
+      <table style="width:100%;border-collapse:collapse;font-size:0.82rem;margin-top:4px;">
+        <thead>
+          <tr style="border-bottom:1px solid #2d4a6e;">
+            <th style="padding:6px 10px;color:#63b3ed;text-align:left;">Component</th>
+            <th style="padding:6px 10px;color:#63b3ed;text-align:right;">Jun 30, Yr 2</th>
+            <th style="padding:6px 10px;color:#63b3ed;text-align:right;">Jul 17, Yr 2</th>
+            <th style="padding:6px 10px;color:#63b3ed;text-align:right;">Aug 22, Yr 2</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="border-bottom:1px solid #1a2535;">
+            <td style="padding:8px 10px;color:#a0aec0;">Basis in shares</td>
+            <td style="padding:8px 10px;text-align:right;color:#f7fafc;">$150</td>
+            <td style="padding:8px 10px;text-align:right;color:#f7fafc;">$80</td>
+            <td style="padding:8px 10px;text-align:right;color:#f7fafc;">$188</td>
+          </tr>
+          <tr style="border-bottom:1px solid #1a2535;">
+            <td style="padding:8px 10px;color:#a0aec0;">Realized gain (loss)</td>
+            <td style="padding:8px 10px;text-align:right;color:#fc8181;">($60)</td>
+            <td style="padding:8px 10px;text-align:right;color:#fc8181;">($30)</td>
+            <td style="padding:8px 10px;text-align:right;color:#a0aec0;">N/A</td>
+          </tr>
+          <tr style="background:#0f1a2e;">
+            <td style="padding:8px 10px;color:#f6ad55;font-weight:700;">Recognized gain (loss)</td>
+            <td style="padding:8px 10px;text-align:right;color:#fc8181;font-weight:700;">($20)</td>
+            <td style="padding:8px 10px;text-align:right;color:#fc8181;font-weight:700;">($30)</td>
+            <td style="padding:8px 10px;text-align:right;color:#a0aec0;">N/A</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="mnemonic">
+      <div class="m-label">Wash Sale Memory Rules</div>
+      <div style="font-size:0.85rem;color:#a0aec0;line-height:2;">
+        <strong style="color:#f7fafc;">Trigger:</strong> Sell at a loss + buy same stock within 30 days before OR after = wash sale<br>
+        <strong style="color:#f7fafc;">Partial reacquisition:</strong> Only the % reacquired is disallowed — rest is recognized<br>
+        <strong style="color:#f7fafc;">Disallowed loss:</strong> Not gone — added to basis of the new shares<br>
+        <strong style="color:#f7fafc;">No wash sale:</strong> No identical stock bought within 30 days → full loss recognized
+      </div>
+    </div>
+
+    <div class="trap">
+      <div class="t-label">Exam Traps</div>
+      <p><strong style="color:#fc8181;">30 days is both directions</strong> — 30 days before OR after the sale triggers the rule. Not just after.<br><br>
+      <strong style="color:#fc8181;">Loss is deferred, not eliminated</strong> — the disallowed amount adds to the new basis. When you eventually sell those shares, the loss comes back.<br><br>
+      <strong style="color:#fc8181;">Partial reacquisition</strong> — if you sold 30 shares but only bought back 20, the wash sale only disallows 20/30 of the loss. The other 10/30 is recognized immediately.<br><br>
+      <strong style="color:#fc8181;">Gains are never affected</strong> — wash sale rules only apply to losses. A gain on sale is always recognized regardless.</p>
     </div>
 
   </div>
