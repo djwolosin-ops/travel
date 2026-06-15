@@ -501,6 +501,15 @@
   <a href="#capital-loss-carryover">Capital Gains & Loss Carryover</a>
   <a href="#wash-sale">Wash Sale Rules</a>
   <a href="#depreciation">Depreciation — Tax Consequences</a>
+  <a href="#section197">§197 Intangibles Amortization</a>
+  <a href="#loan-issuance">Loan Issuance Costs</a>
+  <a href="#org-costs">Organizational &amp; Startup Costs</a>
+  <a href="#book-vs-tax">Book vs. Taxable Income</a>
+  <a href="#corp-charitable">C Corp Charitable Contributions</a>
+  <a href="#casualty-losses">Business Casualty Losses</a>
+  <a href="#drd">Dividends Received Deduction (DRD)</a>
+  <a href="#capital-loss-indiv-corp">Capital Loss: Indiv vs. Corp</a>
+  <a href="#nol">Net Operating Losses (NOLs)</a>
 
   <div class="sidebar-section">Business Tax</div>
   <a href="#s-corp-passthrough">S Corp Pass-Through Income</a>
@@ -508,6 +517,7 @@
   <a href="#partnership-passthrough">Partnership Pass-Through Income</a>
   <a href="#wages-vs-guaranteed">S Corp Wages vs. Partnership Guaranteed Payments</a>
   <a href="#partnership-basis-loss">Partnership Basis Loss Limitation &amp; Capital Netting</a>
+  <a href="#schedule-k-k1">Schedule K &amp; Schedule K-1</a>
   <a href="#se-retirement">Self-Employed Retirement Accounts</a>
   <a href="#ira-401k-limits">IRA &amp; 401(k) Limits &amp; Phase-Outs</a>
 
@@ -1955,6 +1965,9 @@
         − Pro rata share of losses (cannot reduce below zero)<br>
         = Ending basis
       </div>
+      <div style="background:#1a0a0a;border:1px solid #742a2a;border-radius:6px;padding:10px 14px;margin-top:10px;font-size:0.82rem;color:#fc8181;">
+        <strong>Wages paid by the S corp do NOT affect stock basis.</strong> Wages are compensation — they flow through payroll and show up on the shareholder's W-2, but they have zero impact on the basis calculation.
+      </div>
     </div>
 
     <div class="example">
@@ -2016,13 +2029,278 @@
             <td style="color:#68d391;">Decreases gross income (if basis allows)</td>
             <td>Decreases basis</td>
           </tr>
+          <tr>
+            <td class="name-col">Wages received from S corp</td>
+            <td style="color:#fc8181;">Increases gross income (W-2)</td>
+            <td style="color:#fc8181;font-weight:700;">No effect on basis</td>
+          </tr>
         </tbody>
       </table>
+    </div>
+
+    <div style="background:#0a0d14;border:1px solid #38b2ac;border-radius:10px;padding:18px 20px;margin-bottom:10px;">
+      <div style="font-size:0.7rem;font-weight:800;letter-spacing:0.08em;color:#38b2ac;text-transform:uppercase;margin-bottom:12px;">Practice MCQ — Paige (Becker CPA Exam)</div>
+      <p style="font-size:0.85rem;color:#e2e8f0;line-height:1.7;margin-bottom:10px;">Paige is a <strong style="color:#f7fafc;">25% shareholder</strong> with beginning basis of <strong style="color:#f7fafc;">$10,000</strong>. The S corp had ordinary income of <strong style="color:#f7fafc;">$200,000</strong>. No separately stated items. Paige received <strong style="color:#f7fafc;">wages of $25,000</strong> and a <strong style="color:#f7fafc;">distribution of $30,000</strong>. What is Paige's year-end stock basis?</p>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px;font-size:0.82rem;">
+        <div style="background:#1a2535;border-radius:6px;padding:8px 12px;color:#a0aec0;">A. $0</div>
+        <div style="background:#1a263a;border:1px solid #38b2ac;border-radius:6px;padding:8px 12px;color:#38b2ac;font-weight:700;">B. $30,000 &#10003;</div>
+        <div style="background:#1a2535;border-radius:6px;padding:8px 12px;color:#a0aec0;">C. $5,000</div>
+        <div style="background:#1a2535;border-radius:6px;padding:8px 12px;color:#a0aec0;">D. $35,000</div>
+      </div>
+      <div style="background:#0f1a2e;border-radius:6px;padding:12px 14px;font-size:0.8rem;color:#a0aec0;line-height:2;">
+        Beginning basis: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong style="color:#f7fafc;">$10,000</strong><br>
+        + Pro rata income (25% × $200K): <strong style="color:#68d391;">+$50,000</strong><br>
+        − Distribution: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong style="color:#fc8181;">−$30,000</strong><br>
+        Wages: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong style="color:#718096;">$0 effect</strong><br>
+        <strong style="color:#f6ad55;">Ending basis: $30,000</strong><br><br>
+        <span style="color:#718096;">C ($5,000) comes from subtracting wages ($10K + $50K − $30K − $25K = $5K) — wrong, wages don't touch basis. D ($35,000) likely adds wages to the beginning basis. A ($0) probably subtracts both the distribution and wages. The wages number in this question is a pure distractor.</span>
+      </div>
     </div>
 
     <div class="tip">
       <div class="tip-label">S Corp vs. C Corp — The Key Distinction the Exam Tests</div>
       <p>A <strong style="color:#f7fafc;">C corporation</strong> pays entity-level tax; shareholders only pay tax on dividends received (double taxation). An <strong style="color:#f7fafc;">S corporation</strong> pays no entity-level tax; income flows through to shareholders who pay tax at their own rate. The exam may contrast these — know that S corp shareholders include pro rata income even with no distribution, while C corp shareholders only include dividends actually received.</p>
+    </div>
+
+    <div class="rule-card">
+      <h4>S Corp Debt Basis vs. Partnership Debt Basis — The Big Difference</h4>
+      <p style="font-size:0.85rem;color:#a0aec0;line-height:1.7;">This distinction is heavily tested on REG. The two entity types treat debt very differently when it comes to basis.</p>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px;">
+        <div style="background:#0a1428;border:1px solid #2d4a6e;border-radius:8px;padding:12px 14px;font-size:0.82rem;line-height:1.9;">
+          <div style="font-size:0.72rem;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;color:#38b2ac;margin-bottom:8px;">Partnership</div>
+          Partner basis <strong style="color:#68d391;">includes</strong> their pro rata share of <strong style="color:#f7fafc;">all partnership liabilities</strong> (recourse and nonrecourse).<br>
+          The partnership can borrow $1M and every partner's basis increases — even without putting in a dime personally.
+        </div>
+        <div style="background:#1a0a0a;border:1px solid #742a2a;border-radius:8px;padding:12px 14px;font-size:0.82rem;line-height:1.9;">
+          <div style="font-size:0.72rem;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;color:#fc8181;margin-bottom:8px;">S Corporation</div>
+          Shareholder stock basis does <strong style="color:#fc8181;">NOT</strong> increase from corporate-level debt.<br>
+          A shareholder only gets <strong style="color:#f7fafc;">debt basis</strong> if they <strong style="color:#f7fafc;">personally lend money</strong> directly to the S corp. Third-party bank loans to the S corp give the shareholder nothing.
+        </div>
+      </div>
+      <div style="background:#0f1a2e;border-radius:6px;padding:10px 14px;margin-top:10px;font-size:0.82rem;line-height:1.9;">
+        <strong style="color:#63b3ed;">Why it matters:</strong> Loss deductions are limited to basis. An S corp shareholder with zero stock basis and no personal loans to the corp <strong style="color:#f7fafc;">cannot deduct any pass-through losses</strong> — even if the corporation is heavily leveraged. A partner in the same situation can still deduct losses because partnership debt flows into their basis.
+      </div>
+    </div>
+
+    <div class="rule-card">
+      <h4>AAA vs. Basis — Not the Same Number</h4>
+      <p style="font-size:0.85rem;color:#a0aec0;line-height:1.7;">The <strong style="color:#f7fafc;">Accumulated Adjustments Account (AAA)</strong> and a shareholder's <strong style="color:#f7fafc;">stock basis</strong> often move in the same direction — but they are tracked separately and will differ.</p>
+      <div style="background:#0a0d14;border:1px solid #2d4a6e;border-radius:8px;padding:14px 16px;margin-top:12px;font-size:0.82rem;line-height:2.1;">
+        <strong style="color:#38b2ac;">AAA</strong> — tracks the S corporation's <strong style="color:#f7fafc;">accumulated undistributed earnings</strong> since S corp election. It's a corporate-level account used to determine whether distributions are taxable.<br><br>
+        <strong style="color:#38b2ac;">Stock Basis</strong> — tracks the <strong style="color:#f7fafc;">individual shareholder's investment</strong> and determines their ability to deduct losses and whether distributions are taxable to them.
+      </div>
+      <div style="background:#0f1a2e;border-radius:6px;padding:10px 14px;margin-top:10px;font-size:0.82rem;line-height:1.9;">
+        <strong style="color:#f6ad55;">Biggest reasons they differ:</strong><br>
+        1. <strong style="color:#f7fafc;">Contributions</strong> — a new cash contribution increases shareholder basis but does not increase AAA<br>
+        2. <strong style="color:#f7fafc;">Debt-related basis</strong> — personal loans from the shareholder increase their debt basis but are not reflected in AAA
+      </div>
+    </div>
+
+    <div class="trap">
+      <div class="t-label">Exam Trap — S Corp Debt Does Not Flow to Shareholders</div>
+      <p>If the exam says an S corporation took out a bank loan, <strong style="color:#fc8181;">do not increase the shareholder's basis.</strong> Only the shareholder's own loans directly to the corp create debt basis. This is the opposite of partnership treatment and is a classic REG test point.</p>
+    </div>
+
+    <div class="rule-card">
+      <h4>Health Insurance Premiums — More-Than-2% Shareholders</h4>
+      <p style="font-size:0.85rem;color:#a0aec0;line-height:1.7;">S corps treat fringe benefits differently based on ownership percentage. The &gt;2% rule is a heavily tested REG distinction.</p>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px;">
+        <div style="background:#0a1428;border:1px solid #2d4a6e;border-radius:8px;padding:12px 14px;font-size:0.82rem;line-height:1.9;">
+          <div style="font-size:0.72rem;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;color:#38b2ac;margin-bottom:8px;">≤ 2% Shareholders &amp; Non-Owner Employees</div>
+          Normal fringe benefit treatment — premiums paid by the S corp are <strong style="color:#68d391;">excluded from income</strong>. No W-2 inclusion.
+        </div>
+        <div style="background:#1a0a0a;border:1px solid #742a2a;border-radius:8px;padding:12px 14px;font-size:0.82rem;line-height:1.9;">
+          <div style="font-size:0.72rem;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;color:#fc8181;margin-bottom:8px;">&gt; 2% Shareholders</div>
+          Premiums are treated as <strong style="color:#f7fafc;">additional W-2 wages</strong> — <strong style="color:#fc8181;">included in gross income</strong> on the shareholder's personal return.
+        </div>
+      </div>
+      <div style="background:#0a0d14;border:1px solid #2d4a6e;border-radius:8px;padding:14px 16px;margin-top:10px;font-size:0.82rem;line-height:2.1;">
+        <strong style="color:#38b2ac;">How the three-step mechanism works:</strong><br>
+        <span style="color:#f6ad55;">1.</span> S corp adds premium to shareholder's W-2 → <strong style="color:#f7fafc;">included in gross income</strong><br>
+        <span style="color:#f6ad55;">2.</span> S corp deducts premiums as a <strong style="color:#f7fafc;">salary/compensation expense</strong> (only allowed because it's in W-2)<br>
+        <span style="color:#f6ad55;">3.</span> Shareholder takes a <strong style="color:#f7fafc;">self-employed health insurance deduction</strong> on their personal return → offsets the W-2 inclusion
+      </div>
+      <p style="font-size:0.82rem;color:#718096;margin-top:10px;">Net result: no double taxation, no lost deduction. The premiums are taxed once (through wages) then deducted personally.</p>
+    </div>
+
+    <div style="background:#0a0d14;border:1px solid #38b2ac;border-radius:10px;padding:18px 20px;margin-bottom:10px;">
+      <div style="font-size:0.7rem;font-weight:800;letter-spacing:0.08em;color:#38b2ac;text-transform:uppercase;margin-bottom:12px;">Practice MCQ — Lane Inc. / Mill (Becker CPA Exam)</div>
+      <p style="font-size:0.85rem;color:#e2e8f0;line-height:1.7;margin-bottom:10px;">Lane Inc., an S corporation, pays single-coverage premiums of <strong style="color:#f7fafc;">$4,800/yr</strong> and family coverage premiums of <strong style="color:#f7fafc;">$7,200/yr</strong>. Mill is a <strong style="color:#f7fafc;">10% shareholder-employee</strong>. Lane pays Mill's <strong style="color:#f7fafc;">family coverage</strong> on Mill's behalf. What amount is includable in Mill's gross income?</p>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px;font-size:0.82rem;">
+        <div style="background:#1a2535;border-radius:6px;padding:8px 12px;color:#a0aec0;">A. $4,800</div>
+        <div style="background:#1a2535;border-radius:6px;padding:8px 12px;color:#a0aec0;">B. $720</div>
+        <div style="background:#1a263a;border:1px solid #38b2ac;border-radius:6px;padding:8px 12px;color:#38b2ac;font-weight:700;">C. $7,200 &#10003;</div>
+        <div style="background:#1a2535;border-radius:6px;padding:8px 12px;color:#a0aec0;">D. $0</div>
+      </div>
+      <div style="background:#0f1a2e;border-radius:6px;padding:12px 14px;font-size:0.8rem;color:#a0aec0;line-height:1.9;">
+        Mill owns <strong style="color:#f7fafc;">10%</strong> → more than 2% → premiums are W-2 wages.<br>
+        Lane pays <strong style="color:#f7fafc;">family coverage</strong> for Mill → $7,200 is the premium paid on his behalf.<br>
+        <strong style="color:#f6ad55;">$7,200</strong> is includable in Mill's gross income — the full amount of coverage actually paid for him.<br><br>
+        <span style="color:#718096;">Trap: $4,800 (single coverage) is irrelevant — Lane pays family coverage for Mill, so use $7,200. $720 = 10% × $7,200, which is wrong; the full premium amount is included, not Mill's ownership share of it. $0 would be correct only for ≤2% shareholders.</span>
+      </div>
+    </div>
+
+    <div style="background:#0a0d14;border:1px solid #38b2ac;border-radius:10px;padding:18px 20px;margin-bottom:10px;">
+      <div style="font-size:0.7rem;font-weight:800;letter-spacing:0.08em;color:#38b2ac;text-transform:uppercase;margin-bottom:12px;">Practice MCQ — Shareholder A &amp; B (Becker CPA Exam)</div>
+      <p style="font-size:0.85rem;color:#e2e8f0;line-height:1.7;margin-bottom:10px;">An S corp has 2,000 total shares. Shareholder A owns <strong style="color:#f7fafc;">20 shares</strong>; Shareholder B owns <strong style="color:#f7fafc;">90 shares</strong>. The corp pays family coverage health insurance ($5,300) for both. What amount is reported to <strong style="color:#f7fafc;">Shareholder A</strong> as income?</p>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px;font-size:0.82rem;">
+        <div style="background:#1a263a;border:1px solid #38b2ac;border-radius:6px;padding:8px 12px;color:#38b2ac;font-weight:700;">A. $0 &#10003;</div>
+        <div style="background:#1a2535;border-radius:6px;padding:8px 12px;color:#a0aec0;">B. $2,650</div>
+        <div style="background:#1a2535;border-radius:6px;padding:8px 12px;color:#a0aec0;">C. $4,240</div>
+        <div style="background:#1a2535;border-radius:6px;padding:8px 12px;color:#a0aec0;">D. $5,300</div>
+      </div>
+      <div style="background:#0f1a2e;border-radius:6px;padding:12px 14px;font-size:0.8rem;color:#a0aec0;line-height:1.9;">
+        <strong style="color:#63b3ed;">Step 1 — Determine ownership %:</strong> Shareholder A = 20 ÷ 2,000 = <strong style="color:#f7fafc;">1%</strong><br>
+        <strong style="color:#63b3ed;">Step 2 — Apply the rule:</strong> 1% ≤ 2% → <strong style="color:#68d391;">normal fringe benefit exclusion applies</strong> → <strong style="color:#f6ad55;">$0 includable in income</strong><br><br>
+        <span style="color:#718096;">Shareholder B owns 90 ÷ 2,000 = 4.5% → more than 2% → the full $5,300 would be includable in B's income. The distractors (B: $2,650 = $5,300÷2; C: $4,240 = 80% × $5,300) are arithmetic traps — the threshold test is binary. Either you're over 2% (full premium in income) or you're not ($0).</span>
+      </div>
+    </div>
+
+    <div class="trap">
+      <div class="t-label">Exam Trap — Include the Full Premium, Not the Ownership %</div>
+      <p>The amount includable in income is the <strong style="color:#fc8181;">actual premium paid on the shareholder's behalf</strong> — not the shareholder's ownership percentage of the premium. Mill's 10% ownership determines that the rule applies; it does not reduce the $7,200 to $720.<br><br>
+      <strong style="color:#fc8181;">The &gt;2% threshold is binary:</strong> above 2% → full premium in income; at or below 2% → $0. There is no partial inclusion based on ownership percentage.</p>
+    </div>
+
+    <div class="rule-card">
+      <h4>S Corporation Eligibility — Who Can Be a Shareholder</h4>
+      <p style="font-size:0.85rem;color:#a0aec0;line-height:1.7;">An S corporation election is denied if any shareholder is ineligible. REG tests the boundaries — most of the "surprising" eligible entities trip people up.</p>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px;">
+        <div style="background:#0a1a0a;border:1px solid #276749;border-radius:8px;padding:12px 14px;font-size:0.82rem;line-height:2;">
+          <div style="font-size:0.72rem;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;color:#68d391;margin-bottom:8px;">Eligible ✅</div>
+          US citizens<br>
+          <strong style="color:#f7fafc;">Resident aliens</strong> (non-resident aliens are NOT)<br>
+          <strong style="color:#f7fafc;">Estates</strong> (including bankruptcy estates)<br>
+          <strong style="color:#f7fafc;">Qualified retirement plan trusts</strong> (401(k), pension)<br>
+          Grantor trusts<br>
+          Qualified Subchapter S Trusts (QSSTs)<br>
+          Electing Small Business Trusts (ESBTs)
+        </div>
+        <div style="background:#1a0a0a;border:1px solid #742a2a;border-radius:8px;padding:12px 14px;font-size:0.82rem;line-height:2;">
+          <div style="font-size:0.72rem;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;color:#fc8181;margin-bottom:8px;">Ineligible ❌</div>
+          Non-resident aliens<br>
+          C corporations<br>
+          <strong style="color:#f7fafc;">Partnerships</strong><br>
+          <strong style="color:#f7fafc;">Multi-member LLCs</strong> (treated as partnerships)<br>
+          Other S corporations (generally)<br>
+          Ineligible trusts
+        </div>
+      </div>
+      <div style="background:#0f1a2e;border-radius:6px;padding:10px 14px;margin-top:10px;font-size:0.82rem;line-height:1.9;">
+        <strong style="color:#63b3ed;">Other S corp requirements:</strong> Max <strong style="color:#f7fafc;">100 shareholders</strong> · <strong style="color:#f7fafc;">One class of stock</strong> only · Must be a <strong style="color:#f7fafc;">domestic corporation</strong>
+      </div>
+    </div>
+
+    <div style="background:#0a0d14;border:1px solid #38b2ac;border-radius:10px;padding:18px 20px;margin-bottom:10px;">
+      <div style="font-size:0.7rem;font-weight:800;letter-spacing:0.08em;color:#38b2ac;text-transform:uppercase;margin-bottom:12px;">Practice MCQ — Blue Bridge Inc. (Becker CPA Exam)</div>
+      <p style="font-size:0.85rem;color:#e2e8f0;line-height:1.7;margin-bottom:10px;">Blue Bridge Inc., a C corp with 50 shareholders, filed an S election that was denied due to an "ineligible shareholder." Which of the following would be ineligible?</p>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px;font-size:0.82rem;">
+        <div style="background:#1a2535;border-radius:6px;padding:8px 12px;color:#a0aec0;">A. Young, an estate</div>
+        <div style="background:#1a263a;border:1px solid #38b2ac;border-radius:6px;padding:8px 12px;color:#38b2ac;font-weight:700;">B. Jones, a multi-member LLC &#10003;</div>
+        <div style="background:#1a2535;border-radius:6px;padding:8px 12px;color:#a0aec0;">C. Smythe, a resident alien</div>
+        <div style="background:#1a2535;border-radius:6px;padding:8px 12px;color:#a0aec0;">D. Apple Plan, a qualified retirement plan trust</div>
+      </div>
+      <div style="background:#0f1a2e;border-radius:6px;padding:12px 14px;font-size:0.8rem;color:#a0aec0;line-height:1.9;">
+        A multi-member LLC is treated as a <strong style="color:#f7fafc;">partnership</strong> for tax purposes → partnerships cannot be S corp shareholders → <strong style="color:#f6ad55;">Jones disqualifies the election.</strong><br><br>
+        <span style="color:#718096;">Estates (A) ✅ — eligible. Resident aliens (C) ✅ — eligible (non-resident aliens are the ones excluded). Qualified retirement plan trusts (D) ✅ — eligible. Single-member LLCs are ignored as entities (treated as the individual) and would be eligible; it's the multi-member partnership treatment that kills it.</span>
+      </div>
+    </div>
+
+    <div style="background:#0a0d14;border:1px solid #38b2ac;border-radius:10px;padding:18px 20px;margin-bottom:10px;">
+      <div style="font-size:0.7rem;font-weight:800;letter-spacing:0.08em;color:#38b2ac;text-transform:uppercase;margin-bottom:12px;">Practice MCQ — S Corp Termination (Becker CPA Exam)</div>
+      <p style="font-size:0.85rem;color:#e2e8f0;line-height:1.7;margin-bottom:10px;">Which of the following events may result in <strong style="color:#f7fafc;">termination of S corporation status</strong>?</p>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px;font-size:0.82rem;">
+        <div style="background:#1a2535;border-radius:6px;padding:8px 12px;color:#a0aec0;">A. Issued two series of the same class with identical liquidating &amp; distribution rights but different voting rights</div>
+        <div style="background:#1a263a;border:1px solid #38b2ac;border-radius:6px;padding:8px 12px;color:#38b2ac;font-weight:700;">B. Issued shares to a partnership (all partners are US citizens) &#10003;</div>
+        <div style="background:#1a2535;border-radius:6px;padding:8px 12px;color:#a0aec0;">C. Issued shares to a qualified profit-sharing plan</div>
+        <div style="background:#1a2535;border-radius:6px;padding:8px 12px;color:#a0aec0;">D. Issued shares to an estate</div>
+      </div>
+      <div style="background:#0f1a2e;border-radius:6px;padding:12px 14px;font-size:0.8rem;color:#a0aec0;line-height:1.9;">
+        A <strong style="color:#f7fafc;">partnership is an ineligible shareholder</strong> — it doesn't matter that the partners themselves are all US citizens. The ineligibility is at the <em>entity</em> level (the partnership), not the individual level (the partners). Issuing stock to a partnership immediately violates S corp eligibility → <strong style="color:#f6ad55;">S status terminates.</strong><br><br>
+        <span style="color:#718096;">A ✅ — Two series with different <em>voting rights only</em> is fine; S corps can have voting and non-voting shares as long as economic rights (distributions, liquidation) are identical. Only one <em>class of stock</em> is required, not one voting arrangement. C ✅ — Qualified profit-sharing plans are eligible (same as 401(k)/pension trusts). D ✅ — Estates are eligible shareholders.</span>
+      </div>
+    </div>
+
+    <div class="trap">
+      <div class="t-label">Exam Traps — Eligible Entities That Surprise People</div>
+      <p><strong style="color:#fc8181;">Resident alien ≠ non-resident alien.</strong> Resident aliens are eligible; non-resident aliens are not. The exam often lists "resident alien" expecting you to reflexively mark it ineligible.<br><br>
+      <strong style="color:#fc8181;">Estates are eligible</strong> — people confuse this with trusts, where only specific trust types qualify.<br><br>
+      <strong style="color:#fc8181;">Qualified retirement plan trusts are eligible</strong> — 401(k)s, pension plans, profit-sharing plans can hold S corp stock.<br><br>
+      <strong style="color:#fc8181;">Multi-member LLC = partnership = ineligible.</strong> Single-member LLC is a disregarded entity and flows through to the individual owner, who may be eligible.<br><br>
+      <strong style="color:#fc8181;">Different voting rights ≠ two classes of stock.</strong> S corps may have voting and non-voting shares as long as liquidating and distribution rights are identical. "One class of stock" means one set of economic rights, not one voting arrangement.</p>
+    </div>
+
+    <div class="rule-card">
+      <h4>S Corp Election Timing — When Does It Take Effect?</h4>
+      <p style="font-size:0.85rem;color:#a0aec0;line-height:1.7;">The election date relative to the tax year determines whether S status begins the current year or the next.</p>
+      <div style="background:#0a0d14;border:1px solid #2d4a6e;border-radius:8px;padding:14px 16px;margin-top:12px;font-size:0.82rem;line-height:2.1;">
+        <strong style="color:#38b2ac;">On or before March 15 of the current year</strong> → effective <strong style="color:#68d391;">January 1 of that year</strong> (current year)<br>
+        <strong style="color:#fc8181;">After March 15 of the current year</strong> → effective <strong style="color:#f6ad55;">January 1 of the next year</strong>
+      </div>
+      <p style="font-size:0.82rem;color:#718096;margin-top:10px;">The cutoff is the <strong style="color:#f7fafc;">15th day of the 3rd month</strong> of the tax year (March 15 for calendar-year corporations). Unanimous shareholder consent is required regardless of timing.</p>
+    </div>
+
+    <div style="background:#0a0d14;border:1px solid #38b2ac;border-radius:10px;padding:18px 20px;margin-bottom:10px;">
+      <div style="font-size:0.7rem;font-weight:800;letter-spacing:0.08em;color:#38b2ac;text-transform:uppercase;margin-bottom:12px;">Practice MCQ — Village Corp. (Becker CPA Exam)</div>
+      <p style="font-size:0.85rem;color:#e2e8f0;line-height:1.7;margin-bottom:10px;">Village Corp., a calendar year corporation, made a valid S election on <strong style="color:#f7fafc;">December 5, Year 3</strong> with unanimous shareholder consent. Eligibility requirements continued to be met through Year 4. On what date did S status become effective?</p>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px;font-size:0.82rem;">
+        <div style="background:#1a2535;border-radius:6px;padding:8px 12px;color:#a0aec0;">A. January 1, Year 3</div>
+        <div style="background:#1a263a;border:1px solid #38b2ac;border-radius:6px;padding:8px 12px;color:#38b2ac;font-weight:700;">B. January 1, Year 4 &#10003;</div>
+        <div style="background:#1a2535;border-radius:6px;padding:8px 12px;color:#a0aec0;">C. December 5, Year 3</div>
+        <div style="background:#1a2535;border-radius:6px;padding:8px 12px;color:#a0aec0;">D. December 5, Year 4</div>
+      </div>
+      <div style="background:#0f1a2e;border-radius:6px;padding:12px 14px;font-size:0.8rem;color:#a0aec0;line-height:1.9;">
+        Election made <strong style="color:#f7fafc;">December 5, Year 3</strong> → after March 15, Year 3 → misses the current-year cutoff.<br>
+        Result: effective <strong style="color:#f6ad55;">January 1, Year 4</strong> (first day of the following tax year).<br><br>
+        <span style="color:#718096;">A (Jan 1, Year 3) is wrong — Village didn't elect until December. C (Dec 5, Year 3) is the actual election date but not when status begins; the IRS backdates to Jan 1 only if the election was timely. D (Dec 5, Year 4) has no basis in the rules.</span>
+      </div>
+    </div>
+
+    <div style="background:#0a0d14;border:1px solid #38b2ac;border-radius:10px;padding:18px 20px;margin-bottom:10px;">
+      <div style="font-size:0.7rem;font-weight:800;letter-spacing:0.08em;color:#38b2ac;text-transform:uppercase;margin-bottom:12px;">Practice MCQ — Dryco Corp. (Becker CPA Exam)</div>
+      <p style="font-size:0.85rem;color:#e2e8f0;line-height:1.7;margin-bottom:10px;">On August 15, Year 1, Dryco Corp., a calendar year S corporation, acquired <strong style="color:#f7fafc;">100% of the stock of an active C corporation</strong>. As a result, as of what date will Dryco's S election terminate?</p>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px;font-size:0.82rem;">
+        <div style="background:#1a2535;border-radius:6px;padding:8px 12px;color:#a0aec0;">A. January 1, Year 1</div>
+        <div style="background:#1a2535;border-radius:6px;padding:8px 12px;color:#a0aec0;">B. August 15, Year 1</div>
+        <div style="background:#1a2535;border-radius:6px;padding:8px 12px;color:#a0aec0;">C. December 31, Year 1</div>
+        <div style="background:#1a263a;border:1px solid #38b2ac;border-radius:6px;padding:8px 12px;color:#38b2ac;font-weight:700;">D. Election will not terminate &#10003;</div>
+      </div>
+      <div style="background:#0f1a2e;border-radius:6px;padding:12px 14px;font-size:0.8rem;color:#a0aec0;line-height:1.9;">
+        The restriction is <strong style="color:#f7fafc;">directional</strong>: a <strong style="color:#fc8181;">C corporation cannot be a shareholder IN an S corporation</strong> — that terminates S status. But there is <strong style="color:#68d391;">no restriction on an S corporation being a shareholder IN a C corporation.</strong><br><br>
+        Dryco is the <em>investor</em>, not the ineligible party. Acquiring a C corp subsidiary is perfectly fine. Dryco's S election is unaffected.<br><br>
+        <span style="color:#718096;">The trap is reversing the direction. People see "S corp + C corp" and assume a problem exists — but the IRS rule only bars C corps from owning S corp stock, not the other way around.</span>
+      </div>
+    </div>
+
+    <div class="trap">
+      <div class="t-label">Direction Matters — C Corp Owning S Corp vs. S Corp Owning C Corp</div>
+      <p><strong style="color:#fc8181;">C corp owns S corp stock</strong> → S election terminates immediately (C corp is an ineligible shareholder).<br><br>
+      <strong style="color:#68d391;">S corp owns C corp stock</strong> → No problem. S corps can be shareholders in C corps. The restriction only runs one direction.</p>
+    </div>
+
+    <div class="rule-card">
+      <h4>S Corp Re-Election After Termination — 5-Year Waiting Period</h4>
+      <p style="font-size:0.85rem;color:#a0aec0;line-height:1.7;">Once an S election terminates, the corporation cannot simply re-elect immediately. The IRS imposes a waiting period.</p>
+      <div style="background:#0a0d14;border:1px solid #2d4a6e;border-radius:8px;padding:14px 16px;margin-top:12px;font-size:0.82rem;line-height:2.1;">
+        <strong style="color:#fc8181;">General rule:</strong> Cannot re-elect S status until the <strong style="color:#f7fafc;">5th tax year</strong> following the year of termination.<br>
+        <strong style="color:#38b2ac;">Exception:</strong> IRS may consent to an earlier re-election if the prior termination was inadvertent or circumstances have changed.
+      </div>
+      <p style="font-size:0.82rem;color:#718096;margin-top:10px;">REG tests the 5-year number directly — don't confuse it with any other carryover period.</p>
+    </div>
+
+    <div style="background:#0a0d14;border:1px solid #38b2ac;border-radius:10px;padding:18px 20px;margin-bottom:10px;">
+      <div style="font-size:0.7rem;font-weight:800;letter-spacing:0.08em;color:#38b2ac;text-transform:uppercase;margin-bottom:12px;">Practice MCQ — S Corp Re-Election (Becker CPA Exam)</div>
+      <p style="font-size:0.85rem;color:#e2e8f0;line-height:1.7;margin-bottom:10px;">A company terminated its S corporation status for the current tax year. When can the company re-elect S status?</p>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px;font-size:0.82rem;">
+        <div style="background:#1a2535;border-radius:6px;padding:8px 12px;color:#a0aec0;">A. Immediately</div>
+        <div style="background:#1a263a;border:1px solid #38b2ac;border-radius:6px;padding:8px 12px;color:#38b2ac;font-weight:700;">B. Fifth year from the current tax year &#10003;</div>
+        <div style="background:#1a2535;border-radius:6px;padding:8px 12px;color:#a0aec0;">C. Cannot re-elect in future</div>
+        <div style="background:#1a2535;border-radius:6px;padding:8px 12px;color:#a0aec0;">D. Third year from the current tax year</div>
+      </div>
+      <div style="background:#0f1a2e;border-radius:6px;padding:12px 14px;font-size:0.8rem;color:#a0aec0;line-height:1.9;">
+        The rule is a flat <strong style="color:#f6ad55;">5-year waiting period</strong> from the year of termination. IRS consent can allow an earlier re-election in limited circumstances (inadvertent termination), but the default is 5 years.<br><br>
+        <span style="color:#718096;">A (immediately) ignores the waiting period entirely. C (never) is wrong — re-election is allowed, just delayed. D (3 years) is a common distractor — 3 years appears in other tax rules but not S corp re-election.</span>
+      </div>
     </div>
 
   </div>
@@ -5762,8 +6040,13 @@
     </div>
 
     <div class="rule-card">
-      <h4>4 — Personal Residence Exclusion (Heavily Tested)</h4>
-      <p>If you owned AND used the home as your principal residence for <strong style="color:#f7fafc;">2 of the last 5 years</strong>:</p>
+      <h4>4 — Personal Residence Exclusion §121 (Heavily Tested)</h4>
+      <p style="font-size:0.85rem;color:#a0aec0;line-height:1.7;margin-bottom:12px;">Three conditions must ALL be met to qualify:</p>
+      <div style="background:#0a0d14;border:1px solid #2d4a6e;border-radius:8px;padding:12px 16px;font-size:0.82rem;line-height:2;margin-bottom:12px;">
+        <strong style="color:#38b2ac;">1. Ownership + Use:</strong> Owned AND used as principal residence for <strong style="color:#f7fafc;">at least 2 of the last 5 years</strong> before sale. The 2 years do not need to be consecutive.<br>
+        <strong style="color:#38b2ac;">2. Once every 2 years:</strong> Cannot have used this exclusion for another home sale within the <strong style="color:#f7fafc;">past 2 years</strong>.<br>
+        <strong style="color:#38b2ac;">3. Filing status sets the cap:</strong> $250,000 (single) or $500,000 (MFJ).
+      </div>
       <div class="two-col" style="margin-top:12px;">
         <div style="background:#0a0d14;border:1px solid #2d4a6e;border-radius:8px;padding:14px;text-align:center;">
           <div style="color:#718096;font-size:0.78rem;margin-bottom:4px;">Single</div>
@@ -5782,6 +6065,14 @@
         <span style="color:#63b3ed;">Gain:</span> <span style="color:#f7fafc;">$400,000</span><br><br>
         <span style="color:#68d391;font-weight:700;">MFJ → $400,000 excluded → $0 taxable gain</span><br>
         <span style="color:#fc8181;font-size:0.8rem;">Single → $400,000 − $250,000 = $150,000 taxable gain</span>
+      </div>
+
+      <div style="margin-top:16px;font-size:0.7rem;font-weight:800;letter-spacing:0.08em;color:#38b2ac;text-transform:uppercase;margin-bottom:8px;">Additional Rules</div>
+      <div style="background:#0a0d14;border:1px solid #2d4a6e;border-radius:8px;padding:12px 16px;font-size:0.82rem;line-height:2;">
+        <strong style="color:#f7fafc;">Gains only, not losses</strong> — if you sell your home at a loss, no deduction. The exclusion only shelters gains.<br>
+        <strong style="color:#f7fafc;">Nonqualified use reduces exclusion</strong> — if the home was rented or used for non-residential purposes during ownership, the excludable gain is reduced proportionally (nonqualified use period ÷ total ownership period × gain is taxable).<br>
+        <strong style="color:#f7fafc;">Post-occupancy vacancy doesn't count as nonqualified use</strong> — time the home sits empty or is rented <em>after</em> your last use as a principal residence (but before sale) does not reduce the exclusion.<br>
+        <strong style="color:#f7fafc;">Selling to a relative is fine</strong> — exclusion applies regardless of who buys the home, as long as the sale is at fair market value.
       </div>
     </div>
 
@@ -6329,6 +6620,103 @@
     </div>
 
     <div class="rule-card">
+      <h4>Depreciation Conventions — Which One Applies</h4>
+      <p style="font-size:0.82rem;color:#718096;margin-bottom:12px;">The "convention" tells you how much depreciation you get in the <strong style="color:#f7fafc;">year of acquisition</strong>. Real property and personal property use different rules.</p>
+      <table style="width:100%;border-collapse:collapse;font-size:0.85rem;margin-bottom:14px;">
+        <thead>
+          <tr style="border-bottom:1px solid #2d4a6e;">
+            <th style="padding:7px 10px;color:#63b3ed;text-align:left;">Convention</th>
+            <th style="padding:7px 10px;color:#63b3ed;text-align:left;">Applies To</th>
+            <th style="padding:7px 10px;color:#63b3ed;text-align:left;">Rule</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="border-bottom:1px solid #1a2535;background:#0a1428;">
+            <td style="padding:8px 10px;color:#f6ad55;font-weight:700;">Mid-Month</td>
+            <td style="padding:8px 10px;color:#f7fafc;">Real property (buildings, land improvements) — 27.5 yr &amp; 39 yr</td>
+            <td style="padding:8px 10px;color:#a0aec0;">Treated as placed in service <em>mid-month</em>. Count half the acquisition month + remaining full months.</td>
+          </tr>
+          <tr style="border-bottom:1px solid #1a2535;">
+            <td style="padding:8px 10px;color:#f6ad55;font-weight:700;">Half-Year</td>
+            <td style="padding:8px 10px;color:#f7fafc;">Personal property (equipment, furniture, computers) — default</td>
+            <td style="padding:8px 10px;color:#a0aec0;">All assets treated as placed in service <em>mid-year</em> regardless of actual date. First year = 50% of annual rate.</td>
+          </tr>
+          <tr style="background:#0a1428;">
+            <td style="padding:8px 10px;color:#f6ad55;font-weight:700;">Mid-Quarter</td>
+            <td style="padding:8px 10px;color:#f7fafc;">Personal property — <em>only if</em> &gt;40% placed in service in Q4</td>
+            <td style="padding:8px 10px;color:#a0aec0;">Replaces half-year when Q4 bunching triggered. Each asset uses the mid-quarter rate for the quarter it was placed in service.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div style="font-size:0.7rem;font-weight:800;letter-spacing:0.08em;color:#38b2ac;text-transform:uppercase;margin-bottom:10px;">Examples</div>
+      <div style="background:#0a0d14;border:1px solid #2d4a6e;border-radius:8px;padding:12px 16px;font-size:0.82rem;line-height:1.9;">
+        <strong style="color:#f6ad55;">Mid-Month (Real Property):</strong> Buy a $390,000 commercial building on August 10.<br>
+        Annual depreciation: $390,000 ÷ 39 = $10,000/yr<br>
+        Months in year 1: half of Aug (0.5) + Sep + Oct + Nov + Dec = <strong style="color:#f7fafc;">4.5 months</strong><br>
+        Year 1 deduction: $10,000 × (4.5 / 12) = <strong style="color:#00d4ff;">$3,750</strong><br><br>
+
+        <strong style="color:#f6ad55;">Half-Year (Personal Property):</strong> Buy office equipment on March 10, 5-year MACRS.<br>
+        Half-year convention ignores March — treats asset as placed in service July 1.<br>
+        First-year MACRS rate for 5-year property = 20% → Year 1 deduction = 20% × cost.<br>
+        <span style="color:#718096;font-size:0.78rem;">(Actual purchase date irrelevant — Jan or Dec both get the same first-year %)</span><br><br>
+
+        <strong style="color:#f6ad55;">Mid-Quarter (Personal Property):</strong> Buy machinery Nov 15; &gt;40% of year's personal property was Q4.<br>
+        Mid-quarter triggered → use Q4 mid-quarter table rate for 7-year property.<br>
+        Q4 placement = only 1.5 months of the year → smaller first-year deduction than half-year.
+      </div>
+    </div>
+
+    <div class="trap">
+      <div class="t-label">Convention Traps</div>
+      <p><strong style="color:#fc8181;">Real vs. personal property</strong> — real property always uses mid-month; personal property defaults to half-year. Don't apply mid-month to equipment.<br><br>
+      <strong style="color:#fc8181;">Half-year ignores actual purchase date</strong> — a March purchase and a November purchase of the same equipment get the same first-year %. The only exception is if mid-quarter is triggered.<br><br>
+      <strong style="color:#fc8181;">Mid-quarter trigger: &gt;40% in Q4</strong> — if the exam says more than 40% of personal property is placed in service in the last quarter, half-year is out, mid-quarter applies to <em>all</em> personal property placed in service that year — not just Q4 assets.<br><br>
+      <strong style="color:#fc8181;">Mid-month for buildings ties to the loan issuance cost rule</strong> — the Real Ventures question used a Jan 1 building purchase, so mid-month gave a full year. An August purchase would not.</p>
+    </div>
+
+    <div class="rule-card">
+      <h4>Master Summary — All Conventions at a Glance</h4>
+      <p style="font-size:0.82rem;color:#718096;margin-bottom:12px;">Use this as a quick-reference before exam day. Four conventions, each with a distinct trigger and asset type.</p>
+      <table style="width:100%;border-collapse:collapse;font-size:0.8rem;">
+        <thead>
+          <tr style="border-bottom:2px solid #2d4a6e;">
+            <th style="padding:8px 10px;color:#63b3ed;text-align:left;">Convention</th>
+            <th style="padding:8px 10px;color:#63b3ed;text-align:left;">Applies To</th>
+            <th style="padding:8px 10px;color:#63b3ed;text-align:left;">Trigger</th>
+            <th style="padding:8px 10px;color:#63b3ed;text-align:left;">Key Points</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="border-bottom:1px solid #1a2535;background:#0a1428;">
+            <td style="padding:8px 10px;color:#f6ad55;font-weight:700;white-space:nowrap;">Half-Year</td>
+            <td style="padding:8px 10px;color:#f7fafc;">Personal property (MACRS)</td>
+            <td style="padding:8px 10px;color:#a0aec0;">Default — unless &gt;40% of personal property placed in Q4</td>
+            <td style="padding:8px 10px;color:#a0aec0;">Asset treated as placed in service / disposed mid-year → 6 months of depreciation in first year regardless of actual date</td>
+          </tr>
+          <tr style="border-bottom:1px solid #1a2535;">
+            <td style="padding:8px 10px;color:#f6ad55;font-weight:700;white-space:nowrap;">Mid-Quarter</td>
+            <td style="padding:8px 10px;color:#f7fafc;">Personal property (MACRS)</td>
+            <td style="padding:8px 10px;color:#a0aec0;">&gt;40% of personal property basis placed in Q4 → replaces half-year for <em>all</em> personal property that year</td>
+            <td style="padding:8px 10px;color:#a0aec0;">Each asset prorated to the midpoint of its placement quarter. Q4 asset gets only 1.5 months; Q1 asset gets 10.5 months.</td>
+          </tr>
+          <tr style="border-bottom:1px solid #1a2535;background:#0a1428;">
+            <td style="padding:8px 10px;color:#f6ad55;font-weight:700;white-space:nowrap;">Mid-Month</td>
+            <td style="padding:8px 10px;color:#f7fafc;">Real property (27.5 yr &amp; 39 yr, straight-line)</td>
+            <td style="padding:8px 10px;color:#a0aec0;">Always — no trigger needed. Applies to all real property automatically.</td>
+            <td style="padding:8px 10px;color:#a0aec0;">Asset treated as placed in service / disposed at midpoint of the month. Aug 10 and Aug 31 both = 4.5 months remaining.</td>
+          </tr>
+          <tr style="background:#0a1428;">
+            <td style="padding:8px 10px;color:#f6ad55;font-weight:700;">Org &amp; Startup<br>Amortization</td>
+            <td style="padding:8px 10px;color:#f7fafc;">Organizational / startup costs (intangible)</td>
+            <td style="padding:8px 10px;color:#a0aec0;">Amortize over 180 months starting the month business begins. First month is always a full month.</td>
+            <td style="padding:8px 10px;color:#a0aec0;">$5,000 immediate deduction (phases out dollar-for-dollar above $50,000 total); remainder amortized over 15 years. Sep 15 start → 4 full months in Year 1.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="rule-card">
       <h4>Section 179 &amp; Bonus Depreciation</h4>
       <p style="font-size:0.85rem;color:#a0aec0;line-height:1.7;">Instead of spreading depreciation over years, these provisions let businesses <strong style="color:#f7fafc;">deduct a large portion immediately</strong> in the year of purchase.</p>
       <div style="background:#0a0d14;border:1px solid #2d4a6e;border-radius:8px;padding:12px 16px;margin-top:12px;font-size:0.82rem;line-height:1.9;">
@@ -6336,6 +6724,9 @@
         <strong style="color:#38b2ac;">Bonus Depreciation:</strong> Additional first-year depreciation percentage on new/used qualifying property. Can create a loss unlike §179.
       </div>
       <p style="font-size:0.78rem;color:#718096;margin-top:10px;">REG tests the <em>concept</em> — know that both allow faster deductions than standard MACRS. Exact dollar limits change yearly; Becker will give you the number if needed.</p>
+      <div style="background:#1a0a0a;border:1px solid #fc8181;border-radius:8px;padding:10px 14px;margin-top:12px;font-size:0.82rem;line-height:1.7;">
+        <strong style="color:#fc8181;">§179 Exclusion — Escalators &amp; Elevators:</strong> Escalators and elevators <strong style="color:#f7fafc;">cannot</strong> be directly expensed under Section 179. They are structural components of a building and must be depreciated under standard MACRS (39-year life as nonresidential real property). This is a tested trap — the exam may present them alongside other equipment that qualifies.
+      </div>
     </div>
 
     <div class="mnemonic">
@@ -6482,6 +6873,949 @@
       <strong style="color:#fc8181;">Depreciation on personal residence</strong> &mdash; zero. Even if you work from home occasionally. Only a qualifying home office (regular + exclusive use) gets depreciation, and only on the business portion.<br><br>
       <strong style="color:#fc8181;">Allowed or allowable</strong> &mdash; if you forget to take depreciation, the IRS reduces your basis by the amount you <em>could have</em> taken anyway. You pay the recapture whether you claimed it or not.<br><br>
       <strong style="color:#fc8181;">§179 limited to taxable income</strong> &mdash; can't use §179 to create or increase a net operating loss. Bonus depreciation has no such limit.</p>
+    </div>
+
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- TOPIC 53: SECTION 197 INTANGIBLES AMORTIZATION -->
+  <!-- ============================================================ -->
+  <div class="topic" id="section197">
+    <div class="topic-header">
+      <div class="topic-num">53</div>
+      <div>
+        <div class="topic-title">§197 Intangibles — Amortization</div>
+        <div class="topic-sub">15-year straight-line · Full-month convention · Purchased intangibles only</div>
+      </div>
+    </div>
+
+    <div class="rule-card">
+      <h4>The §197 Rule</h4>
+      <p style="font-size:0.85rem;color:#a0aec0;line-height:1.7;">When you purchase a business and allocate the price to intangible assets, those assets cannot be depreciated under MACRS. Instead, they are amortized under <strong style="color:#f7fafc;">IRC §197</strong> over a flat <strong style="color:#00d4ff;">180 months (15 years)</strong> using straight-line and the <strong style="color:#00d4ff;">full-month convention</strong>.</p>
+      <div style="background:#0a0d14;border:1px solid #2d4a6e;border-radius:8px;padding:12px 16px;margin-top:12px;font-size:0.82rem;line-height:1.9;">
+        <strong style="color:#38b2ac;">Common §197 assets:</strong> Goodwill, going-concern value, customer lists, trade names, covenants not to compete, franchises, licenses, patents acquired with a business<br>
+        <strong style="color:#38b2ac;">Formula:</strong> (Total §197 cost ÷ 180) × months held in year<br>
+        <strong style="color:#38b2ac;">Convention:</strong> Full-month — the acquisition month counts as a <em>full</em> month regardless of the day purchased
+      </div>
+    </div>
+
+    <div class="mnemonic">
+      <div class="m-label">Full-Month vs. Half-Year — Don't Mix Them Up</div>
+      <div style="font-size:0.88rem;color:#a0aec0;line-height:2.2;">
+        <span style="color:#f6ad55;">MACRS (tangible assets):</span> half-year convention — treat all acquisitions as if bought mid-year<br>
+        <span style="color:#f6ad55;">§197 (intangibles):</span> full-month convention — month of acquisition = full month. July 31 and July 1 both give you 6 months.
+      </div>
+    </div>
+
+    <div style="background:#0a0d14;border:1px solid #38b2ac;border-radius:10px;padding:18px 20px;margin-top:4px;">
+      <div style="font-size:0.7rem;font-weight:800;letter-spacing:0.08em;color:#38b2ac;text-transform:uppercase;margin-bottom:12px;">Practice MCQ &mdash; Becker CPA Exam</div>
+      <p style="font-size:0.85rem;color:#e2e8f0;line-height:1.7;margin-bottom:10px;">A calendar-year taxpayer purchases a new business on July 1. The contract provides the following price allocation:</p>
+      <div style="background:#0f1a2e;border-radius:6px;padding:10px 14px;margin-bottom:14px;font-size:0.82rem;line-height:1.9;">
+        <span style="color:#a0aec0;">Customer list</span> &mdash; <span style="color:#f7fafc;">$100,000</span><br>
+        <span style="color:#a0aec0;">Trade name</span> &mdash; <span style="color:#f7fafc;">$50,000</span><br>
+        <span style="color:#a0aec0;">Goodwill</span> &mdash; <span style="color:#f7fafc;">$90,000</span>
+      </div>
+      <p style="font-size:0.85rem;color:#e2e8f0;line-height:1.7;margin-bottom:14px;"><em>What is the amortization deduction for the current year?</em></p>
+      <div style="background:#0a1a0a;border:1px solid #38a169;border-radius:8px;padding:12px 16px;font-size:0.82rem;line-height:1.9;">
+        <strong style="color:#68d391;">Answer: $8,000 (D)</strong><br>
+        <span style="color:#a0aec0;">Total §197 cost:</span> $100,000 + $50,000 + $90,000 = <strong style="color:#f7fafc;">$240,000</strong><br>
+        <span style="color:#a0aec0;">Monthly amortization:</span> $240,000 ÷ 180 = <strong style="color:#f7fafc;">$1,333/month</strong><br>
+        <span style="color:#a0aec0;">Months held (Jul–Dec, full-month convention):</span> <strong style="color:#f7fafc;">6 months</strong><br>
+        <span style="color:#a0aec0;">Deduction:</span> $1,333 × 6 = <strong style="color:#00d4ff;">$8,000</strong>
+      </div>
+    </div>
+
+    <div class="trap">
+      <div class="t-label">Exam Traps</div>
+      <p><strong style="color:#fc8181;">Half-year convention trap</strong> &mdash; MACRS uses half-year for tangible assets, making it tempting to apply here. §197 uses full-month. July 1 purchase = 6 months, not 5.5.<br><br>
+      <strong style="color:#fc8181;">Internally created intangibles</strong> &mdash; §197 only applies to <em>purchased</em> intangibles. Goodwill you build yourself is not amortizable. The rule kicks in when you buy a business and allocate the purchase price.<br><br>
+      <strong style="color:#fc8181;">All §197 assets amortized together</strong> &mdash; you don't pick and choose. If you acquire multiple §197 assets in one purchase, they are all amortized over 180 months as a group. You can't write off a customer list faster because it may lose value faster.<br><br>
+      <strong style="color:#fc8181;">Distractor answer $6,000</strong> &mdash; comes from using 5 months (Aug–Dec) instead of 6. Remember: month of acquisition is a full month.</p>
+    </div>
+
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- TOPIC 54: LOAN ISSUANCE COSTS -->
+  <!-- ============================================================ -->
+  <div class="topic" id="loan-issuance">
+    <div class="topic-header">
+      <div class="topic-num">54</div>
+      <div>
+        <div class="topic-title">Loan Issuance Costs</div>
+        <div class="topic-sub">Amortize over loan term · Not asset recovery period · Straight-line</div>
+      </div>
+    </div>
+
+    <div class="rule-card">
+      <h4>The Rule</h4>
+      <p style="font-size:0.85rem;color:#a0aec0;line-height:1.7;">Loan issuance costs (financing fees, origination costs, points paid to obtain a loan) are <strong style="color:#f7fafc;">not immediately deductible</strong>. They must be amortized straight-line over the <strong style="color:#00d4ff;">term of the loan</strong> — starting in the month the costs are incurred.</p>
+      <div style="background:#0a0d14;border:1px solid #2d4a6e;border-radius:8px;padding:12px 16px;margin-top:12px;font-size:0.82rem;line-height:1.9;">
+        <strong style="color:#38b2ac;">Formula:</strong> Total loan issuance costs ÷ loan term (years) = annual deduction<br>
+        <strong style="color:#38b2ac;">Convention:</strong> Starts the month costs are incurred — January 1 origination = full year deduction in Year 1<br>
+        <strong style="color:#38b2ac;">Key anchor:</strong> Use the <em>loan term</em>, not the asset's depreciation recovery period
+      </div>
+    </div>
+
+    <div class="mnemonic">
+      <div class="m-label">The Big Trap: Loan Term ≠ Asset Recovery Period</div>
+      <div style="font-size:0.88rem;color:#a0aec0;line-height:2.2;">
+        The loan finances an asset. That asset has its own depreciation schedule.<br>
+        <strong style="color:#fc8181;">These are two separate timelines.</strong> Loan issuance costs follow the <span style="color:#00d4ff;">loan</span>, not the asset.<br>
+        20-year mortgage on a 40-year building → amortize costs over <span style="color:#00d4ff;">20 years</span>.
+      </div>
+    </div>
+
+    <div style="background:#0a0d14;border:1px solid #38b2ac;border-radius:10px;padding:18px 20px;margin-top:4px;">
+      <div style="font-size:0.7rem;font-weight:800;letter-spacing:0.08em;color:#38b2ac;text-transform:uppercase;margin-bottom:12px;">Practice MCQ &mdash; Becker CPA Exam</div>
+      <p style="font-size:0.85rem;color:#e2e8f0;line-height:1.7;margin-bottom:10px;">Real Ventures Inc. incurred $3 million of loan issuance costs on January 1, Year 3, related to a mortgage to finance a commercial office building. The mortgage term is 20 years; the building recovery period is 40 years. How much can Real Ventures deduct in Year 3?</p>
+      <div style="background:#0a1a0a;border:1px solid #38a169;border-radius:8px;padding:12px 16px;font-size:0.82rem;line-height:1.9;">
+        <strong style="color:#68d391;">Answer: $150,000 (C)</strong><br>
+        <span style="color:#a0aec0;">Annual amortization:</span> $3,000,000 ÷ 20 years = <strong style="color:#f7fafc;">$150,000/year</strong><br>
+        <span style="color:#a0aec0;">Jan 1 origination → full year in Year 3:</span> <strong style="color:#00d4ff;">$150,000</strong>
+      </div>
+    </div>
+
+    <div class="trap">
+      <div class="t-label">Exam Traps</div>
+      <p><strong style="color:#fc8181;">$75,000 (D) — using the 40-year recovery period</strong> &mdash; the most common wrong answer. $3M ÷ 40 = $75K. The exam is testing whether you follow the loan term, not the building's depreciation life.<br><br>
+      <strong style="color:#fc8181;">$200,000 — using 15 years</strong> &mdash; another distractor if you confuse this with §197 amortization (which uses 180 months / 15 years). Loan issuance costs are not §197 assets.<br><br>
+      <strong style="color:#fc8181;">$3,000,000 — immediate expensing</strong> &mdash; wrong. Loan issuance costs must be capitalized and amortized. No §179 or immediate deduction available.<br><br>
+      <strong style="color:#fc8181;">Loan issuance costs ≠ §197</strong> &mdash; both are amortized intangibles, but §197 uses a fixed 180 months. Loan issuance costs use the actual loan term. Don't apply §197 rules here.</p>
+    </div>
+
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- TOPIC 55: ORGANIZATIONAL & STARTUP COSTS -->
+  <!-- ============================================================ -->
+  <div class="topic" id="org-costs">
+    <div class="topic-header">
+      <div class="topic-num">55</div>
+      <div>
+        <div class="topic-title">Organizational &amp; Startup Costs</div>
+        <div class="topic-sub">$5,000 immediate + 180-month amortization · Full-month · Phase-out above $50,000</div>
+      </div>
+    </div>
+
+    <div class="rule-card">
+      <h4>The Two-Part Deduction</h4>
+      <p style="font-size:0.85rem;color:#a0aec0;line-height:1.7;">When a new business incurs organizational or startup costs, the tax treatment is a <strong style="color:#f7fafc;">two-step hybrid</strong> — part immediate deduction, part amortization over 180 months.</p>
+      <div style="background:#0a0d14;border:1px solid #2d4a6e;border-radius:8px;padding:12px 16px;margin-top:12px;font-size:0.82rem;line-height:2;">
+        <strong style="color:#38b2ac;">Step 1 — Immediate deduction:</strong> Deduct the first <strong style="color:#f7fafc;">$5,000</strong> in the year business begins<br>
+        <strong style="color:#38b2ac;">Step 2 — Amortize the rest:</strong> Remaining costs ÷ 180 months, starting the <em>month</em> business begins<br>
+        <strong style="color:#38b2ac;">Convention:</strong> Full-month — month business starts counts as a full month even if mid-month<br>
+        <strong style="color:#38b2ac;">Phase-out:</strong> The $5,000 immediate deduction is reduced dollar-for-dollar when total costs exceed $50,000. At $55,000+ the immediate deduction is fully phased out.
+      </div>
+    </div>
+
+    <div class="mnemonic">
+      <div class="m-label">Same Rule Applies to Both Types</div>
+      <div style="font-size:0.88rem;color:#a0aec0;line-height:2.2;">
+        <span style="color:#f6ad55;">Organizational costs</span> — costs to form the entity (legal fees, state filing fees, accounting for initial capitalization)<br>
+        <span style="color:#f6ad55;">Startup costs</span> — costs before the business opens (market research, training, pre-opening advertising)<br>
+        Both use the exact same $5,000 + 180-month rule. Each category gets its own $5,000.
+      </div>
+    </div>
+
+    <div style="background:#0a0d14;border:1px solid #38b2ac;border-radius:10px;padding:18px 20px;margin-top:4px;">
+      <div style="font-size:0.7rem;font-weight:800;letter-spacing:0.08em;color:#38b2ac;text-transform:uppercase;margin-bottom:12px;">Practice MCQ &mdash; Becker CPA Exam</div>
+      <p style="font-size:0.85rem;color:#e2e8f0;line-height:1.7;margin-bottom:10px;">New Brands, Inc. incurs $46,400 in qualifying organizational costs in Year 1. Business begins September 15, Year 1. What is the Year 1 deduction?</p>
+      <div style="background:#0a1a0a;border:1px solid #38a169;border-radius:8px;padding:12px 16px;font-size:0.82rem;line-height:2;">
+        <strong style="color:#68d391;">Answer: $5,920 (A)</strong><br>
+        <span style="color:#a0aec0;">Immediate deduction:</span> <strong style="color:#f7fafc;">$5,000</strong> (costs &lt; $50,000 → no phase-out)<br>
+        <span style="color:#a0aec0;">Remaining to amortize:</span> $46,400 − $5,000 = <strong style="color:#f7fafc;">$41,400</strong><br>
+        <span style="color:#a0aec0;">Monthly rate:</span> $41,400 ÷ 180 = <strong style="color:#f7fafc;">$230/month</strong><br>
+        <span style="color:#a0aec0;">Months in Year 1 (Sep–Dec, full-month convention):</span> <strong style="color:#f7fafc;">4 months</strong><br>
+        <span style="color:#a0aec0;">Amortization Year 1:</span> $230 × 4 = <strong style="color:#f7fafc;">$920</strong><br>
+        <span style="color:#a0aec0;">Total Year 1 deduction:</span> $5,000 + $920 = <strong style="color:#00d4ff;">$5,920</strong>
+      </div>
+    </div>
+
+    <div class="trap">
+      <div class="t-label">Exam Traps</div>
+      <p><strong style="color:#fc8181;">$5,805 distractor — counting September as half a month</strong> &mdash; Sep 15 start → wrong answer uses 3.5 months instead of 4. Full-month convention: Sep counts as a full month no matter the date.<br><br>
+      <strong style="color:#fc8181;">$5,000 distractor — forgetting to add amortization</strong> &mdash; the $5,000 is only Step 1. You still amortize the remainder and add it.<br><br>
+      <strong style="color:#fc8181;">Phase-out watch: costs &gt; $50,000</strong> &mdash; if the exam gives you $53,000 in org costs, the immediate deduction drops to $2,000 ($5,000 − $3,000 excess). At $55,000+ the $5,000 disappears entirely and you only amortize.<br><br>
+      <strong style="color:#fc8181;">Each category gets its own $5,000</strong> &mdash; a business can deduct up to $5,000 of organizational costs AND up to $5,000 of startup costs, each with their own 180-month tail. They don't share a single $5,000 cap.</p>
+    </div>
+
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- TOPIC 56: BOOK INCOME VS. TAXABLE INCOME -->
+  <!-- ============================================================ -->
+  <div class="topic" id="book-vs-tax">
+    <div class="topic-header">
+      <div class="topic-num">56</div>
+      <div>
+        <div class="topic-title">Book Income vs. Taxable Income</div>
+        <div class="topic-sub">GAAP recognizes it · Tax law excludes it · Know the key differences cold</div>
+      </div>
+    </div>
+
+    <div class="rule-card">
+      <h4>The Core Concept</h4>
+      <p style="font-size:0.85rem;color:#a0aec0;line-height:1.7;">GAAP (book) income and federal taxable income are <strong style="color:#f7fafc;">not the same thing</strong>. Certain items are recognized as income under GAAP but <em>excluded</em> from federal taxable income by statute. The exam tests whether you know which bucket each item falls into.</p>
+    </div>
+
+    <div class="rule-card">
+      <h4>1 — Municipal Bond Interest</h4>
+      <p style="font-size:0.85rem;color:#a0aec0;line-height:1.7;">A state or city issues bonds to raise money. The federal government allows interest on those bonds to be <strong style="color:#f7fafc;">excluded from federal taxable income</strong> so municipalities can borrow more cheaply.</p>
+      <div style="background:#0a0d14;border:1px solid #2d4a6e;border-radius:8px;padding:12px 16px;margin-top:12px;font-size:0.82rem;line-height:2;">
+        <strong style="color:#38b2ac;">Example:</strong> You earn $1,000 interest on a California municipal bond.<br>
+        <span style="color:#a0aec0;">GAAP (book) income:</span> <strong style="color:#f7fafc;">$1,000 recognized</strong><br>
+        <span style="color:#a0aec0;">Federal taxable income:</span> <strong style="color:#68d391;">$0 — excluded</strong><br>
+        <span style="color:#a0aec0;">State tax:</span> Varies — CA munis are usually CA-tax-free too, but out-of-state munis may be taxable at state level.
+      </div>
+      <div style="background:#1a1200;border:1px solid #f59e0b;border-radius:8px;padding:10px 14px;margin-top:10px;font-size:0.82rem;">
+        <strong style="color:#f59e0b;">Brain reflex:</strong> "Municipal bond interest" → <em>Included in GAAP income, excluded from federal taxable income.</em> Becker loves this one.
+      </div>
+    </div>
+
+    <div class="rule-card">
+      <h4>2 — Key-Person Life Insurance</h4>
+      <p style="font-size:0.85rem;color:#a0aec0;line-height:1.7;">A company buys a life insurance policy on a key executive. The company pays the premiums and is the beneficiary.</p>
+      <div style="background:#0a0d14;border:1px solid #2d4a6e;border-radius:8px;padding:12px 16px;margin-top:12px;font-size:0.82rem;line-height:2;">
+        <strong style="color:#38b2ac;">Premiums paid:</strong> <strong style="color:#fc8181;">NOT deductible</strong> — company pays them with after-tax dollars<br>
+        <strong style="color:#38b2ac;">Death benefit received:</strong> <strong style="color:#68d391;">NOT taxable income</strong> to the company — life insurance death proceeds are excluded<br><br>
+        <span style="color:#718096;font-size:0.78rem;">Example: Intuit pays $50K/yr in premiums on CFO's policy. CFO dies. Intuit receives $5M. The $5M is not included in Intuit's taxable income.</span>
+      </div>
+    </div>
+
+    <div class="rule-card">
+      <h4>3 — Life Insurance Cash Surrender Value (CSV)</h4>
+      <p style="font-size:0.85rem;color:#a0aec0;line-height:1.7;">This is <strong style="color:#f7fafc;">not a death benefit</strong> — it's when you cancel a policy while still alive and receive the cash value. The basis recovery rule applies.</p>
+      <div style="background:#0a0d14;border:1px solid #2d4a6e;border-radius:8px;padding:12px 16px;margin-top:12px;font-size:0.82rem;line-height:2;">
+        <strong style="color:#38b2ac;">Basis = total premiums paid</strong> (your investment in the policy)<br>
+        <strong style="color:#38b2ac;">CSV received up to basis:</strong> <strong style="color:#68d391;">Tax-free return of investment</strong><br>
+        <strong style="color:#38b2ac;">CSV received above basis:</strong> <strong style="color:#fc8181;">Taxable ordinary income</strong><br><br>
+        <span style="color:#f6ad55;">Example:</span> Premiums paid = $40,000 &nbsp;|&nbsp; CSV received = $55,000<br>
+        First $40,000 → tax-free (return of basis)<br>
+        Remaining $15,000 → <strong style="color:#fc8181;">taxable income</strong>
+      </div>
+      <p style="font-size:0.78rem;color:#718096;margin-top:10px;">Think of premiums paid exactly like stock cost basis. You get your investment back tax-free; only the gain is taxed.</p>
+    </div>
+
+    <div class="rule-card">
+      <h4>Master Cheat Sheet — Taxable vs. Excluded</h4>
+      <div class="two-col" style="margin-top:8px;">
+        <div style="background:#0a0d14;border:1px solid #38a169;border-radius:8px;padding:14px 16px;">
+          <div style="font-size:0.7rem;font-weight:800;letter-spacing:0.08em;color:#fc8181;text-transform:uppercase;margin-bottom:10px;">Usually Taxable (Included)</div>
+          <div style="font-size:0.82rem;line-height:2;color:#a0aec0;">
+            <span style="color:#fc8181;">✗</span> Salary &amp; wages<br>
+            <span style="color:#fc8181;">✗</span> Bank account interest<br>
+            <span style="color:#fc8181;">✗</span> Dividends<br>
+            <span style="color:#fc8181;">✗</span> Rental income<br>
+            <span style="color:#fc8181;">✗</span> Business income<br>
+            <span style="color:#fc8181;">✗</span> Gambling winnings<br>
+            <span style="color:#fc8181;">✗</span> Life insurance CSV gain (above basis)
+          </div>
+        </div>
+        <div style="background:#0a0d14;border:1px solid #38a169;border-radius:8px;padding:14px 16px;">
+          <div style="font-size:0.7rem;font-weight:800;letter-spacing:0.08em;color:#68d391;text-transform:uppercase;margin-bottom:10px;">Usually Excluded (Not Taxable)</div>
+          <div style="font-size:0.82rem;line-height:2;color:#a0aec0;">
+            <span style="color:#68d391;">✓</span> Municipal bond interest<br>
+            <span style="color:#68d391;">✓</span> Gifts received<br>
+            <span style="color:#68d391;">✓</span> Inheritances received<br>
+            <span style="color:#68d391;">✓</span> Life insurance death benefits<br>
+            <span style="color:#68d391;">✓</span> Workers' compensation<br>
+            <span style="color:#68d391;">✓</span> Child support received<br>
+            <span style="color:#68d391;">✓</span> Home sale exclusion ($250K/$500K)<br>
+            <span style="color:#68d391;">✓</span> Employer health insurance premiums
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="trap">
+      <div class="t-label">Exam Traps</div>
+      <p><strong style="color:#fc8181;">Municipal bond interest: book ≠ tax</strong> — always included in GAAP income, always excluded from federal taxable income. Classic M-1 adjustment on corporate returns.<br><br>
+      <strong style="color:#fc8181;">Key-person premiums are NOT deductible</strong> — the company gets the tax-free death benefit, but pays for it with non-deductible premiums. You don't get both.<br><br>
+      <strong style="color:#fc8181;">CSV vs. death benefit — totally different rules</strong> — death benefit = fully excluded. Cash surrender = basis recovery (only the excess over premiums paid is taxable). Don't mix them.<br><br>
+      <strong style="color:#fc8181;">Alimony filing date matters</strong> — pre-2019 divorce: taxable to recipient; post-2018: excluded. One of the most frequently swapped answers on REG.</p>
+    </div>
+
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- TOPIC 57: C CORP CHARITABLE CONTRIBUTIONS -->
+  <!-- ============================================================ -->
+  <div class="topic" id="corp-charitable">
+    <div class="topic-header">
+      <div class="topic-num">57</div>
+      <div>
+        <div class="topic-title">C Corp Charitable Contributions</div>
+        <div class="topic-sub">1% floor · 10% ceiling · 5-year carryforward · Adjusted taxable income</div>
+      </div>
+    </div>
+
+    <div class="rule-card">
+      <h4>The Rule</h4>
+      <p style="font-size:0.85rem;color:#a0aec0;line-height:1.7;">C corporations can deduct charitable contributions, but the deduction is subject to both a <strong style="color:#f7fafc;">floor</strong> and a <strong style="color:#f7fafc;">ceiling</strong> based on adjusted taxable income. This is different from individual charitable deduction rules.</p>
+      <div style="background:#0a0d14;border:1px solid #2d4a6e;border-radius:8px;padding:12px 16px;margin-top:12px;font-size:0.82rem;line-height:2;">
+        <strong style="color:#38b2ac;">Floor:</strong> First <strong style="color:#f7fafc;">1%</strong> of adjusted taxable income is <strong style="color:#fc8181;">not deductible</strong><br>
+        <strong style="color:#38b2ac;">Ceiling:</strong> Total deduction cannot exceed <strong style="color:#f7fafc;">10%</strong> of adjusted taxable income<br>
+        <strong style="color:#38b2ac;">Carryforward:</strong> Excess contributions carry forward <strong style="color:#f7fafc;">5 years</strong><br>
+        <strong style="color:#38b2ac;">Formula:</strong> Deductible amount = Actual contribution − 1% floor, capped at 10% ceiling
+      </div>
+    </div>
+
+    <div class="rule-card">
+      <h4>What Is Adjusted Taxable Income (ATI)?</h4>
+      <p style="font-size:0.85rem;color:#a0aec0;line-height:1.7;">ATI is the base you apply the 1%/10% limits against. The key: ATI is taxable income <strong style="color:#f7fafc;">before</strong> subtracting three specific items. REG questions will bait you into using a lower number.</p>
+      <div style="background:#0a0d14;border:1px solid #2d4a6e;border-radius:8px;padding:12px 16px;margin-top:12px;font-size:0.82rem;line-height:2;">
+        <strong style="color:#38b2ac;">ATI = Taxable income BEFORE:</strong><br>
+        <span style="color:#f6ad55;">1.</span> Charitable contribution deduction<br>
+        <span style="color:#f6ad55;">2.</span> Dividends Received Deduction (DRD)<br>
+        <span style="color:#f6ad55;">3.</span> Capital loss carrybacks<br><br>
+        <strong style="color:#fc8181;">Do NOT subtract the DRD or charitable deduction first</strong> — use the gross figure.
+      </div>
+
+      <div style="margin-top:14px;font-size:0.7rem;font-weight:800;letter-spacing:0.08em;color:#38b2ac;text-transform:uppercase;margin-bottom:10px;">Example — ATI Trap</div>
+      <div style="background:#0f1a2e;border-radius:6px;padding:12px 14px;font-size:0.82rem;line-height:1.9;">
+        <span style="color:#a0aec0;">Taxable income before special deductions:</span> <span style="color:#f7fafc;">$500,000</span><br>
+        <span style="color:#a0aec0;">Charitable contribution:</span> <span style="color:#f7fafc;">$70,000</span><br>
+        <span style="color:#a0aec0;">DRD:</span> <span style="color:#f7fafc;">$40,000</span><br><br>
+        <span style="color:#fc8181;">Wrong ATI:</span> $500,000 − $40,000 DRD = $460,000 → 10% = $46,000 ✗<br>
+        <span style="color:#68d391;">Correct ATI:</span> $500,000 (ignore DRD) → 10% ceiling = <strong style="color:#f7fafc;">$50,000</strong><br><br>
+        Allowed deduction: <strong style="color:#00d4ff;">$50,000</strong> &nbsp;|&nbsp; Excess carryforward: <strong style="color:#f7fafc;">$20,000</strong>
+      </div>
+    </div>
+
+    <div class="two-col" style="margin-top:4px;">
+      <div style="background:#0a0d14;border:1px solid #2d4a6e;border-radius:10px;padding:18px 20px;">
+        <div style="font-size:0.7rem;font-weight:800;letter-spacing:0.08em;color:#38b2ac;text-transform:uppercase;margin-bottom:12px;">Example 1 — Under the Ceiling</div>
+        <div style="font-size:0.82rem;line-height:2;color:#a0aec0;">
+          ATI = <span style="color:#f7fafc;">$100,000</span><br>
+          Contribution = <span style="color:#f7fafc;">$8,000</span><br>
+          1% floor = <span style="color:#fc8181;">$1,000</span><br>
+          10% ceiling = <span style="color:#f7fafc;">$10,000</span><br>
+          <br>
+          Deduct now: <strong style="color:#00d4ff;">$7,000</strong><br>
+          Floor lost: <span style="color:#fc8181;">$1,000 (gone)</span><br>
+          Carryforward: <strong style="color:#f7fafc;">$0</strong>
+        </div>
+        <p style="font-size:0.75rem;color:#718096;margin-top:10px;">Under the ceiling → floor amount is simply lost. Nothing to carry forward.</p>
+      </div>
+      <div style="background:#0a0d14;border:1px solid #2d4a6e;border-radius:10px;padding:18px 20px;">
+        <div style="font-size:0.7rem;font-weight:800;letter-spacing:0.08em;color:#f6ad55;text-transform:uppercase;margin-bottom:12px;">Example 2 — Over the Ceiling</div>
+        <div style="font-size:0.82rem;line-height:2;color:#a0aec0;">
+          ATI = <span style="color:#f7fafc;">$100,000</span><br>
+          Contribution = <span style="color:#f7fafc;">$15,000</span><br>
+          1% floor = <span style="color:#fc8181;">$1,000</span><br>
+          10% ceiling = <span style="color:#f7fafc;">$10,000</span><br>
+          After floor: $15,000 − $1,000 = $14,000<br>
+          Ceiling blocks: $14,000 − $10,000 = $4,000<br>
+          <br>
+          Deduct now: <strong style="color:#00d4ff;">$10,000</strong><br>
+          Carryforward: <strong style="color:#f7fafc;">$5,000</strong> ($1,000 floor + $4,000 ceiling excess)
+        </div>
+        <p style="font-size:0.75rem;color:#718096;margin-top:10px;">Over the ceiling → BOTH the floor amount and the ceiling excess carry forward 5 years.</p>
+      </div>
+    </div>
+
+    <div style="background:#1a1200;border:1px solid #f59e0b;border-radius:8px;padding:12px 16px;margin-top:14px;font-size:0.82rem;line-height:1.7;">
+      <strong style="color:#f59e0b;">Becker Note:</strong> The 1% floor is how Becker presents this rule — memorize it for Becker questions. Many modern sources focus only on the 10% ceiling and 5-year carryforward. If the exam question doesn't mention a floor, apply just the 10% ceiling.
+    </div>
+
+    <div class="trap">
+      <div class="t-label">Exam Traps</div>
+      <p><strong style="color:#fc8181;">C corp vs. individual rules are different</strong> — individual charitable deductions use AGI percentage limits (60% for cash, 30% for property) with no floor. C corp uses the 1%/10% adjusted taxable income framework.<br><br>
+      <strong style="color:#fc8181;">Don't forget the 1% floor</strong> — the exam may present a contribution that's clearly under 10% and expect you to also subtract the floor. The deductible amount is contribution minus floor, not just the contribution itself.<br><br>
+      <strong style="color:#fc8181;">Excess carries forward 5 years</strong> — if the contribution exceeds the 10% ceiling, the excess is not lost. It carries forward up to 5 years (not back).<br><br>
+      <strong style="color:#fc8181;">Separately stated on K-1</strong> — charitable contributions flow through as separately stated items on partnership and S corp returns because the deductibility depends on each partner/shareholder's individual situation.</p>
+    </div>
+
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- TOPIC 58: BUSINESS CASUALTY LOSSES -->
+  <!-- ============================================================ -->
+  <div class="topic" id="casualty-losses">
+    <div class="topic-header">
+      <div class="topic-num">58</div>
+      <div>
+        <div class="topic-title">Business Casualty Losses</div>
+        <div class="topic-sub">Partial = lesser of ΔFMV or basis · Total = basis only · Then subtract insurance</div>
+      </div>
+    </div>
+
+    <div class="rule-card">
+      <h4>The Two-Track Rule</h4>
+      <p style="font-size:0.85rem;color:#a0aec0;line-height:1.7;">Whether the property is <strong style="color:#f7fafc;">partially</strong> or <strong style="color:#f7fafc;">totally</strong> destroyed determines which formula you use. The insurance reimbursement always comes off at the end.</p>
+      <div class="two-col" style="margin-top:12px;">
+        <div style="background:#0a0d14;border:1px solid #2d4a6e;border-radius:8px;padding:14px 16px;font-size:0.82rem;line-height:2;">
+          <div style="font-size:0.68rem;font-weight:800;letter-spacing:0.08em;color:#f6ad55;text-transform:uppercase;margin-bottom:8px;">Partial Destruction</div>
+          <strong style="color:#38b2ac;">Step 1:</strong> Calculate ΔFMV (FMV before − FMV after)<br>
+          <strong style="color:#38b2ac;">Step 2:</strong> Take the <strong style="color:#f7fafc;">lesser</strong> of ΔFMV or adjusted basis<br>
+          <strong style="color:#38b2ac;">Step 3:</strong> Subtract insurance reimbursement<br>
+          <br>
+          <span style="color:#718096;font-size:0.78rem;">"Part of it survived → measure the damage"</span>
+        </div>
+        <div style="background:#0a0d14;border:1px solid #2d4a6e;border-radius:8px;padding:14px 16px;font-size:0.82rem;line-height:2;">
+          <div style="font-size:0.68rem;font-weight:800;letter-spacing:0.08em;color:#63b3ed;text-transform:uppercase;margin-bottom:8px;">Total Destruction</div>
+          <strong style="color:#38b2ac;">Step 1:</strong> Use adjusted <strong style="color:#f7fafc;">basis only</strong> — skip the FMV test<br>
+          <strong style="color:#38b2ac;">Step 2:</strong> Subtract insurance reimbursement<br>
+          <br><br>
+          <span style="color:#718096;font-size:0.78rem;">"Nothing survived → just use basis"</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="two-col">
+      <div style="background:#0a0d14;border:1px solid #38b2ac;border-radius:10px;padding:18px 20px;">
+        <div style="font-size:0.7rem;font-weight:800;letter-spacing:0.08em;color:#f6ad55;text-transform:uppercase;margin-bottom:12px;">Example 1 — Partial Destruction</div>
+        <div style="font-size:0.82rem;line-height:2;color:#a0aec0;">
+          Basis = <span style="color:#f7fafc;">$100,000</span><br>
+          FMV before = <span style="color:#f7fafc;">$120,000</span><br>
+          FMV after = <span style="color:#f7fafc;">$70,000</span><br>
+          ΔFMV = <span style="color:#f7fafc;">$50,000</span><br>
+          Lesser of $50,000 (ΔFMV) vs $100,000 (basis) = <strong style="color:#f7fafc;">$50,000</strong><br>
+          Insurance = <span style="color:#fc8181;">− $15,000</span><br>
+          <strong style="color:#00d4ff;">Deductible loss = $35,000</strong>
+        </div>
+      </div>
+      <div style="background:#0a0d14;border:1px solid #38b2ac;border-radius:10px;padding:18px 20px;">
+        <div style="font-size:0.7rem;font-weight:800;letter-spacing:0.08em;color:#63b3ed;text-transform:uppercase;margin-bottom:12px;">Example 2 — Total Destruction</div>
+        <div style="font-size:0.82rem;line-height:2;color:#a0aec0;">
+          Basis = <span style="color:#f7fafc;">$100,000</span><br>
+          Completely destroyed<br>
+          No FMV test needed<br>
+          Insurance = <span style="color:#fc8181;">− $30,000</span><br>
+          <br>
+          <strong style="color:#00d4ff;">Deductible loss = $70,000</strong>
+        </div>
+      </div>
+    </div>
+
+    <div style="background:#0a0d14;border:1px solid #8b5cf6;border-radius:10px;padding:18px 20px;margin-top:4px;">
+      <div style="font-size:0.7rem;font-weight:800;letter-spacing:0.08em;color:#8b5cf6;text-transform:uppercase;margin-bottom:12px;">Example 3 — Basis Is the Limiting Factor</div>
+      <p style="font-size:0.82rem;color:#a0aec0;margin-bottom:10px;">The FMV decline is larger than basis — basis caps the loss.</p>
+      <div style="font-size:0.82rem;line-height:2;color:#a0aec0;">
+        Basis = <span style="color:#f7fafc;">$40,000</span><br>
+        FMV before = <span style="color:#f7fafc;">$120,000</span> &nbsp;|&nbsp; FMV after = <span style="color:#f7fafc;">$50,000</span><br>
+        ΔFMV = <span style="color:#f7fafc;">$70,000</span><br>
+        Lesser of $70,000 (ΔFMV) vs $40,000 (basis) = <strong style="color:#f7fafc;">$40,000</strong> ← basis wins<br>
+        Insurance = <span style="color:#fc8181;">− $10,000</span><br>
+        <strong style="color:#00d4ff;">Deductible loss = $30,000</strong>
+      </div>
+      <p style="font-size:0.75rem;color:#718096;margin-top:10px;">The machine lost $70K in value but you can only deduct $30K — basis was the ceiling, not the FMV decline.</p>
+    </div>
+
+    <div class="mnemonic">
+      <div class="m-label">Memory Trick</div>
+      <div style="font-size:0.88rem;color:#a0aec0;line-height:2.4;">
+        <span style="color:#f6ad55;">Partial →</span> Lesser of <strong style="color:#f7fafc;">ΔFMV</strong> or <strong style="color:#f7fafc;">Basis</strong>, then subtract insurance<br>
+        <span style="color:#63b3ed;">Total →</span> <strong style="color:#f7fafc;">Basis only</strong>, then subtract insurance<br>
+        <span style="color:#718096;font-size:0.8rem;">Insurance always comes off last. Always.</span>
+      </div>
+    </div>
+
+    <div class="trap">
+      <div class="t-label">Exam Traps</div>
+      <p><strong style="color:#fc8181;">Don't use FMV on total destruction</strong> — when property is completely destroyed, skip the ΔFMV test entirely. The loss is just basis minus insurance. If you apply the lesser-of test to total destruction you'll get the wrong answer.<br><br>
+      <strong style="color:#fc8181;">Basis can be lower than FMV</strong> — in partial destruction, the exam may give you a FMV decline larger than basis. You take the lesser, so basis caps the loss. Example: ΔFMV = $80,000 but basis = $60,000 → deductible loss is $60,000 (before insurance), not $80,000.<br><br>
+      <strong style="color:#fc8181;">Insurance comes off last, not first</strong> — calculate the lesser-of amount first, then subtract the reimbursement. Don't net insurance against FMV before the comparison.<br><br>
+      <strong style="color:#fc8181;">Business vs. personal casualty losses</strong> — business casualty losses are fully deductible. Personal casualty losses have much stricter limits (federally declared disaster only, 10% of AGI floor, $100 per event floor). This topic covers business property only.</p>
+    </div>
+
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- TOPIC 59: DIVIDENDS RECEIVED DEDUCTION (DRD) -->
+  <!-- ============================================================ -->
+  <div class="topic" id="drd">
+    <div class="topic-header">
+      <div class="topic-num">59</div>
+      <div>
+        <div class="topic-title">Dividends Received Deduction (DRD)</div>
+        <div class="topic-sub">Anti-triple-tax rule · &lt;20% = 50% · 20–80% = 65% · ≥80% = 100%</div>
+      </div>
+    </div>
+
+    <div class="rule-card">
+      <h4>Why the DRD Exists — The Triple Tax Problem</h4>
+      <p style="font-size:0.85rem;color:#a0aec0;line-height:1.7;">Without the DRD, the same corporate earnings would be taxed three times as they move through a chain of corporations down to individual shareholders.</p>
+      <div style="background:#0a0d14;border:1px solid #2d4a6e;border-radius:8px;padding:14px 16px;margin-top:12px;font-size:0.82rem;line-height:2;">
+        <span style="color:#f6ad55;font-weight:700;">Tax 1:</span> Big Corp earns $100, pays 21% corporate tax → $79 left<br>
+        <span style="color:#f6ad55;font-weight:700;">Tax 2:</span> Big Corp pays $79 dividend to Little Corp → Little Corp taxed again on same earnings<br>
+        <span style="color:#f6ad55;font-weight:700;">Tax 3:</span> Little Corp distributes to individual shareholders → individual pays dividend tax<br><br>
+        <strong style="color:#00d4ff;">The DRD eliminates or reduces Tax 2</strong> — giving Little Corp a deduction for dividends received from Big Corp.
+      </div>
+      <div style="background:#1a1200;border:1px solid #f59e0b;border-radius:8px;padding:10px 14px;margin-top:10px;font-size:0.82rem;">
+        <strong style="color:#f59e0b;">Brain reflex:</strong> DRD = Anti-Triple-Tax Rule. A corporation receiving dividends from another corporation gets a deduction so the same earnings aren't taxed twice at the corporate level.
+      </div>
+    </div>
+
+    <div class="rule-card">
+      <h4>The Percentages — Most Testable Part</h4>
+      <p style="font-size:0.82rem;color:#718096;margin-bottom:12px;">The DRD percentage depends on how much of the paying corporation the recipient corporation owns.</p>
+      <table style="width:100%;border-collapse:collapse;font-size:0.85rem;">
+        <thead>
+          <tr style="border-bottom:2px solid #2d4a6e;">
+            <th style="padding:8px 12px;color:#63b3ed;text-align:left;">Ownership %</th>
+            <th style="padding:8px 12px;color:#63b3ed;text-align:left;">DRD %</th>
+            <th style="padding:8px 12px;color:#63b3ed;text-align:left;">Taxable Portion</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="border-bottom:1px solid #1a2535;">
+            <td style="padding:9px 12px;color:#f7fafc;font-weight:700;">&lt; 20%</td>
+            <td style="padding:9px 12px;color:#f6ad55;font-weight:800;font-family:'JetBrains Mono',monospace;">50%</td>
+            <td style="padding:9px 12px;color:#a0aec0;">50% of dividend included in income</td>
+          </tr>
+          <tr style="border-bottom:1px solid #1a2535;background:#0a1428;">
+            <td style="padding:9px 12px;color:#f7fafc;font-weight:700;">20% to &lt; 80%</td>
+            <td style="padding:9px 12px;color:#f6ad55;font-weight:800;font-family:'JetBrains Mono',monospace;">65%</td>
+            <td style="padding:9px 12px;color:#a0aec0;">35% of dividend included in income</td>
+          </tr>
+          <tr style="background:#0a1428;">
+            <td style="padding:9px 12px;color:#f7fafc;font-weight:700;">≥ 80%</td>
+            <td style="padding:9px 12px;color:#68d391;font-weight:800;font-family:'JetBrains Mono',monospace;">100%</td>
+            <td style="padding:9px 12px;color:#a0aec0;">0% — fully excluded (affiliated group)</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div style="background:#0a0d14;border:1px solid #38b2ac;border-radius:10px;padding:18px 20px;margin-top:4px;">
+      <div style="font-size:0.7rem;font-weight:800;letter-spacing:0.08em;color:#38b2ac;text-transform:uppercase;margin-bottom:12px;">Basic Example</div>
+      <div style="font-size:0.82rem;line-height:2;color:#a0aec0;">
+        Little Corp owns <strong style="color:#f7fafc;">15%</strong> of Big Corp → DRD = <strong style="color:#f6ad55;">50%</strong><br>
+        Dividend received = <span style="color:#f7fafc;">$100</span><br>
+        DRD = <span style="color:#68d391;">$100 × 50% = $50 deduction</span><br>
+        Taxable dividend income = <strong style="color:#00d4ff;">$50</strong>
+      </div>
+    </div>
+
+    <div class="rule-card">
+      <h4>The DRD Limitation Test — Where Becker Gets You</h4>
+      <p style="font-size:0.85rem;color:#a0aec0;line-height:1.7;">The DRD is capped at a percentage of <strong style="color:#f7fafc;">taxable income before the DRD</strong>. You always calculate both the tentative DRD and the limitation, then take the smaller.</p>
+      <div style="background:#0a0d14;border:1px solid #2d4a6e;border-radius:8px;padding:12px 16px;margin-top:10px;font-size:0.82rem;line-height:2;">
+        <strong style="color:#38b2ac;">Step 1:</strong> Tentative DRD = Dividend × ownership %<br>
+        <strong style="color:#38b2ac;">Step 2:</strong> Limitation = Same % × taxable income before DRD<br>
+        <strong style="color:#38b2ac;">Step 3:</strong> Allowed DRD = <strong style="color:#f7fafc;">lesser</strong> of tentative DRD or limitation
+      </div>
+    </div>
+
+    <div style="background:#0a0d14;border:1px solid #8b5cf6;border-radius:10px;padding:18px 20px;margin-top:4px;">
+      <div style="font-size:0.7rem;font-weight:800;letter-spacing:0.08em;color:#8b5cf6;text-transform:uppercase;margin-bottom:14px;">DRD Limitation Example — Duffy / Fox Corp (Becker)</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;font-size:0.82rem;line-height:2;color:#a0aec0;">
+        <div>
+          <div style="font-size:0.68rem;font-weight:800;letter-spacing:0.08em;color:#8b5cf6;text-transform:uppercase;margin-bottom:6px;">Setup</div>
+          Duffy owns <strong style="color:#f7fafc;">30%</strong> of Fox Corp → DRD = <strong style="color:#f6ad55;">65%</strong><br>
+          Dividend received = <span style="color:#f7fafc;">$100</span><br>
+          Operating revenue = <span style="color:#f7fafc;">$250</span><br>
+          Deductions = <span style="color:#fc8181;">$200</span><br>
+          Taxable income before DRD:<br>
+          ($250 + $100) − $200 = <strong style="color:#f7fafc;">$150</strong>
+        </div>
+        <div>
+          <div style="font-size:0.68rem;font-weight:800;letter-spacing:0.08em;color:#38b2ac;text-transform:uppercase;margin-bottom:6px;">Limitation Test</div>
+          Tentative DRD: $100 × 65% = <strong style="color:#f7fafc;">$65</strong><br>
+          Limitation: $150 × 65% = <strong style="color:#f7fafc;">$97.50</strong><br>
+          Lesser = <strong style="color:#00d4ff;">$65</strong> ← tentative wins<br><br>
+          Final taxable income:<br>
+          $150 − $65 = <strong style="color:#00d4ff;">$85</strong>
+        </div>
+      </div>
+      <div style="margin-top:14px;background:#0f1a2e;border-radius:6px;padding:10px 14px;font-size:0.82rem;line-height:1.8;">
+        <strong style="color:#fc8181;">The tricky version — when taxable income is low:</strong><br>
+        <span style="color:#a0aec0;">If taxable income before DRD = <strong style="color:#f7fafc;">$50</strong> instead of $150:</span><br>
+        Tentative DRD = $65 &nbsp;|&nbsp; Limitation = 65% × $50 = <strong style="color:#f7fafc;">$32.50</strong><br>
+        Allowed DRD = <strong style="color:#00d4ff;">$32.50</strong> ← limitation becomes the bottleneck
+      </div>
+    </div>
+
+    <div class="rule-card">
+      <h4>The NOL Exception — Limitation Disappears</h4>
+      <p style="font-size:0.85rem;color:#a0aec0;line-height:1.7;">The DRD limitation does <strong style="color:#f7fafc;">not apply</strong> if taking the full DRD would create or increase a Net Operating Loss. When this happens, ignore the limitation and deduct the full DRD.</p>
+
+      <div style="background:#0a0d14;border:1px solid #fc8181;border-radius:10px;padding:18px 20px;margin-top:12px;">
+        <div style="font-size:0.7rem;font-weight:800;letter-spacing:0.08em;color:#fc8181;text-transform:uppercase;margin-bottom:14px;">Scenario 3 — NOL Exception (Becker Classic)</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;font-size:0.82rem;line-height:2;color:#a0aec0;">
+          <div>
+            <div style="font-size:0.68rem;font-weight:800;letter-spacing:0.08em;color:#fc8181;text-transform:uppercase;margin-bottom:6px;">Setup</div>
+            Operating income = <span style="color:#f7fafc;">$250</span><br>
+            Dividend income = <span style="color:#f7fafc;">$100</span><br>
+            Deductions = <span style="color:#fc8181;">$290</span><br>
+            Taxable income before DRD = <strong style="color:#f7fafc;">$60</strong><br><br>
+            Tentative DRD: $100 × 65% = <strong style="color:#f7fafc;">$65</strong><br>
+            Limitation: $60 × 65% = <strong style="color:#f7fafc;">$39</strong>
+          </div>
+          <div>
+            <div style="font-size:0.68rem;font-weight:800;letter-spacing:0.08em;color:#38b2ac;text-transform:uppercase;margin-bottom:6px;">Apply the Exception</div>
+            <span style="color:#fc8181;">With $39 DRD:</span> $60 − $39 = $21 taxable → <span style="color:#fc8181;">no NOL</span><br><br>
+            <span style="color:#68d391;">With full $65 DRD:</span> $60 − $65 = <strong style="color:#f7fafc;">($5) NOL</strong><br><br>
+            Full DRD creates NOL →<br>
+            <strong style="color:#00d4ff;">Ignore limitation. Deduct full $65.</strong>
+          </div>
+        </div>
+      </div>
+
+      <div style="background:#0a0d14;border:1px solid #2d4a6e;border-radius:8px;padding:12px 16px;margin-top:14px;font-size:0.82rem;line-height:2;">
+        <strong style="color:#38b2ac;">The 3-Step DRD Process (complete):</strong><br>
+        <span style="color:#f6ad55;">1.</span> Compute tentative DRD (dividend × %)<br>
+        <span style="color:#f6ad55;">2.</span> Compute limitation (same % × taxable income before DRD)<br>
+        <span style="color:#f6ad55;">3.</span> Ask: <em>"Would the full DRD create or increase an NOL?"</em><br>
+        &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#68d391;">Yes →</span> ignore the limitation, take the full DRD<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#fc8181;">No →</span> apply the limitation (take the lesser)
+      </div>
+
+      <div style="margin-top:14px;font-size:0.7rem;font-weight:800;letter-spacing:0.08em;color:#38b2ac;text-transform:uppercase;margin-bottom:8px;">All Three Scenarios at a Glance</div>
+      <table style="width:100%;border-collapse:collapse;font-size:0.82rem;">
+        <thead>
+          <tr style="border-bottom:1px solid #2d4a6e;">
+            <th style="padding:7px 10px;color:#63b3ed;text-align:left;">Scenario</th>
+            <th style="padding:7px 10px;color:#63b3ed;text-align:left;">Situation</th>
+            <th style="padding:7px 10px;color:#63b3ed;text-align:left;">DRD Allowed</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="border-bottom:1px solid #1a2535;background:#0a1428;">
+            <td style="padding:7px 10px;color:#f7fafc;font-weight:700;">1</td>
+            <td style="padding:7px 10px;color:#a0aec0;">Limitation &gt; tentative DRD</td>
+            <td style="padding:7px 10px;color:#68d391;">Full tentative DRD (limitation not binding)</td>
+          </tr>
+          <tr style="border-bottom:1px solid #1a2535;">
+            <td style="padding:7px 10px;color:#f7fafc;font-weight:700;">2</td>
+            <td style="padding:7px 10px;color:#a0aec0;">Limitation &lt; tentative DRD, no NOL</td>
+            <td style="padding:7px 10px;color:#fc8181;">Limitation amount (binding)</td>
+          </tr>
+          <tr style="background:#0a1428;">
+            <td style="padding:7px 10px;color:#f7fafc;font-weight:700;">3</td>
+            <td style="padding:7px 10px;color:#a0aec0;">Full DRD creates or increases NOL</td>
+            <td style="padding:7px 10px;color:#00d4ff;">Full tentative DRD (NOL exception)</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="trap">
+      <div class="t-label">Exam Traps</div>
+      <p><strong style="color:#fc8181;">DRD is added back when computing ATI for charitable contributions</strong> — as covered in Topic 57, ATI for the charitable contribution limitation is calculated BEFORE subtracting the DRD. Don't let the DRD reduce your ATI base first.<br><br>
+      <strong style="color:#fc8181;">DRD is separately stated on K-1s</strong> — for S corps and partnerships, the DRD flows through to owners as a separately stated item. Each owner applies the DRD based on their own ownership percentage in the paying corporation.<br><br>
+      <strong style="color:#fc8181;">The 80% threshold unlocks 100% exclusion</strong> — once a corporation owns 80%+ it's an affiliated group and dividends are fully excluded. This is a bright-line exam question: 79% ownership gets 65% DRD; 80% ownership gets 100%.<br><br>
+      <strong style="color:#fc8181;">DRD only applies to C corp recipients</strong> — the DRD is a corporate-level deduction. Individual shareholders receiving dividends from a corporation do not get a DRD; they pay qualified dividend rates instead.</p>
+    </div>
+
+  </div>
+
+  <!-- TOPIC 60: CAPITAL LOSSES — INDIVIDUALS VS. CORPORATIONS -->
+  <!-- ============================================================ -->
+  <div class="topic" id="capital-loss-indiv-corp">
+    <div class="topic-header">
+      <div class="topic-num">60</div>
+      <div>
+        <div class="topic-title">Capital Losses — Individuals vs. Corporations</div>
+        <div class="topic-sub">Indiv: $3K ordinary + indefinite CF · Corp: gains only · 3-back / 5-forward</div>
+      </div>
+    </div>
+
+    <div class="rule-card">
+      <h4>The Core Rule</h4>
+      <p style="font-size:0.85rem;color:#a0aec0;line-height:1.7;">Both individuals and corporations can use capital losses to offset capital gains. The difference is what happens to any <strong style="color:#f7fafc;">remaining net capital loss</strong> after gains are absorbed.</p>
+    </div>
+
+    <div class="rule-card">
+      <h4>Individuals</h4>
+      <div style="background:#0a0d14;border:1px solid #2d4a6e;border-radius:8px;padding:14px 16px;margin-top:12px;font-size:0.82rem;line-height:2.1;">
+        <span style="color:#f6ad55;">Step 1:</span> Offset all capital gains with capital losses<br>
+        <span style="color:#f6ad55;">Step 2:</span> Deduct up to <strong style="color:#f7fafc;">$3,000</strong> of remaining net loss against ordinary income ($1,500 if MFS)<br>
+        <span style="color:#f6ad55;">Step 3:</span> Carry forward the remaining loss — <strong style="color:#68d391;">indefinitely</strong>
+      </div>
+      <div style="background:#0f1a2e;border-radius:6px;padding:10px 14px;margin-top:12px;font-size:0.82rem;line-height:1.9;">
+        <strong style="color:#63b3ed;">Example:</strong> Capital gains $5K, capital losses ($10K) → net loss ($5K)<br>
+        Offset gains: ($5K)<br>
+        Deduct vs. ordinary income: ($3K)<br>
+        Carryforward: <strong style="color:#f7fafc;">$2K — indefinitely</strong>
+      </div>
+    </div>
+
+    <div class="rule-card">
+      <h4>C Corporations</h4>
+      <div style="background:#0a0d14;border:1px solid #2d4a6e;border-radius:8px;padding:14px 16px;margin-top:12px;font-size:0.82rem;line-height:2.1;">
+        <span style="color:#68d391;">✅</span> Can offset capital gains<br>
+        <span style="color:#fc8181;">❌</span> Cannot deduct against ordinary income<br>
+        <span style="color:#fc8181;">❌</span> No $3,000 deduction<br>
+        <span style="color:#f6ad55;">Carryback:</span> <strong style="color:#f7fafc;">3 years</strong> &nbsp;|&nbsp; <span style="color:#f6ad55;">Carryforward:</span> <strong style="color:#f7fafc;">5 years</strong> (then expires)
+      </div>
+      <div style="background:#0f1a2e;border-radius:6px;padding:10px 14px;margin-top:12px;font-size:0.82rem;line-height:1.9;">
+        <strong style="color:#63b3ed;">Example (favorite REG question):</strong><br>
+        Corp ordinary income = $100,000<br>
+        Corp capital loss = ($20,000) &nbsp;&nbsp; Capital gains = $0<br>
+        <strong style="color:#f7fafc;">Taxable income = $100,000</strong> — the $20K capital loss gives <em>zero</em> current-year benefit.
+      </div>
+    </div>
+
+    <div class="rule-card">
+      <h4>Side-by-Side Comparison</h4>
+      <table style="width:100%;border-collapse:collapse;font-size:0.82rem;margin-top:8px;">
+        <thead>
+          <tr style="border-bottom:2px solid #2d4a6e;">
+            <th style="padding:8px 12px;color:#63b3ed;text-align:left;">Rule</th>
+            <th style="padding:8px 12px;color:#63b3ed;text-align:center;">Individual</th>
+            <th style="padding:8px 12px;color:#63b3ed;text-align:center;">C Corp</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="border-bottom:1px solid #1a2535;background:#0a1428;">
+            <td style="padding:8px 12px;color:#a0aec0;">Offset capital gains?</td>
+            <td style="padding:8px 12px;color:#68d391;font-weight:700;text-align:center;">Yes</td>
+            <td style="padding:8px 12px;color:#68d391;font-weight:700;text-align:center;">Yes</td>
+          </tr>
+          <tr style="border-bottom:1px solid #1a2535;">
+            <td style="padding:8px 12px;color:#a0aec0;">Offset ordinary income?</td>
+            <td style="padding:8px 12px;color:#68d391;font-weight:700;text-align:center;">Yes — up to $3,000</td>
+            <td style="padding:8px 12px;color:#fc8181;font-weight:700;text-align:center;">No</td>
+          </tr>
+          <tr style="border-bottom:1px solid #1a2535;background:#0a1428;">
+            <td style="padding:8px 12px;color:#a0aec0;">Carryback?</td>
+            <td style="padding:8px 12px;color:#fc8181;font-weight:700;text-align:center;">No</td>
+            <td style="padding:8px 12px;color:#f6ad55;font-weight:700;text-align:center;">3 years</td>
+          </tr>
+          <tr style="background:#0a1428;">
+            <td style="padding:8px 12px;color:#a0aec0;">Carryforward?</td>
+            <td style="padding:8px 12px;color:#68d391;font-weight:700;text-align:center;">Indefinite</td>
+            <td style="padding:8px 12px;color:#f6ad55;font-weight:700;text-align:center;">5 years (then expires)</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="trap">
+      <div class="t-label">REG Shortcut</div>
+      <p><strong style="color:#fc8181;">See "C corporation net capital loss"</strong> → immediately think: no $3,000 deduction, can only offset capital gains, 3-year carryback / 5-year carryforward.<br><br>
+      <strong style="color:#fc8181;">See "individual capital loss carryforward"</strong> → indefinite. No expiration ever.<br><br>
+      <strong style="color:#fc8181;">Don't confuse 5-year with NOL rules</strong> — the 5-year cap is for corporate capital losses only. NOL carryforwards for individuals and corporations are indefinite under current law.</p>
+    </div>
+
+  </div>
+
+  <!-- TOPIC 61: NET OPERATING LOSSES (NOLs) -->
+  <!-- ============================================================ -->
+  <div class="topic" id="nol">
+    <div class="topic-header">
+      <div class="topic-num">61</div>
+      <div>
+        <div class="topic-title">Net Operating Losses (NOLs)</div>
+        <div class="topic-sub">Ordinary business loss · Post-TCJA: indefinite CF · 80% limitation (2021+) · 2018–2020: no 80% cap</div>
+      </div>
+    </div>
+
+    <div class="rule-card">
+      <h4>What Creates an NOL</h4>
+      <p style="font-size:0.85rem;color:#a0aec0;line-height:1.7;">An NOL arises when a taxpayer's deductible business expenses exceed gross income in a tax year. It comes from <strong style="color:#f7fafc;">ordinary business operations</strong> — not capital transactions. This is the critical distinction from capital losses.</p>
+      <div style="background:#0a0d14;border:1px solid #2d4a6e;border-radius:8px;padding:12px 16px;margin-top:12px;font-size:0.82rem;line-height:2;">
+        Revenue: $100,000 &nbsp;&nbsp; Expenses: $300,000<br>
+        <strong style="color:#f7fafc;">NOL = ($200,000)</strong> — this is ordinary income/loss, not capital
+      </div>
+    </div>
+
+    <div class="rule-card">
+      <h4>NOL Rules by Era — Know All Three for REG</h4>
+      <table style="width:100%;border-collapse:collapse;font-size:0.82rem;margin-top:8px;">
+        <thead>
+          <tr style="border-bottom:2px solid #2d4a6e;">
+            <th style="padding:8px 12px;color:#63b3ed;text-align:left;">NOL Year</th>
+            <th style="padding:8px 12px;color:#63b3ed;text-align:center;">Carryback</th>
+            <th style="padding:8px 12px;color:#63b3ed;text-align:center;">Carryforward</th>
+            <th style="padding:8px 12px;color:#63b3ed;text-align:center;">TI Limitation</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="border-bottom:1px solid #1a2535;background:#0a1428;">
+            <td style="padding:8px 12px;color:#f6ad55;font-weight:700;">Pre-2018 (≤ 2017)</td>
+            <td style="padding:8px 12px;color:#a0aec0;text-align:center;">2 years</td>
+            <td style="padding:8px 12px;color:#a0aec0;text-align:center;">20 years</td>
+            <td style="padding:8px 12px;color:#a0aec0;text-align:center;">100%</td>
+          </tr>
+          <tr style="border-bottom:1px solid #1a2535;">
+            <td style="padding:8px 12px;color:#68d391;font-weight:700;">2018–2020 (CARES Act)</td>
+            <td style="padding:8px 12px;color:#68d391;text-align:center;">5 years (optional)</td>
+            <td style="padding:8px 12px;color:#68d391;text-align:center;">Indefinite</td>
+            <td style="padding:8px 12px;color:#68d391;font-weight:700;text-align:center;">100% (no 80% cap)</td>
+          </tr>
+          <tr style="background:#0a1428;">
+            <td style="padding:8px 12px;color:#00d4ff;font-weight:700;">2021+ (current TCJA)</td>
+            <td style="padding:8px 12px;color:#fc8181;text-align:center;">None (generally)</td>
+            <td style="padding:8px 12px;color:#68d391;text-align:center;">Indefinite</td>
+            <td style="padding:8px 12px;color:#f6ad55;font-weight:700;text-align:center;">80% of TI</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="rule-card">
+      <h4>The 80% Limitation — How It Works (2021+)</h4>
+      <p style="font-size:0.85rem;color:#a0aec0;line-height:1.7;">When a post-2020 NOL is carried forward, it can offset at most <strong style="color:#f7fafc;">80% of taxable income</strong> in any future year. The unused portion keeps rolling forward indefinitely.</p>
+      <div style="background:#0a0d14;border:1px solid #2d4a6e;border-radius:8px;padding:14px 16px;margin-top:12px;font-size:0.82rem;line-height:2.1;">
+        <strong style="color:#f6ad55;">Year 1:</strong> NOL generated = <strong style="color:#f7fafc;">$100,000</strong><br>
+        <strong style="color:#f6ad55;">Year 2:</strong> Taxable income before NOL = <strong style="color:#f7fafc;">$50,000</strong><br>
+        Max NOL deduction: 80% × $50,000 = <strong style="color:#00d4ff;">$40,000</strong><br>
+        Taxable income after NOL: $50,000 − $40,000 = <strong style="color:#68d391;">$10,000</strong><br>
+        NOL carryforward remaining: $100,000 − $40,000 = <strong style="color:#f7fafc;">$60,000</strong> (no expiration)
+      </div>
+    </div>
+
+    <div class="rule-card">
+      <h4>NOL vs. Capital Loss — Key Distinction</h4>
+      <table style="width:100%;border-collapse:collapse;font-size:0.82rem;margin-top:8px;">
+        <thead>
+          <tr style="border-bottom:2px solid #2d4a6e;">
+            <th style="padding:8px 12px;color:#63b3ed;text-align:left;">Feature</th>
+            <th style="padding:8px 12px;color:#63b3ed;text-align:center;">NOL</th>
+            <th style="padding:8px 12px;color:#63b3ed;text-align:center;">Capital Loss (C Corp)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="border-bottom:1px solid #1a2535;background:#0a1428;">
+            <td style="padding:8px 12px;color:#a0aec0;">Source</td>
+            <td style="padding:8px 12px;color:#f7fafc;text-align:center;">Ordinary business operations</td>
+            <td style="padding:8px 12px;color:#f7fafc;text-align:center;">Capital transactions</td>
+          </tr>
+          <tr style="border-bottom:1px solid #1a2535;">
+            <td style="padding:8px 12px;color:#a0aec0;">Offset ordinary income?</td>
+            <td style="padding:8px 12px;color:#68d391;font-weight:700;text-align:center;">Yes</td>
+            <td style="padding:8px 12px;color:#fc8181;font-weight:700;text-align:center;">No</td>
+          </tr>
+          <tr style="border-bottom:1px solid #1a2535;background:#0a1428;">
+            <td style="padding:8px 12px;color:#a0aec0;">Carryforward period</td>
+            <td style="padding:8px 12px;color:#68d391;font-weight:700;text-align:center;">Indefinite (post-TCJA)</td>
+            <td style="padding:8px 12px;color:#f6ad55;font-weight:700;text-align:center;">5 years max</td>
+          </tr>
+          <tr style="background:#0a1428;">
+            <td style="padding:8px 12px;color:#a0aec0;">Annual limitation</td>
+            <td style="padding:8px 12px;color:#f6ad55;font-weight:700;text-align:center;">80% of TI (2021+)</td>
+            <td style="padding:8px 12px;color:#a0aec0;text-align:center;">100% of capital gains only</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="trap">
+      <div class="t-label">REG Brain Reflexes</div>
+      <p><strong style="color:#fc8181;">"Capital loss" → capital gains only</strong> (corp: 3-back/5-forward; indiv: +$3K ordinary / indefinite)<br><br>
+      <strong style="color:#fc8181;">"NOL" → ordinary business loss → 80% limitation → indefinite carryforward</strong><br><br>
+      <strong style="color:#fc8181;">5-year carryforward = corporate capital losses, NOT NOLs</strong> — a Becker-classic distractor (Choice D in the MCQ above).<br><br>
+      <strong style="color:#fc8181;">20-year carryforward = pre-2018 NOLs only</strong> — old law; post-TCJA it's indefinite.<br><br>
+      <strong style="color:#fc8181;">2018–2020 NOLs: no 80% cap</strong> — the CARES Act suspended the 80% limitation for these years. The 80% rule kicks in for NOLs arising in 2021 and later.</p>
+    </div>
+
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- TOPIC 62: SCHEDULE K & SCHEDULE K-1 -->
+  <!-- ============================================================ -->
+  <div class="topic" id="schedule-k-k1">
+    <div class="topic-header">
+      <div class="topic-num">62</div>
+      <div>
+        <div class="topic-title">Schedule K &amp; Schedule K-1</div>
+        <div class="topic-sub">Form 1065 totals → Schedule K (partnership) → Schedule K-1 (per partner) → partner's Form 1040</div>
+      </div>
+    </div>
+
+    <div class="rule-card">
+      <h4>The Two Schedules — What Each Does</h4>
+      <table style="width:100%;border-collapse:collapse;font-size:0.82rem;margin-top:8px;">
+        <thead>
+          <tr style="border-bottom:2px solid #2d4a6e;">
+            <th style="padding:8px 12px;color:#63b3ed;text-align:left;">Schedule</th>
+            <th style="padding:8px 12px;color:#63b3ed;text-align:left;">Where</th>
+            <th style="padding:8px 12px;color:#63b3ed;text-align:left;">Purpose</th>
+            <th style="padding:8px 12px;color:#63b3ed;text-align:left;">Think of it as…</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="border-bottom:1px solid #1a2535;background:#0a1428;">
+            <td style="padding:8px 12px;color:#f6ad55;font-weight:700;">Schedule K</td>
+            <td style="padding:8px 12px;color:#a0aec0;">Part of Form 1065</td>
+            <td style="padding:8px 12px;color:#a0aec0;">Shows the partnership's <strong style="color:#f7fafc;">total</strong> separately stated items</td>
+            <td style="padding:8px 12px;color:#68d391;font-weight:700;">The partnership's master summary</td>
+          </tr>
+          <tr>
+            <td style="padding:8px 12px;color:#00d4ff;font-weight:700;">Schedule K-1</td>
+            <td style="padding:8px 12px;color:#a0aec0;">Issued to each partner</td>
+            <td style="padding:8px 12px;color:#a0aec0;">Shows that partner's <strong style="color:#f7fafc;">allocated share</strong> of Schedule K amounts</td>
+            <td style="padding:8px 12px;color:#68d391;font-weight:700;">Each partner's personalized summary</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="rule-card">
+      <h4>The Flow</h4>
+      <div style="background:#0a0d14;border:1px solid #2d4a6e;border-radius:8px;padding:14px 16px;font-size:0.85rem;line-height:2.2;text-align:center;">
+        <span style="color:#a0aec0;">Partnership books</span>
+        <span style="color:#4a5568;margin:0 12px;">→</span>
+        <span style="color:#f7fafc;font-weight:700;">Form 1065</span>
+        <span style="color:#4a5568;margin:0 12px;">→</span>
+        <span style="color:#f6ad55;font-weight:700;">Schedule K</span> <span style="color:#4a5568;">(total amounts)</span>
+        <span style="color:#4a5568;margin:0 12px;">→</span>
+        <span style="color:#00d4ff;font-weight:700;">Schedule K-1</span> <span style="color:#4a5568;">(partner's share)</span>
+        <span style="color:#4a5568;margin:0 12px;">→</span>
+        <span style="color:#68d391;font-weight:700;">Partner's Form 1040</span>
+      </div>
+    </div>
+
+    <div class="rule-card">
+      <h4>Example — Two Equal 50% Partners</h4>
+      <p style="font-size:0.82rem;color:#a0aec0;margin-bottom:12px;">Partnership has: Ordinary income $100,000 · Interest income $10,000 · Charitable contributions $4,000</p>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+        <div style="background:#0a0d14;border:1px solid #f6ad55;border-radius:8px;padding:14px;">
+          <div style="font-size:0.7rem;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;color:#f6ad55;margin-bottom:10px;">Schedule K — Partnership Totals</div>
+          <table style="width:100%;border-collapse:collapse;font-size:0.8rem;">
+            <tr style="border-bottom:1px solid #1a2535;">
+              <td style="padding:5px 0;color:#a0aec0;">Ordinary income</td>
+              <td style="padding:5px 0;color:#f7fafc;text-align:right;font-weight:700;">$100,000</td>
+            </tr>
+            <tr style="border-bottom:1px solid #1a2535;">
+              <td style="padding:5px 0;color:#a0aec0;">Interest income</td>
+              <td style="padding:5px 0;color:#f7fafc;text-align:right;font-weight:700;">$10,000</td>
+            </tr>
+            <tr>
+              <td style="padding:5px 0;color:#a0aec0;">Charitable contributions</td>
+              <td style="padding:5px 0;color:#fc8181;text-align:right;font-weight:700;">$4,000</td>
+            </tr>
+          </table>
+        </div>
+        <div style="background:#0a0d14;border:1px solid #00d4ff;border-radius:8px;padding:14px;">
+          <div style="font-size:0.7rem;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;color:#00d4ff;margin-bottom:10px;">Schedule K-1 — Each Partner's Share (50%)</div>
+          <table style="width:100%;border-collapse:collapse;font-size:0.8rem;">
+            <tr style="border-bottom:1px solid #1a2535;">
+              <td style="padding:5px 0;color:#a0aec0;">Ordinary income</td>
+              <td style="padding:5px 0;color:#f7fafc;text-align:right;font-weight:700;">$50,000</td>
+            </tr>
+            <tr style="border-bottom:1px solid #1a2535;">
+              <td style="padding:5px 0;color:#a0aec0;">Interest income</td>
+              <td style="padding:5px 0;color:#f7fafc;text-align:right;font-weight:700;">$5,000</td>
+            </tr>
+            <tr>
+              <td style="padding:5px 0;color:#a0aec0;">Charitable contributions</td>
+              <td style="padding:5px 0;color:#fc8181;text-align:right;font-weight:700;">$2,000</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div style="background:#0d1f3c;border:1px solid #38b2ac;border-radius:10px;padding:16px 20px;margin-top:16px;">
+      <div style="font-size:0.7rem;font-weight:800;letter-spacing:0.12em;text-transform:uppercase;color:#38b2ac;margin-bottom:10px;">REG Memory Trick</div>
+      <div style="font-size:0.87rem;line-height:2.1;">
+        <strong style="color:#f6ad55;">Schedule K = Kitchen</strong> — everything the partnership cooked up (total amounts).<br>
+        <strong style="color:#00d4ff;">Schedule K-1 = Kid's plate</strong> — what each partner actually gets served (their allocated share).
+      </div>
+    </div>
+
+    <div class="trap">
+      <div class="t-label">REG Brain Reflexes</div>
+      <p>
+        <strong style="color:#fc8181;">Schedule K → Form 1065 → partnership-level totals.</strong> Never goes to a partner's 1040 directly.<br><br>
+        <strong style="color:#fc8181;">Schedule K-1 → issued to each partner → flows to partner's Form 1040.</strong> This is how pass-through items leave the entity.<br><br>
+        <strong style="color:#fc8181;">Separately stated items</strong> (capital gains, charitable contributions, interest income) appear on both K and K-1 because their tax treatment depends on each partner's individual situation — they cannot be lumped into ordinary income at the entity level.
+      </p>
     </div>
 
   </div>
