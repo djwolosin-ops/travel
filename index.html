@@ -1,507 +1,326 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>David & Diana — Caribbean Cruise · May 2026</title>
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>David & Diana — Travel Hub</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
-
     body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-      background: #0a0e1a;
-      color: #e2e8f0;
+      font-family: 'Inter', sans-serif;
+      background: #050a14;
+      color: #c8d8e8;
       min-height: 100vh;
     }
 
     /* HERO */
     .hero {
-      background: linear-gradient(160deg, #0d1f3c 0%, #0a0e1a 60%);
-      border-bottom: 1px solid #1e2d45;
-      padding: 48px 40px 36px;
+      background: linear-gradient(135deg, #060d1a 0%, #091525 50%, #050a14 100%);
+      border-bottom: 1px solid #0e2035;
+      padding: 52px 40px 44px;
       position: relative;
       overflow: hidden;
     }
-
     .hero::before {
       content: '';
       position: absolute;
-      top: -60px; right: -80px;
-      width: 400px; height: 400px;
-      background: radial-gradient(circle, rgba(56, 178, 172, 0.08) 0%, transparent 70%);
+      inset: 0;
+      background: radial-gradient(ellipse at 65% 40%, rgba(0,212,255,0.05) 0%, transparent 60%);
       pointer-events: none;
     }
-
+    .hero-grid {
+      position: absolute; inset: 0; pointer-events: none; opacity: 0.02;
+      background-image: linear-gradient(#00d4ff 1px, transparent 1px), linear-gradient(90deg, #00d4ff 1px, transparent 1px);
+      background-size: 40px 40px;
+    }
+    .hero-inner { position: relative; max-width: 1000px; margin: 0 auto; }
     .hero-eyebrow {
-      font-size: 0.72rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.68rem;
       font-weight: 700;
       letter-spacing: 0.14em;
       text-transform: uppercase;
-      color: #38b2ac;
+      color: #00d4ff;
       margin-bottom: 10px;
+      opacity: 0.8;
     }
-
     .hero h1 {
-      font-size: 2rem;
-      font-weight: 800;
-      color: #f7fafc;
+      font-size: 2.4rem;
+      font-weight: 900;
+      color: #f0f8ff;
       letter-spacing: -0.03em;
       line-height: 1.1;
-      margin-bottom: 8px;
-    }
-
-    .hero-sub {
-      color: #718096;
-      font-size: 0.95rem;
-      margin-bottom: 24px;
-    }
-
-    .chips {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-
-    .chip {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      background: #1a2740;
-      border: 1px solid #2d4a6e;
-      border-radius: 20px;
-      padding: 5px 12px;
-      font-size: 0.78rem;
-      color: #a0b4cc;
-    }
-
-    .chip .dot {
-      width: 6px; height: 6px;
-      border-radius: 50%;
-      background: #38b2ac;
-      flex-shrink: 0;
-    }
-
-    /* CONTAINER */
-    .container {
-      max-width: 900px;
-      margin: 0 auto;
-      padding: 40px 24px 80px;
-    }
-
-    /* SECTION LABELS */
-    .section-label {
-      font-size: 0.95rem;
-      font-weight: 700;
-      letter-spacing: 0.01em;
-      text-transform: none;
-      color: #f0f4f8;
-      margin-bottom: 14px;
-      margin-top: 44px;
-      padding-bottom: 10px;
-      border-bottom: 1px solid #2d4a6e;
-    }
-
-    /* BOOKING CARDS ROW */
-    .booking-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-    }
-
-    .booking-card {
-      background: #edf2f7;
-      border: 1px solid #cbd5e0;
-      border-radius: 12px;
-      padding: 18px 20px;
-    }
-
-    .booking-card .bc-label {
-      font-size: 0.68rem;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: #718096;
-      margin-bottom: 8px;
-    }
-
-    .booking-card .bc-title {
-      font-size: 0.95rem;
-      font-weight: 600;
-      color: #1a202c;
-      margin-bottom: 4px;
-    }
-
-    .booking-card .bc-detail {
-      font-size: 0.8rem;
-      color: #4a5568;
-      line-height: 1.6;
-    }
-
-    .booking-card .bc-conf {
-      margin-top: 10px;
-      font-size: 0.75rem;
-      color: #2b6cb0;
-      font-family: 'SF Mono', 'Fira Code', monospace;
-      letter-spacing: 0.05em;
-    }
-
-    /* FLIGHT CARDS */
-    .flight-card {
-      background: #edf2f7;
-      border: 1px solid #cbd5e0;
-      border-radius: 12px;
-      padding: 18px 20px;
-      display: flex;
-      align-items: center;
-      gap: 20px;
       margin-bottom: 10px;
     }
-
-    .flight-num {
-      font-size: 0.72rem;
+    .hero h1 span { color: #00d4ff; }
+    .hero-sub { color: #4a6a80; font-size: 0.92rem; margin-bottom: 28px; }
+    .hero-stats {
+      display: flex;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+    .hero-stat {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .hero-stat-num {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 1.4rem;
       font-weight: 700;
-      letter-spacing: 0.06em;
-      color: #718096;
+      color: #00d4ff;
+    }
+    .hero-stat-label {
+      font-size: 0.65rem;
+      font-weight: 700;
       text-transform: uppercase;
-      margin-bottom: 4px;
+      letter-spacing: 0.1em;
+      color: #2a4a60;
     }
 
-    .flight-route {
+    /* MAIN */
+    .main { max-width: 1000px; margin: 0 auto; padding: 44px 24px 80px; }
+
+    /* SECTION HEADER */
+    .section-head {
       display: flex;
       align-items: center;
       gap: 12px;
-      flex: 1;
+      margin-bottom: 20px;
+      margin-top: 48px;
     }
-
-    .airport {
-      text-align: center;
-    }
-
-    .airport .code {
-      font-size: 1.3rem;
+    .section-head:first-child { margin-top: 0; }
+    .section-title {
+      font-size: 0.68rem;
       font-weight: 800;
-      color: #1a202c;
-      letter-spacing: -0.02em;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #00d4ff;
     }
-
-    .airport .city {
-      font-size: 0.72rem;
-      color: #718096;
-      margin-top: 2px;
-    }
-
-    .flight-arrow {
+    .section-line {
       flex: 1;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 4px;
-    }
-
-    .arrow-line {
-      width: 100%;
       height: 1px;
-      background: linear-gradient(90deg, #2d4a6e, #38b2ac, #2d4a6e);
-      position: relative;
+      background: linear-gradient(90deg, #0e2035, transparent);
     }
 
-    .arrow-line::after {
-      content: '▶';
-      position: absolute;
-      right: -6px;
-      top: -7px;
-      font-size: 0.6rem;
-      color: #38b2ac;
+    /* TRIP GRID */
+    .trip-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 16px;
     }
 
-    .flight-time {
-      font-size: 0.78rem;
-      color: #718096;
-    }
-
-    .flight-times {
+    /* TRIP CARD */
+    .trip-card {
+      background: #0b1525;
+      border: 1px solid #0e2035;
+      border-radius: 14px;
+      padding: 24px;
+      text-decoration: none;
+      color: inherit;
       display: flex;
       flex-direction: column;
-      align-items: flex-end;
-      gap: 2px;
-    }
-
-    .flight-times .time {
-      font-size: 0.9rem;
-      font-weight: 700;
-      color: #1a202c;
-    }
-
-    .flight-times .conf {
-      font-size: 0.72rem;
-      color: #2b6cb0;
-      font-family: monospace;
-    }
-
-    /* ITINERARY DAYS */
-    .days {
-      display: flex;
-      flex-direction: column;
-      gap: 0;
+      gap: 14px;
       position: relative;
+      overflow: hidden;
+      transition: border-color 0.2s, transform 0.15s;
     }
-
-    .days::before {
+    .trip-card:hover {
+      border-color: #00d4ff44;
+      transform: translateY(-2px);
+    }
+    .trip-card::before {
       content: '';
       position: absolute;
-      left: 20px;
-      top: 24px;
-      bottom: 24px;
-      width: 1px;
-      background: linear-gradient(180deg, #1e2d45 0%, #1e2d45 100%);
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      opacity: 0;
+      transition: opacity 0.2s;
     }
+    .trip-card:hover::before { opacity: 1; }
+    .trip-card.status-upcoming::before { background: linear-gradient(90deg, transparent, #00d4ff, transparent); }
+    .trip-card.status-completed::before { background: linear-gradient(90deg, transparent, #10b981, transparent); }
+    .trip-card.status-active::before { background: linear-gradient(90deg, transparent, #f59e0b, transparent); }
+    .trip-card.status-past::before { background: linear-gradient(90deg, transparent, #4a6a80, transparent); }
 
-    .day-row {
+    /* CARD HEADER */
+    .card-top {
       display: flex;
-      gap: 20px;
-      padding: 8px 0;
-      position: relative;
-    }
-
-    .day-dot {
-      width: 41px;
-      flex-shrink: 0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding-top: 14px;
-    }
-
-    .dot-circle {
-      width: 12px;
-      height: 12px;
-      border-radius: 50%;
-      border: 2px solid #2d4a6e;
-      background: #0a0e1a;
-      z-index: 1;
-      flex-shrink: 0;
-    }
-
-    .dot-circle.active {
-      background: #38b2ac;
-      border-color: #38b2ac;
-      box-shadow: 0 0 8px rgba(56,178,172,0.4);
-    }
-
-    .dot-circle.port { border-color: #68d391; background: #0a0e1a; }
-    .dot-circle.sea { border-color: #63b3ed; background: #0a0e1a; }
-    .dot-circle.end { border-color: #fc8181; background: #0a0e1a; }
-
-    .day-card {
-      flex: 1;
-      background: #edf2f7;
-      border: 1px solid #cbd5e0;
-      border-radius: 12px;
-      padding: 16px 18px;
-      margin-bottom: 4px;
-    }
-
-    .day-card:hover { border-color: #a0aec0; }
-
-    .day-header {
-      display: flex;
-      align-items: flex-start;
       justify-content: space-between;
-      margin-bottom: 8px;
+      align-items: flex-start;
+      gap: 10px;
     }
-
-    .day-num {
-      font-size: 0.68rem;
+    .card-emoji {
+      font-size: 2rem;
+      line-height: 1;
+      flex-shrink: 0;
+    }
+    .card-badge {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.62rem;
       font-weight: 700;
-      letter-spacing: 0.1em;
+      letter-spacing: 0.08em;
       text-transform: uppercase;
-      color: #718096;
-      margin-bottom: 3px;
+      padding: 3px 9px;
+      border-radius: 20px;
+      flex-shrink: 0;
+    }
+    .badge-upcoming  { background: rgba(0,212,255,0.1);  color: #00d4ff;  border: 1px solid rgba(0,212,255,0.25); }
+    .badge-active    { background: rgba(245,158,11,0.1); color: #f59e0b;  border: 1px solid rgba(245,158,11,0.25); }
+    .badge-completed { background: rgba(16,185,129,0.1); color: #10b981;  border: 1px solid rgba(16,185,129,0.25); }
+    .badge-past      { background: rgba(74,106,128,0.1); color: #4a6a80;  border: 1px solid rgba(74,106,128,0.25); }
+
+    /* CARD BODY */
+    .card-title {
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: #f0f8ff;
+      letter-spacing: -0.01em;
+      line-height: 1.25;
+    }
+    .card-sub {
+      font-size: 0.8rem;
+      color: #4a6a80;
+      margin-top: 3px;
     }
 
-    .day-title {
-      font-size: 1rem;
-      font-weight: 700;
-      color: #1a202c;
-    }
-
-    .day-date {
-      font-size: 0.78rem;
-      color: #718096;
-      text-align: right;
-    }
-
-    .port-times {
-      display: flex;
-      gap: 16px;
-      margin-bottom: 8px;
-    }
-
-    .port-time {
-      display: flex;
-      align-items: center;
-      gap: 5px;
-      font-size: 0.78rem;
-      color: #718096;
-    }
-
-    .port-time .label {
-      font-size: 0.68rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-      color: #718096;
-    }
-
-    .port-time .val {
-      color: #2d3748;
-      font-weight: 600;
-    }
-
-    .tender-badge {
-      display: inline-block;
-      font-size: 0.65rem;
-      font-weight: 700;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      padding: 2px 7px;
-      border-radius: 4px;
-      background: #2d1b1b;
-      color: #fc8181;
-      border: 1px solid #744210;
-      margin-left: 8px;
-    }
-
-    .dock-badge {
-      display: inline-block;
-      font-size: 0.65rem;
-      font-weight: 700;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      padding: 2px 7px;
-      border-radius: 4px;
-      background: #1a2e1a;
-      color: #68d391;
-      border: 1px solid #276749;
-      margin-left: 8px;
-    }
-
-    .excursions {
-      margin-top: 10px;
+    /* CARD META */
+    .card-meta {
       display: flex;
       flex-direction: column;
       gap: 6px;
     }
-
-    .excursion {
+    .meta-row {
       display: flex;
-      align-items: flex-start;
-      gap: 10px;
-      background: #e2edf7;
-      border-radius: 8px;
-      padding: 10px 12px;
-      border-left: 2px solid #38b2ac;
-    }
-
-    .exc-time {
-      font-size: 0.75rem;
-      font-weight: 700;
-      color: #38b2ac;
-      flex-shrink: 0;
-      min-width: 48px;
-      padding-top: 1px;
-    }
-
-    .exc-details .exc-name {
-      font-size: 0.83rem;
-      font-weight: 600;
-      color: #1a202c;
-      margin-bottom: 2px;
-    }
-
-    .exc-details .exc-meta {
-      font-size: 0.75rem;
-      color: #718096;
-    }
-
-    .sea-note {
-      font-size: 0.82rem;
-      color: #4a5568;
-      font-style: italic;
-      padding: 4px 0;
-    }
-
-    /* CONFIRMATION TABLE */
-    .conf-table {
-      width: 100%;
-      border-collapse: collapse;
-    }
-
-    .conf-table tr td {
-      padding: 10px 14px;
-      font-size: 0.82rem;
-      border-bottom: 1px solid #cbd5e0;
-      vertical-align: top;
-    }
-
-    .conf-table tr:last-child td { border-bottom: none; }
-
-    .conf-table .key {
-      color: #718096;
-      font-size: 0.72rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      width: 140px;
-    }
-
-    .conf-table .val {
-      color: #1a202c;
-      font-weight: 500;
-    }
-
-    .conf-table .val.mono {
-      font-family: 'SF Mono', 'Fira Code', monospace;
-      color: #2b6cb0;
-      font-size: 0.8rem;
-      font-weight: 700;
-    }
-
-    .conf-wrap {
-      background: #edf2f7;
-      border: 1px solid #cbd5e0;
-      border-radius: 12px;
-      overflow: hidden;
-    }
-
-    /* NOTES */
-    .notes-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 10px;
-    }
-
-    .note {
-      background: #edf2f7;
-      border: 1px solid #cbd5e0;
-      border-radius: 10px;
-      padding: 14px 16px;
-      font-size: 0.8rem;
-      color: #4a5568;
-      line-height: 1.6;
-    }
-
-    .note strong {
-      color: #1a202c;
-      display: block;
-      margin-bottom: 4px;
+      align-items: center;
+      gap: 8px;
       font-size: 0.78rem;
+    }
+    .meta-label {
+      font-size: 0.62rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #2a4a60;
+      min-width: 52px;
+    }
+    .meta-val { color: #8aaabb; }
+    .meta-val.highlight { color: #00d4ff; font-family: 'JetBrains Mono', monospace; }
+
+    /* CARD FOOTER */
+    .card-footer {
+      margin-top: auto;
+      padding-top: 14px;
+      border-top: 1px solid #0e2035;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .card-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+    }
+    .tag {
+      font-size: 0.65rem;
+      font-weight: 600;
+      padding: 2px 7px;
+      border-radius: 4px;
+      background: #0e2035;
+      color: #4a6a80;
+      border: 1px solid #152a40;
+    }
+    .card-arrow {
+      font-size: 0.8rem;
+      color: #2a4a60;
+      flex-shrink: 0;
+    }
+    .trip-card:hover .card-arrow { color: #00d4ff; }
+
+    /* CPA CARD — distinct style */
+    .cpa-card {
+      background: #0b1520;
+      border: 1px solid #1a2d1a;
+      border-radius: 14px;
+      padding: 24px;
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      position: relative;
+      overflow: hidden;
+      transition: border-color 0.2s, transform 0.15s;
+    }
+    .cpa-card:hover { border-color: #10b98144; transform: translateY(-2px); }
+    .cpa-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, #10b981, transparent);
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+    .cpa-card:hover::before { opacity: 1; }
+    .cpa-icon {
+      font-size: 2.4rem;
+      line-height: 1;
+      flex-shrink: 0;
+    }
+    .cpa-body { flex: 1; }
+    .cpa-title {
+      font-size: 1rem;
+      font-weight: 800;
+      color: #f0f8ff;
+      margin-bottom: 4px;
+    }
+    .cpa-sub { font-size: 0.8rem; color: #4a6a80; }
+    .cpa-pills {
+      display: flex;
+      gap: 6px;
+      margin-top: 10px;
+      flex-wrap: wrap;
+    }
+    .cpa-pill {
+      font-size: 0.65rem;
+      font-weight: 700;
+      padding: 3px 9px;
+      border-radius: 20px;
+    }
+    .pill-green { background: rgba(16,185,129,0.1); color: #10b981; border: 1px solid rgba(16,185,129,0.2); }
+    .pill-amber { background: rgba(245,158,11,0.1); color: #f59e0b; border: 1px solid rgba(245,158,11,0.2); }
+    .pill-cyan  { background: rgba(0,212,255,0.1);  color: #00d4ff;  border: 1px solid rgba(0,212,255,0.2); }
+
+    /* COUNTDOWN PULSE */
+    @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.4; } }
+    .pulse-dot {
+      display: inline-block;
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: #f59e0b;
+      animation: pulse 1.8s ease-in-out infinite;
+      margin-right: 5px;
+      vertical-align: middle;
+    }
+
+    /* FOOTER */
+    .page-footer {
+      text-align: center;
+      padding: 32px 24px;
+      border-top: 1px solid #0e2035;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.68rem;
+      color: #1a3050;
+      letter-spacing: 0.06em;
     }
 
     @media (max-width: 640px) {
-      .booking-row, .notes-grid { grid-template-columns: 1fr; }
-      .hero h1 { font-size: 1.5rem; }
+      .hero h1 { font-size: 1.7rem; }
+      .trip-grid { grid-template-columns: 1fr; }
+      .hero { padding: 36px 20px 32px; }
+      .main { padding: 32px 16px 60px; }
     }
   </style>
 </head>
@@ -509,427 +328,199 @@
 
 <!-- HERO -->
 <div class="hero">
-  <div class="hero-eyebrow">Celebrity Beyond · Reservation 7315949</div>
-  <h1>David & Diana<br>Caribbean Cruise</h1>
-  <div class="hero-sub">May 15–24, 2026 · Grand Cayman · Cozumel · Costa Maya · Nassau</div>
-  <div class="chips">
-    <div class="chip"><span class="dot"></span>Stateroom 7117 · Deck 7 Balcony</div>
-    <div class="chip"><span class="dot"></span>Dining 8:30 PM</div>
-    <div class="chip"><span class="dot"></span>3 Shore Excursions Booked</div>
-    <div class="chip"><span class="dot"></span>San Diego → Miami → San Diego</div>
+  <div class="hero-grid"></div>
+  <div class="hero-inner">
+    <div class="hero-eyebrow">David & Diana Wolosin</div>
+    <h1>Travel <span>Hub</span></h1>
+    <div class="hero-sub">All trips, itineraries, and dashboards in one place</div>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <div class="hero-stat-num">5</div>
+        <div class="hero-stat-label">Trips</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">3</div>
+        <div class="hero-stat-label">Upcoming</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">41</div>
+        <div class="hero-stat-label">Days to REG Exam</div>
+      </div>
+    </div>
   </div>
 </div>
 
-<div class="container">
+<div class="main">
 
-  <!-- FLIGHTS OUT -->
-  <div class="section-label">Flights Out — Friday, May 15</div>
-
-  <div class="flight-card">
-    <div>
-      <div class="flight-num">WN 4025</div>
-      <div class="flight-route">
-        <div class="airport">
-          <div class="code">SAN</div>
-          <div class="city">San Diego</div>
-        </div>
-        <div class="flight-arrow">
-          <div class="arrow-line"></div>
-          <div class="flight-time">11:50am → 3:50pm</div>
-        </div>
-        <div class="airport">
-          <div class="code">ORD</div>
-          <div class="city">Chicago</div>
-        </div>
-      </div>
-    </div>
+  <!-- UPCOMING & ACTIVE -->
+  <div class="section-head">
+    <div class="section-title">Upcoming & Active</div>
+    <div class="section-line"></div>
   </div>
 
-  <div class="flight-card">
-    <div style="width:100%">
-      <div class="flight-num">WN 1453</div>
-      <div class="flight-route">
-        <div class="airport">
-          <div class="code">ORD</div>
-          <div class="city">Chicago</div>
-        </div>
-        <div class="flight-arrow">
-          <div class="arrow-line"></div>
-          <div class="flight-time">4:50pm → 7:50pm</div>
-        </div>
-        <div class="airport">
-          <div class="code">MIA</div>
-          <div class="city">Miami</div>
-        </div>
-      </div>
-    </div>
-  </div>
+  <div class="trip-grid">
 
-  <!-- HOTEL -->
-  <div class="section-label">Hotel — Miami · May 15–17</div>
-  <div class="booking-row">
-    <div class="booking-card">
-      <div class="bc-label">Hotel</div>
-      <div class="bc-title">Homewood Suites Miami Downtown/Brickell</div>
-      <div class="bc-detail">
-        1750 SW 1st Avenue, Miami, FL 33129<br>
-        +1 305-285-7112<br><br>
-        Check-in: May 15 · 3:00 PM<br>
-        Check-out: May 17 · 11:00 AM<br>
-        1 guest
+    <!-- Japan Cruise -->
+    <a class="trip-card status-upcoming" href="japan.html">
+      <div class="card-top">
+        <div class="card-emoji">⛴️</div>
+        <div class="card-badge badge-upcoming">Upcoming</div>
       </div>
-      <div class="bc-conf">Confirmation: 955850387</div>
-    </div>
-    <div class="booking-card">
-      <div class="bc-label">Getting to Port · May 17</div>
-      <div class="bc-title">PortMiami Terminal</div>
-      <div class="bc-detail">
-        Hotel → Port Miami: ~15 min by rideshare<br><br>
-        Boarding opens: 4:00 PM · Don't arrive early<br>
-        Complete online check-in before boarding<br>
-        Bring printed Xpress Pass<br><br>
-        Port address: 1015 N America Way, Miami FL 33132
+      <div>
+        <div class="card-title">Japan Cruise</div>
+        <div class="card-sub">Holland America Westerdam · Oct 11–24, 2026</div>
       </div>
-    </div>
-  </div>
+      <div class="card-meta">
+        <div class="meta-row">
+          <span class="meta-label">Dates</span>
+          <span class="meta-val highlight">Oct 11–24, 2026</span>
+        </div>
+        <div class="meta-row">
+          <span class="meta-label">Ship</span>
+          <span class="meta-val">HAL Westerdam · 13 nights</span>
+        </div>
+        <div class="meta-row">
+          <span class="meta-label">Cabin</span>
+          <span class="meta-val">8125 · Deck 8 · Interior</span>
+        </div>
+        <div class="meta-row">
+          <span class="meta-label">Conf #</span>
+          <span class="meta-val highlight">3TXC4T</span>
+        </div>
+      </div>
+      <div class="card-footer">
+        <div class="card-tags">
+          <span class="tag">Tokyo</span>
+          <span class="tag">Kyoto</span>
+          <span class="tag">Osaka</span>
+          <span class="tag">Korea</span>
+        </div>
+        <div class="card-arrow">→</div>
+      </div>
+    </a>
 
-  <!-- CRUISE ITINERARY -->
-  <div class="section-label">Cruise Itinerary · Celebrity Beyond</div>
-  <div class="days">
-
-    <!-- Day 1 -->
-    <div class="day-row">
-      <div class="day-dot"><div class="dot-circle active"></div></div>
-      <div class="day-card">
-        <div class="day-header">
-          <div>
-            <div class="day-num">Day 1</div>
-            <div class="day-title">Miami, Florida <span class="dock-badge">Embark</span></div>
-          </div>
-          <div class="day-date">Sun · May 17</div>
-        </div>
-        <div class="port-times">
-          <div class="port-time"><span class="label">Sail</span><span class="val">4:00 PM</span></div>
-        </div>
-        <div class="sea-note">Board, explore the ship, muster drill. Dining at 8:30 PM.</div>
+    <!-- Decker Europe -->
+    <a class="trip-card status-active" href="decker.html">
+      <div class="card-top">
+        <div class="card-emoji">🏰</div>
+        <div class="card-badge badge-active"><span class="pulse-dot"></span>Active</div>
       </div>
-    </div>
-
-    <!-- Day 2 -->
-    <div class="day-row">
-      <div class="day-dot"><div class="dot-circle sea"></div></div>
-      <div class="day-card">
-        <div class="day-header">
-          <div>
-            <div class="day-num">Day 2</div>
-            <div class="day-title">At Sea</div>
-          </div>
-          <div class="day-date">Mon · May 18</div>
-        </div>
-        <div class="sea-note">Full day at sea — pool, spa, explore Celebrity Beyond.</div>
+      <div>
+        <div class="card-title">Decker Europe Trip</div>
+        <div class="card-sub">May–June 2026</div>
       </div>
-    </div>
-
-    <!-- Day 3 -->
-    <div class="day-row">
-      <div class="day-dot"><div class="dot-circle port"></div></div>
-      <div class="day-card">
-        <div class="day-header">
-          <div>
-            <div class="day-num">Day 3</div>
-            <div class="day-title">George Town, Grand Cayman <span class="tender-badge">Tender</span></div>
-          </div>
-          <div class="day-date">Tue · May 19</div>
-        </div>
-        <div class="port-times">
-          <div class="port-time"><span class="label">Arrive</span><span class="val">7:00 AM</span></div>
-          <div class="port-time"><span class="label">Depart</span><span class="val">3:30 PM</span></div>
-        </div>
-        <div class="excursions">
-          <div class="excursion">
-            <div class="exc-time">9:00 AM</div>
-            <div class="exc-details">
-              <div class="exc-name">Destination Highlight: Stingray City</div>
-              <div class="exc-meta">4 hrs 30 min · David & Diana · Reserved</div>
-            </div>
-          </div>
-        </div>
-        <div style="margin-top:8px; font-size:0.75rem; color:#718096;">Note: Tender port — take ship's tender boat to shore. Allow extra time.</div>
-      </div>
-    </div>
-
-    <!-- Day 4 -->
-    <div class="day-row">
-      <div class="day-dot"><div class="dot-circle port"></div></div>
-      <div class="day-card">
-        <div class="day-header">
-          <div>
-            <div class="day-num">Day 4</div>
-            <div class="day-title">Cozumel, Mexico <span class="dock-badge">Dock</span></div>
-          </div>
-          <div class="day-date">Wed · May 20</div>
-        </div>
-        <div class="port-times">
-          <div class="port-time"><span class="label">Arrive</span><span class="val">11:00 AM</span></div>
-          <div class="port-time"><span class="label">Depart</span><span class="val">8:30 PM</span></div>
-        </div>
-        <div class="excursions">
-          <div class="excursion">
-            <div class="exc-time">1:30 PM</div>
-            <div class="exc-details">
-              <div class="exc-name">Destination Highlight: Fury Catamaran</div>
-              <div class="exc-meta">4 hrs · David & Diana · Reserved</div>
-            </div>
-          </div>
-        </div>
-        <div style="margin-top:8px; font-size:0.75rem; color:#718096;">Long port day — morning free to explore before the 1:30pm excursion.</div>
-      </div>
-    </div>
-
-    <!-- Day 5 -->
-    <div class="day-row">
-      <div class="day-dot"><div class="dot-circle port"></div></div>
-      <div class="day-card">
-        <div class="day-header">
-          <div>
-            <div class="day-num">Day 5</div>
-            <div class="day-title">Puerto Costa Maya, Mexico <span class="dock-badge">Dock</span></div>
-          </div>
-          <div class="day-date">Thu · May 21</div>
-        </div>
-        <div class="port-times">
-          <div class="port-time"><span class="label">Arrive</span><span class="val">7:00 AM</span></div>
-          <div class="port-time"><span class="label">Depart</span><span class="val">3:00 PM</span></div>
-        </div>
-        <div class="excursions">
-          <div class="excursion">
-            <div class="exc-time">9:30 AM</div>
-            <div class="exc-details">
-              <div class="exc-name">Destination Highlight: Chacchoben Mayan Ruins</div>
-              <div class="exc-meta">4 hrs 15 min · David & Diana · Reserved</div>
-            </div>
-          </div>
+      <div class="card-meta">
+        <div class="meta-row">
+          <span class="meta-label">Dates</span>
+          <span class="meta-val">May–June 2026</span>
         </div>
       </div>
-    </div>
-
-    <!-- Day 6 -->
-    <div class="day-row">
-      <div class="day-dot"><div class="dot-circle sea"></div></div>
-      <div class="day-card">
-        <div class="day-header">
-          <div>
-            <div class="day-num">Day 6</div>
-            <div class="day-title">At Sea</div>
-          </div>
-          <div class="day-date">Fri · May 22</div>
+      <div class="card-footer">
+        <div class="card-tags">
+          <span class="tag">Europe</span>
         </div>
-        <div class="sea-note">Full day at sea. Pack bags tonight — staff collects before last morning.</div>
+        <div class="card-arrow">→</div>
       </div>
-    </div>
+    </a>
 
-    <!-- Day 7 -->
-    <div class="day-row">
-      <div class="day-dot"><div class="dot-circle port"></div></div>
-      <div class="day-card">
-        <div class="day-header">
-          <div>
-            <div class="day-num">Day 7</div>
-            <div class="day-title">Nassau, Bahamas <span class="dock-badge">Dock</span></div>
-          </div>
-          <div class="day-date">Sat · May 23</div>
-        </div>
-        <div class="port-times">
-          <div class="port-time"><span class="label">Arrive</span><span class="val">11:00 AM</span></div>
-          <div class="port-time"><span class="label">Depart</span><span class="val">6:00 PM</span></div>
-        </div>
-        <div class="sea-note">No excursion booked — free day to explore Nassau. Back on ship before 6:00 PM.</div>
+    <!-- Donna Rockies -->
+    <a class="trip-card status-upcoming" href="donna.html">
+      <div class="card-top">
+        <div class="card-emoji">🏔️</div>
+        <div class="card-badge badge-upcoming">Upcoming</div>
       </div>
-    </div>
-
-    <!-- Day 8 -->
-    <div class="day-row">
-      <div class="day-dot"><div class="dot-circle end"></div></div>
-      <div class="day-card">
-        <div class="day-header">
-          <div>
-            <div class="day-num">Day 8</div>
-            <div class="day-title">Miami, Florida <span style="display:inline-block;font-size:0.65rem;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;padding:2px 7px;border-radius:4px;background:#2d1b1b;color:#fc8181;border:1px solid #744210;margin-left:8px;">Disembark</span></div>
-          </div>
-          <div class="day-date">Sun · May 24</div>
-        </div>
-        <div class="port-times">
-          <div class="port-time"><span class="label">Arrive</span><span class="val">7:00 AM</span></div>
-        </div>
-        <div class="sea-note">Disembarkation time assigned onboard. Flight is 1:30 PM — plenty of buffer.</div>
+      <div>
+        <div class="card-title">Donna's Canadian Rockies</div>
+        <div class="card-sub">Banff · Jasper · Lake Louise</div>
       </div>
-    </div>
+      <div class="card-meta">
+        <div class="meta-row">
+          <span class="meta-label">Region</span>
+          <span class="meta-val">Alberta, Canada</span>
+        </div>
+      </div>
+      <div class="card-footer">
+        <div class="card-tags">
+          <span class="tag">Banff</span>
+          <span class="tag">Jasper</span>
+          <span class="tag">Canada</span>
+        </div>
+        <div class="card-arrow">→</div>
+      </div>
+    </a>
 
   </div>
 
-  <!-- RETURN FLIGHT -->
-  <div class="section-label">Return Flight — Sunday, May 24</div>
-  <div class="flight-card">
-    <div style="width:100%">
-      <div class="flight-num">Southwest · AL4Q4T</div>
-      <div class="flight-route">
-        <div class="airport">
-          <div class="code">MIA</div>
-          <div class="city">Miami</div>
+  <!-- COMPLETED -->
+  <div class="section-head">
+    <div class="section-title">Completed</div>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="trip-grid">
+
+    <!-- Caribbean Cruise -->
+    <a class="trip-card status-completed" href="caribbean.html">
+      <div class="card-top">
+        <div class="card-emoji">🌊</div>
+        <div class="card-badge badge-completed">Completed</div>
+      </div>
+      <div>
+        <div class="card-title">Caribbean Cruise</div>
+        <div class="card-sub">Celebrity Beyond · May 17–24, 2026</div>
+      </div>
+      <div class="card-meta">
+        <div class="meta-row">
+          <span class="meta-label">Ship</span>
+          <span class="meta-val">Celebrity Beyond · 7 nights</span>
         </div>
-        <div class="flight-arrow">
-          <div class="arrow-line"></div>
-          <div class="flight-time">1:30 PM → 7:25 PM</div>
+        <div class="meta-row">
+          <span class="meta-label">Ports</span>
+          <span class="meta-val">Grand Cayman · Cozumel · Costa Maya · Nassau</span>
         </div>
-        <div class="airport">
-          <div class="code">SAN</div>
-          <div class="city">San Diego</div>
+        <div class="meta-row">
+          <span class="meta-label">Conf #</span>
+          <span class="meta-val highlight">7315949</span>
         </div>
       </div>
-    </div>
+      <div class="card-footer">
+        <div class="card-tags">
+          <span class="tag">Cayman</span>
+          <span class="tag">Cozumel</span>
+          <span class="tag">Nassau</span>
+          <span class="tag">Bahamas</span>
+        </div>
+        <div class="card-arrow">→</div>
+      </div>
+    </a>
+
   </div>
 
-  <!-- CONFIRMATIONS -->
-  <div class="section-label">All Confirmation Numbers</div>
-  <div class="conf-wrap">
-    <table class="conf-table">
-      <tr><td class="key">Cruise</td><td class="val mono">7315949</td></tr>
-      <tr><td class="key">Hotel</td><td class="val mono">955850387</td></tr>
-      <tr><td class="key">Return Flight</td><td class="val mono">AL4Q4T</td></tr>
-      <tr><td class="key">Ship</td><td class="val">Celebrity Beyond</td></tr>
-      <tr><td class="key">Stateroom</td><td class="val">7117 · Deck 7 · Balcony (P1)</td></tr>
-      <tr><td class="key">Dining</td><td class="val">8:30 PM seating</td></tr>
-      <tr><td class="key">Hotel Address</td><td class="val">1750 SW 1st Ave, Miami FL · (305) 285-7112</td></tr>
-    </table>
+  <!-- CPA -->
+  <div class="section-head">
+    <div class="section-title">CPA Exam Prep</div>
+    <div class="section-line"></div>
   </div>
 
-  <!-- GOOD TO KNOW -->
-  <div class="section-label">Good to Know</div>
-  <div class="notes-grid">
-    <div class="note">
-      <strong>Online Check-In</strong>
-      Complete at celebritycruises.com/onlinecheckin at least 3 days before sailing. Print your Xpress Pass.
+  <a class="cpa-card" href="cpa/reg_study_guide.html">
+    <div class="cpa-icon">📚</div>
+    <div class="cpa-body">
+      <div class="cpa-title">REG Study Guide</div>
+      <div class="cpa-sub">56 topics · Becker MCQs · Tax law · Business law · Exam July 18, 2026</div>
+      <div class="cpa-pills">
+        <span class="cpa-pill pill-green">AUD ✓ Passed</span>
+        <span class="cpa-pill pill-amber">REG — Jul 18</span>
+        <span class="cpa-pill pill-cyan">56 Topics</span>
+      </div>
     </div>
-    <div class="note">
-      <strong>Grand Cayman is a Tender Port</strong>
-      You'll take a small tender boat from the ship to shore. Allow extra time and watch for tender ticket times onboard.
-    </div>
-    <div class="note">
-      <strong>Reef-Safe Sunscreen</strong>
-      Avoid oxybenzone, octinoxate, and titanium dioxide — some ports ban them and it's better for the reef.
-    </div>
-    <div class="note">
-      <strong>Evening Chic Nights</strong>
-      1–2 formal nights onboard. Check the daily program in your stateroom. Smart Casual required every other night in the main dining room.
-    </div>
-    <div class="note">
-      <strong>Wine Corkage</strong>
-      1 bottle per person allowed on embarkation day. $35 corkage fee if consumed in a dining venue.
-    </div>
-    <div class="note">
-      <strong>Last Night Bags</strong>
-      Leave bags outside your stateroom the night before disembarkation. Keep an overnight bag for last morning essentials.
-    </div>
-  </div>
-
-  <div style="margin-top: 40px; padding: 18px; background: #111827; border: 1px solid #1e2d45; border-radius: 12px; text-align: center;">
-    <p style="color: #2d4a6e; font-size: 0.78rem;">David & Diana Wolosin · Celebrity Beyond · May 17–24, 2026 · 7 Nights</p>
-  </div>
-
-  <!-- ROUTE MAP -->
-  <div class="section-label" style="margin-top:48px;">Cruise Route Map</div>
-  <div id="map" style="height: 480px; border-radius: 12px; overflow: hidden; border: 1px solid #2d4a6e;"></div>
+    <div class="card-arrow" style="font-size:1rem;">→</div>
+  </a>
 
 </div>
 
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-<script>
-  const map = L.map('map', { zoomControl: true, scrollWheelZoom: false }).setView([22, -81], 5);
+<div class="page-footer">
+  djwolosin-ops.github.io/travel &nbsp;·&nbsp; David & Diana Wolosin &nbsp;·&nbsp; 2026
+</div>
 
-  L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
-    attribution: '&copy; OpenStreetMap &copy; CARTO',
-    subdomains: 'abcd', maxZoom: 19
-  }).addTo(map);
-
-  const ports = [
-    { name: "Miami, Florida",            date: "May 17 · Embark",                      coords: [25.761, -80.192], day: 1, color: "#38b2ac", desc: "Home port. Board Celebrity Beyond at PortMiami and set sail at 4pm." },
-    { name: "George Town, Grand Cayman", date: "May 19 · Arrive 7am / Depart 3:30pm", coords: [19.287, -81.367], day: 3, color: "#68d391", desc: "Crystal-clear British territory famous for Stingray City, Seven Mile Beach, and some of the best snorkeling in the Caribbean." },
-    { name: "Cozumel, Mexico",           date: "May 20 · Arrive 11am / Depart 8:30pm",coords: [20.507, -86.958], day: 4, color: "#68d391", desc: "Colorful Mexican island off the Yucatán coast. World-class reef diving, beach clubs, and fresh ceviche. Long port day." },
-    { name: "Puerto Costa Maya, Mexico", date: "May 21 · Arrive 7am / Depart 3pm",     coords: [18.733, -87.717], day: 5, color: "#68d391", desc: "Gateway to the ancient Chacchoben Mayan ruins. Jungle, history, and one of the least touristy stops on the route." },
-    { name: "Nassau, Bahamas",           date: "May 23 · Arrive 11am / Depart 6pm",    coords: [25.044, -77.350], day: 7, color: "#68d391", desc: "Capital of the Bahamas. Vibrant colonial architecture, pink-sand beaches, and the famous Atlantis resort nearby." },
-    { name: "Miami, Florida",            date: "May 24 · Disembark",                   coords: [25.741, -80.212], day: 8, color: "#fc8181", desc: "Back home. Disembark in the morning, flight to San Diego at 1:30pm." },
-  ];
-
-  const routeCoords = ports.map(p => p.coords);
-
-  // Dashed route line
-  L.polyline(routeCoords, {
-    color: '#38b2ac', weight: 2.5, opacity: 0.7, dashArray: '8 6'
-  }).addTo(map);
-
-  // Markers
-  ports.forEach((port, i) => {
-    const num = i + 1;
-    const isEnd = i === ports.length - 1;
-    const isStart = i === 0;
-    const size = 26;
-
-    const icon = L.divIcon({
-      className: '',
-      html: `<div style="
-        width: ${size}px;
-        height: ${size}px;
-        background: ${port.color};
-        border: 2px solid #0a0e1a;
-        border-radius: 50%;
-        box-shadow: 0 0 10px ${port.color}99;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-family: -apple-system, sans-serif;
-        font-size: 0.72rem;
-        font-weight: 800;
-        color: #0a0e1a;
-        line-height: 1;
-      ">${num}</div>`,
-      iconSize: [size, size],
-      iconAnchor: [size/2, size/2]
-    });
-
-    const dayLabel = isStart ? 'Day 1' : isEnd ? 'Day 8' : `Day ${port.day}`;
-
-    L.marker(port.coords, { icon })
-      .addTo(map)
-      .bindPopup(`
-        <div style="font-family:-apple-system,sans-serif; min-width:200px; max-width:240px;">
-          <div style="font-size:0.68rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#718096;margin-bottom:4px;">${dayLabel}</div>
-          <div style="font-size:1rem;font-weight:900;color:#1a202c;margin-bottom:4px;">${port.name}</div>
-          <div style="font-size:0.76rem;color:#718096;margin-bottom:8px;">${port.date}</div>
-          <div style="font-size:0.8rem;color:#2d3748;line-height:1.5;border-top:1px solid #e2e8f0;padding-top:8px;">${port.desc}</div>
-        </div>
-      `, { maxWidth: 260 });
-  });
-
-  // Day number labels along the route
-  const seaDays = [
-    { label: "Day 2\nAt Sea", coords: [23.2, -80.8] },
-    { label: "Day 6\nAt Sea", coords: [23.5, -83.5] },
-  ];
-
-  seaDays.forEach(s => {
-    const icon = L.divIcon({
-      className: '',
-      html: `<div style="
-        font-family:-apple-system,sans-serif;
-        font-size:0.62rem;font-weight:700;
-        color:#4a5568;text-align:center;
-        white-space:pre-line;line-height:1.3;
-      ">${s.label}</div>`,
-      iconSize: [50, 30],
-      iconAnchor: [25, 15]
-    });
-    L.marker(s.coords, { icon, interactive: false }).addTo(map);
-  });
-</script>
 </body>
 </html>
