@@ -1,0 +1,2456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>REG Highlights — Formula Flash Review</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap');
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:      #f4f6f9;
+      --bg2:     #eaecf2;
+      --card:    #ffffff;
+      --card2:   #f8f9fc;
+      --border:  #111827;
+      --border2: #374151;
+      --cyan:    #1a6fd4;
+      --cyan-dim:#ddeeff;
+      --green:   #0a7a50;
+      --green-dim:#e6f5ef;
+      --amber:   #b45309;
+      --amber-dim:#fef3c7;
+      --red:     #c0392b;
+      --red-dim: #fde8e8;
+      --purple:  #6d28d9;
+      --text:    #1e293b;
+      --muted:   #64748b;
+      --white:   #0f172a;
+    }
+
+    html { font-size: 16px; scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      line-height: 1.6;
+    }
+
+    /* ── HEADER ────────────────────────────────────────── */
+    .site-header {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(244,246,249,0.97);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 24px;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 52px;
+    }
+    .site-header-left { display: flex; align-items: center; gap: 14px; }
+    .site-logo {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.78rem; font-weight: 700;
+      color: var(--cyan); letter-spacing: 0.06em;
+    }
+    .site-title {
+      font-size: 0.88rem; font-weight: 700;
+      color: var(--white); letter-spacing: -0.01em;
+    }
+    .sep { color: var(--border2); font-size: 1.1rem; }
+    .card-count {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.7rem; color: var(--muted);
+    }
+    .exam-badge {
+      font-size: 0.62rem; font-weight: 800; letter-spacing: 0.1em;
+      text-transform: uppercase;
+      background: rgba(0,212,255,0.08);
+      border: 1px solid rgba(0,212,255,0.2);
+      color: var(--cyan);
+      padding: 3px 10px; border-radius: 99px;
+    }
+
+    /* ── LAYOUT ────────────────────────────────────────── */
+    .main { max-width: 820px; margin: 0 auto; padding: 36px 24px 80px; }
+
+    /* ── FORMULA CARD ──────────────────────────────────── */
+    .formula-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+      margin-bottom: 28px;
+    }
+
+    .card-header {
+      background: var(--card2);
+      border-bottom: 1px solid var(--border);
+      padding: 18px 24px 16px;
+      display: flex; align-items: flex-start; justify-content: space-between; gap: 16px;
+    }
+    .card-header-left { flex: 1; }
+    .topic-badge {
+      display: inline-block;
+      font-size: 0.58rem; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase;
+      padding: 3px 9px; border-radius: 4px; margin-bottom: 8px;
+      background: rgba(0,212,255,0.08); color: var(--cyan);
+      border: 1px solid rgba(0,212,255,0.15);
+    }
+    .card-title {
+      font-size: 1.15rem; font-weight: 800;
+      color: var(--white); letter-spacing: -0.02em;
+      text-wrap: balance;
+    }
+    .card-subtitle {
+      font-size: 0.78rem; color: var(--muted); margin-top: 4px;
+    }
+    .card-num {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 1.8rem; font-weight: 700;
+      color: var(--border2); line-height: 1;
+      flex-shrink: 0; user-select: none;
+    }
+
+    .card-body { padding: 22px 24px; }
+
+    /* ── STEPS ─────────────────────────────────────────── */
+    .steps { display: flex; flex-direction: column; gap: 10px; margin-bottom: 22px; }
+    .step {
+      display: flex; align-items: flex-start; gap: 14px;
+    }
+    .step-num {
+      flex-shrink: 0;
+      width: 24px; height: 24px; border-radius: 50%;
+      background: rgba(0,212,255,0.08);
+      border: 1px solid rgba(0,212,255,0.25);
+      color: var(--cyan);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.7rem; font-weight: 700;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .step-body { flex: 1; padding-top: 2px; }
+    .step-label {
+      font-size: 0.8rem; font-weight: 700; color: var(--white);
+      margin-bottom: 2px;
+    }
+    .step-detail { font-size: 0.8rem; color: var(--muted); line-height: 1.5; }
+    .step-detail .hi { color: var(--text); }
+
+    /* ── FORMULA BLOCK ─────────────────────────────────── */
+    .formula-block {
+      background: #f0f4fa;
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--cyan);
+      border-radius: 10px;
+      padding: 16px 20px;
+      margin-bottom: 22px;
+      overflow-x: auto;
+    }
+    .formula-label {
+      font-size: 0.58rem; font-weight: 800; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--muted);
+      margin-bottom: 10px;
+    }
+    .formula-line {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.88rem; line-height: 1.8;
+      white-space: nowrap;
+    }
+    .f-result  { color: var(--green);  font-weight: 700; }
+    .f-fn      { color: var(--cyan);   font-weight: 600; }
+    .f-var     { color: #2d4a6e;       font-weight: 500; }
+    .f-op      { color: var(--muted);  font-weight: 400; }
+    .f-num     { color: var(--amber);  font-weight: 700; }
+    .f-pct     { color: var(--purple); font-weight: 600; }
+
+    /* ── EXAMPLE ───────────────────────────────────────── */
+    .example-block {
+      background: rgba(16,185,129,0.04);
+      border: 1px solid rgba(16,185,129,0.15);
+      border-radius: 10px;
+      padding: 16px 20px;
+      margin-bottom: 22px;
+    }
+    .example-label {
+      font-size: 0.58rem; font-weight: 800; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--green);
+      margin-bottom: 12px;
+    }
+    .example-given {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 4px 24px;
+      margin-bottom: 14px;
+      font-size: 0.78rem;
+    }
+    .eg-row { display: contents; }
+    .eg-key { color: var(--muted); }
+    .eg-val {
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 600; color: var(--white);
+      font-variant-numeric: tabular-nums;
+    }
+    .example-divider {
+      height: 1px; background: rgba(16,185,129,0.12);
+      margin: 12px 0;
+    }
+    .example-steps { display: flex; flex-direction: column; gap: 6px; }
+    .ex-step {
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: 0.8rem; gap: 16px;
+    }
+    .ex-step-label { color: var(--muted); flex: 1; }
+    .ex-step-val {
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 600; color: var(--white);
+      font-variant-numeric: tabular-nums;
+      white-space: nowrap;
+    }
+    .ex-step.result {
+      margin-top: 6px;
+      padding-top: 10px;
+      border-top: 1px solid rgba(16,185,129,0.2);
+    }
+    .ex-step.result .ex-step-label { color: var(--white); font-weight: 700; }
+    .ex-step.result .ex-step-val { color: var(--green); font-size: 1rem; }
+
+    /* ── TRAPS ─────────────────────────────────────────── */
+    .traps-block {
+      background: var(--amber-dim);
+      border: 1px solid rgba(245,158,11,0.2);
+      border-radius: 10px;
+      padding: 14px 18px;
+    }
+    .traps-label {
+      font-size: 0.58rem; font-weight: 800; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--amber);
+      margin-bottom: 10px;
+    }
+    .trap-list { display: flex; flex-direction: column; gap: 7px; }
+    .trap-item {
+      display: flex; gap: 10px; align-items: flex-start;
+      font-size: 0.78rem; line-height: 1.5;
+    }
+    .trap-icon { color: var(--amber); flex-shrink: 0; margin-top: 1px; }
+    .trap-text { color: #a08050; }
+    .trap-text strong { color: #c8a060; }
+
+    /* ── DIVIDER BETWEEN SECTIONS ──────────────────────── */
+    .section-label {
+      font-size: 0.6rem; font-weight: 800; letter-spacing: 0.16em;
+      text-transform: uppercase; color: var(--muted);
+      display: flex; align-items: center; gap: 12px;
+      margin-bottom: 20px;
+    }
+    .section-label::after {
+      content: ''; flex: 1; height: 1px;
+      background: linear-gradient(90deg, var(--border), transparent);
+    }
+
+    @media (max-width: 600px) {
+      .card-num { display: none; }
+      .example-given { grid-template-columns: 1fr; }
+      .main { padding: 20px 16px 60px; }
+    }
+  </style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="site-header-left">
+    <span class="site-logo">REG</span>
+    <span class="sep">/</span>
+    <span class="site-title">Formula Highlights</span>
+    <span class="card-count">15 cards</span>
+  </div>
+  <span class="exam-badge">CPA Exam</span>
+</header>
+
+<main class="main">
+
+  <div class="section-label">Individual Taxation</div>
+
+  <!-- ── CARD 1: CASUALTY LOSS ─────────────────────────── -->
+  <article class="formula-card">
+    <div class="card-header">
+      <div class="card-header-left">
+        <div class="topic-badge">§165 — Personal Casualty Loss</div>
+        <div class="card-title">Federally Declared Disaster — Deductible Loss</div>
+        <div class="card-subtitle">Personal-use property only &mdash; Schedule A itemized deduction</div>
+      </div>
+      <div class="card-num">01</div>
+    </div>
+
+    <div class="card-body">
+
+      <!-- Steps -->
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="step-body">
+            <div class="step-label">Determine the loss amount</div>
+            <div class="step-detail">
+              Take the <span class="hi">lesser of</span>: adjusted basis <em>or</em> decline in FMV
+              (FMV before &minus; FMV after).
+            </div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-body">
+            <div class="step-label">Subtract insurance / reimbursements</div>
+            <div class="step-detail">
+              Reduce by any insurance proceeds or other compensation received.
+            </div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <div class="step-body">
+            <div class="step-label">Apply the $100 per-event floor</div>
+            <div class="step-detail">
+              Subtract <span class="hi">$100</span> for each separate casualty event.
+            </div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">4</div>
+          <div class="step-body">
+            <div class="step-label">Apply the 10% of AGI limitation</div>
+            <div class="step-detail">
+              Only the amount exceeding <span class="hi">10% × AGI</span> is deductible.
+              If the result is negative, the deduction is zero.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Formula -->
+      <div class="formula-block">
+        <div class="formula-label">Formula</div>
+        <div class="formula-line">
+          <span class="f-result">Loss</span>
+          <span class="f-op"> = </span>
+          <span class="f-fn">max</span><span class="f-op">(</span><span class="f-num">0</span><span class="f-op">,  </span>
+          <span class="f-op">[</span><span class="f-fn">min</span><span class="f-op">(</span><span class="f-var">Adj. Basis</span><span class="f-op">,  </span><span class="f-var">Decline in FMV</span><span class="f-op">)  &minus;  </span><span class="f-var">Insurance</span><span class="f-op">]</span>
+        </div>
+        <div class="formula-line">
+          <span style="visibility:hidden;" class="f-result">Loss = </span>
+          <span class="f-op">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&minus;  </span><span class="f-num">$100</span>
+          <span class="f-op">  &minus;  </span><span class="f-pct">10%</span><span class="f-op"> &times; </span><span class="f-var">AGI</span>
+          <span class="f-op">)</span>
+        </div>
+      </div>
+
+      <!-- Example -->
+      <div class="example-block">
+        <div class="example-label">Worked Example</div>
+        <div class="example-given">
+          <span class="eg-key">Adjusted basis</span>     <span class="eg-val">$36,500</span>
+          <span class="eg-key">FMV before disaster</span><span class="eg-val">$36,500</span>
+          <span class="eg-key">FMV after disaster</span> <span class="eg-val">$21,500</span>
+          <span class="eg-key">Insurance received</span> <span class="eg-val">$0</span>
+          <span class="eg-key">AGI</span>                <span class="eg-val">$40,000</span>
+        </div>
+        <div class="example-divider"></div>
+        <div class="example-steps">
+          <div class="ex-step">
+            <span class="ex-step-label">Step 1 — lesser of $36,500 or decline ($36,500 &minus; $21,500)</span>
+            <span class="ex-step-val">$15,000</span>
+          </div>
+          <div class="ex-step">
+            <span class="ex-step-label">Step 2 — subtract insurance</span>
+            <span class="ex-step-val">$15,000 &minus; $0 = $15,000</span>
+          </div>
+          <div class="ex-step">
+            <span class="ex-step-label">Step 3 — subtract $100 floor</span>
+            <span class="ex-step-val">$15,000 &minus; $100 = $14,900</span>
+          </div>
+          <div class="ex-step">
+            <span class="ex-step-label">Step 4 — subtract 10% &times; $40,000 AGI</span>
+            <span class="ex-step-val">$14,900 &minus; $4,000 = $10,900</span>
+          </div>
+          <div class="ex-step result">
+            <span class="ex-step-label">Deductible casualty loss (Schedule A)</span>
+            <span class="ex-step-val">$10,900</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Traps -->
+      <div class="traps-block">
+        <div class="traps-label">Exam Traps</div>
+        <div class="trap-list">
+          <div class="trap-item">
+            <span class="trap-icon">&#9654;</span>
+            <span class="trap-text"><strong>Federally declared disaster only.</strong> Post-2017 TCJA: personal casualty losses are only deductible if the property is in a presidentially declared disaster area. Other personal casualty losses are suspended through 2025.</span>
+          </div>
+          <div class="trap-item">
+            <span class="trap-icon">&#9654;</span>
+            <span class="trap-text"><strong>Lesser of, not the larger.</strong> If basis ($36,500) &gt; decline in FMV ($15,000), you use $15,000. The exam loves giving you a higher basis to tempt the wrong number.</span>
+          </div>
+          <div class="trap-item">
+            <span class="trap-icon">&#9654;</span>
+            <span class="trap-text"><strong>$100 comes before the 10% test.</strong> Apply the floor first, then subtract 10% AGI — not the other way around.</span>
+          </div>
+          <div class="trap-item">
+            <span class="trap-icon">&#9654;</span>
+            <span class="trap-text"><strong>Business-use property is different.</strong> The $100 floor and 10%-of-AGI limit do NOT apply to business or income-producing property. Business casualty losses are fully deductible on Schedule C / Form 4797.</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </article>
+
+  <div class="section-label" style="margin-top:12px;">Business Taxation</div>
+
+  <!-- ── CARD 2: §179 PHASE-OUT ────────────────────────── -->
+  <article class="formula-card">
+    <div class="card-header">
+      <div class="card-header-left">
+        <div class="topic-badge">§179 — Expensing Election</div>
+        <div class="card-title">Section 179 Phase-Out for Excess Property</div>
+        <div class="card-subtitle">Dollar-for-dollar reduction when total qualified property exceeds the threshold</div>
+      </div>
+      <div class="card-num">02</div>
+    </div>
+
+    <div class="card-body">
+
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="step-body">
+            <div class="step-label">Calculate excess property placed in service</div>
+            <div class="step-detail">
+              Total qualified property placed in service &minus; <span class="hi">phase-out threshold</span>.
+              If zero or negative, no reduction applies.
+            </div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-body">
+            <div class="step-label">Reduce the §179 maximum dollar-for-dollar</div>
+            <div class="step-detail">
+              Subtract the excess from the maximum §179 deduction. The reduction is <span class="hi">$1 for every $1</span> of excess — not a percentage.
+            </div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <div class="step-body">
+            <div class="step-label">Floor at zero — no negative deduction</div>
+            <div class="step-detail">
+              If excess &ge; maximum, the §179 deduction is fully phased out ($0). Any remaining basis is depreciated normally under MACRS.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="formula-block">
+        <div class="formula-label">Formula (2026 limits)</div>
+        <div class="formula-line">
+          <span class="f-var">Excess</span>
+          <span class="f-op"> = </span>
+          <span class="f-var">Total Property</span>
+          <span class="f-op"> &minus; </span>
+          <span class="f-num">$4,090,000</span>
+          <span class="f-op">  (phase-out threshold)</span>
+        </div>
+        <div class="formula-line" style="margin-top:6px;">
+          <span class="f-result">§179 Deduction</span>
+          <span class="f-op"> = </span>
+          <span class="f-fn">max</span><span class="f-op">(</span><span class="f-num">0</span><span class="f-op">,  </span>
+          <span class="f-num">$2,560,000</span>
+          <span class="f-op"> &minus; </span>
+          <span class="f-var">Excess</span>
+          <span class="f-op">)</span>
+        </div>
+      </div>
+
+      <div class="example-block">
+        <div class="example-label">Worked Example — Martin Corporation (2026)</div>
+        <div class="example-given">
+          <span class="eg-key">Property placed in service</span><span class="eg-val">$4,590,000</span>
+          <span class="eg-key">Phase-out threshold (2026)</span><span class="eg-val">$4,090,000</span>
+          <span class="eg-key">§179 maximum (2026)</span>    <span class="eg-val">$2,560,000</span>
+        </div>
+        <div class="example-divider"></div>
+        <div class="example-steps">
+          <div class="ex-step">
+            <span class="ex-step-label">Step 1 — excess over threshold</span>
+            <span class="ex-step-val">$4,590,000 &minus; $4,090,000 = $500,000</span>
+          </div>
+          <div class="ex-step">
+            <span class="ex-step-label">Step 2 — reduce maximum dollar-for-dollar</span>
+            <span class="ex-step-val">$2,560,000 &minus; $500,000 = $2,060,000</span>
+          </div>
+          <div class="ex-step result">
+            <span class="ex-step-label">§179 deduction allowed</span>
+            <span class="ex-step-val">$2,060,000</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="traps-block">
+        <div class="traps-label">Exam Traps</div>
+        <div class="trap-list">
+          <div class="trap-item">
+            <span class="trap-icon">&#9654;</span>
+            <span class="trap-text"><strong>$500K distractor.</strong> The exam often lists the excess amount ($500,000) as an answer choice. That's the reduction, not the deduction.</span>
+          </div>
+          <div class="trap-item">
+            <span class="trap-icon">&#9654;</span>
+            <span class="trap-text"><strong>Dollar-for-dollar, not proportional.</strong> Every dollar of excess above the threshold cuts the deduction by exactly $1 — there's no percentage involved.</span>
+          </div>
+          <div class="trap-item">
+            <span class="trap-icon">&#9654;</span>
+            <span class="trap-text"><strong>Also limited by taxable income.</strong> Even after the phase-out, §179 cannot exceed the entity's taxable income from active business. Unused §179 carries forward indefinitely (but the phase-out recalculates each year).</span>
+          </div>
+          <div class="trap-item">
+            <span class="trap-icon">&#9654;</span>
+            <span class="trap-text"><strong>Limits adjust annually for inflation.</strong> Memorize the structure ($max &minus; excess), not the dollar amounts — the exam will always give you the year's figures.</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </article>
+
+  <div class="section-label" style="margin-top:12px;">Individual Taxation — Education Credits</div>
+
+  <!-- ── CARD 3: AOC + LLC ──────────────────────────────── -->
+  <article class="formula-card">
+    <div class="card-header">
+      <div class="card-header-left">
+        <div class="topic-badge">§25A — Education Credits</div>
+        <div class="card-title">American Opportunity Credit &amp; Lifetime Learning Credit</div>
+        <div class="card-subtitle">Two credits, same return — but never for the same student in the same year</div>
+      </div>
+      <div class="card-num">03</div>
+    </div>
+
+    <div class="card-body">
+
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="step-body">
+            <div class="step-label">American Opportunity Credit (AOC) — per student</div>
+            <div class="step-detail">
+              100% of first <span class="hi">$2,000</span> of qualified expenses + 25% of next <span class="hi">$2,000</span>.
+              Max <span class="hi">$2,500</span> per eligible student. First 4 years of post-secondary only; student must be enrolled <span class="hi">at least half-time</span> for at least one academic period.
+            </div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-body">
+            <div class="step-label">Lifetime Learning Credit (LLC) — per return</div>
+            <div class="step-detail">
+              20% of qualified expenses up to <span class="hi">$10,000</span>. Max <span class="hi">$2,000 per return</span> (not per student).
+              No half-time enrollment requirement — any course counts.
+            </div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <div class="step-body">
+            <div class="step-label">Check eligibility — AOC requirements are stricter</div>
+            <div class="step-detail">
+              If a student doesn't qualify for AOC (e.g., not half-time, or past year 4), their expenses fall to LLC instead. Both credits can appear on the same return for different students.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="formula-block">
+        <div class="formula-label">AOC Formula — per eligible student</div>
+        <div class="formula-line">
+          <span class="f-result">AOC</span>
+          <span class="f-op"> = </span>
+          <span class="f-op">(</span><span class="f-fn">min</span><span class="f-op">(</span><span class="f-var">expenses</span><span class="f-op">, </span><span class="f-num">$2,000</span><span class="f-op">) &times; </span><span class="f-pct">100%</span><span class="f-op">)</span>
+          <span class="f-op"> + </span>
+          <span class="f-op">(</span><span class="f-fn">min</span><span class="f-op">(</span><span class="f-fn">max</span><span class="f-op">(0, </span><span class="f-var">expenses</span><span class="f-op"> &minus; </span><span class="f-num">$2,000</span><span class="f-op">), </span><span class="f-num">$2,000</span><span class="f-op">) &times; </span><span class="f-pct">25%</span><span class="f-op">)</span>
+        </div>
+        <div class="formula-label" style="margin-top:14px;">LLC Formula — per return</div>
+        <div class="formula-line">
+          <span class="f-result">LLC</span>
+          <span class="f-op"> = </span>
+          <span class="f-fn">min</span><span class="f-op">(</span><span class="f-var">qualified expenses</span><span class="f-op">, </span><span class="f-num">$10,000</span><span class="f-op">)</span>
+          <span class="f-op"> &times; </span>
+          <span class="f-pct">20%</span>
+          <span class="f-op">&nbsp;&nbsp;&nbsp;[max </span><span class="f-num">$2,000</span><span class="f-op"> per return]</span>
+        </div>
+      </div>
+
+      <div class="example-block">
+        <div class="example-label">Worked Example — Jermaine &amp; Keesha (MFJ, MAGI $50,000)</div>
+        <div class="example-given">
+          <span class="eg-key">Devona (full-time, year 1)</span><span class="eg-val">$3,600 → AOC</span>
+          <span class="eg-key">Arethia (not half-time, yr 4)</span><span class="eg-val">$4,250 → LLC</span>
+        </div>
+        <div class="example-divider"></div>
+        <div class="example-steps">
+          <div class="ex-step">
+            <span class="ex-step-label">Devona AOC — first $2,000 × 100%</span>
+            <span class="ex-step-val">$2,000</span>
+          </div>
+          <div class="ex-step">
+            <span class="ex-step-label">Devona AOC — next $1,600 × 25%</span>
+            <span class="ex-step-val">$400</span>
+          </div>
+          <div class="ex-step result" style="border-top:1px solid rgba(10,122,80,0.2);margin-bottom:10px;">
+            <span class="ex-step-label">AOC total (Devona)</span>
+            <span class="ex-step-val">$2,400</span>
+          </div>
+          <div class="ex-step">
+            <span class="ex-step-label">Arethia LLC — $4,250 × 20%</span>
+            <span class="ex-step-val">$850</span>
+          </div>
+          <div class="ex-step result">
+            <span class="ex-step-label">LLC total (per return)</span>
+            <span class="ex-step-val">$850</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="traps-block">
+        <div class="traps-label">Exam Traps</div>
+        <div class="trap-list">
+          <div class="trap-item">
+            <span class="trap-icon">&#9654;</span>
+            <span class="trap-text"><strong>Arethia can't use AOC — not half-time.</strong> The exam tells you she won't be enrolled at least half-time. That one fact disqualifies AOC entirely; her expenses fall to LLC.</span>
+          </div>
+          <div class="trap-item">
+            <span class="trap-icon">&#9654;</span>
+            <span class="trap-text"><strong>AOC is 100% + 25%, not 100% flat.</strong> $3,600 → $2,000 at 100% = $2,000, then $1,600 at 25% = $400 → total $2,400. Not $2,500 (max) and not $3,600 × 100%.</span>
+          </div>
+          <div class="trap-item">
+            <span class="trap-icon">&#9654;</span>
+            <span class="trap-text"><strong>LLC is 20% of actual expenses, not 20% of $10,000.</strong> The $10,000 is a cap on eligible expenses, not a guaranteed base. $4,250 × 20% = $850, not $2,000.</span>
+          </div>
+          <div class="trap-item">
+            <span class="trap-icon">&#9654;</span>
+            <span class="trap-text"><strong>LLC is per return, not per student.</strong> Even if both children qualified for LLC, the combined credit is still capped at $2,000 total — not $2,000 each.</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </article>
+
+  <div class="section-label" style="margin-top:12px;">Business Taxation — C Corporations</div>
+
+  <!-- ── CARD 4: C CORP CHARITABLE CONTRIBUTIONS ───────── -->
+  <article class="formula-card">
+    <div class="card-header">
+      <div class="card-header-left">
+        <div class="topic-badge">§170 — C Corp Charitable Contributions</div>
+        <div class="card-title">C Corporation Charitable Deduction — Floor &amp; Ceiling</div>
+        <div class="card-subtitle">Two-step limit: 1% floor reduces total; 10% ceiling caps the deduction</div>
+      </div>
+      <div class="card-num">04</div>
+    </div>
+
+    <div class="card-body">
+
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="step-body">
+            <div class="step-label">Compute Adjusted Taxable Income (ATI)</div>
+            <div class="step-detail">
+              Start with taxable income <em>before</em> the charitable deduction, then <span class="hi">add back</span>:
+              the dividends-received deduction (DRD) and any capital loss carryback.
+            </div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-body">
+            <div class="step-label">Find the floor and ceiling</div>
+            <div class="step-detail">
+              <span class="hi">Floor = 1% × ATI</span> — this amount is non-deductible (reduces available deduction).<br>
+              <span class="hi">Ceiling = 10% × ATI</span> — hard cap on total deductible contributions.
+            </div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <div class="step-body">
+            <div class="step-label">Sum current-year + carryover contributions</div>
+            <div class="step-detail">
+              Add current year actual contributions and any carryover from prior years (5-year carryforward).
+            </div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">4</div>
+          <div class="step-body">
+            <div class="step-label">Apply floor, then cap at ceiling</div>
+            <div class="step-detail">
+              Subtract the 1% floor from total contributions. Then take the <span class="hi">lesser</span> of that result or the 10% ceiling. The amount cut by the 1% floor is <span class="hi">permanently lost</span> — it cannot carry forward.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="formula-block">
+        <div class="formula-label">Step 1 — ATI</div>
+        <div class="formula-line">
+          <span class="f-result">ATI</span>
+          <span class="f-op"> = </span>
+          <span class="f-var">Taxable income (before charit. deduction)</span>
+          <span class="f-op"> + </span>
+          <span class="f-var">DRD</span>
+          <span class="f-op"> + </span>
+          <span class="f-var">Capital loss carryback</span>
+        </div>
+        <div class="formula-label" style="margin-top:14px;">Step 4 — Deduction</div>
+        <div class="formula-line">
+          <span class="f-result">Deduction</span>
+          <span class="f-op"> = </span>
+          <span class="f-fn">min</span><span class="f-op">(</span>
+          <span class="f-op">[</span><span class="f-var">Current contrib.</span><span class="f-op"> + </span><span class="f-var">Carryover</span><span class="f-op">]</span>
+          <span class="f-op"> &minus; </span>
+          <span class="f-pct">1%</span><span class="f-op"> &times; </span><span class="f-var">ATI</span>
+          <span class="f-op">,&nbsp;&nbsp;</span>
+          <span class="f-pct">10%</span><span class="f-op"> &times; </span><span class="f-var">ATI</span>
+          <span class="f-op">)</span>
+        </div>
+      </div>
+
+      <div class="example-block">
+        <div class="example-label">Worked Example — Radon Corporation</div>
+        <div class="example-given">
+          <span class="eg-key">Taxable income (before charit.)</span><span class="eg-val">$1,400,000</span>
+          <span class="eg-key">DRD included above</span>           <span class="eg-val">$100,000</span>
+          <span class="eg-key">Current year contributions</span>   <span class="eg-val">$120,000</span>
+          <span class="eg-key">Carryover from prior year</span>    <span class="eg-val">$25,000</span>
+        </div>
+        <div class="example-divider"></div>
+        <div class="example-steps">
+          <div class="ex-step">
+            <span class="ex-step-label">Step 1 — ATI: $1,400,000 + $100,000 DRD</span>
+            <span class="ex-step-val">$1,500,000</span>
+          </div>
+          <div class="ex-step">
+            <span class="ex-step-label">Step 2 — 1% floor: $1,500,000 × 1%</span>
+            <span class="ex-step-val">$15,000</span>
+          </div>
+          <div class="ex-step">
+            <span class="ex-step-label">Step 2 — 10% ceiling: $1,500,000 × 10%</span>
+            <span class="ex-step-val">$150,000</span>
+          </div>
+          <div class="ex-step">
+            <span class="ex-step-label">Step 3 — total contributions: $120,000 + $25,000</span>
+            <span class="ex-step-val">$145,000</span>
+          </div>
+          <div class="ex-step">
+            <span class="ex-step-label">Step 4 — subtract 1% floor: $145,000 &minus; $15,000</span>
+            <span class="ex-step-val">$130,000</span>
+          </div>
+          <div class="ex-step">
+            <span class="ex-step-label">$130,000 &lt; $150,000 ceiling — full amount allowed</span>
+            <span class="ex-step-val" style="color:var(--muted);">✓</span>
+          </div>
+          <div class="ex-step result">
+            <span class="ex-step-label">Charitable deduction for current year</span>
+            <span class="ex-step-val">$130,000</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="traps-block">
+        <div class="traps-label">Exam Traps</div>
+        <div class="trap-list">
+          <div class="trap-item">
+            <span class="trap-icon">&#9654;</span>
+            <span class="trap-text"><strong>Must add back DRD to get ATI.</strong> The exam gives you taxable income that already includes the DRD deduction — you have to reverse it. Forgetting this understates ATI, understates both the floor and ceiling.</span>
+          </div>
+          <div class="trap-item">
+            <span class="trap-icon">&#9654;</span>
+            <span class="trap-text"><strong>$150,000 is the ceiling, not the answer.</strong> You can never deduct more than contributions actually paid + carryovers. Radon only contributed $145,000 total, so $150,000 is off the table regardless.</span>
+          </div>
+          <div class="trap-item">
+            <span class="trap-icon">&#9654;</span>
+            <span class="trap-text"><strong>$145,000 ignores the 1% floor.</strong> The floor is not optional — it always reduces the deductible amount first.</span>
+          </div>
+          <div class="trap-item">
+            <span class="trap-icon">&#9654;</span>
+            <span class="trap-text"><strong>1% disallowance is permanent — cannot carry forward.</strong> The $15,000 cut by the floor is gone. However, amounts exceeding the 10% ceiling CAN carry forward up to 5 years.</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </article>
+
+  <div class="section-label" style="margin-top:12px;">Business Taxation — Depreciation</div>
+
+  <!-- ── CARD 5: MACRS CONVENTIONS ─────────────────────── -->
+  <article class="formula-card">
+    <div class="card-header">
+      <div class="card-header-left">
+        <div class="topic-badge">MACRS — Depreciation Conventions</div>
+        <div class="card-title">Which Convention Applies? Half-Year vs. Mid-Quarter vs. Mid-Month</div>
+        <div class="card-subtitle">Two separate tracks: real property always mid-month; personal property depends on the 40% test</div>
+      </div>
+      <div class="card-num">05</div>
+    </div>
+
+    <div class="card-body">
+
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="step-body">
+            <div class="step-label">Real property → always mid-month</div>
+            <div class="step-detail">
+              Buildings and structural components use the <span class="hi">mid-month convention</span> — no exceptions, no test needed. Land is <span class="hi">never depreciable</span> and is excluded from all calculations.
+            </div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-body">
+            <div class="step-label">Personal property → run the 40% test</div>
+            <div class="step-detail">
+              Default is <span class="hi">half-year convention</span>. But if more than <span class="hi">40% of total personal property basis</span> placed in service during the year falls in Q4 (Oct–Dec), the <span class="hi">mid-quarter convention</span> applies to <em>all</em> personal property placed in service that year.
+            </div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <div class="step-body">
+            <div class="step-label">Mid-quarter: if triggered, it applies to everything</div>
+            <div class="step-detail">
+              Once the 40% threshold is crossed, every piece of personal property placed in service that year uses mid-quarter — even items placed in Q1.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="formula-block">
+        <div class="formula-label">40% Test — triggers mid-quarter for personal property</div>
+        <div class="formula-line">
+          <span class="f-result">Q4 %</span>
+          <span class="f-op"> = </span>
+          <span class="f-var">Personal property placed in service Q4</span>
+          <span class="f-op"> &divide; </span>
+          <span class="f-var">Total personal property placed in service (yr)</span>
+        </div>
+        <div class="formula-line" style="margin-top:8px;">
+          <span class="f-op">If </span>
+          <span class="f-result">Q4 %</span>
+          <span class="f-op"> &gt; </span>
+          <span class="f-num">40%</span>
+          <span class="f-op"> → use </span>
+          <span class="f-fn">mid-quarter</span>
+          <span class="f-op"> for all personal property&nbsp;&nbsp;</span>
+          <span class="f-op">|&nbsp;&nbsp;else → </span>
+          <span class="f-fn">half-year</span>
+        </div>
+      </div>
+
+      <div class="example-block">
+        <div class="example-label">Worked Example — Star Corporation</div>
+        <div class="example-given">
+          <span class="eg-key">Building (March) — real property</span>   <span class="eg-val">$400,000</span>
+          <span class="eg-key">Land (March) — not depreciable</span>      <span class="eg-val">$150,000</span>
+          <span class="eg-key">Equipment (Nov 15) — personal prop.</span> <span class="eg-val">$80,000</span>
+        </div>
+        <div class="example-divider"></div>
+        <div class="example-steps">
+          <div class="ex-step">
+            <span class="ex-step-label">Building → real property → mid-month (always)</span>
+            <span class="ex-step-val">Mid-Month ✓</span>
+          </div>
+          <div class="ex-step">
+            <span class="ex-step-label">40% test — Q4 personal property: $80,000</span>
+            <span class="ex-step-val">$80,000</span>
+          </div>
+          <div class="ex-step">
+            <span class="ex-step-label">Total personal property placed in service: $80,000</span>
+            <span class="ex-step-val">$80,000</span>
+          </div>
+          <div class="ex-step">
+            <span class="ex-step-label">Q4 % = $80,000 ÷ $80,000 = 100% &gt; 40%</span>
+            <span class="ex-step-val">Triggered</span>
+          </div>
+          <div class="ex-step result">
+            <span class="ex-step-label">Equipment → mid-quarter convention applies</span>
+            <span class="ex-step-val">Mid-Quarter ✓</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="traps-block">
+        <div class="traps-label">Exam Traps</div>
+        <div class="trap-list">
+          <div class="trap-item">
+            <span class="trap-icon">&#9654;</span>
+            <span class="trap-text"><strong>Land and buildings are excluded from the 40% test.</strong> Only personal property (equipment, furniture, vehicles) goes into the numerator and denominator. The $400K building and $150K land are irrelevant to the test.</span>
+          </div>
+          <div class="trap-item">
+            <span class="trap-icon">&#9654;</span>
+            <span class="trap-text"><strong>Buildings never get half-year or mid-quarter.</strong> Real property is always mid-month — the exam frequently offers half-year for the building as a wrong answer choice.</span>
+          </div>
+          <div class="trap-item">
+            <span class="trap-icon">&#9654;</span>
+            <span class="trap-text"><strong>Mid-quarter infects all personal property for the year.</strong> If one late-year purchase triggers it, everything — including a piece of equipment bought in January — must use mid-quarter for that year.</span>
+          </div>
+          <div class="trap-item">
+            <span class="trap-icon">&#9654;</span>
+            <span class="trap-text"><strong>There is no "full-year convention."</strong> It doesn't exist under MACRS. If you see it as an answer choice, it's always wrong.</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </article>
+
+  <div class="section-label" style="margin-top:12px;">Individual Taxation — Itemized Deductions</div>
+
+  <!-- ── CARD 6: MEDICAL EXPENSE DEDUCTION ─────────────── -->
+  <article class="formula-card">
+    <div class="card-header">
+      <div class="card-header-left">
+        <div class="topic-badge">§213 — Medical Expense Deduction</div>
+        <div class="card-title">Schedule A Medical Expenses — Qualified Items &amp; 7.5% AGI Floor</div>
+        <div class="card-subtitle">Subtract reimbursements first, then apply the floor — order matters</div>
+      </div>
+      <div class="card-num">06</div>
+    </div>
+
+    <div class="card-body">
+
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="step-body">
+            <div class="step-label">Sum only qualified medical expenses</div>
+            <div class="step-detail">
+              Include: insurance premiums, deductibles, hospital costs, prescription drugs &amp; co-pays, doctor/dentist visits, prescription eyeglasses, transportation to medical care.<br>
+              <span style="color:var(--red);">Exclude:</span> vitamins/supplements for general health, health club dues, cosmetic procedures (unless reconstructive).
+            </div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-body">
+            <div class="step-label">Subtract insurance reimbursements</div>
+            <div class="step-detail">
+              Reduce qualified expenses by any insurance reimbursements <span class="hi">before</span> applying the AGI floor. This step trips up most exam takers.
+            </div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <div class="step-body">
+            <div class="step-label">Apply the 7.5% of AGI floor</div>
+            <div class="step-detail">
+              Only the amount exceeding <span class="hi">7.5% × AGI</span> is deductible. Applies to all taxpayers regardless of age (TCJA made 7.5% permanent).
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="formula-block">
+        <div class="formula-label">Formula</div>
+        <div class="formula-line">
+          <span class="f-result">Deduction</span>
+          <span class="f-op"> = </span>
+          <span class="f-fn">max</span><span class="f-op">(</span><span class="f-num">0</span><span class="f-op">,  </span>
+          <span class="f-op">[</span><span class="f-var">Qualified expenses</span>
+          <span class="f-op"> &minus; </span>
+          <span class="f-var">Reimbursements</span><span class="f-op">]</span>
+          <span class="f-op"> &minus; </span>
+          <span class="f-pct">7.5%</span>
+          <span class="f-op"> &times; </span>
+          <span class="f-var">AGI</span>
+          <span class="f-op">)</span>
+        </div>
+      </div>
+
+      <div class="example-block">
+        <div class="example-label">Worked Example — Jan Thomas (AGI $80,000)</div>
+        <div style="overflow-x:auto;margin-bottom:14px;">
+          <table style="width:100%;font-size:0.78rem;border-collapse:collapse;">
+            <thead>
+              <tr>
+                <th style="text-align:left;padding:5px 8px;color:var(--green);font-family:'JetBrains Mono',monospace;font-size:0.62rem;letter-spacing:0.08em;border-bottom:1px solid rgba(10,122,80,0.3);">Expense</th>
+                <th style="text-align:right;padding:5px 8px;color:var(--green);font-family:'JetBrains Mono',monospace;font-size:0.62rem;letter-spacing:0.08em;border-bottom:1px solid rgba(10,122,80,0.3);">Amount</th>
+                <th style="text-align:center;padding:5px 8px;color:var(--green);font-family:'JetBrains Mono',monospace;font-size:0.62rem;letter-spacing:0.08em;border-bottom:1px solid rgba(10,122,80,0.3);">Qualified?</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td style="padding:4px 8px;color:var(--text);">Medical insurance premiums</td><td style="text-align:right;font-family:'JetBrains Mono',monospace;font-weight:600;color:var(--text);padding:4px 8px;">$8,000</td><td style="text-align:center;color:var(--green);padding:4px 8px;">✓</td></tr>
+              <tr><td style="padding:4px 8px;color:var(--text);">Deductible paid</td><td style="text-align:right;font-family:'JetBrains Mono',monospace;font-weight:600;color:var(--text);padding:4px 8px;">$1,000</td><td style="text-align:center;color:var(--green);padding:4px 8px;">✓</td></tr>
+              <tr><td style="padding:4px 8px;color:var(--text);">Hospital / ER costs</td><td style="text-align:right;font-family:'JetBrains Mono',monospace;font-weight:600;color:var(--text);padding:4px 8px;">$2,000</td><td style="text-align:center;color:var(--green);padding:4px 8px;">✓</td></tr>
+              <tr><td style="padding:4px 8px;color:var(--muted);">Vitamins — general health</td><td style="text-align:right;font-family:'JetBrains Mono',monospace;font-weight:600;color:var(--muted);padding:4px 8px;">$500</td><td style="text-align:center;color:var(--red);padding:4px 8px;">✗</td></tr>
+              <tr><td style="padding:4px 8px;color:var(--text);">Prescription eyeglasses</td><td style="text-align:right;font-family:'JetBrains Mono',monospace;font-weight:600;color:var(--text);padding:4px 8px;">$200</td><td style="text-align:center;color:var(--green);padding:4px 8px;">✓</td></tr>
+              <tr><td style="padding:4px 8px;color:var(--text);">Doctor &amp; dentist visits</td><td style="text-align:right;font-family:'JetBrains Mono',monospace;font-weight:600;color:var(--text);padding:4px 8px;">$700</td><td style="text-align:center;color:var(--green);padding:4px 8px;">✓</td></tr>
+              <tr><td style="padding:4px 8px;color:var(--muted);">Health club dues — general health</td><td style="text-align:right;font-family:'JetBrains Mono',monospace;font-weight:600;color:var(--muted);padding:4px 8px;">$1,200</td><td style="text-align:center;color:var(--red);padding:4px 8px;">✗</td></tr>
+              <tr><td style="padding:4px 8px;color:var(--text);">Prescription drug co-pays</td><td style="text-align:right;font-family:'JetBrains Mono',monospace;font-weight:600;color:var(--text);padding:4px 8px;">$300</td><td style="text-align:center;color:var(--green);padding:4px 8px;">✓</td></tr>
+              <tr><td style="padding:4px 8px;color:var(--text);">Transportation to doctor</td><td style="text-align:right;font-family:'JetBrains Mono',monospace;font-weight:600;color:var(--text);padding:4px 8px;">$100</td><td style="text-align:center;color:var(--green);padding:4px 8px;">✓</td></tr>
+              <tr><td style="padding:4px 8px;color:var(--red);">Insurance reimbursement</td><td style="text-align:right;font-family:'JetBrains Mono',monospace;font-weight:600;color:var(--red);padding:4px 8px;">($1,500)</td><td style="text-align:center;color:var(--red);padding:4px 8px;">—</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="example-divider"></div>
+        <div class="example-steps">
+          <div class="ex-step">
+            <span class="ex-step-label">Step 1 — qualified expenses only (excl. vitamins &amp; health club)</span>
+            <span class="ex-step-val">$12,300</span>
+          </div>
+          <div class="ex-step">
+            <span class="ex-step-label">Step 2 — subtract reimbursement: $12,300 &minus; $1,500</span>
+            <span class="ex-step-val">$10,800</span>
+          </div>
+          <div class="ex-step">
+            <span class="ex-step-label">Step 3 — 7.5% floor: $80,000 &times; 7.5%</span>
+            <span class="ex-step-val">$6,000</span>
+          </div>
+          <div class="ex-step">
+            <span class="ex-step-label">$10,800 &minus; $6,000 floor</span>
+            <span class="ex-step-val">$4,800</span>
+          </div>
+          <div class="ex-step result">
+            <span class="ex-step-label">Deductible medical expenses (Schedule A)</span>
+            <span class="ex-step-val">$4,800</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="traps-block">
+        <div class="traps-label">Exam Traps</div>
+        <div class="trap-list">
+          <div class="trap-item">
+            <span class="trap-icon">&#9654;</span>
+            <span class="trap-text"><strong>Vitamins and health club dues are never deductible.</strong> "General health" = nondeductible. The expense must treat or diagnose a specific medical condition. $6,500 is the distractor that forgets to exclude these two.</span>
+          </div>
+          <div class="trap-item">
+            <span class="trap-icon">&#9654;</span>
+            <span class="trap-text"><strong>Subtract reimbursements before the floor, not after.</strong> $6,300 is the distractor that skips the reimbursement reduction. Reimbursements always reduce gross qualified expenses first.</span>
+          </div>
+          <div class="trap-item">
+            <span class="trap-icon">&#9654;</span>
+            <span class="trap-text"><strong>7.5% floor is permanent for all ages (post-TCJA).</strong> Pre-2021 it was 10% for under-65 taxpayers. The exam may test the old 10% rule — current law is 7.5% regardless of age.</span>
+          </div>
+          <div class="trap-item">
+            <span class="trap-icon">&#9654;</span>
+            <span class="trap-text"><strong>Transportation to medical care is qualified.</strong> Easy to overlook — the $100 counts. Mileage to/from required medical appointments is a deductible medical expense.</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </article>
+
+  <div class="section-label" style="margin-top:12px;">Individual Taxation — Core Formula</div>
+
+  <!-- ── CARD 7: INDIVIDUAL TAX FORMULA ORDER ──────────── -->
+  <article class="formula-card">
+    <div class="card-header">
+      <div class="card-header-left">
+        <div class="topic-badge">Individual Income Tax — Formula Order</div>
+        <div class="card-title">Gross Income → Taxable Income: The Correct Sequence</div>
+        <div class="card-subtitle">Four deduction layers in a fixed order — QBI and Additional deductions always come last</div>
+      </div>
+      <div class="card-num">07</div>
+    </div>
+
+    <div class="card-body">
+
+      <div class="formula-block">
+        <div class="formula-label">The Individual Income Tax Formula</div>
+        <div class="formula-line"><span class="f-var">Gross Income</span></div>
+        <div class="formula-line"><span class="f-op">&minus;&nbsp;&nbsp;</span><span class="f-var">Adjustments</span><span class="f-op" style="font-size:0.75rem;">&nbsp;&nbsp;(above-the-line deductions)</span></div>
+        <div class="formula-line"><span class="f-op">=&nbsp;&nbsp;</span><span class="f-result">Adjusted Gross Income (AGI)</span></div>
+        <div class="formula-line" style="margin-top:6px;"><span class="f-op">&minus;&nbsp;&nbsp;</span><span class="f-var">Standard deduction</span><span class="f-op"> or </span><span class="f-var">Itemized deductions</span></div>
+        <div class="formula-line"><span class="f-op">&minus;&nbsp;&nbsp;</span><span class="f-pct">QBI deduction</span><span class="f-op" style="font-size:0.75rem;">&nbsp;&nbsp;(§199A — 20% of qualified business income)</span></div>
+        <div class="formula-line"><span class="f-op">&minus;&nbsp;&nbsp;</span><span class="f-num">Additional deductions</span><span class="f-op" style="font-size:0.75rem;">&nbsp;&nbsp;(e.g., qualified disability trust deduction)</span></div>
+        <div class="formula-line" style="margin-top:6px;"><span class="f-op">=&nbsp;&nbsp;</span><span class="f-result">Taxable Income</span></div>
+      </div>
+
+      <div class="example-block">
+        <div class="example-label">Order to Memorize</div>
+        <div class="example-steps">
+          <div class="ex-step">
+            <span class="ex-step-label" style="font-weight:700;color:var(--text);">1 — Adjustments</span>
+            <span class="ex-step-val">→ gets you to AGI</span>
+          </div>
+          <div class="ex-step">
+            <span class="ex-step-label" style="font-weight:700;color:var(--text);">2 — Standard or Itemized deduction</span>
+            <span class="ex-step-val">→ from AGI</span>
+          </div>
+          <div class="ex-step">
+            <span class="ex-step-label" style="font-weight:700;color:var(--text);">3 — QBI deduction (§199A)</span>
+            <span class="ex-step-val">→ after Std/Itemized</span>
+          </div>
+          <div class="ex-step result">
+            <span class="ex-step-label" style="font-weight:700;color:var(--text);">4 — Additional deductions</span>
+            <span class="ex-step-val">→ last, → Taxable Income</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="traps-block">
+        <div class="traps-label">Exam Traps</div>
+        <div class="trap-list">
+          <div class="trap-item">
+            <span class="trap-icon">&#9654;</span>
+            <span class="trap-text"><strong>QBI deduction is NOT an adjustment and NOT itemized.</strong> It's its own deduction layer after Std/Itemized but before Additional deductions. Misplacing it is the most common wrong answer.</span>
+          </div>
+          <div class="trap-item">
+            <span class="trap-icon">&#9654;</span>
+            <span class="trap-text"><strong>Adjustments always come first</strong> — they reduce gross income to arrive at AGI, which then becomes the base for the 7.5% medical floor, 2% misc. floors, and other AGI-dependent calculations.</span>
+          </div>
+          <div class="trap-item">
+            <span class="trap-icon">&#9654;</span>
+            <span class="trap-text"><strong>Standard vs. Itemized — choose one, not both.</strong> The taxpayer takes whichever is greater. The QBI and Additional deductions apply regardless of which is chosen.</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </article>
+
+  <div class="section-label" style="margin-top:12px;">Individual Taxation — Filing Status</div>
+
+  <!-- ── CARD 8: FILING STATUS ──────────────────────────── -->
+  <article class="formula-card">
+    <div class="card-header">
+      <div class="card-header-left">
+        <div class="topic-badge">Filing Status — Quick Reference</div>
+        <div class="card-title">5 Filing Statuses: Requirements &amp; Benefits</div>
+        <div class="card-subtitle">Status is determined on the last day of the tax year</div>
+      </div>
+      <div class="card-num">08</div>
+    </div>
+
+    <div class="card-body">
+
+      <div style="overflow-x:auto;margin-bottom:22px;">
+        <table style="width:100%;border-collapse:collapse;font-size:0.8rem;">
+          <thead>
+            <tr style="background:#f0f4fa;">
+              <th style="text-align:left;padding:9px 12px;color:var(--cyan);font-family:'JetBrains Mono',monospace;font-size:0.6rem;letter-spacing:0.1em;border-bottom:2px solid var(--border);white-space:nowrap;">Filing Status</th>
+              <th style="text-align:center;padding:9px 12px;color:var(--cyan);font-family:'JetBrains Mono',monospace;font-size:0.6rem;letter-spacing:0.1em;border-bottom:2px solid var(--border);white-space:nowrap;">Married?</th>
+              <th style="text-align:center;padding:9px 12px;color:var(--cyan);font-family:'JetBrains Mono',monospace;font-size:0.6rem;letter-spacing:0.1em;border-bottom:2px solid var(--border);white-space:nowrap;">Dependents?</th>
+              <th style="text-align:left;padding:9px 12px;color:var(--cyan);font-family:'JetBrains Mono',monospace;font-size:0.6rem;letter-spacing:0.1em;border-bottom:2px solid var(--border);">Key Requirements</th>
+              <th style="text-align:left;padding:9px 12px;color:var(--cyan);font-family:'JetBrains Mono',monospace;font-size:0.6rem;letter-spacing:0.1em;border-bottom:2px solid var(--border);">Benefit</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="border-bottom:1px solid var(--border);">
+              <td style="padding:10px 12px;font-weight:700;color:var(--text);white-space:nowrap;">Single (S)</td>
+              <td style="padding:10px 12px;text-align:center;color:var(--muted);">❌ No</td>
+              <td style="padding:10px 12px;text-align:center;color:var(--muted);">Optional</td>
+              <td style="padding:10px 12px;color:var(--muted);line-height:1.5;">Not married on last day of year; doesn't qualify for another status</td>
+              <td style="padding:10px 12px;color:var(--muted);">Baseline rates &amp; standard deduction</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--border);background:#f8fffe;">
+              <td style="padding:10px 12px;font-weight:700;color:var(--green);white-space:nowrap;">MFJ</td>
+              <td style="padding:10px 12px;text-align:center;">✅ Yes</td>
+              <td style="padding:10px 12px;text-align:center;color:var(--muted);">Optional</td>
+              <td style="padding:10px 12px;color:var(--muted);line-height:1.5;">Married on last day of year; file one joint return</td>
+              <td style="padding:10px 12px;color:var(--green);font-weight:600;">Lowest rates, largest std. deduction, most credits</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--border);">
+              <td style="padding:10px 12px;font-weight:700;color:var(--red);white-space:nowrap;">MFS</td>
+              <td style="padding:10px 12px;text-align:center;">✅ Yes</td>
+              <td style="padding:10px 12px;text-align:center;color:var(--muted);">Optional</td>
+              <td style="padding:10px 12px;color:var(--muted);line-height:1.5;">Married but each spouse files separately</td>
+              <td style="padding:10px 12px;color:var(--red);">Loses / limits many deductions &amp; credits</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--border);background:#f8fffe;">
+              <td style="padding:10px 12px;font-weight:700;color:var(--cyan);white-space:nowrap;">Head of Household (HOH)</td>
+              <td style="padding:10px 12px;text-align:center;color:var(--muted);">❌ Unmarried<br><span style="font-size:0.7rem;">(or considered)</span></td>
+              <td style="padding:10px 12px;text-align:center;color:var(--green);">✅ Required</td>
+              <td style="padding:10px 12px;color:var(--muted);line-height:1.5;">Pays &gt;50% cost of home for qualifying child or relative for &gt;½ year</td>
+              <td style="padding:10px 12px;color:var(--cyan);">Better brackets &amp; larger std. deduction than Single</td>
+            </tr>
+            <tr>
+              <td style="padding:10px 12px;font-weight:700;color:var(--purple);white-space:nowrap;">Qualifying Surviving<br>Spouse (QSS)</td>
+              <td style="padding:10px 12px;text-align:center;color:var(--muted);">❌ Widowed<br><span style="font-size:0.7rem;">(not remarried)</span></td>
+              <td style="padding:10px 12px;text-align:center;color:var(--green);">✅ Required<br><span style="font-size:0.7rem;">(child only)</span></td>
+              <td style="padding:10px 12px;color:var(--muted);line-height:1.5;">Spouse died within prior 2 years; not remarried; maintains home for qualifying <strong>child</strong></td>
+              <td style="padding:10px 12px;color:var(--purple);">Same rates &amp; std. deduction as MFJ</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="traps-block">
+        <div class="traps-label">Exam Traps</div>
+        <div class="trap-list">
+          <div class="trap-item">
+            <span class="trap-icon">&#9654;</span>
+            <span class="trap-text"><strong>HOH requires a qualifying child or relative — QSS requires a qualifying child only.</strong> A parent caring for a qualifying relative can get HOH; the same situation does NOT qualify for QSS.</span>
+          </div>
+          <div class="trap-item">
+            <span class="trap-icon">&#9654;</span>
+            <span class="trap-text"><strong>"Considered unmarried" can unlock HOH for married taxpayers.</strong> A married taxpayer who lived apart from their spouse the last 6 months of the year, files separately, and maintains the home for a qualifying child can use HOH — they don't have to be legally single.</span>
+          </div>
+          <div class="trap-item">
+            <span class="trap-icon">&#9654;</span>
+            <span class="trap-text"><strong>QSS is only available for 2 years after spouse's death.</strong> Year 1 (year of death): still MFJ. Years 2–3: QSS (if qualified). Year 4+: drops to HOH or Single.</span>
+          </div>
+          <div class="trap-item">
+            <span class="trap-icon">&#9654;</span>
+            <span class="trap-text"><strong>MFS kills many credits.</strong> Earned Income Credit, Child &amp; Dependent Care Credit, American Opportunity Credit, and others are either eliminated or severely limited when filing MFS. Almost always worse than MFJ — the exam tests whether you know this.</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </article>
+
+  <div class="section-label" style="margin-top:12px;">Business Law — UCC Article 9</div>
+
+  <!-- ── CARD 9: PERFECTING A SECURITY INTEREST ─────────── -->
+  <article class="formula-card">
+    <div class="card-header">
+      <div class="card-header-left">
+        <div class="topic-badge">UCC Article 9 — Secured Transactions</div>
+        <div class="card-title">Attachment &amp; Perfection of a Security Interest</div>
+        <div class="card-subtitle">Attachment comes first — perfection without attachment is impossible</div>
+      </div>
+      <div class="card-num">09</div>
+    </div>
+
+    <div class="card-body">
+
+      <!-- Step 1: Attachment -->
+      <div style="margin-bottom:18px;">
+        <div style="font-size:0.62rem;font-weight:800;letter-spacing:0.12em;text-transform:uppercase;color:var(--cyan);margin-bottom:10px;">Step 1 — Attachment (3 Requirements — ALL must be met)</div>
+        <div class="steps">
+          <div class="step">
+            <div class="step-num">A</div>
+            <div class="step-body">
+              <div class="step-label">Agreement</div>
+              <div class="step-detail">Written or authenticated security agreement signed by the debtor describing the collateral.</div>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">B</div>
+            <div class="step-body">
+              <div class="step-label">Value given</div>
+              <div class="step-detail">Creditor must give value — e.g., extend a loan or extend credit.</div>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">C</div>
+            <div class="step-body">
+              <div class="step-label">Debtor's rights in collateral</div>
+              <div class="step-detail">Debtor must have rights or the power to transfer rights in the collateral.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 2: Perfection Methods -->
+      <div style="margin-bottom:18px;">
+        <div style="font-size:0.62rem;font-weight:800;letter-spacing:0.12em;text-transform:uppercase;color:var(--cyan);margin-bottom:10px;">Step 2 — Perfection (5 Methods)</div>
+        <div class="steps">
+          <div class="step">
+            <div class="step-num">1</div>
+            <div class="step-body">
+              <div class="step-label">Filing a Financing Statement</div>
+              <div class="step-detail">Used for most collateral, especially <span class="hi">intangibles</span> (accounts receivable, general intangibles). Must include debtor name &amp; address, secured party name &amp; address, and collateral description. Filed at state level. Can file before attachment — perfection only begins at attachment.</div>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">2</div>
+            <div class="step-body">
+              <div class="step-label">Possession</div>
+              <div class="step-detail"><span class="hi">Tangible collateral only</span> (goods, negotiable documents, certificated securities). Creditor physically holds the collateral. Perfects instantly while possession lasts. Cannot use for intangibles (accounts receivable, deposit accounts).</div>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">3</div>
+            <div class="step-body">
+              <div class="step-label">Control</div>
+              <div class="step-detail">Used for <span class="hi">investment property</span> (stocks, bonds, securities accounts) and <span class="hi">deposit accounts</span>. Creditor obtains legal control — e.g., debtor authorizes broker to comply with creditor's instructions. No filing or possession needed.</div>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">4</div>
+            <div class="step-body">
+              <div class="step-label">Automatic Perfection</div>
+              <div class="step-detail">No filing or possession required. Applies to: (1) <span class="hi">PMSI in consumer goods</span> — perfected upon attachment; (2) small-scale assignments of accounts receivable. Does NOT apply to large-scale account assignments or equipment PMSIs.</div>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">5</div>
+            <div class="step-body">
+              <div class="step-label">Temporary Perfection</div>
+              <div class="step-detail"><span class="hi">20-day grace period</span> for proceeds after collateral is sold. <span class="hi">4-month grace period</span> if debtor moves to a new state. Must file in new jurisdiction before grace period expires.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Collateral Table -->
+      <div style="overflow-x:auto;margin-bottom:22px;">
+        <div style="font-size:0.62rem;font-weight:800;letter-spacing:0.12em;text-transform:uppercase;color:var(--cyan);margin-bottom:10px;">Perfection Method by Collateral Type</div>
+        <table style="width:100%;border-collapse:collapse;font-size:0.8rem;">
+          <thead>
+            <tr style="background:#f0f4fa;">
+              <th style="text-align:left;padding:9px 12px;color:var(--cyan);font-family:'JetBrains Mono',monospace;font-size:0.6rem;letter-spacing:0.1em;border-bottom:2px solid var(--border);">Collateral Type</th>
+              <th style="text-align:left;padding:9px 12px;color:var(--cyan);font-family:'JetBrains Mono',monospace;font-size:0.6rem;letter-spacing:0.1em;border-bottom:2px solid var(--border);">Method(s)</th>
+              <th style="text-align:left;padding:9px 12px;color:var(--cyan);font-family:'JetBrains Mono',monospace;font-size:0.6rem;letter-spacing:0.1em;border-bottom:2px solid var(--border);">Notes</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="border-bottom:1px solid var(--border);">
+              <td style="padding:9px 12px;font-weight:600;color:var(--text);">Tangible Goods</td>
+              <td style="padding:9px 12px;color:var(--muted);">Filing, Possession</td>
+              <td style="padding:9px 12px;color:var(--muted);">Possession perfects instantly while held</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--border);background:#f8f9fc;">
+              <td style="padding:9px 12px;font-weight:600;color:var(--text);">Accounts Receivable</td>
+              <td style="padding:9px 12px;color:var(--muted);">Filing, Automatic (small-scale only)</td>
+              <td style="padding:9px 12px;color:var(--red);">Cannot perfect by possession</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--border);">
+              <td style="padding:9px 12px;font-weight:600;color:var(--text);">Investment Property</td>
+              <td style="padding:9px 12px;color:var(--muted);">Filing, Control</td>
+              <td style="padding:9px 12px;color:var(--muted);">Control is preferred &amp; superior method</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--border);background:#f8f9fc;">
+              <td style="padding:9px 12px;font-weight:600;color:var(--green);">Consumer Goods (PMSI)</td>
+              <td style="padding:9px 12px;color:var(--green);font-weight:600;">Automatic</td>
+              <td style="padding:9px 12px;color:var(--green);">Perfected upon attachment — no filing needed</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--border);">
+              <td style="padding:9px 12px;font-weight:600;color:var(--text);">Deposit Accounts</td>
+              <td style="padding:9px 12px;color:var(--muted);">Control only</td>
+              <td style="padding:9px 12px;color:var(--red);">Cannot perfect by filing or possession</td>
+            </tr>
+            <tr>
+              <td style="padding:9px 12px;font-weight:600;color:var(--text);">Proceeds</td>
+              <td style="padding:9px 12px;color:var(--muted);">Temporary (20-day grace)</td>
+              <td style="padding:9px 12px;color:var(--muted);">Must perfect in new collateral after 20 days</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- PMSI Deep Dive -->
+      <div style="background:var(--cyan-dim);border:1px solid rgba(26,111,212,0.25);border-left:3px solid var(--cyan);border-radius:10px;padding:16px 20px;margin-bottom:22px;">
+        <div style="font-size:0.62rem;font-weight:800;letter-spacing:0.12em;text-transform:uppercase;color:var(--cyan);margin-bottom:14px;">PMSI — Purchase Money Security Interest Deep Dive</div>
+        <p style="font-size:0.8rem;color:var(--muted);line-height:1.6;margin-bottom:14px;">A PMSI arises when a creditor finances the debtor's purchase of the specific collateral. It gets <strong style="color:var(--text);">super-priority</strong> over earlier-perfected interests — even a creditor who filed first can be leapfrogged by a PMSI creditor who perfects in time.</p>
+        <div style="overflow-x:auto;">
+          <table style="width:100%;border-collapse:collapse;font-size:0.8rem;">
+            <thead>
+              <tr style="background:rgba(26,111,212,0.08);">
+                <th style="text-align:left;padding:8px 12px;color:var(--cyan);font-family:'JetBrains Mono',monospace;font-size:0.6rem;letter-spacing:0.1em;border-bottom:1px solid rgba(26,111,212,0.2);">Collateral</th>
+                <th style="text-align:left;padding:8px 12px;color:var(--cyan);font-family:'JetBrains Mono',monospace;font-size:0.6rem;letter-spacing:0.1em;border-bottom:1px solid rgba(26,111,212,0.2);">How to Perfect</th>
+                <th style="text-align:left;padding:8px 12px;color:var(--cyan);font-family:'JetBrains Mono',monospace;font-size:0.6rem;letter-spacing:0.1em;border-bottom:1px solid rgba(26,111,212,0.2);">Deadline for Priority</th>
+                <th style="text-align:left;padding:8px 12px;color:var(--cyan);font-family:'JetBrains Mono',monospace;font-size:0.6rem;letter-spacing:0.1em;border-bottom:1px solid rgba(26,111,212,0.2);">Extra Notice Required?</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style="border-bottom:1px solid rgba(26,111,212,0.1);">
+                <td style="padding:8px 12px;font-weight:600;color:var(--text);">Consumer Goods</td>
+                <td style="padding:8px 12px;color:var(--green);font-weight:600;">Automatic upon attachment</td>
+                <td style="padding:8px 12px;color:var(--green);">No filing needed</td>
+                <td style="padding:8px 12px;color:var(--muted);">No</td>
+              </tr>
+              <tr style="border-bottom:1px solid rgba(26,111,212,0.1);background:rgba(26,111,212,0.04);">
+                <td style="padding:8px 12px;font-weight:600;color:var(--text);">Equipment</td>
+                <td style="padding:8px 12px;color:var(--muted);">File financing statement</td>
+                <td style="padding:8px 12px;color:var(--amber);font-weight:600;">Within 20 days of delivery</td>
+                <td style="padding:8px 12px;color:var(--muted);">No</td>
+              </tr>
+              <tr>
+                <td style="padding:8px 12px;font-weight:600;color:var(--text);">Inventory</td>
+                <td style="padding:8px 12px;color:var(--muted);">File financing statement</td>
+                <td style="padding:8px 12px;color:var(--red);font-weight:600;">Before debtor gets possession</td>
+                <td style="padding:8px 12px;color:var(--red);font-weight:600;">Yes — notify prior secured parties</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p style="font-size:0.78rem;color:var(--muted);margin-top:12px;line-height:1.5;"><strong style="color:var(--text);">Priority rule:</strong> Normally first to file or perfect wins. A properly perfected PMSI is the exception — it jumps the line over earlier-perfected interests. The 20-day grace period for equipment "relates back" to attachment, giving the PMSI creditor retroactive priority.</p>
+      </div>
+
+      <div class="traps-block">
+        <div class="traps-label">Exam Traps</div>
+        <div class="trap-list">
+          <div class="trap-item">
+            <span class="trap-icon">&#9654;</span>
+            <span class="trap-text"><strong>Filing before attachment is allowed — but perfection doesn't start until attachment.</strong> You can file the financing statement early, but the clock on perfection only begins once all 3 attachment requirements are met.</span>
+          </div>
+          <div class="trap-item">
+            <span class="trap-icon">&#9654;</span>
+            <span class="trap-text"><strong>PMSI automatic perfection is consumer goods only — equipment and inventory both require filing.</strong> Equipment: file within 20 days. Inventory: file AND notify prior secured parties before debtor takes possession. Missing either step loses the super-priority.</span>
+          </div>
+          <div class="trap-item">
+            <span class="trap-icon">&#9654;</span>
+            <span class="trap-text"><strong>Inventory PMSI requires advance notice to prior secured parties.</strong> Equipment PMSI does not. This distinction is a classic exam question — inventory is stricter because it turns over fast and affects existing lenders more directly.</span>
+          </div>
+          <div class="trap-item">
+            <span class="trap-icon">&#9654;</span>
+            <span class="trap-text"><strong>Deposit accounts can only be perfected by control.</strong> Filing and possession are both invalid. The exam will offer filing as a trap answer for deposit accounts.</span>
+          </div>
+          <div class="trap-item">
+            <span class="trap-icon">&#9654;</span>
+            <span class="trap-text"><strong>Grace periods: 20 days for PMSI equipment &amp; proceeds, 4 months for interstate moves.</strong> Don't confuse the two — the exam tests these numbers against each other.</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </article>
+
+  <div class="section-label" style="margin-top:12px;">Business Taxation — §197 Intangibles</div>
+
+  <!-- ── CARD 10: §197 INTANGIBLE AMORTIZATION ─────────── -->
+  <article class="formula-card">
+    <div class="card-header">
+      <div class="card-header-left">
+        <div class="topic-badge">§197 — Intangible Amortization</div>
+        <div class="card-title">§197 Purchased Intangibles — Always 180 Months</div>
+        <div class="card-subtitle">Ignore the actual useful life — 180 months applies regardless, full-month convention</div>
+      </div>
+      <div class="card-num">10</div>
+    </div>
+
+    <div class="card-body">
+
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="step-body">
+            <div class="step-label">Identify §197 intangibles</div>
+            <div class="step-detail">
+              Goodwill, going concern value, patents, copyrights, franchises, trademarks, trade names, covenants not-to-compete, customer lists — when <span class="hi">acquired as part of a business purchase</span>. Self-created intangibles are NOT §197.
+            </div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-body">
+            <div class="step-label">Pool all §197 intangibles from the same acquisition</div>
+            <div class="step-detail">
+              Every §197 intangible acquired in the same business purchase is grouped together. One total basis, one 180-month clock — not separate schedules per asset.
+            </div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <div class="step-body">
+            <div class="step-label">Amortize over 180 months — full-month convention</div>
+            <div class="step-detail">
+              Divide total basis by 180 to get monthly amortization. Count <span class="hi">full months starting in the month of acquisition</span> — even if purchased on the last day of the month.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="formula-block">
+        <div class="formula-label">Formula</div>
+        <div class="formula-line">
+          <span class="f-result">Annual Amortization</span>
+          <span class="f-op"> = </span>
+          <span class="f-op">(</span>
+          <span class="f-var">Total §197 basis</span>
+          <span class="f-op"> &divide; </span>
+          <span class="f-num">180</span>
+          <span class="f-op">)</span>
+          <span class="f-op"> &times; </span>
+          <span class="f-var">Months in service</span>
+        </div>
+        <div class="formula-line" style="margin-top:6px;font-size:0.78rem;">
+          <span class="f-op">Convention: </span>
+          <span class="f-fn">full-month</span>
+          <span class="f-op"> — count from month of acquisition, not mid-month or half-year</span>
+        </div>
+      </div>
+
+      <div class="example-block">
+        <div class="example-label">Worked Example — Fran acquires Chuck's business (January 2)</div>
+        <div class="example-given">
+          <span class="eg-key">Patent (10-yr remaining life)</span>      <span class="eg-val">$60,000</span>
+          <span class="eg-key">Covenant not-to-compete (5-yr)</span>     <span class="eg-val">$30,000</span>
+          <span class="eg-key">Goodwill (excess purchase price)</span>   <span class="eg-val">$45,000</span>
+          <span class="eg-key">Total §197 basis</span>                  <span class="eg-val">$135,000</span>
+        </div>
+        <div class="example-divider"></div>
+        <div class="example-steps">
+          <div class="ex-step">
+            <span class="ex-step-label">Monthly amortization: $135,000 &divide; 180 months</span>
+            <span class="ex-step-val">$750/mo</span>
+          </div>
+          <div class="ex-step">
+            <span class="ex-step-label">Months in service: January–December (acquired Jan 2)</span>
+            <span class="ex-step-val">&times; 12 months</span>
+          </div>
+          <div class="ex-step result">
+            <span class="ex-step-label">§197 amortization deduction for the year</span>
+            <span class="ex-step-val">$9,000</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="traps-block">
+        <div class="traps-label">Exam Traps</div>
+        <div class="trap-list">
+          <div class="trap-item">
+            <span class="trap-icon">&#9654;</span>
+            <span class="trap-text"><strong>Never use the actual useful life.</strong> The patent has 10 years left, the covenant is 5 years — irrelevant. §197 overrides both. Using those lives ($6,000 + $6,000 = $12,000) is the most common wrong answer on this topic.</span>
+          </div>
+          <div class="trap-item">
+            <span class="trap-icon">&#9654;</span>
+            <span class="trap-text"><strong>Goodwill IS amortizable for tax purposes under §197.</strong> Unlike GAAP (where goodwill is tested for impairment, not amortized), tax law allows full amortization over 180 months. Skipping goodwill gets you $6,000 — another distractor.</span>
+          </div>
+          <div class="trap-item">
+            <span class="trap-icon">&#9654;</span>
+            <span class="trap-text"><strong>Full-month convention — not half-year, not mid-month.</strong> If acquired January 2, you get 12 full months. MACRS conventions do not apply to §197 intangibles.</span>
+          </div>
+          <div class="trap-item">
+            <span class="trap-icon">&#9654;</span>
+            <span class="trap-text"><strong>Must be acquired in a business purchase — self-created intangibles don't qualify.</strong> A patent you developed internally is not §197. Only purchased intangibles acquired alongside a going business get the 180-month treatment.</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </article>
+
+  <div class="section-label" style="margin-top:12px;">Business Law &amp; Tax-Exempt Organizations</div>
+
+  <!-- ── CARD 11: 501(c) TAX-EXEMPT ORGS ───────────────── -->
+  <article class="formula-card">
+    <div class="card-header">
+      <div class="card-header-left">
+        <div class="topic-badge">§501(c) — Tax-Exempt Organizations</div>
+        <div class="card-title">501(c)(3) Public Charities vs. Other Tax-Exempt Categories</div>
+        <div class="card-subtitle">Tax-exempt ≠ deductible donations — the category determines donor deductibility</div>
+      </div>
+      <div class="card-num">11</div>
+    </div>
+
+    <div class="card-body">
+
+      <!-- 501(c)(3) box -->
+      <div style="background:var(--green-dim);border:1px solid rgba(10,122,80,0.25);border-left:3px solid var(--green);border-radius:10px;padding:16px 20px;margin-bottom:18px;">
+        <div style="font-size:0.62rem;font-weight:800;letter-spacing:0.12em;text-transform:uppercase;color:var(--green);margin-bottom:10px;">501(c)(3) — Public Charities (donations are tax-deductible)</div>
+        <div style="font-size:0.8rem;color:var(--muted);line-height:1.8;">
+          ✓ &nbsp;Religious organizations<br>
+          ✓ &nbsp;Educational institutions<br>
+          ✓ &nbsp;Scientific organizations<br>
+          ✓ &nbsp;Literary organizations<br>
+          ✓ &nbsp;<strong style="color:var(--text);">Organizations testing consumer products for public safety</strong><br>
+          ✓ &nbsp;Prevention of cruelty to children or animals<br>
+          ✓ &nbsp;Amateur sports competition (non-Olympic)<br>
+          ✓ &nbsp;Fostering national or international amateur sports competition
+        </div>
+      </div>
+
+      <!-- Comparison Table -->
+      <div style="overflow-x:auto;margin-bottom:22px;">
+        <table style="width:100%;border-collapse:collapse;font-size:0.8rem;">
+          <thead>
+            <tr style="background:#f0f4fa;">
+              <th style="text-align:left;padding:9px 12px;color:var(--cyan);font-family:'JetBrains Mono',monospace;font-size:0.6rem;letter-spacing:0.1em;border-bottom:2px solid var(--border);">Section</th>
+              <th style="text-align:left;padding:9px 12px;color:var(--cyan);font-family:'JetBrains Mono',monospace;font-size:0.6rem;letter-spacing:0.1em;border-bottom:2px solid var(--border);">Type of Organization</th>
+              <th style="text-align:center;padding:9px 12px;color:var(--cyan);font-family:'JetBrains Mono',monospace;font-size:0.6rem;letter-spacing:0.1em;border-bottom:2px solid var(--border);">Tax-Exempt?</th>
+              <th style="text-align:center;padding:9px 12px;color:var(--cyan);font-family:'JetBrains Mono',monospace;font-size:0.6rem;letter-spacing:0.1em;border-bottom:2px solid var(--border);">Donations Deductible?</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="border-bottom:1px solid var(--border);background:#f8fffe;">
+              <td style="padding:9px 12px;font-family:'JetBrains Mono',monospace;font-weight:700;color:var(--green);">501(c)(3)</td>
+              <td style="padding:9px 12px;color:var(--text);">Public charities — religious, educational, scientific, public safety testing, etc.</td>
+              <td style="padding:9px 12px;text-align:center;color:var(--green);font-weight:700;">✅ Yes</td>
+              <td style="padding:9px 12px;text-align:center;color:var(--green);font-weight:700;">✅ Yes</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--border);">
+              <td style="padding:9px 12px;font-family:'JetBrains Mono',monospace;font-weight:700;color:var(--text);">501(c)(4)</td>
+              <td style="padding:9px 12px;color:var(--text);">Civic leagues, social welfare organizations, homeowners' associations</td>
+              <td style="padding:9px 12px;text-align:center;color:var(--green);">✅ Yes</td>
+              <td style="padding:9px 12px;text-align:center;color:var(--red);font-weight:700;">❌ No</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--border);background:#f8f9fc;">
+              <td style="padding:9px 12px;font-family:'JetBrains Mono',monospace;font-weight:700;color:var(--text);">501(c)(5)</td>
+              <td style="padding:9px 12px;color:var(--text);">Labor, agricultural, and horticultural organizations</td>
+              <td style="padding:9px 12px;text-align:center;color:var(--green);">✅ Yes</td>
+              <td style="padding:9px 12px;text-align:center;color:var(--red);font-weight:700;">❌ No</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--border);">
+              <td style="padding:9px 12px;font-family:'JetBrains Mono',monospace;font-weight:700;color:var(--text);">501(c)(6)</td>
+              <td style="padding:9px 12px;color:var(--text);">Business leagues, chambers of commerce, real estate boards</td>
+              <td style="padding:9px 12px;text-align:center;color:var(--green);">✅ Yes</td>
+              <td style="padding:9px 12px;text-align:center;color:var(--red);font-weight:700;">❌ No</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--border);background:#f8f9fc;">
+              <td style="padding:9px 12px;font-family:'JetBrains Mono',monospace;font-weight:700;color:var(--text);">501(c)(7)</td>
+              <td style="padding:9px 12px;color:var(--text);">Social and recreational clubs (country clubs, hobby groups)</td>
+              <td style="padding:9px 12px;text-align:center;color:var(--green);">✅ Yes</td>
+              <td style="padding:9px 12px;text-align:center;color:var(--red);font-weight:700;">❌ No</td>
+            </tr>
+            <tr>
+              <td style="padding:9px 12px;font-family:'JetBrains Mono',monospace;font-weight:700;color:var(--amber);">501(c)(19)</td>
+              <td style="padding:9px 12px;color:var(--text);">Veterans' organizations</td>
+              <td style="padding:9px 12px;text-align:center;color:var(--green);">✅ Yes</td>
+              <td style="padding:9px 12px;text-align:center;color:var(--amber);font-weight:700;">✅ Exception</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="traps-block">
+        <div class="traps-label">Exam Traps</div>
+        <div class="trap-list">
+          <div class="trap-item">
+            <span class="trap-icon">&#9654;</span>
+            <span class="trap-text"><strong>Tax-exempt does NOT mean donations are deductible.</strong> Every org in the table above is tax-exempt — but only 501(c)(3) and 501(c)(19) generate a charitable deduction for donors. This distinction is tested constantly.</span>
+          </div>
+          <div class="trap-item">
+            <span class="trap-icon">&#9654;</span>
+            <span class="trap-text"><strong>Civic leagues and social welfare orgs are 501(c)(4), not 501(c)(3).</strong> They serve community interests but not broad public charitable purposes — donations are not deductible.</span>
+          </div>
+          <div class="trap-item">
+            <span class="trap-icon">&#9654;</span>
+            <span class="trap-text"><strong>Organizations testing consumer products for public safety ARE 501(c)(3).</strong> This one surprises people — it reads like a business activity but it's classified as serving public welfare and qualifies as a public charity.</span>
+          </div>
+          <div class="trap-item">
+            <span class="trap-icon">&#9654;</span>
+            <span class="trap-text"><strong>Veterans' organizations (501(c)(19)) are the key exception.</strong> Donations to them ARE deductible even though they're not 501(c)(3). Volunteer fire departments also qualify for deductible donations under a separate rule.</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </article>
+
+  <div class="section-label" style="margin-top:12px;">Business Taxation — Net Operating Losses</div>
+
+  <!-- ── CARD 12: NOL ───────────────────────────────────── -->
+  <article class="formula-card">
+    <div class="card-header">
+      <div class="card-header-left">
+        <div class="topic-badge">NOL — Net Operating Loss</div>
+        <div class="card-title">NOL Generation, Carryforward &amp; 80% Limitation</div>
+        <div class="card-subtitle">C corps claim at entity level — pass-throughs (S corps, partnerships) do not</div>
+      </div>
+      <div class="card-num">12</div>
+    </div>
+
+    <div class="card-body">
+
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="step-body">
+            <div class="step-label">Generate the NOL</div>
+            <div class="step-detail">
+              NOL arises when allowable deductions exceed gross income. For C corps: Gross Income &minus; Expenses &minus; Charitable contributions &minus; DRD = negative taxable income → that negative amount is the NOL.
+            </div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-body">
+            <div class="step-label">Carry it forward (post-2017 TCJA rules)</div>
+            <div class="step-detail">
+              NOLs generated in 2021+ carry forward <span class="hi">indefinitely</span>. No carryback. In the carryforward year, the NOL deduction is capped at <span class="hi">80% of taxable income</span> — the corporation can never be reduced below zero using the NOL alone.
+            </div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <div class="step-body">
+            <div class="step-label">Apply the deduction — max allowed vs. NOL available</div>
+            <div class="step-detail">
+              Deduct the <span class="hi">lesser of</span>: the available NOL carryforward, or 80% of current-year taxable income. Any unused NOL continues to carry forward.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Carryforward rules by year -->
+      <div style="overflow-x:auto;margin-bottom:18px;">
+        <div style="font-size:0.62rem;font-weight:800;letter-spacing:0.12em;text-transform:uppercase;color:var(--cyan);margin-bottom:10px;">NOL Rules by Year Generated</div>
+        <table style="width:100%;border-collapse:collapse;font-size:0.8rem;">
+          <thead>
+            <tr style="background:#f0f4fa;">
+              <th style="text-align:left;padding:9px 12px;color:var(--cyan);font-family:'JetBrains Mono',monospace;font-size:0.6rem;letter-spacing:0.1em;border-bottom:2px solid var(--border);">NOL Year</th>
+              <th style="text-align:center;padding:9px 12px;color:var(--cyan);font-family:'JetBrains Mono',monospace;font-size:0.6rem;letter-spacing:0.1em;border-bottom:2px solid var(--border);">Carryback</th>
+              <th style="text-align:center;padding:9px 12px;color:var(--cyan);font-family:'JetBrains Mono',monospace;font-size:0.6rem;letter-spacing:0.1em;border-bottom:2px solid var(--border);">Carryforward</th>
+              <th style="text-align:center;padding:9px 12px;color:var(--cyan);font-family:'JetBrains Mono',monospace;font-size:0.6rem;letter-spacing:0.1em;border-bottom:2px solid var(--border);">TI Limit</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="border-bottom:1px solid var(--border);">
+              <td style="padding:9px 12px;font-weight:600;color:var(--text);">&le; 2017</td>
+              <td style="padding:9px 12px;text-align:center;color:var(--muted);">2 years</td>
+              <td style="padding:9px 12px;text-align:center;color:var(--muted);">20 years</td>
+              <td style="padding:9px 12px;text-align:center;color:var(--green);font-weight:600;">100%</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--border);background:#f8f9fc;">
+              <td style="padding:9px 12px;font-weight:600;color:var(--text);">2018–2020 <span style="font-size:0.7rem;color:var(--muted);">(CARES Act)</span></td>
+              <td style="padding:9px 12px;text-align:center;color:var(--amber);font-weight:600;">5 years (optional)</td>
+              <td style="padding:9px 12px;text-align:center;color:var(--green);">Indefinite</td>
+              <td style="padding:9px 12px;text-align:center;color:var(--green);font-weight:600;">100%</td>
+            </tr>
+            <tr>
+              <td style="padding:9px 12px;font-weight:600;color:var(--text);">2021+ <span style="font-size:0.7rem;color:var(--muted);">(TCJA)</span></td>
+              <td style="padding:9px 12px;text-align:center;color:var(--red);font-weight:600;">None</td>
+              <td style="padding:9px 12px;text-align:center;color:var(--green);">Indefinite</td>
+              <td style="padding:9px 12px;text-align:center;color:var(--red);font-weight:600;">80%</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="formula-block">
+        <div class="formula-label">NOL Deduction Allowed (2021+ rules)</div>
+        <div class="formula-line">
+          <span class="f-result">NOL Deduction</span>
+          <span class="f-op"> = </span>
+          <span class="f-fn">min</span><span class="f-op">(</span>
+          <span class="f-var">Available NOL carryforward</span>
+          <span class="f-op">,&nbsp;&nbsp;</span>
+          <span class="f-pct">80%</span>
+          <span class="f-op"> &times; </span>
+          <span class="f-var">Current-year taxable income</span>
+          <span class="f-op">)</span>
+        </div>
+      </div>
+
+      <div class="example-block">
+        <div class="example-label">Worked Example — C Corporation (2026/2027)</div>
+        <div style="font-size:0.78rem;font-weight:700;color:var(--green);margin-bottom:8px;">Year 1 (2026) — NOL Generated</div>
+        <div class="example-given">
+          <span class="eg-key">Gross income</span>          <span class="eg-val">$300,000</span>
+          <span class="eg-key">Business expenses</span>     <span class="eg-val">($400,000)</span>
+          <span class="eg-key">Charitable contributions</span><span class="eg-val">($10,000)</span>
+          <span class="eg-key">DRD</span>                   <span class="eg-val">($5,000)</span>
+          <span class="eg-key">Taxable income (NOL)</span>  <span class="eg-val" style="color:var(--red);">($115,000)</span>
+        </div>
+        <div class="example-divider"></div>
+        <div style="font-size:0.78rem;font-weight:700;color:var(--green);margin-bottom:8px;margin-top:6px;">Year 2 (2027) — NOL Applied</div>
+        <div class="example-steps">
+          <div class="ex-step">
+            <span class="ex-step-label">Taxable income before NOL</span>
+            <span class="ex-step-val">$150,000</span>
+          </div>
+          <div class="ex-step">
+            <span class="ex-step-label">80% limit: $150,000 &times; 80% = $120,000</span>
+            <span class="ex-step-val">$120,000 max</span>
+          </div>
+          <div class="ex-step">
+            <span class="ex-step-label">NOL available ($115,000) &lt; $120,000 limit → full NOL used</span>
+            <span class="ex-step-val">($115,000)</span>
+          </div>
+          <div class="ex-step result">
+            <span class="ex-step-label">Year 2 taxable income after NOL</span>
+            <span class="ex-step-val">$35,000</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="traps-block">
+        <div class="traps-label">Exam Traps</div>
+        <div class="trap-list">
+          <div class="trap-item">
+            <span class="trap-icon">&#9654;</span>
+            <span class="trap-text"><strong>S corps and partnerships do NOT claim NOLs at the entity level.</strong> Losses pass through to owners who apply them on their individual returns (subject to basis, at-risk, and passive activity rules). Only C corps, individuals, estates, and trusts claim NOLs directly.</span>
+          </div>
+          <div class="trap-item">
+            <span class="trap-icon">&#9654;</span>
+            <span class="trap-text"><strong>Post-2020 NOLs: 80% cap, no carryback, indefinite forward.</strong> The 80% cap means you can never use an NOL to reduce taxable income all the way to zero — there's always a minimum taxable floor.</span>
+          </div>
+          <div class="trap-item">
+            <span class="trap-icon">&#9654;</span>
+            <span class="trap-text"><strong>2018–2020 NOLs had a 5-year carryback option (CARES Act) and no 80% cap.</strong> Don't confuse these with post-2020 rules — the exam may specify the year to force you to apply the right set of rules.</span>
+          </div>
+          <div class="trap-item">
+            <span class="trap-icon">&#9654;</span>
+            <span class="trap-text"><strong>20-year carryforward = pre-2018 NOL distractor.</strong> The exam loves listing "20 years" as an answer choice — that's only for NOLs generated in 2017 or earlier. Post-2017 NOLs carry forward indefinitely.</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </article>
+
+  <div class="section-label" style="margin-top:12px;">Business Taxation — Partnerships</div>
+
+  <!-- ── CARD 13: PARTNERSHIPS ─────────────────────────── -->
+  <article class="formula-card">
+    <div class="card-header">
+      <div class="card-header-left">
+        <div class="topic-badge">Partnerships — Form 1065 / Schedule K-1</div>
+        <div class="card-title">Partnership Pass-Through Mechanics, Outside Basis &amp; Separately Stated Items</div>
+        <div class="card-subtitle">Highest-yield REG topic — partnership reports, partners pay</div>
+      </div>
+      <div class="card-num">13</div>
+    </div>
+
+    <div class="card-body">
+
+      <div style="font-size:0.62rem;font-weight:800;letter-spacing:0.12em;text-transform:uppercase;color:var(--cyan);margin-bottom:10px;">⭐ Tier 1 — Must Know</div>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="step-body">
+            <div class="step-label">Pass-through entity — no entity-level federal tax</div>
+            <div class="step-detail">
+              Partnership files <span class="hi">Form 1065</span> (information return only — no tax paid at entity level). Each partner receives a <span class="hi">Schedule K-1</span> and reports their allocable share on their own return.
+              <em style="display:block;color:var(--cyan);font-size:0.76rem;margin-top:3px;">Memory: Partnership reports. Partners pay.</em>
+            </div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-body">
+            <div class="step-label">Separately stated items — they keep their character on the K-1</div>
+            <div class="step-detail">
+              Reported separately because every partner's tax situation is different (different AGIs, capital loss carryovers, charitable limits, passive loss limitations).<br>
+              <span class="hi">Separately stated:</span> capital gains/losses · charitable contributions · §179 deduction · tax-exempt interest · dividend income · foreign taxes.<br>
+              <span style="color:var(--red);">NOT separately stated:</span> ordinary business income — netted at the entity level.
+            </div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <div class="step-body">
+            <div class="step-label">Guaranteed payments — "salary," not "distribution"</div>
+            <div class="step-detail">
+              Paid regardless of whether the partnership has income. <span class="hi">Deducted by the partnership</span> (reduces ordinary income on Form 1065). <span class="hi">Ordinary income to the partner</span> — always taxable, always reported on K-1. Not a distribution.
+            </div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">4</div>
+          <div class="step-body">
+            <div class="step-label">Outside basis — what increases and decreases it</div>
+            <div class="step-detail">
+              <span style="color:var(--green);font-weight:600;">Increases (+):</span> capital contributions · share of taxable income · share of tax-exempt income · increases in share of partnership liabilities.<br>
+              <span style="color:var(--red);font-weight:600;">Decreases (−):</span> cash distributions · share of losses · nondeductible expenses · decreases in share of partnership liabilities.
+            </div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">5</div>
+          <div class="step-body">
+            <div class="step-label">Cash distributions — tax-free until basis hits zero</div>
+            <div class="step-detail">
+              Each cash distribution reduces outside basis dollar-for-dollar. If cash distributed <span class="hi">exceeds outside basis</span> → the excess is recognized as a <span class="hi">capital gain</span>. Outside basis cannot go below zero.
+            </div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">6</div>
+          <div class="step-body">
+            <div class="step-label">Liabilities affect outside basis</div>
+            <div class="step-detail">
+              A partner's share of partnership liabilities is included in outside basis. <span class="hi">Increase in share → basis goes up</span> (treated like a contribution). <span class="hi">Decrease in share → basis goes down</span> (treated like a distribution). This is why partners can sometimes deduct losses beyond their cash investment.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="font-size:0.62rem;font-weight:800;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);margin-bottom:10px;margin-top:10px;">⭐ Tier 2 — Know Well</div>
+      <div class="steps" style="margin-bottom:22px;">
+        <div class="step">
+          <div class="step-num">A</div>
+          <div class="step-body">
+            <div class="step-label">Inside basis vs. outside basis</div>
+            <div class="step-detail">
+              <span class="hi">Inside basis</span> = the partnership's own basis in its assets.<br>
+              <span class="hi">Outside basis</span> = a partner's basis in their partnership interest.<br>
+              They start equal at formation but diverge as contributions, distributions, and debt allocations change over time.
+            </div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">B</div>
+          <div class="step-body">
+            <div class="step-label">Formation — generally no gain or loss recognized</div>
+            <div class="step-detail">
+              Contributing property for a partnership interest is generally tax-free. The partnership takes a carryover basis in the contributed asset. A contributed capital asset's holding period carries over to the partnership; cash contributions start a new holding period.
+            </div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">C</div>
+          <div class="step-body">
+            <div class="step-label">Income flows through when earned — not when distributed</div>
+            <div class="step-detail">
+              A partner reports their K-1 share of partnership income in the year the partnership earns it, even if no cash was distributed. Taxable in the year of K-1, period.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="formula-block">
+        <div class="formula-label">Outside Basis Waterfall</div>
+        <div class="formula-line"><span class="f-var">&nbsp;&nbsp;Beginning outside basis</span></div>
+        <div class="formula-line"><span class="f-op">+&nbsp;&nbsp;</span><span class="f-var">Capital contributions</span></div>
+        <div class="formula-line"><span class="f-op">+&nbsp;&nbsp;</span><span class="f-var">Share of taxable income (incl. separately stated income)</span></div>
+        <div class="formula-line"><span class="f-op">+&nbsp;&nbsp;</span><span class="f-var">Share of tax-exempt income</span></div>
+        <div class="formula-line"><span class="f-op">+&nbsp;&nbsp;</span><span class="f-var">Increase in share of partnership liabilities</span></div>
+        <div class="formula-line"><span class="f-op">&minus;&nbsp;&nbsp;</span><span class="f-var">Cash distributions</span></div>
+        <div class="formula-line"><span class="f-op">&minus;&nbsp;&nbsp;</span><span class="f-var">Share of losses (incl. separately stated losses)</span></div>
+        <div class="formula-line"><span class="f-op">&minus;&nbsp;&nbsp;</span><span class="f-var">Nondeductible expenses</span></div>
+        <div class="formula-line"><span class="f-op">&minus;&nbsp;&nbsp;</span><span class="f-var">Decrease in share of partnership liabilities</span></div>
+        <div class="formula-line" style="margin-top:6px;"><span class="f-op">=&nbsp;&nbsp;</span><span class="f-result">Ending Outside Basis</span><span class="f-op">&nbsp;&nbsp;&ge;&nbsp;&nbsp;</span><span class="f-num">$0</span></div>
+      </div>
+
+      <div class="example-block">
+        <div class="example-label">Worked Example — Partner A, Ending Outside Basis</div>
+        <div class="example-given">
+          <span class="eg-key">Beginning outside basis</span>             <span class="eg-val">$30,000</span>
+          <span class="eg-key">Share of ordinary income</span>            <span class="eg-val">$15,000</span>
+          <span class="eg-key">Share of tax-exempt interest</span>        <span class="eg-val">$5,000</span>
+          <span class="eg-key">Increase in share of liabilities</span>    <span class="eg-val">$10,000</span>
+          <span class="eg-key">Cash distribution received</span>          <span class="eg-val">$(20,000)</span>
+          <span class="eg-key">Share of ordinary loss</span>              <span class="eg-val">$(8,000)</span>
+          <span class="eg-key">Nondeductible penalties</span>             <span class="eg-val">$(2,000)</span>
+        </div>
+        <div class="example-divider"></div>
+        <div class="example-steps">
+          <div class="ex-step">
+            <span class="ex-step-label">Beginning basis</span>
+            <span class="ex-step-val">$30,000</span>
+          </div>
+          <div class="ex-step">
+            <span class="ex-step-label">+ Share of ordinary income</span>
+            <span class="ex-step-val">$45,000</span>
+          </div>
+          <div class="ex-step">
+            <span class="ex-step-label">+ Tax-exempt interest (always increases basis)</span>
+            <span class="ex-step-val">$50,000</span>
+          </div>
+          <div class="ex-step">
+            <span class="ex-step-label">+ Increase in share of liabilities</span>
+            <span class="ex-step-val">$60,000</span>
+          </div>
+          <div class="ex-step">
+            <span class="ex-step-label">− Cash distribution</span>
+            <span class="ex-step-val">$40,000</span>
+          </div>
+          <div class="ex-step">
+            <span class="ex-step-label">− Share of ordinary loss</span>
+            <span class="ex-step-val">$32,000</span>
+          </div>
+          <div class="ex-step">
+            <span class="ex-step-label">− Nondeductible expenses</span>
+            <span class="ex-step-val">$30,000</span>
+          </div>
+          <div class="ex-step result">
+            <span class="ex-step-label">Ending outside basis</span>
+            <span class="ex-step-val">$30,000</span>
+          </div>
+        </div>
+      </div>
+
+      <div style="background:var(--cyan-dim);border:1px solid rgba(26,111,212,0.25);border-left:3px solid var(--cyan);border-radius:10px;padding:16px 20px;margin-bottom:22px;">
+        <div style="font-size:0.62rem;font-weight:800;letter-spacing:0.12em;text-transform:uppercase;color:var(--cyan);margin-bottom:12px;">Separately Stated Items — "Which Items Keep Their Character?"</div>
+        <div style="overflow-x:auto;">
+          <table style="width:100%;border-collapse:collapse;font-size:0.8rem;">
+            <thead>
+              <tr style="background:rgba(26,111,212,0.08);">
+                <th style="text-align:left;padding:7px 12px;color:var(--cyan);font-family:'JetBrains Mono',monospace;font-size:0.6rem;letter-spacing:0.1em;border-bottom:1px solid rgba(26,111,212,0.2);">Item</th>
+                <th style="text-align:center;padding:7px 12px;color:var(--cyan);font-family:'JetBrains Mono',monospace;font-size:0.6rem;letter-spacing:0.1em;border-bottom:1px solid rgba(26,111,212,0.2);">Separately Stated?</th>
+                <th style="text-align:left;padding:7px 12px;color:var(--cyan);font-family:'JetBrains Mono',monospace;font-size:0.6rem;letter-spacing:0.1em;border-bottom:1px solid rgba(26,111,212,0.2);">Why</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style="border-bottom:1px solid rgba(26,111,212,0.1);">
+                <td style="padding:7px 12px;font-weight:600;color:var(--text);">Capital gains / losses</td>
+                <td style="padding:7px 12px;text-align:center;color:var(--green);font-weight:700;">✅ Yes</td>
+                <td style="padding:7px 12px;color:var(--muted);">Partners have different capital loss carryovers</td>
+              </tr>
+              <tr style="border-bottom:1px solid rgba(26,111,212,0.1);background:rgba(26,111,212,0.03);">
+                <td style="padding:7px 12px;font-weight:600;color:var(--text);">Charitable contributions</td>
+                <td style="padding:7px 12px;text-align:center;color:var(--green);font-weight:700;">✅ Yes</td>
+                <td style="padding:7px 12px;color:var(--muted);">Subject to each partner's own AGI % limits</td>
+              </tr>
+              <tr style="border-bottom:1px solid rgba(26,111,212,0.1);">
+                <td style="padding:7px 12px;font-weight:600;color:var(--text);">§179 deduction</td>
+                <td style="padding:7px 12px;text-align:center;color:var(--green);font-weight:700;">✅ Yes</td>
+                <td style="padding:7px 12px;color:var(--muted);">Limited by each partner's own taxable income</td>
+              </tr>
+              <tr style="border-bottom:1px solid rgba(26,111,212,0.1);background:rgba(26,111,212,0.03);">
+                <td style="padding:7px 12px;font-weight:600;color:var(--text);">Tax-exempt interest</td>
+                <td style="padding:7px 12px;text-align:center;color:var(--green);font-weight:700;">✅ Yes</td>
+                <td style="padding:7px 12px;color:var(--muted);">Must retain exempt character when passed through</td>
+              </tr>
+              <tr style="border-bottom:1px solid rgba(26,111,212,0.1);">
+                <td style="padding:7px 12px;font-weight:600;color:var(--text);">Dividend income</td>
+                <td style="padding:7px 12px;text-align:center;color:var(--green);font-weight:700;">✅ Yes</td>
+                <td style="padding:7px 12px;color:var(--muted);">Qualified dividend rates vary per partner's situation</td>
+              </tr>
+              <tr style="border-bottom:1px solid rgba(26,111,212,0.1);background:rgba(26,111,212,0.03);">
+                <td style="padding:7px 12px;font-weight:600;color:var(--text);">Foreign taxes paid</td>
+                <td style="padding:7px 12px;text-align:center;color:var(--green);font-weight:700;">✅ Yes</td>
+                <td style="padding:7px 12px;color:var(--muted);">Partners claim foreign tax credit on own returns</td>
+              </tr>
+              <tr>
+                <td style="padding:7px 12px;font-weight:600;color:var(--red);">Ordinary business income</td>
+                <td style="padding:7px 12px;text-align:center;color:var(--red);font-weight:700;">❌ No</td>
+                <td style="padding:7px 12px;color:var(--muted);">Netted at entity level — flows through as one line item</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="traps-block">
+        <div class="traps-label">Exam Traps &amp; Common Confusions</div>
+        <div class="trap-list">
+          <div class="trap-item">
+            <span class="trap-icon">&#9654;</span>
+            <span class="trap-text"><strong>Partnership pays no federal income tax.</strong> Only C corporations pay entity-level tax. Partnerships and S corps are pure pass-throughs — the tax obligation sits entirely with the partners/shareholders on their own returns.</span>
+          </div>
+          <div class="trap-item">
+            <span class="trap-icon">&#9654;</span>
+            <span class="trap-text"><strong>Guaranteed payment ≠ distribution.</strong> A guaranteed payment is always ordinary income to the recipient and always deducted by the partnership. A distribution reduces basis and is usually tax-free. The exam loves asking you to classify one as the other.</span>
+          </div>
+          <div class="trap-item">
+            <span class="trap-icon">&#9654;</span>
+            <span class="trap-text"><strong>Tax-exempt income increases outside basis.</strong> Even though it is never taxed, tax-exempt income flows through and increases each partner's outside basis. Skipping this step understates basis and artificially limits loss deductions — a common calculation error.</span>
+          </div>
+          <div class="trap-item">
+            <span class="trap-icon">&#9654;</span>
+            <span class="trap-text"><strong>Cash distribution exceeding basis → capital gain, not ordinary income.</strong> The excess is capital in character. The exam will tempt you to say "ordinary income" because it came from a partnership — that's wrong.</span>
+          </div>
+          <div class="trap-item">
+            <span class="trap-icon">&#9654;</span>
+            <span class="trap-text"><strong>Income is taxed when earned, not when distributed.</strong> If the partnership earns $50K in Year 1 and distributes it in Year 2, the partner pays tax in Year 1. The Year 2 cash is a return of already-taxed basis — generally tax-free.</span>
+          </div>
+          <div class="trap-item">
+            <span class="trap-icon">&#9654;</span>
+            <span class="trap-text"><strong>Unlike S corps, partnership liabilities flow into partner outside basis.</strong> An increase in a partner's share of debt increases basis dollar-for-dollar. S corp debt at the entity level does NOT increase shareholder basis — only direct loans from the shareholder do. Classic cross-topic trap.</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </article>
+
+  <div class="section-label" style="margin-top:12px;">Business Taxation — MACRS Property &amp; Recovery Periods</div>
+
+  <!-- ── CARD 14: MACRS PROPERTY TYPES & RECOVERY PERIODS ── -->
+  <article class="formula-card">
+    <div class="card-header">
+      <div class="card-header-left">
+        <div class="topic-badge">MACRS — Qualifying Property &amp; Recovery Periods</div>
+        <div class="card-title">What Qualifies for MACRS, Recovery Periods &amp; §179 / Bonus Comparison</div>
+        <div class="card-subtitle">Know what qualifies, how long to depreciate it, and when §179 or bonus beats MACRS</div>
+      </div>
+      <div class="card-num">14</div>
+    </div>
+
+    <div class="card-body">
+
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="step-body">
+            <div class="step-label">Property that qualifies for MACRS</div>
+            <div class="step-detail">
+              <span class="hi">Tangible personal property used in a business or for income production:</span><br>
+              ✅ Equipment &amp; machinery &nbsp;·&nbsp; ✅ Computers &nbsp;·&nbsp; ✅ Office furniture &nbsp;·&nbsp; ✅ Business vehicles &nbsp;·&nbsp; ✅ Residential rental buildings &nbsp;·&nbsp; ✅ Commercial buildings
+            </div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-body">
+            <div class="step-label">Property that does NOT qualify</div>
+            <div class="step-detail">
+              ❌ <span style="color:var(--red);">Land</span> — never depreciable under any method. Always separate it from the building's cost basis.<br>
+              ❌ <span style="color:var(--red);">Inventory</span> — deducted through COGS, not depreciation.<br>
+              ❌ <span style="color:var(--red);">Property held for personal use</span> — must be used in a trade or business or for income production.
+            </div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <div class="step-body">
+            <div class="step-label">Recovery periods to memorize</div>
+            <div class="step-detail">
+              Computers — <span class="hi">5 years</span><br>
+              Equipment &amp; machinery — <span class="hi">5 or 7 years</span> (type-dependent; exam usually tells you)<br>
+              Office furniture &amp; fixtures — <span class="hi">7 years</span><br>
+              Residential rental building — <span class="hi">27.5 years</span><br>
+              Commercial / nonresidential building — <span class="hi">39 years</span>
+            </div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">4</div>
+          <div class="step-body">
+            <div class="step-label">Bonus depreciation — then MACRS on the rest</div>
+            <div class="step-detail">
+              Bonus depreciation allows an immediate deduction of a large percentage of the asset's cost. Whatever basis remains after the bonus deduction is then depreciated under normal MACRS over the recovery period. The exam usually specifies the bonus percentage or tells you to ignore it.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="overflow-x:auto;margin-bottom:22px;">
+        <div style="font-size:0.62rem;font-weight:800;letter-spacing:0.12em;text-transform:uppercase;color:var(--cyan);margin-bottom:10px;">Recovery Period Quick Reference</div>
+        <table style="width:100%;border-collapse:collapse;font-size:0.8rem;">
+          <thead>
+            <tr style="background:#f0f4fa;">
+              <th style="text-align:left;padding:9px 12px;color:var(--cyan);font-family:'JetBrains Mono',monospace;font-size:0.6rem;letter-spacing:0.1em;border-bottom:2px solid var(--border);">Property Type</th>
+              <th style="text-align:center;padding:9px 12px;color:var(--cyan);font-family:'JetBrains Mono',monospace;font-size:0.6rem;letter-spacing:0.1em;border-bottom:2px solid var(--border);">Recovery Period</th>
+              <th style="text-align:center;padding:9px 12px;color:var(--cyan);font-family:'JetBrains Mono',monospace;font-size:0.6rem;letter-spacing:0.1em;border-bottom:2px solid var(--border);">Convention</th>
+              <th style="text-align:center;padding:9px 12px;color:var(--cyan);font-family:'JetBrains Mono',monospace;font-size:0.6rem;letter-spacing:0.1em;border-bottom:2px solid var(--border);">§179 Eligible?</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="border-bottom:1px solid var(--border);">
+              <td style="padding:9px 12px;font-weight:600;color:var(--text);">Computers</td>
+              <td style="padding:9px 12px;text-align:center;font-family:'JetBrains Mono',monospace;font-weight:700;color:var(--amber);">5 years</td>
+              <td style="padding:9px 12px;text-align:center;color:var(--muted);">Half-year (default)</td>
+              <td style="padding:9px 12px;text-align:center;color:var(--green);font-weight:700;">✅ Yes</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--border);background:#f8f9fc;">
+              <td style="padding:9px 12px;font-weight:600;color:var(--text);">Equipment &amp; Machinery</td>
+              <td style="padding:9px 12px;text-align:center;font-family:'JetBrains Mono',monospace;font-weight:700;color:var(--amber);">5 or 7 yrs</td>
+              <td style="padding:9px 12px;text-align:center;color:var(--muted);">Half-year (default)</td>
+              <td style="padding:9px 12px;text-align:center;color:var(--green);font-weight:700;">✅ Yes</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--border);">
+              <td style="padding:9px 12px;font-weight:600;color:var(--text);">Office Furniture &amp; Fixtures</td>
+              <td style="padding:9px 12px;text-align:center;font-family:'JetBrains Mono',monospace;font-weight:700;color:var(--amber);">7 years</td>
+              <td style="padding:9px 12px;text-align:center;color:var(--muted);">Half-year (default)</td>
+              <td style="padding:9px 12px;text-align:center;color:var(--green);font-weight:700;">✅ Yes</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--border);background:#f8f9fc;">
+              <td style="padding:9px 12px;font-weight:600;color:var(--text);">Residential Rental Building</td>
+              <td style="padding:9px 12px;text-align:center;font-family:'JetBrains Mono',monospace;font-weight:700;color:var(--cyan);">27.5 years</td>
+              <td style="padding:9px 12px;text-align:center;color:var(--cyan);font-weight:600;">Mid-month</td>
+              <td style="padding:9px 12px;text-align:center;color:var(--red);font-weight:700;">❌ No</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--border);">
+              <td style="padding:9px 12px;font-weight:600;color:var(--text);">Commercial Building</td>
+              <td style="padding:9px 12px;text-align:center;font-family:'JetBrains Mono',monospace;font-weight:700;color:var(--cyan);">39 years</td>
+              <td style="padding:9px 12px;text-align:center;color:var(--cyan);font-weight:600;">Mid-month</td>
+              <td style="padding:9px 12px;text-align:center;color:var(--red);font-weight:700;">❌ No</td>
+            </tr>
+            <tr>
+              <td style="padding:9px 12px;font-weight:600;color:var(--red);">Land</td>
+              <td style="padding:9px 12px;text-align:center;color:var(--red);font-weight:700;">Never</td>
+              <td style="padding:9px 12px;text-align:center;color:var(--muted);">N/A</td>
+              <td style="padding:9px 12px;text-align:center;color:var(--red);font-weight:700;">❌ No</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="formula-block">
+        <div class="formula-label">§179 vs. Bonus Depreciation vs. MACRS — Side by Side</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;font-size:0.78rem;margin-top:4px;">
+          <div>
+            <div style="font-family:'JetBrains Mono',monospace;font-weight:700;color:var(--cyan);margin-bottom:6px;font-size:0.74rem;">§179</div>
+            <div style="color:var(--muted);line-height:1.8;">
+              ✅ Immediate deduction<br>
+              ✅ Election required<br>
+              ⚠️ Business income limit<br>
+              ✅ Carryforward if limited<br>
+              ❌ Buildings not eligible
+            </div>
+          </div>
+          <div>
+            <div style="font-family:'JetBrains Mono',monospace;font-weight:700;color:var(--amber);margin-bottom:6px;font-size:0.74rem;">Bonus Depr.</div>
+            <div style="color:var(--muted);line-height:1.8;">
+              ✅ Large % immediate<br>
+              ✅ Automatic (no election)<br>
+              ✅ No income limit<br>
+              ❌ No carryforward<br>
+              ⚠️ % varies by year
+            </div>
+          </div>
+          <div>
+            <div style="font-family:'JetBrains Mono',monospace;font-weight:700;color:var(--green);margin-bottom:6px;font-size:0.74rem;">MACRS</div>
+            <div style="color:var(--muted);line-height:1.8;">
+              ✅ Default system<br>
+              ✅ No election needed<br>
+              ✅ No income limit<br>
+              ❌ Spread over years<br>
+              ✅ Applies to buildings
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="example-block">
+        <div class="example-label">Worked Example — $100,000 Machine, 5-Year MACRS, Half-Year Convention</div>
+        <div class="example-given">
+          <span class="eg-key">Cost of machine</span>             <span class="eg-val">$100,000</span>
+          <span class="eg-key">§179 election taken?</span>       <span class="eg-val">No</span>
+          <span class="eg-key">Bonus depreciation?</span>         <span class="eg-val">No</span>
+          <span class="eg-key">Recovery period</span>            <span class="eg-val">5-year MACRS</span>
+          <span class="eg-key">Convention</span>                 <span class="eg-val">Half-year (default)</span>
+        </div>
+        <div class="example-divider"></div>
+        <div class="example-steps">
+          <div class="ex-step">
+            <span class="ex-step-label">Year 1 — get only half a year regardless of purchase date</span>
+            <span class="ex-step-val">$100,000 × rate</span>
+          </div>
+          <div class="ex-step">
+            <span class="ex-step-label">Depreciate remaining basis over years 2–6 using MACRS table %</span>
+            <span class="ex-step-val">% given on exam</span>
+          </div>
+          <div class="ex-step result">
+            <span class="ex-step-label">You do NOT need to memorize annual MACRS %s — exam always provides the table</span>
+            <span class="ex-step-val">✓</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="traps-block">
+        <div class="traps-label">Exam Traps</div>
+        <div class="trap-list">
+          <div class="trap-item">
+            <span class="trap-icon">&#9654;</span>
+            <span class="trap-text"><strong>Land is never depreciable — always separate it from the building.</strong> If an exam question gives you a combined purchase price, you must exclude the land portion before computing any depreciation. Depreciating land cost is always a wrong answer.</span>
+          </div>
+          <div class="trap-item">
+            <span class="trap-icon">&#9654;</span>
+            <span class="trap-text"><strong>Buildings are never §179 eligible.</strong> §179 applies only to personal property (equipment, furniture, computers, etc.). A building — even one used 100% for business — cannot be expensed under §179. Residential rental = 27.5 years, commercial = 39 years, no shortcuts.</span>
+          </div>
+          <div class="trap-item">
+            <span class="trap-icon">&#9654;</span>
+            <span class="trap-text"><strong>Half-year convention applies no matter when in the year the asset was purchased.</strong> A machine bought December 29 still gets half a year's depreciation in Year 1 — not a full year, not a fraction of a month. (Unless the mid-quarter convention is triggered.)</span>
+          </div>
+          <div class="trap-item">
+            <span class="trap-icon">&#9654;</span>
+            <span class="trap-text"><strong>Escalators and elevators cannot be §179 expensed.</strong> They are structural components of a building and must be depreciated over 39 years. Don't let the fact that they're "equipment" fool you — their connection to the building structure controls.</span>
+          </div>
+          <div class="trap-item">
+            <span class="trap-icon">&#9654;</span>
+            <span class="trap-text"><strong>§179 carryforward vs. bonus — they work differently.</strong> Unused §179 (limited by business income) carries forward indefinitely. Unused bonus depreciation (no income limit) does not carry forward — it converts to a higher NOL in the same year instead.</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </article>
+
+  <div class="section-label" style="margin-top:12px;">Individual Taxation — §199A QBI Deduction</div>
+
+  <!-- ── CARD 15: QBI DEDUCTION ─────────────────────────── -->
+  <article class="formula-card">
+    <div class="card-header">
+      <div class="card-header-left">
+        <div class="topic-badge">§199A — Qualified Business Income Deduction</div>
+        <div class="card-title">QBI Deduction: 20% of Pass-Through Business Income</div>
+        <div class="card-subtitle">Below-the-line deduction — reduces taxable income, not AGI · C corps and employees don't qualify</div>
+      </div>
+      <div class="card-num">15</div>
+    </div>
+
+    <div class="card-body">
+
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="step-body">
+            <div class="step-label">What it is — 20% of qualified business income, below the line</div>
+            <div class="step-detail">
+              Owners of pass-through businesses can deduct up to <span class="hi">20% of their qualified business income (QBI)</span>. This is a <span class="hi">below-the-line deduction</span> — it reduces taxable income, but does NOT reduce AGI. It comes after the standard/itemized deduction and before Additional deductions in the individual tax formula.
+            </div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-body">
+            <div class="step-label">Who qualifies — pass-through owners only</div>
+            <div class="step-detail">
+              ✅ <span class="hi">Sole proprietors</span> (Schedule C)<br>
+              ✅ <span class="hi">Partners</span> in a partnership (based on K-1 ordinary income)<br>
+              ✅ <span class="hi">S corporation shareholders</span> (based on K-1 ordinary income)<br>
+              ✅ Some trusts and estates<br>
+              Each partner/shareholder computes their own QBI deduction using their K-1 share — this is why partnerships separately state income.
+            </div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <div class="step-body">
+            <div class="step-label">Who does NOT qualify</div>
+            <div class="step-detail">
+              ❌ <span style="color:var(--red);">C corporations</span> — they pay entity-level corporate tax; no pass-through deduction applies.<br>
+              ❌ <span style="color:var(--red);">Employees (W-2 wages)</span> — a salary from an employer is never QBI, even if the employer is a pass-through. You must be an owner, not just a worker.
+            </div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">4</div>
+          <div class="step-body">
+            <div class="step-label">What counts as QBI — and what doesn't</div>
+            <div class="step-detail">
+              <span style="color:var(--green);font-weight:600;">Counts as QBI:</span> ordinary business income from the pass-through.<br>
+              <span style="color:var(--red);font-weight:600;">Excluded from QBI:</span> capital gains · dividend income · interest income (unless from the business itself) · W-2 wages received as an employee · guaranteed payments to partners.
+            </div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">5</div>
+          <div class="step-body">
+            <div class="step-label">High-income phaseout — SSTB rules (know the concept)</div>
+            <div class="step-detail">
+              At higher taxable income, the IRS phases out or limits the deduction for <span class="hi">Specified Service Trade or Business (SSTB)</span> owners. SSTBs include: doctors · lawyers · CPAs · consultants · financial advisors. For REG, know that <span class="hi">SSTBs can lose some or all of the deduction once taxable income exceeds the phaseout range</span>. The exam usually tells you to ignore wage/property/SSTB limits unless specifically testing them.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="formula-block">
+        <div class="formula-label">Basic QBI Deduction (no limitations)</div>
+        <div class="formula-line">
+          <span class="f-result">QBI Deduction</span>
+          <span class="f-op"> = </span>
+          <span class="f-pct">20%</span>
+          <span class="f-op"> &times; </span>
+          <span class="f-var">Qualified Business Income</span>
+        </div>
+        <div class="formula-line" style="margin-top:8px;font-size:0.78rem;">
+          <span class="f-op">Placed in individual tax formula: </span>
+          <span class="f-var">Taxable Income</span>
+          <span class="f-op"> = AGI &minus; Std/Itemized &minus; </span>
+          <span class="f-result">QBI Deduction</span>
+          <span class="f-op"> &minus; Additional</span>
+        </div>
+        <div class="formula-label" style="margin-top:14px;">At High Income — SSTB Phase-Out (concept level)</div>
+        <div class="formula-line">
+          <span class="f-op">If SSTB and taxable income &gt; phaseout threshold: </span>
+          <span class="f-result">QBI Deduction</span>
+          <span class="f-op"> → </span>
+          <span class="f-fn">reduced or $0</span>
+        </div>
+        <div class="formula-line" style="margin-top:4px;font-size:0.78rem;">
+          <span class="f-op">Non-SSTB: wage &amp; property limitations may apply at high income — exam will specify</span>
+        </div>
+      </div>
+
+      <div class="example-block">
+        <div class="example-label">Three Scenarios — Who Gets the Deduction?</div>
+        <div class="example-steps">
+          <div class="ex-step">
+            <span class="ex-step-label" style="font-weight:700;color:var(--text);">Scenario A — Sole proprietor, $100K profit</span>
+            <span class="ex-step-val" style="color:var(--green);">$20,000</span>
+          </div>
+          <div class="ex-step">
+            <span class="ex-step-label" style="color:var(--muted);font-size:0.76rem;">20% × $100,000 = $20,000 QBI deduction. Taxable income = $80,000.</span>
+            <span class="ex-step-val"></span>
+          </div>
+          <div class="ex-step" style="margin-top:8px;">
+            <span class="ex-step-label" style="font-weight:700;color:var(--text);">Scenario B — Sarah, consulting partnership, $150K K-1 income</span>
+            <span class="ex-step-val" style="color:var(--green);">$30,000</span>
+          </div>
+          <div class="ex-step">
+            <span class="ex-step-label" style="color:var(--muted);font-size:0.76rem;">20% × $150,000 = $30,000 QBI deduction (assuming no SSTB phaseout applies).</span>
+            <span class="ex-step-val"></span>
+          </div>
+          <div class="ex-step" style="margin-top:8px;">
+            <span class="ex-step-label" style="font-weight:700;color:var(--text);">Scenario C — Employee, $160,000 W-2 salary from Intuit</span>
+            <span class="ex-step-val" style="color:var(--red);">$0</span>
+          </div>
+          <div class="ex-step result">
+            <span class="ex-step-label" style="color:var(--muted);font-size:0.76rem;">W-2 wages from an employer are never QBI. No ownership interest = no deduction.</span>
+            <span class="ex-step-val"></span>
+          </div>
+        </div>
+      </div>
+
+      <div style="background:var(--green-dim);border:1px solid rgba(10,122,80,0.25);border-left:3px solid var(--green);border-radius:10px;padding:16px 20px;margin-bottom:22px;">
+        <div style="font-size:0.62rem;font-weight:800;letter-spacing:0.12em;text-transform:uppercase;color:var(--green);margin-bottom:12px;">QBI Eligibility by Business Type</div>
+        <div style="overflow-x:auto;">
+          <table style="width:100%;border-collapse:collapse;font-size:0.8rem;">
+            <thead>
+              <tr style="background:rgba(10,122,80,0.07);">
+                <th style="text-align:left;padding:8px 12px;color:var(--green);font-family:'JetBrains Mono',monospace;font-size:0.6rem;letter-spacing:0.1em;border-bottom:1px solid rgba(10,122,80,0.2);">Entity / Person</th>
+                <th style="text-align:center;padding:8px 12px;color:var(--green);font-family:'JetBrains Mono',monospace;font-size:0.6rem;letter-spacing:0.1em;border-bottom:1px solid rgba(10,122,80,0.2);">QBI Eligible?</th>
+                <th style="text-align:left;padding:8px 12px;color:var(--green);font-family:'JetBrains Mono',monospace;font-size:0.6rem;letter-spacing:0.1em;border-bottom:1px solid rgba(10,122,80,0.2);">Note</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style="border-bottom:1px solid rgba(10,122,80,0.1);">
+                <td style="padding:8px 12px;font-weight:600;color:var(--text);">Sole Proprietor (Sch. C)</td>
+                <td style="padding:8px 12px;text-align:center;color:var(--green);font-weight:700;">✅ Yes</td>
+                <td style="padding:8px 12px;color:var(--muted);">QBI = net profit on Schedule C</td>
+              </tr>
+              <tr style="border-bottom:1px solid rgba(10,122,80,0.1);background:rgba(10,122,80,0.03);">
+                <td style="padding:8px 12px;font-weight:600;color:var(--text);">Partnership (partner)</td>
+                <td style="padding:8px 12px;text-align:center;color:var(--green);font-weight:700;">✅ Yes</td>
+                <td style="padding:8px 12px;color:var(--muted);">Based on K-1 ordinary income share</td>
+              </tr>
+              <tr style="border-bottom:1px solid rgba(10,122,80,0.1);">
+                <td style="padding:8px 12px;font-weight:600;color:var(--text);">S Corporation (shareholder)</td>
+                <td style="padding:8px 12px;text-align:center;color:var(--green);font-weight:700;">✅ Yes</td>
+                <td style="padding:8px 12px;color:var(--muted);">Based on K-1 ordinary income share</td>
+              </tr>
+              <tr style="border-bottom:1px solid rgba(10,122,80,0.1);background:rgba(10,122,80,0.03);">
+                <td style="padding:8px 12px;font-weight:600;color:var(--red);">C Corporation</td>
+                <td style="padding:8px 12px;text-align:center;color:var(--red);font-weight:700;">❌ No</td>
+                <td style="padding:8px 12px;color:var(--muted);">Pays entity-level tax; §199A doesn't apply</td>
+              </tr>
+              <tr style="border-bottom:1px solid rgba(10,122,80,0.1);">
+                <td style="padding:8px 12px;font-weight:600;color:var(--red);">Employee (W-2 only)</td>
+                <td style="padding:8px 12px;text-align:center;color:var(--red);font-weight:700;">❌ No</td>
+                <td style="padding:8px 12px;color:var(--muted);">Must be an owner, not a worker</td>
+              </tr>
+              <tr>
+                <td style="padding:8px 12px;font-weight:600;color:var(--amber);">SSTB owner (high income)</td>
+                <td style="padding:8px 12px;text-align:center;color:var(--amber);font-weight:700;">⚠️ Limited</td>
+                <td style="padding:8px 12px;color:var(--muted);">Phases out above income threshold</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="traps-block">
+        <div class="traps-label">Exam Traps</div>
+        <div class="trap-list">
+          <div class="trap-item">
+            <span class="trap-icon">&#9654;</span>
+            <span class="trap-text"><strong>QBI is below the line — it does NOT reduce AGI.</strong> The deduction comes after standard/itemized deductions in the tax formula. AGI-based calculations (7.5% medical floor, passive loss rules, etc.) use AGI before the QBI deduction.</span>
+          </div>
+          <div class="trap-item">
+            <span class="trap-icon">&#9654;</span>
+            <span class="trap-text"><strong>Guaranteed payments to partners are NOT QBI.</strong> Partners deduct them for §199A purposes — they are excluded from the QBI calculation. This is a specific cross-topic trap: guaranteed payments are ordinary income to the partner on the K-1, but that doesn't make them eligible for the 20% deduction.</span>
+          </div>
+          <div class="trap-item">
+            <span class="trap-icon">&#9654;</span>
+            <span class="trap-text"><strong>Capital gains, dividends, and interest are excluded from QBI.</strong> Even if the pass-through entity generates these items, they don't count toward the QBI base. Only ordinary business income qualifies.</span>
+          </div>
+          <div class="trap-item">
+            <span class="trap-icon">&#9654;</span>
+            <span class="trap-text"><strong>C corporations get no QBI deduction — they pay corporate tax instead.</strong> The deduction exists specifically to give pass-through businesses parity with C corps after the 2017 TCJA rate cuts. The question will sometimes ask whether a C corp owner gets the deduction — they don't.</span>
+          </div>
+          <div class="trap-item">
+            <span class="trap-icon">&#9654;</span>
+            <span class="trap-text"><strong>SSTBs (doctors, lawyers, CPAs, consultants, financial advisors) can lose the deduction at high income.</strong> Below the phaseout range, they get the full 20% just like anyone else. Above it, the deduction shrinks and eventually disappears. The exam usually specifies "ignore limitations" or "no limitations apply" — when it does, just calculate 20% × QBI.</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </article>
+
+  <!-- future cards go here -->
+
+</main>
+</body>
+</html>
