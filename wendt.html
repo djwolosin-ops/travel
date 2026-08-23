@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Daniel Wendt — Croatia &amp; Italy</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --deep: #0a2540;
+    --teal: #0f7173;
+    --teal-mid: #14b8a6;
+    --teal-light: #e6fffa;
+    --terra: #c2542c;
+    --terra-light: #fdf1ec;
+    --gold: #d4a843;
+    --gold-light: #fdf6e3;
+    --green: #4d7c0f;
+    --green-light: #f0f7e6;
+    --gray: #f3f4f8;
+    --text: #1a1a2e;
+    --muted: #6b7280;
+    --card-shadow: 0 2px 14px rgba(0,0,0,0.09);
+  }
+
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--gray); color: var(--text); min-height: 100vh; }
+
+  /* HERO */
+  .hero {
+    background: linear-gradient(135deg, #0a2540 0%, #0f7173 55%, #0a2540 100%);
+    color: white; padding: 28px 24px 20px; text-align: center; position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 160'%3E%3Ccircle cx='200' cy='80' r='60' fill='rgba(255,255,255,0.03)'/%3E%3Ccircle cx='600' cy='40' r='80' fill='rgba(255,255,255,0.03)'/%3E%3Ccircle cx='1000' cy='100' r='50' fill='rgba(255,255,255,0.03)'/%3E%3C/svg%3E") center/cover no-repeat;
+    pointer-events: none;
+  }
+  .hero-flags { font-size: 1.5rem; display: block; margin-bottom: 6px; letter-spacing: 3px; }
+  .hero h1 { font-size: 1.7rem; font-weight: 800; letter-spacing: -0.5px; }
+  .hero .subtitle { font-size: 0.88rem; opacity: 0.8; margin-top: 5px; }
+  .hero .dates { font-size: 0.8rem; opacity: 0.6; margin-top: 3px; letter-spacing: 0.5px; }
+
+  .countdown-bar { background: #0d3a4d; padding: 8px 24px; text-align: center; font-size: 0.85rem; color: #d6f3ee; }
+  .countdown-bar span { font-weight: 800; color: #ffffff; }
+  .countdown-bar.active { background: rgba(77,124,15,0.85); color: white; }
+  .countdown-bar.active span { color: #ffffff; }
+
+  /* TABS */
+  .tab-bar { background: white; display: flex; overflow-x: auto; border-bottom: 2px solid #e5e7eb; position: sticky; top: 0; z-index: 100; scrollbar-width: none; }
+  .tab-bar::-webkit-scrollbar { display: none; }
+  .tab-btn { flex: none; padding: 12px 14px; border: none; background: none; font-size: 0.79rem; font-weight: 600; color: var(--muted); cursor: pointer; white-space: nowrap; border-bottom: 3px solid transparent; margin-bottom: -2px; transition: all 0.15s; }
+  .tab-btn.active { color: var(--teal); border-bottom-color: var(--teal-mid); }
+  .tab-btn:hover { color: var(--deep); }
+
+  .tab-content { display: none; padding: 16px; max-width: 860px; margin: 0 auto; }
+  .tab-content.active { display: block; }
+
+  /* CARDS */
+  .card { background: white; border-radius: 12px; padding: 16px 18px; margin-bottom: 14px; box-shadow: var(--card-shadow); }
+  .card-title { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); margin-bottom: 12px; }
+
+  /* CITY PILLS */
+  .city-pill { display: inline-block; font-size: 0.67rem; font-weight: 700; padding: 2px 9px; border-radius: 20px; margin-bottom: 6px; letter-spacing: 0.3px; }
+  .city-split    { background: #dbeafe; color: #1e40af; }
+  .city-cycle    { background: var(--green-light); color: var(--green); }
+  .city-dubrovnik{ background: var(--gold-light); color: #92400e; }
+  .city-matera   { background: var(--terra-light); color: var(--terra); }
+  .city-lecce    { background: #fde68a; color: #78350f; }
+  .city-rome     { background: var(--teal-light); color: var(--teal); }
+  .city-travel   { background: #e5e7eb; color: #374151; }
+
+  /* DAY ITEMS */
+  .day-item { border-radius: 10px; border: 1.5px solid #e5e7eb; border-left: 4px solid #e5e7eb; padding: 13px 15px; margin-bottom: 10px; position: relative; transition: all 0.15s; }
+  .day-item:hover { border-color: var(--teal-mid); box-shadow: 0 2px 8px rgba(15,113,115,0.12); }
+  .day-item.today-item { border-color: var(--teal-mid); border-left-color: var(--teal-mid); background: var(--teal-light); }
+  .day-item.past-item { opacity: 0.7; }
+  .day-item[data-type="split"]     { border-left-color: #1e40af; }
+  .day-item[data-type="cycle"]     { border-left-color: var(--green); }
+  .day-item[data-type="dubrovnik"] { border-left-color: #b8860b; }
+  .day-item[data-type="matera"]    { border-left-color: var(--terra); }
+  .day-item[data-type="lecce"]     { border-left-color: #d97706; }
+  .day-item[data-type="rome"]      { border-left-color: var(--teal); }
+  .day-item[data-type="travel"]    { border-left-color: #9ca3af; }
+  .day-badge { position: absolute; top: 10px; right: 12px; font-size: 0.67rem; font-weight: 700; padding: 2px 8px; border-radius: 20px; background: var(--teal-mid); color: white; }
+  .day-label { font-size: 0.75rem; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; }
+  .day-title { font-size: 0.98rem; font-weight: 700; margin: 3px 0 4px; }
+  .day-plan { font-size: 0.81rem; color: #444; line-height: 1.55; margin-top: 4px; }
+  .day-tags { margin-top: 8px; display: flex; flex-wrap: wrap; gap: 5px; }
+  .tag { font-size: 0.68rem; padding: 3px 8px; border-radius: 20px; font-weight: 600; }
+  .tag-eat  { background: var(--terra-light); color: var(--terra); }
+  .tag-act  { background: var(--teal-light); color: var(--teal); }
+  .tag-move { background: #f0f0f0; color: #555; }
+  .tag-stay { background: var(--gold-light); color: #7a5200; }
+
+  /* STAYS */
+  .stay-block { border-left: 4px solid var(--teal-mid); padding-left: 14px; margin-bottom: 18px; }
+  .stay-name  { font-size: 0.98rem; font-weight: 700; }
+  .stay-dates { font-size: 0.77rem; color: var(--muted); margin: 2px 0 6px; }
+  .stay-addr  { font-size: 0.81rem; color: var(--text); margin: 2px 0; }
+  .stay-detail{ font-size: 0.81rem; margin: 2px 0; }
+  .stay-detail strong { color: var(--deep); }
+  .btn-sm { display: inline-block; font-size: 0.72rem; font-weight: 700; padding: 4px 11px; border-radius: 20px; text-decoration: none; margin-top: 6px; margin-left: 4px; }
+  .btn-map  { background: var(--teal-light); color: var(--teal); }
+  .btn-call { background: var(--deep); color: white; }
+  .confirm-pill { display: inline-block; font-size: 0.71rem; font-weight: 700; background: var(--green-light); color: var(--green); padding: 2px 9px; border-radius: 20px; margin-top: 5px; }
+
+  /* TRANSPORT */
+  .transport-block { padding: 13px 0; border-bottom: 1px solid #f0f0f0; }
+  .transport-block:last-child { border-bottom: none; }
+  .transport-label { font-size: 0.69rem; font-weight: 700; text-transform: uppercase; color: var(--muted); letter-spacing: 0.5px; margin-bottom: 6px; }
+  .transport-row { display: flex; align-items: center; gap: 8px; }
+  .t-city { font-size: 0.84rem; font-weight: 700; }
+  .t-time { font-size: 0.98rem; font-weight: 800; color: var(--deep); }
+  .t-arrow { flex: 1; text-align: center; color: var(--gold); font-size: 1.2rem; }
+  .t-sub { font-size: 0.72rem; color: var(--muted); margin-top: 2px; }
+
+  /* CARS */
+  .car-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 8px; }
+  .car-cell { background: var(--gray); border-radius: 8px; padding: 9px 11px; }
+  .car-label { font-size: 0.69rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.4px; }
+  .car-value { font-size: 0.87rem; font-weight: 700; margin-top: 2px; }
+
+  /* ALERTS */
+  .alert { border-radius: 8px; padding: 10px 14px; margin-bottom: 12px; font-size: 0.81rem; line-height: 1.55; }
+  .alert-info { background: var(--teal-light); border-left: 4px solid var(--teal-mid); color: var(--deep); }
+  .alert-warn { background: #fff8e1; border-left: 4px solid #f59e0b; color: #7a5200; }
+  .alert strong { display: block; margin-bottom: 2px; font-size: 0.84rem; }
+
+  /* SECTION HEADER */
+  .section-header { font-size: 0.75rem; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; color: var(--teal); margin: 18px 0 10px; padding-bottom: 5px; border-bottom: 2px solid var(--teal-light); }
+
+  @media (max-width: 480px) {
+    .hero h1 { font-size: 1.35rem; }
+    .car-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <span class="hero-flags">🇭🇷 🇮🇹 🇺🇸</span>
+  <h1>Daniel Wendt — Croatia &amp; Italy</h1>
+  <div class="subtitle">Split &amp; Dalmatian Coast Cycling → Dubrovnik → Puglia → Matera → Rome</div>
+  <div class="dates">Sep 13 – Oct 6, 2026 · San Diego → Split → Dubrovnik → Bari → Rome → New York</div>
+</div>
+<div class="countdown-bar" id="countdown-bar">
+  <span id="countdown-text">Loading...</span>
+</div>
+
+<div class="tab-bar">
+  <button class="tab-btn active" onclick="showTab('today')">📍 Today</button>
+  <button class="tab-btn" onclick="showTab('itinerary')">🗓 Itinerary</button>
+  <button class="tab-btn" onclick="showTab('stays')">🏨 Stays</button>
+  <button class="tab-btn" onclick="showTab('transport')">✈️ Flights</button>
+  <button class="tab-btn" onclick="showTab('cars')">🚗 Car Rental</button>
+</div>
+
+<!-- TODAY -->
+<div id="tab-today" class="tab-content active">
+  <div id="today-container"></div>
+</div>
+
+<!-- ITINERARY -->
+<div id="tab-itinerary" class="tab-content">
+  <div class="card">
+    <div class="card-title">Full Trip</div>
+    <div id="itinerary-list"></div>
+  </div>
+</div>
+
+<!-- STAYS -->
+<div id="tab-stays" class="tab-content">
+
+  <div class="card">
+    <div class="section-header">🇭🇷 Split</div>
+    <div class="stay-block">
+      <div class="stay-name">Hotel Ambasador Split</div>
+      <div class="stay-dates">Fri Sep 18 → Sun Sep 20 (check-out 11 AM)</div>
+      <div class="stay-addr">Trumbićeva obala 18, 21000 Split, Croatia</div>
+      <div class="stay-detail"><strong>Check-in:</strong> 3:00 PM CEST</div>
+      <div class="stay-detail"><strong>Phone:</strong> +385 21 293 000</div>
+      <a href="https://maps.google.com/?q=Hotel+Ambasador+Split,Trumbićeva+obala+18,Split,Croatia" target="_blank" class="btn-sm btn-map">🗺 Map</a>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="section-header">🇭🇷 Dalmatian Coast — Cycling</div>
+    <div class="stay-block">
+      <div class="stay-name">Duvine Cycle Tour</div>
+      <div class="stay-dates">Sun Sep 20 → Fri Sep 25 (multi-day guided tour)</div>
+      <div class="stay-addr">Starts: Sinjska ul. 6, 21000 Split, Croatia</div>
+      <a href="https://maps.google.com/?q=Sinjska+ul.+6,Split,Croatia" target="_blank" class="btn-sm btn-map">🗺 Map</a>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="section-header">🇭🇷 Dubrovnik</div>
+    <div class="stay-block">
+      <div class="stay-name">Hotel Bellevue Dubrovnik</div>
+      <div class="stay-dates">Fri Sep 25 → Sat Sep 26 (check-out 11 AM)</div>
+      <div class="stay-addr">Ul. Pera Čingrije 7, 20000 Dubrovnik, Croatia</div>
+      <div class="stay-detail"><strong>Check-in:</strong> 12:00 PM CEST</div>
+      <div class="stay-detail"><strong>Phone:</strong> +385 20 330 000</div>
+      <a href="https://maps.google.com/?q=Hotel+Bellevue+Dubrovnik,Ul.+Pera+Čingrije+7,Dubrovnik,Croatia" target="_blank" class="btn-sm btn-map">🗺 Map</a>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="section-header">🇮🇹 Matera</div>
+    <div class="stay-block">
+      <div class="stay-name">Masseria Fontana Di Vite</div>
+      <div class="stay-dates">Sat Sep 26 → Tue Sep 29 (check-out 11 AM)</div>
+      <div class="stay-addr">Unnamed Road, 75100 Matera MT, Italy</div>
+      <div class="stay-detail"><strong>Check-in:</strong> 3:00 PM CEST</div>
+      <div class="stay-detail"><strong>Phone:</strong> +39 0835 182 4169</div>
+      <a href="https://maps.google.com/?q=Masseria+Fontana+Di+Vite,Matera,Italy" target="_blank" class="btn-sm btn-map">🗺 Map</a>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="section-header">🇮🇹 Minervino di Lecce</div>
+    <div class="stay-block">
+      <div class="stay-name">Palazzo Ducale Venturi – Luxury Relais &amp; Wellness</div>
+      <div class="stay-dates">Tue Sep 29 → Sat Oct 3 (check-out 11 AM)</div>
+      <div class="stay-addr">Via Podgora, 60, 73027 Minervino di Lecce LE, Italy</div>
+      <div class="stay-detail"><strong>Check-in:</strong> 3:00 PM CEST</div>
+      <div class="stay-detail"><strong>Phone:</strong> +39 0836 818717</div>
+      <a href="https://maps.google.com/?q=Palazzo+Ducale+Venturi,Via+Podgora+60,Minervino+di+Lecce,Italy" target="_blank" class="btn-sm btn-map">🗺 Map</a>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="section-header">🇮🇹 Rome</div>
+    <div class="stay-block">
+      <div class="stay-name">Margutta 54 Luxury Suites</div>
+      <div class="stay-dates">Sat Oct 3 → Tue Oct 6 (check-out 11 AM)</div>
+      <div class="stay-addr">Via Margutta, 54, 00187 Roma RM, Italy</div>
+      <div class="stay-detail"><strong>Check-in:</strong> 6:01 PM CEST</div>
+      <div class="stay-detail"><strong>Phone:</strong> +39 06 9779 7979</div>
+      <a href="https://maps.google.com/?q=Margutta+54+Luxury+Suites,Via+Margutta+54,Roma,Italy" target="_blank" class="btn-sm btn-map">🗺 Map</a>
+    </div>
+  </div>
+</div>
+
+<!-- TRANSPORT -->
+<div id="tab-transport" class="tab-content">
+  <div class="card">
+    <div class="card-title">Flights</div>
+    <div class="transport-block">
+      <div class="transport-label">Thu Sep 17 — San Diego → Amsterdam</div>
+      <div class="transport-row">
+        <div><div class="t-city">San Diego (SAN)</div><div class="t-time">1:40 PM PDT</div></div>
+        <div class="t-arrow">✈</div>
+        <div style="text-align:right"><div class="t-city">Amsterdam (AMS)</div><div class="t-time">9:15 AM CEST</div><div class="t-sub">Arrives Fri Sep 18</div></div>
+      </div>
+      <div class="t-sub" style="margin-top:6px">KLM 640</div>
+    </div>
+    <div class="transport-block">
+      <div class="transport-label">Fri Sep 18 — Amsterdam → Split</div>
+      <div class="transport-row">
+        <div><div class="t-city">Amsterdam (AMS)</div><div class="t-time">10:55 AM CEST</div></div>
+        <div class="t-arrow">✈</div>
+        <div style="text-align:right"><div class="t-city">Split (SPU)</div><div class="t-time">1:05 PM CEST</div></div>
+      </div>
+      <div class="t-sub" style="margin-top:6px">EasyJet 7907</div>
+    </div>
+    <div class="transport-block">
+      <div class="transport-label">Sat Sep 26 — Dubrovnik → Bari</div>
+      <div class="transport-row">
+        <div><div class="t-city">Dubrovnik (DBV)</div><div class="t-time">3:00 PM CEST</div></div>
+        <div class="t-arrow">✈</div>
+        <div style="text-align:right"><div class="t-city">Bari (BRI)</div><div class="t-time">3:50 PM CEST</div></div>
+      </div>
+      <div class="t-sub" style="margin-top:6px">Ryanair operated by Buzz 6876</div>
+    </div>
+    <div class="transport-block">
+      <div class="transport-label">Sat Oct 3 — Bari → Rome</div>
+      <div class="transport-row">
+        <div><div class="t-city">Bari (BRI)</div><div class="t-time">4:00 PM CEST</div></div>
+        <div class="t-arrow">✈</div>
+        <div style="text-align:right"><div class="t-city">Rome</div><div class="t-time">5:10 PM CEST</div></div>
+      </div>
+      <div class="t-sub" style="margin-top:6px">Ryanair – Malta 7076</div>
+    </div>
+    <div class="transport-block">
+      <div class="transport-label">Tue Oct 6 — Fly Home</div>
+      <div class="transport-row">
+        <div><div class="t-city">Rome Fiumicino (FCO)</div><div class="t-time">10:10 AM CEST</div></div>
+        <div class="t-arrow">✈</div>
+        <div style="text-align:right"><div class="t-city">New York (JFK)</div><div class="t-time">2:07 PM EDT</div></div>
+      </div>
+      <div class="t-sub" style="margin-top:6px">Delta Air Lines 183</div>
+    </div>
+  </div>
+  <div class="alert alert-info">
+    <strong>ℹ️ Trip window</strong>
+    TripIt lists the overall trip as Sep 13 – Oct 6, 2026, but the first scheduled itinerary item (outbound flight) is Thu Sep 17. Confirm whether Sep 13–17 involves separate plans not yet loaded into TripIt.
+  </div>
+</div>
+
+<!-- CARS -->
+<div id="tab-cars" class="tab-content">
+  <div class="card">
+    <div class="card-title">Rental Car</div>
+    <div class="car-grid">
+      <div class="car-cell" style="grid-column:1/-1">
+        <div class="car-label">Hertz — Bari</div>
+        <div class="car-value">Pickup: Sat Sep 26 4:00 PM · Drop-off: Sat Oct 3 12:00 PM</div>
+      </div>
+      <div class="car-cell" style="grid-column:1/-1">
+        <div class="car-label">Pickup location</div>
+        <div class="car-value" style="font-size:0.78rem;font-weight:500">Bari Airport (BRI), on arrival from Dubrovnik</div>
+      </div>
+    </div>
+  </div>
+  <div class="alert alert-info">
+    <strong>🚗 Puglia road trip</strong>
+    The Hertz rental covers the Matera → Minervino di Lecce leg of the trip (Sep 26 – Oct 3), between the Bari flight arrival and the Bari flight to Rome.
+  </div>
+</div>
+
+<script>
+const days = [
+  { date:'2026-09-17', label:'Thu, Sep 17', city:'Depart San Diego', type:'travel', plan:'KLM 640 departs SAN 1:40 PM PDT → Amsterdam. Overnight flight.', tags:['✈ KLM640 1:40PM SAN'] },
+  { date:'2026-09-18', label:'Fri, Sep 18', city:'Amsterdam → Split', type:'travel', plan:'Arrive AMS 9:15 AM. EasyJet 7907 AMS → Split 10:55 AM, arrives 1:05 PM. Check in Hotel Ambasador Split (3 PM).', tags:['🛬 Arrive AMS 9:15AM','✈ EasyJet 7907 10:55AM','🏨 Hotel Ambasador'] },
+  { date:'2026-09-19', label:'Sat, Sep 19', city:'Split', type:'split', plan:'Explore Split — Diocletian\'s Palace, Riva waterfront, old town.', tags:[] },
+  { date:'2026-09-20', label:'Sun, Sep 20', city:'Split → Cycle Tour begins', type:'cycle', plan:'Check out Hotel Ambasador (11 AM). Duvine Cycle Tour begins 12 PM from Sinjska ul. 6, Split. Multi-day guided cycling through the Dalmatian Coast.', tags:['🚴 Duvine Cycle Tour 12PM'] },
+  { date:'2026-09-21', label:'Mon, Sep 21', city:'Dalmatian Coast', type:'cycle', plan:'Duvine Cycle Tour continues along the Dalmatian Coast.', tags:['🚴 Cycling'] },
+  { date:'2026-09-22', label:'Tue, Sep 22', city:'Dalmatian Coast', type:'cycle', plan:'Duvine Cycle Tour continues.', tags:['🚴 Cycling'] },
+  { date:'2026-09-23', label:'Wed, Sep 23', city:'Dalmatian Coast', type:'cycle', plan:'Duvine Cycle Tour continues.', tags:['🚴 Cycling'] },
+  { date:'2026-09-24', label:'Thu, Sep 24', city:'Dalmatian Coast', type:'cycle', plan:'Duvine Cycle Tour continues.', tags:['🚴 Cycling'] },
+  { date:'2026-09-25', label:'Fri, Sep 25', city:'Cycle Tour ends → Dubrovnik', type:'dubrovnik', plan:'Duvine Cycle Tour ends 3 PM. Check in Hotel Bellevue Dubrovnik (12 PM).', tags:['🚴 Tour ends 3PM','🏨 Hotel Bellevue'] },
+  { date:'2026-09-26', label:'Sat, Sep 26', city:'Dubrovnik → Bari → Matera', type:'travel', plan:'Check out Hotel Bellevue (11 AM). Ryanair/Buzz 6876 DBV → BRI 3:00 PM, arrives 3:50 PM. Hertz rental car pickup 4 PM. Drive to Matera. Check in Masseria Fontana Di Vite (3 PM).', tags:['✈ Buzz6876 3PM DBV','🚗 Hertz pickup 4PM','🏨 Masseria Fontana'] },
+  { date:'2026-09-27', label:'Sun, Sep 27', city:'Matera', type:'matera', plan:'Explore Matera — the Sassi cave-dwellings district, UNESCO World Heritage site.', tags:[] },
+  { date:'2026-09-28', label:'Mon, Sep 28', city:'Matera', type:'matera', plan:'Matera day. Explore at leisure or day trip into Puglia countryside.', tags:[] },
+  { date:'2026-09-29', label:'Tue, Sep 29', city:'Matera → Minervino di Lecce', type:'travel', plan:'Check out Masseria Fontana Di Vite (11 AM). Drive to Minervino di Lecce. Check in Palazzo Ducale Venturi (3 PM).', tags:['🚗 Drive to Lecce area','🏨 Palazzo Ducale Venturi'] },
+  { date:'2026-09-30', label:'Wed, Sep 30', city:'Salento / Lecce', type:'lecce', plan:'Explore the Salento peninsula — Lecce baroque old town, Adriatic and Ionian beaches.', tags:[] },
+  { date:'2026-10-01', label:'Thu, Oct 1', city:'Salento / Lecce', type:'lecce', plan:'Salento day. Explore coastal towns — Otranto, Gallipoli, or relax at the Relais.', tags:[] },
+  { date:'2026-10-02', label:'Fri, Oct 2', city:'Salento / Lecce', type:'lecce', plan:'Final Salento day. Explore at leisure.', tags:[] },
+  { date:'2026-10-03', label:'Sat, Oct 3', city:'Minervino di Lecce → Bari → Rome', type:'travel', plan:'Check out Palazzo Ducale Venturi (11 AM). Hertz drop-off 12 PM. Ryanair-Malta 7076 flight from BRI 4:00 PM, arrives 5:10 PM. Check in Margutta 54 Luxury Suites, Rome (6:01 PM).', tags:['🚗 Hertz drop-off 12PM','✈ Malta7076 4PM','🏨 Margutta 54'] },
+  { date:'2026-10-04', label:'Sun, Oct 4', city:'Rome', type:'rome', plan:'Explore Rome — Colosseum, Roman Forum, Trastevere.', tags:[] },
+  { date:'2026-10-05', label:'Mon, Oct 5', city:'Rome', type:'rome', plan:'Final Rome day — Vatican Museums, Sistine Chapel, or explore at leisure.', tags:[] },
+  { date:'2026-10-06', label:'Tue, Oct 6', city:'Fly Home', type:'travel', plan:'Check out Margutta 54 (11 AM). Delta 183 FCO → JFK departs 10:10 AM, arrives 2:07 PM EDT. Home!', tags:['✈ Delta183 10:10AM FCO'] },
+];
+
+const cityTypeMap = {
+  split: 'city-split', cycle: 'city-cycle', dubrovnik: 'city-dubrovnik',
+  matera: 'city-matera', lecce: 'city-lecce', rome: 'city-rome', travel: 'city-travel'
+};
+
+function parseDate(str) { const [y,m,d] = str.split('-').map(Number); return new Date(y,m-1,d); }
+function todayStr() { const t = new Date(); return `${t.getFullYear()}-${String(t.getMonth()+1).padStart(2,'0')}-${String(t.getDate()).padStart(2,'0')}`; }
+
+function renderCountdown() {
+  const today = new Date(); today.setHours(0,0,0,0);
+  const start = parseDate('2026-09-17');
+  const end   = parseDate('2026-10-06');
+  const bar = document.getElementById('countdown-bar');
+  const txt = document.getElementById('countdown-text');
+  if (today < start) {
+    const diff = Math.round((start - today) / 86400000);
+    txt.innerHTML = `✈️ Trip starts in <span>${diff} day${diff===1?'':'s'}</span> — Sep 17, 2026`;
+  } else if (today <= end) {
+    bar.classList.add('active');
+    const d = Math.round((today - start) / 86400000) + 1;
+    txt.innerHTML = `🌍 On the road! <span>Day ${d} of 20</span>`;
+  } else {
+    txt.innerHTML = `🎉 What an adventure — welcome home!`;
+  }
+}
+
+function renderToday() {
+  const ts = todayStr();
+  const container = document.getElementById('today-container');
+  const day = days.find(d => d.date === ts);
+  if (!day) {
+    const now = new Date(); now.setHours(0,0,0,0);
+    const start = parseDate('2026-09-17');
+    const diff = Math.round((start - now) / 86400000);
+    container.innerHTML = `
+      <div class="card" style="text-align:center;padding:28px 18px">
+        <div style="font-size:2.5rem;margin-bottom:8px">🌍</div>
+        <div style="font-size:1.1rem;font-weight:700;color:var(--deep);margin-bottom:4px">
+          ${diff > 0 ? `${diff} days until departure!` : 'Safe travels — what a trip!'}
+        </div>
+        <div style="font-size:0.85rem;color:var(--muted)">Sep 17 – Oct 6, 2026 · Croatia &amp; Italy</div>
+      </div>`;
+    return;
+  }
+  const pill = `<span class="city-pill ${cityTypeMap[day.type]||'city-travel'}">${day.city}</span>`;
+  const tagsHtml = day.tags.length
+    ? `<div class="day-tags">${day.tags.map(t => {
+        const cls = t.includes('🍽')||t.includes('🍺')||t.includes('🥂') ? 'tag tag-eat' : t.includes('✈')||t.includes('🚄')||t.includes('🚗') ? 'tag tag-move' : 'tag tag-act';
+        return `<span class="${cls}">${t}</span>`;
+      }).join('')}</div>` : '';
+  container.innerHTML = `
+    <div class="card">
+      <div class="card-title">Today</div>
+      ${pill}
+      <div style="font-size:1.05rem;font-weight:700;color:var(--deep);margin:4px 0 2px">${day.label}</div>
+      <div style="font-size:0.82rem;color:var(--muted);margin-bottom:10px">${day.city}</div>
+      <div style="font-size:0.93rem;line-height:1.6;border-left:3px solid var(--teal-mid);padding-left:12px">${day.plan}</div>
+      ${tagsHtml}
+    </div>`;
+}
+
+function renderItinerary() {
+  const ts = todayStr();
+  const el = document.getElementById('itinerary-list');
+  el.innerHTML = days.map(d => {
+    const isToday = d.date === ts;
+    const isPast  = d.date < ts;
+    const pill = `<span class="city-pill ${cityTypeMap[d.type]||'city-travel'}">${d.city}</span>`;
+    const tagsHtml = d.tags.length
+      ? `<div class="day-tags">${d.tags.map(t => {
+          const cls = t.includes('🍽')||t.includes('🍺')||t.includes('🥂') ? 'tag tag-eat' : t.includes('✈')||t.includes('🚄')||t.includes('🚗') ? 'tag tag-move' : 'tag tag-act';
+          return `<span class="${cls}">${t}</span>`;
+        }).join('')}</div>` : '';
+    let cls = 'day-item' + (isToday ? ' today-item' : '') + (isPast ? ' past-item' : '');
+    return `<div class="${cls}" data-type="${d.type}">
+      ${isToday ? '<span class="day-badge">TODAY</span>' : ''}
+      <div class="day-label">${d.label}</div>
+      ${pill}
+      <div class="day-plan">${d.plan}</div>
+      ${tagsHtml}
+    </div>`;
+  }).join('');
+}
+
+function showTab(name) {
+  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + name).classList.add('active');
+  event.target.classList.add('active');
+}
+
+renderCountdown();
+renderToday();
+renderItinerary();
+</script>
+</body>
+</html>
