@@ -161,6 +161,8 @@
     .day-date { font-size: 0.72rem; color: var(--muted); margin-bottom: 5px; font-family: 'JetBrains Mono', monospace; letter-spacing: 0.04em; }
     .day-port { font-size: 1.1rem; font-weight: 800; color: var(--white); letter-spacing: -0.01em; }
     .day-times { font-size: 0.82rem; color: #4a6080; margin-top: 5px; }
+    .day-excursion { margin-top: 8px; padding: 8px 12px; background: rgba(0,212,255,0.06); border: 1px solid rgba(0,212,255,0.25); border-radius: 8px; font-size: 0.82rem; color: var(--white); }
+    .day-excursion .lbl { font-size: 0.62rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; color: var(--cyan); display: block; margin-bottom: 2px; }
     .day-desc { font-size: 0.85rem; color: #3a5570; margin-top: 8px; line-height: 1.6; }
     .day-tips { margin: 10px 0 0 0; padding-left: 0; list-style: none; }
     .day-tips li { font-size: 0.82rem; color: #4a6080; line-height: 1.6; padding-left: 16px; position: relative; margin-bottom: 4px; }
@@ -568,13 +570,23 @@
           <div class="section-title">Onboard Purchases</div>
           <div class="card">
             <table>
-              <tr><td>Premium Internet Plan &ndash; 13 Days (Diana)</td><td class="val">$223.99</td></tr>
-              <tr><td>Premium Internet Plan &ndash; 13 Days (David)</td><td class="val">$223.99</td></tr>
-              <tr><td style="font-weight:700;">Internet Plan Total</td><td class="val" style="font-weight:700;">$447.98</td></tr>
-              <tr><td>Delivery</td><td class="val">Stateroom, starting Oct 11, 2026</td></tr>
-              <tr><td>Reference # (card ending 1743)</td><td class="val">21170811</td></tr>
+              <tr><td style="font-weight:700;color:var(--cyan);">Premium Internet Plan &ndash; 13 Days</td><td class="val"></td></tr>
+              <tr><td>&nbsp;&nbsp;Diana</td><td class="val">$223.99</td></tr>
+              <tr><td>&nbsp;&nbsp;David</td><td class="val">$223.99</td></tr>
+              <tr><td>&nbsp;&nbsp;Delivery</td><td class="val">Stateroom, starting Oct 11, 2026</td></tr>
+              <tr><td>&nbsp;&nbsp;Reference # (card ending 1743)</td><td class="val">21170811</td></tr>
+              <tr><td style="font-weight:700;color:var(--cyan);">Shore Excursion &ndash; Nihondaira Outlook &amp; Kunozan Toshogu Shrine</td><td class="val"></td></tr>
+              <tr><td>&nbsp;&nbsp;Port / Time</td><td class="val">Omaezaki, Oct 12 &middot; 8:45 AM</td></tr>
+              <tr><td>&nbsp;&nbsp;Cost (2 guests)</td><td class="val">$339.90</td></tr>
+              <tr><td>&nbsp;&nbsp;Reference # (card ending 1743)</td><td class="val">21170792</td></tr>
+              <tr><td style="font-weight:700;color:var(--cyan);">Shore Excursion &ndash; Kyoto, the Ancient Capital</td><td class="val"></td></tr>
+              <tr><td>&nbsp;&nbsp;Port / Time</td><td class="val">Kobe, Oct 13 &middot; 9:30 AM</td></tr>
+              <tr><td>&nbsp;&nbsp;Cost (2 guests)</td><td class="val">$479.90</td></tr>
+              <tr><td>&nbsp;&nbsp;Reference # (card ending 1743)</td><td class="val">21170783</td></tr>
+              <tr><td style="font-weight:700;">Total Onboard Purchases</td><td class="val" style="font-weight:700;">$1,267.78</td></tr>
             </table>
-            <p style="font-size:0.82rem;color:#fbbf24;margin-top:10px;line-height:1.6;">⚠️ Two other Holland America purchase confirmations landed the same day (Oct 6) &ndash; order #21170783 and a $339.90 charge, ref #21170792 &ndash; but the forwarded emails only showed order numbers/amounts, not itemized contents (likely Spa, Dining, or an Indulgences purchase). Forward the full emails if you want these itemized here too.</p>
+            <p style="font-size:0.82rem;color:#4a6080;margin-top:10px;line-height:1.6;">Shore excursion tickets are digital via the Navigator App &ndash; check in once aboard (Account &rarr; Wallet), then confirm meeting time/place 24 hours before each tour. Guide or driver scans the digital ticket or stateroom key card.</p>
+            <p style="font-size:0.82rem;color:#fbbf24;margin-top:10px;line-height:1.6;">⚠️ Only 2 shore excursions confirmed from the emails so far &ndash; mentioned there are 3. Send the third confirmation and I'll add it here and to the matching port day in the Itinerary tab.</p>
           </div>
         </div>
 
@@ -643,19 +655,21 @@
         'Board with time to spare — muster drill and sail-away happen before the 7:00 PM departure'
       ] },
     { date: 'Oct 12', day: 'Mon', port: 'Omaezaki', arr: '7:00 AM', dep: '4:00 PM', country: 'jp', desc: 'Small fishing port town in Shizuoka Prefecture. Cape Omaezaki lighthouse area.',
+      excursion: { name: 'Nihondaira Outlook &amp; Kunozan Toshogu Shrine', time: '8:45 AM', cost: '$169.95 &times; 2 = $339.90', ref: '21170792' },
       tips: [
         'Walk or shuttle to <strong>Cape Omaezaki Lighthouse</strong> — climbable, with ocean views over the Pacific',
         'Browse the port-side fish market for fresh local catch — this is a tuna/bonito fishing town',
         'A quiet, low-key stop — good day to keep it light if you did a full day in Kobe the day before'
       ] },
     { date: 'Oct 13', day: 'Tue', port: 'Kobe', arr: '9:00 AM', dep: '7:00 PM', country: 'jp', desc: 'Major port city. Arima Onsen, Nunobiki Herb Garden, Chinatown (Nankinmachi), Kobe beef.',
+      excursion: { name: 'Kyoto, the Ancient Capital', time: '9:30 AM', cost: '$239.95 &times; 2 = $479.90', ref: '21170783' },
       tips: [
         '<strong>Kobe beef lunch</strong> — reserve ahead if possible (Steakland or Mouriya are popular with cruise passengers)',
         '<strong>Nunobiki Herb Garden</strong> — ropeway up for skyline/harbor views, gardens at the top',
         '<strong>Kitano-cho</strong> historic foreigner district — Western-style houses, cafes, good walking area',
         'Want onsen instead? <strong>Arima Onsen</strong> is ~30 min by train/bus — one of Japan\'s oldest hot spring towns',
         'Nankinmachi (Chinatown) for street food if you want a lighter, cheaper lunch option',
-        '<strong>Kyoto</strong> is doable as a day trip — ~1 hour by Shinkansen or local train, but eats most of the port day; worth it if Fushimi Inari, Kinkaku-ji, or Gion are on your must-see list'
+        'Booked excursion goes to <strong>Kyoto</strong> rather than staying in Kobe — if you want any Kobe-specific sights (beef lunch, Kitano-cho), fit them in before the 9:30 AM tour meeting time or skip them this port'
       ] },
     { date: 'Oct 14', day: 'Wed', port: 'Kochi', arr: '8:00 AM', dep: '9:00 PM', country: 'jp', desc: 'Shikoku island. Kochi Castle, Hirome Market, Katsurahama Beach. Known for katsuo (bonito) tataki.',
       tips: [
@@ -745,11 +759,14 @@
 
       const tips = d.tips ? `<ul class="day-tips">${d.tips.map(t => `<li>${t}</li>`).join('')}</ul>` : '';
 
+      const excursion = d.excursion ? `<div class="day-excursion"><span class="lbl">🎟️ Booked Excursion</span>${d.excursion.name} — ${d.excursion.time}<br><span style="color:#4a6080;">${d.excursion.cost} &middot; ref #${d.excursion.ref}</span></div>` : '';
+
       return `<div class="${cls}">
         ${badge}
         <div class="day-date">${d.date}, 2026 &middot;${d.day}</div>
         <div class="day-port">${d.port}${ctry}</div>
         ${times ? `<div class="day-times">⏰ ${times}</div>` : ''}
+        ${excursion}
         <div class="day-desc">${d.desc}</div>
         ${tips}
       </div>`;
