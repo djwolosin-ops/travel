@@ -162,6 +162,10 @@
     .day-port { font-size: 1.1rem; font-weight: 800; color: var(--white); letter-spacing: -0.01em; }
     .day-times { font-size: 0.82rem; color: #4a6080; margin-top: 5px; }
     .day-desc { font-size: 0.85rem; color: #3a5570; margin-top: 8px; line-height: 1.6; }
+    .day-tips { margin: 10px 0 0 0; padding-left: 0; list-style: none; }
+    .day-tips li { font-size: 0.82rem; color: #4a6080; line-height: 1.6; padding-left: 16px; position: relative; margin-bottom: 4px; }
+    .day-tips li::before { content: '→'; position: absolute; left: 0; color: var(--cyan); font-weight: 700; }
+    .day-tips li strong { color: var(--white); font-weight: 700; }
     .country-pill { display: inline-block; font-size: 0.65rem; font-weight: 700; padding: 2px 8px; border-radius: 99px; margin-left: 8px; vertical-align: middle; }
     .jp { background: rgba(0,212,255,0.1); color: var(--cyan); }
     .kr { background: rgba(59,130,246,0.12); color: #93c5fd; }
@@ -233,6 +237,7 @@
     <a href="#" onclick="showTab('overview')">Overview</a>
     <a href="#" onclick="showTab('itinerary')">Itinerary</a>
     <a href="#" onclick="showTab('ship')">Ship & Cabin</a>
+    <a href="#" onclick="showTab('travel')">Flights & Hotel</a>
     <a href="#" onclick="showTab('booking')">Booking & Payment</a>
     <a href="#" onclick="showTab('packing')">Packing</a>
     <div class="sidebar-section">Ports</div>
@@ -286,6 +291,7 @@
         <button class="tab-btn active" onclick="showTab('overview')">Overview</button>
         <button class="tab-btn" onclick="showTab('itinerary')">Itinerary</button>
         <button class="tab-btn" onclick="showTab('ship')">Ship & Cabin</button>
+        <button class="tab-btn" onclick="showTab('travel')">Flights & Hotel</button>
         <button class="tab-btn" onclick="showTab('booking')">Booking</button>
         <button class="tab-btn" onclick="showTab('packing')">Packing</button>
       </div>
@@ -376,7 +382,7 @@
           <div class="section-title">Ship Details</div>
           <div class="card">
             <table>
-              <tr><td>Ship</td><td class="val"><a href="https://www.hollandamerica.com/en/us/cruise-ships/westerdam/8" target="_blank" style="color:var(--cyan);text-decoration:none;">Westerdam â†—</a></td></tr>
+              <tr><td>Ship</td><td class="val"><a href="https://www.hollandamerica.com/en/us/cruise-ships/westerdam/8" target="_blank" style="color:var(--cyan);text-decoration:none;">Westerdam ↗</a></td></tr>
               <tr><td>Cruise Line</td><td class="val">Holland America Line</td></tr>
               <tr><td>Voyage</td><td class="val">13 Night Japan Round Trip</td></tr>
               <tr><td>Embarkation Port</td><td class="val">Tokyo, Japan</td></tr>
@@ -401,7 +407,7 @@
                 <tr><td>Seating</td><td class="val">Early &ndash;5:45 PM</td></tr>
                 <tr><td>Level</td><td class="val">Upper Level</td></tr>
                 <tr><td>Table Size</td><td class="val">2 &ndash;Confirmed Request</td></tr>
-                <tr><td>Note</td><td class="val" style="color:#fbbf24;font-size:0.75rem;">Confirm onboard with maÃ®tre d'</td></tr>
+                <tr><td>Note</td><td class="val" style="color:#fbbf24;font-size:0.75rem;">Confirm onboard with maître d'</td></tr>
               </table>
             </div>
           </div>
@@ -414,7 +420,7 @@
             <p style="font-size:0.88rem;color:#4a6080;margin-top:6px;line-height:1.6;">HAL's <strong style="color:var(--white);">Move Up program</strong> &ndash;expect an email 60&ndash;90 days before sailing (July/August) inviting you to bid on higher categories. You name your price above the minimum. Target categories:</p>
             <table style="margin-top:12px;">
               <tr><td>Outside / Ocean View</td><td class="val">Natural light, no balcony</td></tr>
-              <tr><td>Verandah / Balcony â­</td><td class="val" style="color:var(--cyan);">Best value &ndash;worth paying for Japan</td></tr>
+              <tr><td>Verandah / Balcony ⭐</td><td class="val" style="color:var(--cyan);">Best value &ndash;worth paying for Japan</td></tr>
               <tr><td>Neptune Suite</td><td class="val">Priority boarding + concierge lounge</td></tr>
             </table>
           </div>
@@ -437,6 +443,83 @@
             <p style="font-size:0.85rem;color:#4a6080;margin-top:10px;line-height:1.6;border-top:1px solid var(--border);padding-top:10px;">
               <strong style="color:var(--cyan);">Why balcony is the priority:</strong> Japan in October is stunning. Kanmon Strait transit (Oct 15) and Hakodate approach (Oct 21) are best experienced from a private balcony. That's the upgrade worth paying for.
             </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- TRAVEL (FLIGHTS & HOTEL) -->
+      <div class="tab-content" id="tab-travel">
+        <div class="section">
+          <div class="section-title">Outbound Flight — Fri, Oct 9, 2026</div>
+          <div class="card">
+            <table>
+              <tr><td>Route</td><td class="val">San Diego (SAN) → Tokyo Narita (NRT)</td></tr>
+              <tr><td>Departs</td><td class="val">1:05 PM, Fri Oct 9, 2026</td></tr>
+              <tr><td>Arrives</td><td class="val">4:45 PM, Sat Oct 10, 2026</td></tr>
+              <tr><td>Flight</td><td class="val">AA 8479 (operated by Japan Airlines)</td></tr>
+              <tr><td>Class</td><td class="val">Economy (Q)</td></tr>
+            </table>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="section-title">Pre-Cruise Hotel — Tokyo</div>
+          <div class="card">
+            <h3>Sotetsu Grand Fresa Tokyo-Bay Ariake</h3>
+            <table style="margin-top:10px;">
+              <tr><td>Check-in</td><td class="val">Sat, Oct 10, 2026 (from 3:00 PM)</td></tr>
+              <tr><td>Check-out</td><td class="val">Sun, Oct 11, 2026 (until 11:00 AM)</td></tr>
+              <tr><td>Room</td><td class="val">Premium Bay Side Double Room, Non-Smoking · 2 adults</td></tr>
+              <tr><td>Address</td><td class="val">Koto-ku Ariake 3-6-6, Tokyo-to, Japan</td></tr>
+              <tr><td>Phone</td><td class="val"><a href="tel:+81368992030" style="color:var(--cyan);text-decoration:none;">+81 3-6899-2030</a></td></tr>
+              <tr><td>Booking.com Confirmation</td><td class="val">5352311388</td></tr>
+              <tr><td>PIN</td><td class="val">4541</td></tr>
+              <tr><td>Total Paid</td><td class="val">¥38,091</td></tr>
+              <tr><td style="color:#fbbf24;">Free Cancellation Until</td><td class="val" style="color:#fbbf24;font-size:0.8rem;">Oct 8, 2026 11:59 PM JST</td></tr>
+            </table>
+            <p style="font-size:0.82rem;color:#4a6080;margin-top:10px;line-height:1.6;">Bridges the gap between the Oct 10 flight arrival and Oct 11 cruise embarkation — one night in Tokyo before boarding the Westerdam.</p>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="section-title">Return Flight — Sat, Oct 24, 2026</div>
+          <div class="two-col">
+            <div class="card">
+              <h3>Leg 1</h3>
+              <table style="margin-top:10px;">
+                <tr><td>Route</td><td class="val">Tokyo Haneda (HND) → San Francisco (SFO)</td></tr>
+                <tr><td>Departs</td><td class="val">4:25 PM, Sat Oct 24, 2026</td></tr>
+                <tr><td>Arrives</td><td class="val">9:45 AM, Sat Oct 24, 2026</td></tr>
+                <tr><td>Flight</td><td class="val">JL 2 (Japan Airlines)</td></tr>
+                <tr><td>Class</td><td class="val">Economy (Q)</td></tr>
+              </table>
+            </div>
+            <div class="card">
+              <h3>Leg 2</h3>
+              <table style="margin-top:10px;">
+                <tr><td>Route</td><td class="val">San Francisco (SFO) → San Diego (SAN)</td></tr>
+                <tr><td>Departs</td><td class="val">2:44 PM</td></tr>
+                <tr><td>Arrives</td><td class="val">4:27 PM</td></tr>
+                <tr><td>Flight</td><td class="val">AS 3482 (operated by SkyWest Airlines)</td></tr>
+                <tr><td>Class</td><td class="val">Economy (Q)</td></tr>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="section-title">Flight Confirmation Codes &amp; Cost</div>
+          <div class="card">
+            <table>
+              <tr><td>American Airlines</td><td class="val">JJZAEA</td></tr>
+              <tr><td>Japan Airlines</td><td class="val">AROLJ5</td></tr>
+              <tr><td>SkyWest Airlines</td><td class="val">UODBOE</td></tr>
+              <tr><td>Diana — Ticket</td><td class="val">$1,189.43</td></tr>
+              <tr><td>David — Ticket</td><td class="val">$1,189.43</td></tr>
+              <tr><td style="font-weight:700;">Total Paid (both passengers)</td><td class="val" style="font-weight:700;">$2,378.86</td></tr>
+              <tr><td>Payment</td><td class="val">MasterCard ending 2833</td></tr>
+              <tr><td>Checked Bags</td><td class="val">1st &amp; 2nd bag — no charge</td></tr>
+            </table>
           </div>
         </div>
       </div>
@@ -465,7 +548,7 @@
               <tr><td>Total Package Price</td><td class="val">$4,158.00</td></tr>
               <tr><td>Amount Paid</td><td class="val" style="color:#34d399;">($600.00)</td></tr>
               <tr><td style="color:#fc8181;font-weight:700;">Balance Remaining</td><td class="val" style="color:#fc8181;font-weight:700;">$3,558.00</td></tr>
-              <tr><td style="color:#f87171;">Final Payment Due</td><td class="val" style="color:#f87171;">05/30/2026 âš ï¸ PAST DUE</td></tr>
+              <tr><td style="color:#f87171;">Final Payment Due</td><td class="val" style="color:#f87171;">05/30/2026 ⚠️ PAST DUE</td></tr>
             </table>
           </div>
         </div>
@@ -473,11 +556,38 @@
           <div class="section-title">Included Extras</div>
           <div class="card">
             <table>
-              <tr><td>$280 Digital Costco Shop Card</td><td class="val" style="color:#34d399;">âœ“ Included</td></tr>
-              <tr><td>Pre-Paid Crew Appreciation</td><td class="val" style="color:#34d399;">âœ“ Included</td></tr>
-              <tr><td>Cruise Fare Savings</td><td class="val" style="color:#34d399;">âœ“ Applied</td></tr>
-              <tr><td>Non-Refundable Deposit</td><td class="val" style="color:#fbbf24;font-size:0.8rem;">âš ï¸ Non-refundable</td></tr>
+              <tr><td>$280 Digital Costco Shop Card</td><td class="val" style="color:#34d399;">✓ Included</td></tr>
+              <tr><td>Pre-Paid Crew Appreciation</td><td class="val" style="color:#34d399;">✓ Included</td></tr>
+              <tr><td>Cruise Fare Savings</td><td class="val" style="color:#34d399;">✓ Applied</td></tr>
+              <tr><td>Non-Refundable Deposit</td><td class="val" style="color:#fbbf24;font-size:0.8rem;">⚠️ Non-refundable</td></tr>
             </table>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="section-title">Onboard Purchases</div>
+          <div class="card">
+            <table>
+              <tr><td>Premium Internet Plan &ndash; 13 Days (Diana)</td><td class="val">$223.99</td></tr>
+              <tr><td>Premium Internet Plan &ndash; 13 Days (David)</td><td class="val">$223.99</td></tr>
+              <tr><td style="font-weight:700;">Internet Plan Total</td><td class="val" style="font-weight:700;">$447.98</td></tr>
+              <tr><td>Delivery</td><td class="val">Stateroom, starting Oct 11, 2026</td></tr>
+              <tr><td>Reference # (card ending 1743)</td><td class="val">21170811</td></tr>
+            </table>
+            <p style="font-size:0.82rem;color:#fbbf24;margin-top:10px;line-height:1.6;">⚠️ Two other Holland America purchase confirmations landed the same day (Oct 6) &ndash; order #21170783 and a $339.90 charge, ref #21170792 &ndash; but the forwarded emails only showed order numbers/amounts, not itemized contents (likely Spa, Dining, or an Indulgences purchase). Forward the full emails if you want these itemized here too.</p>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="section-title">Documents &amp; Boarding</div>
+          <div class="card">
+            <table>
+              <tr><td>Boarding Pass</td><td class="val" style="color:#34d399;">✓ Received (emailed Oct 6, PDF attached)</td></tr>
+              <tr><td>Luggage Tags</td><td class="val" style="color:#34d399;">✓ Received (emailed Oct 6, PDF attached)</td></tr>
+              <tr><td>Holland America Account</td><td class="val" style="color:#34d399;">✓ Created (Oct 4)</td></tr>
+              <tr><td>Embarkation Notification</td><td class="val" style="color:#fbbf24;font-size:0.8rem;">⚠️ Received Oct 5 &ndash; attachment not reviewed</td></tr>
+            </table>
+            <p style="font-size:0.82rem;color:#4a6080;margin-top:10px;line-height:1.6;">The Embarkation Notification email just pointed to an attached PDF ("an important update to your booking") without describing what changed in the email body itself &ndash; worth opening that attachment before Oct 11 in case it's a schedule or terminal change.</p>
           </div>
         </div>
       </div>
@@ -510,7 +620,7 @@
     document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
     document.getElementById('tab-' + id).classList.add('active');
     const btns = document.querySelectorAll('.tab-btn');
-    const labels = ['overview','itinerary','ship','booking','packing'];
+    const labels = ['overview','itinerary','ship','travel','booking','packing'];
     const idx = labels.indexOf(id);
     if (idx >= 0) btns[idx].classList.add('active');
     document.getElementById('sidebar').classList.remove('open');
@@ -525,18 +635,88 @@
 
   // Itinerary
   const itinerary = [
-    { date: 'Oct 11', day: 'Sun', port: 'Tokyo', arr: '--', dep: '7:00 PM', country: 'jp', desc: 'Embarkation day. Board the Westerdam and settle in. Ship departs evening.' },
-    { date: 'Oct 12', day: 'Mon', port: 'Omaezaki', arr: '7:00 AM', dep: '4:00 PM', country: 'jp', desc: 'Small fishing port town in Shizuoka Prefecture. Cape Omaezaki lighthouse area.' },
-    { date: 'Oct 13', day: 'Tue', port: 'Kobe', arr: '9:00 AM', dep: '7:00 PM', country: 'jp', desc: 'Major port city. Arima Onsen, Nunobiki Herb Garden, Chinatown (Nankinmachi), Kobe beef.' },
-    { date: 'Oct 14', day: 'Wed', port: 'Kochi', arr: '8:00 AM', dep: '9:00 PM', country: 'jp', desc: 'Shikoku island. Kochi Castle, Hirome Market, Katsurahama Beach. Known for katsuo (bonito) tataki.' },
-    { date: 'Oct 15', day: 'Thu', port: 'Kanmon Strait', arr: '--', dep: '--', country: 'jp', desc: 'Scenic transit through the narrow strait between Honshu and Kyushu. Panoramic views from deck.', sea: true },
-    { date: 'Oct 16', day: 'Fri', port: 'Hakata / Fukuoka', arr: '8:00 AM', dep: '4:00 PM', country: 'jp', desc: 'Fukuoka &ndash;Hakata ramen, Canal City, Dazaifu Tenmangu Shrine, Ohori Park. Great food city.' },
-    { date: 'Oct 17', day: 'Sat', port: 'Sokcho', arr: '10:00 AM', dep: '8:00 PM', country: 'kr', desc: 'South Korea. Gateway to Seoraksan National Park &ndash;best fall foliage. Abai Village, Sokcho beach.' },
+    { date: 'Oct 11', day: 'Sun', port: 'Tokyo', arr: '--', dep: '7:00 PM', country: 'jp', desc: 'Embarkation day. Board the Westerdam and settle in. Ship departs evening.',
+      tips: [
+        'Terminal is in Ariake — right by <strong>Odaiba</strong> if you have a few hours before boarding',
+        '<strong>teamLab Planets</strong> (immersive digital art) is a short taxi ride away and worth the detour if it fits',
+        'DiverCity Tokyo Plaza has the life-size <strong>Gundam statue</strong> and Rainbow Bridge views',
+        'Board with time to spare — muster drill and sail-away happen before the 7:00 PM departure'
+      ] },
+    { date: 'Oct 12', day: 'Mon', port: 'Omaezaki', arr: '7:00 AM', dep: '4:00 PM', country: 'jp', desc: 'Small fishing port town in Shizuoka Prefecture. Cape Omaezaki lighthouse area.',
+      tips: [
+        'Walk or shuttle to <strong>Cape Omaezaki Lighthouse</strong> — climbable, with ocean views over the Pacific',
+        'Browse the port-side fish market for fresh local catch — this is a tuna/bonito fishing town',
+        'A quiet, low-key stop — good day to keep it light if you did a full day in Kobe the day before'
+      ] },
+    { date: 'Oct 13', day: 'Tue', port: 'Kobe', arr: '9:00 AM', dep: '7:00 PM', country: 'jp', desc: 'Major port city. Arima Onsen, Nunobiki Herb Garden, Chinatown (Nankinmachi), Kobe beef.',
+      tips: [
+        '<strong>Kobe beef lunch</strong> — reserve ahead if possible (Steakland or Mouriya are popular with cruise passengers)',
+        '<strong>Nunobiki Herb Garden</strong> — ropeway up for skyline/harbor views, gardens at the top',
+        '<strong>Kitano-cho</strong> historic foreigner district — Western-style houses, cafes, good walking area',
+        'Want onsen instead? <strong>Arima Onsen</strong> is ~30 min by train/bus — one of Japan\'s oldest hot spring towns',
+        'Nankinmachi (Chinatown) for street food if you want a lighter, cheaper lunch option',
+        '<strong>Kyoto</strong> is doable as a day trip — ~1 hour by Shinkansen or local train, but eats most of the port day; worth it if Fushimi Inari, Kinkaku-ji, or Gion are on your must-see list'
+      ] },
+    { date: 'Oct 14', day: 'Wed', port: 'Kochi', arr: '8:00 AM', dep: '9:00 PM', country: 'jp', desc: 'Shikoku island. Kochi Castle, Hirome Market, Katsurahama Beach. Known for katsuo (bonito) tataki.',
+      tips: [
+        '<strong>Kochi Castle</strong> — one of only 12 original (non-rebuilt) castles left in Japan, worth the climb',
+        '<strong>Hirome Market</strong> — food hall, try the seared <strong>katsuo tataki</strong> (bonito), Kochi\'s signature dish',
+        '<strong>Katsurahama Beach</strong> — scenic coastline with a statue of local hero Ryoma Sakamoto',
+        'Shikoku is known for sake — worth a tasting if you pass a local brewery shop',
+        'Long port day (8am–9pm) — enough time to combine castle + market + beach without rushing'
+      ] },
+    { date: 'Oct 15', day: 'Thu', port: 'Kanmon Strait', arr: '--', dep: '--', country: 'jp', desc: 'Scenic transit through the narrow strait between Honshu and Kyushu. Panoramic views from deck.', sea: true,
+      tips: [
+        'No stop — this is a scenic transit day. Be on deck for the narrowest point, where Honshu and Kyushu are visible on both sides',
+        'Watch for the <strong>Kanmon Bridge</strong> and the retro port town of Mojiko as the ship passes',
+        'Good day to use ship amenities (spa, pool) between deck visits'
+      ] },
+    { date: 'Oct 16', day: 'Fri', port: 'Hakata / Fukuoka', arr: '8:00 AM', dep: '4:00 PM', country: 'jp', desc: 'Fukuoka &ndash;Hakata ramen, Canal City, Dazaifu Tenmangu Shrine, Ohori Park. Great food city.',
+      tips: [
+        '<strong>Hakata ramen</strong> (tonkotsu) for lunch — this city invented the style, go early since ship leaves at 4pm',
+        '<strong>Dazaifu Tenmangu Shrine</strong> — important shrine, ~30 min from port, plum blossom grounds',
+        '<strong>Canal City Hakata</strong> — shopping/dining complex with a canal running through it',
+        '<strong>Ohori Park</strong> — relaxed walk around the pond if you want something less packed',
+        'Famous yatai (street food stalls) come alive at night — you\'ll miss them with a 4pm departure, so prioritize ramen at a sit-down spot instead'
+      ] },
+    { date: 'Oct 17', day: 'Sat', port: 'Sokcho', arr: '10:00 AM', dep: '8:00 PM', country: 'kr', desc: 'South Korea. Gateway to Seoraksan National Park &ndash;best fall foliage. Abai Village, Sokcho beach.',
+      tips: [
+        '<strong>Seoraksan National Park</strong> — best fall foliage of the trip, cable car up to Gwongeumseong Fortress for views (it\'s a bit of a drive, best via excursion)',
+        '<strong>Abai Village</strong> — settled by North Korean refugees, famous for abai sundae (Korean blood sausage)',
+        'Sokcho Beach boardwalk for a relaxed walk, plus a fresh seafood market near the port',
+        'Late departure (8pm) gives real time for the Seoraksan trip if the weather cooperates'
+      ] },
     { date: 'Oct 18', day: 'Sun', port: 'Sea Day', arr: '--', dep: '--', country: null, desc: 'Full day at sea. Relax, explore the ship, spa, pool, shows.', sea: true },
-    { date: 'Oct 19', day: 'Mon', port: 'Kanazawa', arr: '8:00 AM', dep: '7:00 PM', country: 'jp', desc: 'Kenroku-en Garden (one of Japan\'s top 3), Higashi Chaya geisha district, Omicho Market fresh seafood.' },
-    { date: 'Oct 20', day: 'Tue', port: 'Sakata', arr: '10:00 AM', dep: '6:00 PM', country: 'jp', desc: 'Historic rice trading port in Yamagata. Sankyo Soko rice warehouses, local sake breweries.' },
-    { date: 'Oct 21', day: 'Wed', port: 'Hakodate', arr: '8:00 AM', dep: '5:00 PM', country: 'jp', desc: 'Southern Hokkaido. Goryokaku star fort, Hakodate morning market, Mt. Hakodate night view. Iconic.' },
-    { date: 'Oct 22', day: 'Thu', port: 'Miyako', arr: '8:00 AM', dep: '5:00 PM', country: 'jp', desc: 'Iwate Prefecture. Jodogahama Beach (stunning white rocks/blue water), Ryusendo Cavern nearby.' },
+    { date: 'Oct 19', day: 'Mon', port: 'Kanazawa', arr: '8:00 AM', dep: '7:00 PM', country: 'jp', desc: 'Kenroku-en Garden (one of Japan\'s top 3), Higashi Chaya geisha district, Omicho Market fresh seafood.',
+      tips: [
+        '<strong>Kenroku-en Garden</strong> — one of Japan\'s three great gardens, stunning in October color',
+        '<strong>Omicho Market</strong> — go for fresh seafood breakfast/lunch (crab, sushi) right off the boats',
+        '<strong>Higashi Chaya</strong> geisha district — historic tea houses, try gold-leaf soft-serve ice cream (Kanazawa is famous for gold leaf)',
+        'Kanazawa Castle Park is right next to Kenroku-en — easy to combine both',
+        '21st Century Museum of Contemporary Art if you have extra time and want something modern'
+      ] },
+    { date: 'Oct 20', day: 'Tue', port: 'Sakata', arr: '10:00 AM', dep: '6:00 PM', country: 'jp', desc: 'Historic rice trading port in Yamagata. Sankyo Soko rice warehouses, local sake breweries.',
+      tips: [
+        '<strong>Sankyo Soko rice warehouses</strong> — iconic black-tiled 19th-century buildings, now shops and a sake brewery',
+        'Local sake tasting — Yamagata is a top prefecture for sake, worth sampling here',
+        '<strong>Honma Museum of Art</strong> — gardens and a historic merchant residence, quieter stop',
+        'Small, relaxed town — good pairing with the bigger Kanazawa day before and Hakodate day after'
+      ] },
+    { date: 'Oct 21', day: 'Wed', port: 'Hakodate', arr: '8:00 AM', dep: '5:00 PM', country: 'jp', desc: 'Southern Hokkaido. Goryokaku star fort, Hakodate morning market, Mt. Hakodate night view. Iconic.',
+      tips: [
+        '<strong>Goryokaku star-shaped fort</strong> — go up the observation tower to see the full star shape from above',
+        '<strong>Hakodate Morning Market</strong> — fresh crab, uni, and seafood; go early for the best selection',
+        '<strong>Mt. Hakodate ropeway</strong> — one of Japan\'s "three great night views," but ship leaves at 5pm so this is a daytime-only option here',
+        '<strong>Motomachi district</strong> — Western-style buildings and churches from Hakodate\'s port-opening era',
+        'This is one of the trip\'s best port days — worth planning tightly given the 8am–5pm window'
+      ] },
+    { date: 'Oct 22', day: 'Thu', port: 'Miyako', arr: '8:00 AM', dep: '5:00 PM', country: 'jp', desc: 'Iwate Prefecture. Jodogahama Beach (stunning white rocks/blue water), Ryusendo Cavern nearby.',
+      tips: [
+        '<strong>Jodogahama Beach</strong> — white volcanic rock formations against blue water, considered one of Japan\'s most scenic beaches',
+        '<strong>Ryusendo Cavern</strong> — one of Japan\'s three great limestone caves, with striking underground lakes (it\'s a longer drive, best as an excursion)',
+        'Local market near the port for Sanriku-coast seafood — this region is known for it',
+        'Quieter, nature-focused stop — good contrast after Hakodate\'s busier day'
+      ] },
     { date: 'Oct 23', day: 'Fri', port: 'Sea Day', arr: '--', dep: '--', country: null, desc: 'Final sea day. Pack, attend the Captain\'s farewell dinner, explore last dining options.', sea: true },
     { date: 'Oct 24', day: 'Sat', port: 'Tokyo (Return)', arr: '8:00 AM', dep: '--', country: 'jp', desc: 'Disembarkation day in Tokyo. Ship arrives 8:00 AM.' },
   ];
@@ -563,12 +743,15 @@
 
       const times = (!d.sea && d.arr !== '--') ? `Arrive ${d.arr} · Depart ${d.dep}` : d.arr === '--' && d.dep !== '--' ? `Depart ${d.dep}` : '';
 
+      const tips = d.tips ? `<ul class="day-tips">${d.tips.map(t => `<li>${t}</li>`).join('')}</ul>` : '';
+
       return `<div class="${cls}">
         ${badge}
         <div class="day-date">${d.date}, 2026 &middot;${d.day}</div>
         <div class="day-port">${d.port}${ctry}</div>
-        ${times ? `<div class="day-times">â° ${times}</div>` : ''}
+        ${times ? `<div class="day-times">⏰ ${times}</div>` : ''}
         <div class="day-desc">${d.desc}</div>
+        ${tips}
       </div>`;
     }).join('');
   }
